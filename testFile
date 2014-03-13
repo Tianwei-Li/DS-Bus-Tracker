@@ -1,0 +1,14 @@
+!!python/object:MessagePasser.Configuration
+hosts:
+  - name:   alice
+    ip: 127.0.0.1
+    port: 20000
+  - name:   bob
+    ip: 127.0.1.2
+    port: 30009
+
+groups:
+  - name:   group1
+    members:
+        - alice
+        - bob
