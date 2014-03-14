@@ -1,4 +1,4 @@
-!!python/object:MessagePasser.Configuration
+!!python/object:comm.MessagePasser.Configuration
 hosts:
   - name:   alice
     ip: 127.0.0.1
