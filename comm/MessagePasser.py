@@ -20,7 +20,8 @@ DELIVERQUE = collections.deque()
 
 # configuration map
 CONFMAP = {}
-CONF = None
+CONF = {}
+CONFFILE = None
 LOCALNAME = None
 
 class Configuration:
@@ -38,7 +39,11 @@ class Configuration:
 
 # called by application to send a message
 def send(dst, message):
-    pass
+    # check if the dst is in conf list
+    if not dst in CONF["hosts"]:
+        pass
+    
+    TCPComm.send(CONF["hosts"][dst]["ip"], CONF["hosts"][dst]["port"], message)
 
 # called by application to deliver a message
 def receive():
@@ -57,12 +62,11 @@ def initialize(confFileName, localName):
     # check if localName exists
     localIP,localPort = None, 0
     
-    for host in getattr(CONF, "hosts"):
-        if localName == host["name"]:
-            LOCALNAME = localName
-            localIP = host["ip"]
-            localPort = host["port"]
-            break
+    if localName in CONF["hosts"]:
+        LOCALNAME = localName
+        localIP = CONF["hosts"][localName]["ip"]
+        localPort = CONF["hosts"][localName]["port"]
+        
     if LOCALNAME != None:
         TCPComm.runServer(localIP, localPort)
     else:
@@ -78,12 +82,17 @@ def checkConfChange(confFileName):
 # load configuration file
 def loadConfiguration(confFileName):
     LOGGER.info("load configuration")
-    global CONF
+    global CONFFILE, CONF
     confFile = open(confFileName, "r")
-    CONF = yaml.load(confFile)
+    CONFFILE = yaml.load(confFile)
     confFile.close()
+    
+    # do some pre-processing
+    CONF = {'hosts' : {}, "groups" : {}}
+    for host in CONFFILE.hosts:
+        CONF['hosts'][host['name']] = {'ip' : host['ip'], 'port' : host['port']}
 
 if __name__ == "__main__":
-    initialize("../testFile", "alice")
+    initialize("../testFile.txt", "alice")
     while True:
         pass
