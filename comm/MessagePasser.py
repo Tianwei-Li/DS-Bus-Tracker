@@ -6,10 +6,12 @@ Created on Mar 12, 2014
 @author: Qian Mao
 '''
 
-import TCPComm
 import collections
-import yaml
 import logging
+
+import TCPComm
+import yaml
+
 
 logging.basicConfig()
 LOGGER = logging.getLogger("MessagePasser")

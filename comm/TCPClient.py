@@ -10,6 +10,7 @@ Created on Mar 12, 2014
 
 import socket
 
+
 def client(ip, port, message):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((ip, port))

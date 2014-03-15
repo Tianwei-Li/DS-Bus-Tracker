@@ -5,11 +5,12 @@ Created on Mar 11, 2014
 
 @author: Qian Mao
 '''
+import SocketServer
+import collections
+import logging
 import socket
 import threading
-import SocketServer
-import logging
-import collections
+
 
 logging.basicConfig()
 LOGGER = logging.getLogger("TCPComm")

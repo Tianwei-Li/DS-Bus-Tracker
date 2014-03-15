@@ -6,14 +6,15 @@ Created on Mar 13, 2014
 @author: Qian Mao
 '''
 
-import threading
+from Tkinter import Tk, BOTH
 import os
+import threading
 import tkFileDialog
 import tkSimpleDialog
+from ttk import Frame, Button, Style, Label
 
 from comm import MessagePasser
-from Tkinter import Tk, BOTH
-from ttk import Frame, Button, Style, Label
+
 
 ROOT = None
 APP = None
