@@ -8,6 +8,7 @@ Created on Mar 12, 2014
 
 import collections
 import logging
+import threading
 
 import TCPComm
 import yaml
@@ -37,7 +38,13 @@ class Configuration:
     def getGroups(self):
         return self.groups
 
-
+# a background thread keep receiving message from TCPComm
+def receiveThread():
+    global DELIVERQUE
+    while True:
+        message = TCPComm.receive()
+        if message != None:
+            DELIVERQUE.append(message["data"])
 
 # called by application to send a message
 def send(dst, message):
@@ -49,7 +56,11 @@ def send(dst, message):
 
 # called by application to deliver a message
 def receive():
-    return TCPComm.receive()
+    global DELIVERQUE
+    if len(DELIVERQUE) > 0:
+        return DELIVERQUE.popleft()
+    else:
+        return None
 
 # called by application to multicast
 def multicast(groupName, message):
@@ -70,11 +81,16 @@ def initialize(confFileName, localName):
         localPort = CONF["hosts"][localName]["port"]
         
     if LOCALNAME != None:
-        TCPComm.runServer(localIP, localPort)
+        TCPComm.runServer(localIP, localPort, LOCALNAME)
     else:
         # TODO throw an ERROR
         print "NO matched local name"
         pass
+    
+    # initialize receiving thread
+    thread = threading.Thread(target=receiveThread, args = ())
+    thread.daemon = True
+    thread.start()
     
 # check if the configuration file has been modified
 def checkConfChange(confFileName):
