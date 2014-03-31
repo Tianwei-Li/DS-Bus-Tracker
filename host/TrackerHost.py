@@ -54,6 +54,7 @@ class MainFrame(Frame):
 
         self.label = Label(self, text="Ready")
         self.label.grid(row=0, column=0)
+        # TEST ONLY
         self.testButton = Button(self, text="Send", command= lambda: self.send("alice", "hi alice"))
         self.testButton.grid(row=1, column=0)
         self.quitButton = Button(self, text="Quit", command=self.quit)

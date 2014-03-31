@@ -59,15 +59,19 @@ def receive():
 def send(ip, port, message):
     global LOCALNAME, SEQ_NUM
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((ip, port))
     packet = {"src" : LOCALNAME,
                "seq" : SEQ_NUM,
                "data" : message}
-    SEQ_NUM = SEQ_NUM + 1
     try:
+        sock.connect((ip, port))
         sock.sendall(pickle.dumps(packet))
+    except socket.error as e:
+        LOGGER.error("Socket error: " + str(e))
+        return
     finally:
         sock.close()
+        
+    SEQ_NUM = SEQ_NUM + 1
     LOGGER.info("Send message to (%s, %d) : %s", ip, port, message)
 
 # shutdown tcp server for receiving

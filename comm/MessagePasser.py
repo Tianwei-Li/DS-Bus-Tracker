@@ -27,6 +27,22 @@ CONF = {}
 CONFFILE = None
 LOCALNAME = None
 
+# multicast
+MULTICAST_SEQ = 0
+holdBackQueue = []
+# key is message src+seq
+msgStateMap = {}
+
+class MessageState:
+    def __init__(self, message):
+        self.message = message
+        self.group = message["group"]
+        self.memberList = message["memberList"]
+        self.memStateMap = dict.fromkeys(self.memberList, 0)
+        
+    def __repr__(self):
+        return "MessageState: \n\tgroup: %s\n\tmessage: %s\n\tmemStateMap: %s" % (self.group, self.message, self.memStateMap)
+
 class Configuration:
     def __init__(self, hosts, groups):
         self.hosts = hosts
@@ -37,6 +53,38 @@ class Configuration:
         return self.hosts
     def getGroups(self):
         return self.groups
+
+# helpful function for message hash key generation
+def make_hash(message):
+    return hash(message["src"] + message["seq"])
+
+# called by MessagePasser, if the received message is multicast message
+def recvMulticastMsg(message):
+    # check if the message is new
+    msgKey = make_hash(message)
+    if msgKey in msgStateMap:
+        # update message state
+        msgState = msgStateMap[msgKey]
+        msgState.memStateMap[message["src"]] = 1
+        print msgState
+    else:
+        msgStateMap[msgKey] = MessageState(message)
+
+# called by application to do a multicast 
+def multicast(group, data):
+    global LOCALNAME, MULTICAST_SEQ
+    memberList = CONF['groups'][group]['members']
+    message = {"type" : "MULTICAST",
+               "src" : LOCALNAME,
+               "seq" : MULTICAST_SEQ,
+               "group" : group,
+               "memberList" : memberList,
+               "data" : data
+               }
+    MULTICAST_SEQ = MULTICAST_SEQ + 1
+    for member in memberList:
+        if not member == LOCALNAME:
+            send(member, message)
 
 # a background thread keep receiving message from TCPComm
 def receiveThread():
@@ -62,9 +110,6 @@ def receive():
     else:
         return None
 
-# called by application to multicast
-def multicast(groupName, message):
-    pass
 
 # initialize configuration and start listning server
 def initialize(confFileName, localName):
@@ -109,8 +154,12 @@ def loadConfiguration(confFileName):
     CONF = {'hosts' : {}, "groups" : {}}
     for host in CONFFILE.hosts:
         CONF['hosts'][host['name']] = {'ip' : host['ip'], 'port' : host['port']}
-
+    
+    for group in CONFFILE.groups:
+        CONF['groups'][group['name']] = {'members' : group['members']}
+        
 if __name__ == "__main__":
     initialize("../testFile.txt", "alice")
+    multicast('group1', "multicast-group1")
     while True:
         pass
