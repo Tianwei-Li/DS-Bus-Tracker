@@ -56,7 +56,7 @@ class Configuration:
 
 # helpful function for message hash key generation
 def make_hash(message):
-    return hash(message["src"] + message["seq"])
+    return hash(message["src"] + str(message["seq"]))
 
 # called by MessagePasser, if the received message is multicast message
 def recvMulticastMsg(message):
@@ -67,8 +67,13 @@ def recvMulticastMsg(message):
         msgState = msgStateMap[msgKey]
         msgState.memStateMap[message["src"]] = 1
         print msgState
+        DELIVERQUE.append(message["data"])
     else:
         msgStateMap[msgKey] = MessageState(message)
+        # flood the same message to others, use simple send is enough
+        for member in message["memberList"]:
+            #if not member == LOCALNAME:
+            send(member, message)
 
 # called by application to do a multicast 
 def multicast(group, data):
@@ -83,8 +88,8 @@ def multicast(group, data):
                }
     MULTICAST_SEQ = MULTICAST_SEQ + 1
     for member in memberList:
-        if not member == LOCALNAME:
-            send(member, message)
+        #if not member == LOCALNAME:
+        send(member, message)
 
 # a background thread keep receiving message from TCPComm
 def receiveThread():
@@ -92,7 +97,23 @@ def receiveThread():
     while True:
         message = TCPComm.receive()
         if message != None:
-            DELIVERQUE.append(message["data"])
+            # check the type of the message
+            type = message["type"]
+            if type == "NORMAL":
+                DELIVERQUE.append(message["data"])
+            elif type == "MULTICAST":
+                recvMulticastMsg(message)
+
+# called by application to send a message
+def normalSend(dst, data):
+    message = {"type" : "NORMAL",
+               "src" : LOCALNAME,
+               "seq" : None,
+               "group" : None,
+               "memberList" : [],
+               "data" : data
+               }
+    send(dst, message)
 
 # called by application to send a message
 def send(dst, message):
@@ -160,6 +181,7 @@ def loadConfiguration(confFileName):
         
 if __name__ == "__main__":
     initialize("../testFile.txt", "alice")
-    multicast('group1', "multicast-group1")
+    multicast("group1", "multicast-group1")
+    #send('alice', 'normal message')
     while True:
         pass

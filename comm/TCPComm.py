@@ -28,7 +28,8 @@ class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         data = pickle.loads(self.request.recv(1024))
-        RECVMSGQUE.append(data)
+        message = data["data"]
+        RECVMSGQUE.append(message)
         LOGGER.info("Receive message from %s : %s", self.request.getpeername(), data)
 
 class ThreadedTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
@@ -59,7 +60,9 @@ def receive():
 def send(ip, port, message):
     global LOCALNAME, SEQ_NUM
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    packet = {"src" : LOCALNAME,
+    packet = { "src" : LOCALNAME,
+               "dst_ip" : ip,
+               "dst_port" : port,
                "seq" : SEQ_NUM,
                "data" : message}
     try:
@@ -72,7 +75,7 @@ def send(ip, port, message):
         sock.close()
         
     SEQ_NUM = SEQ_NUM + 1
-    LOGGER.info("Send message to (%s, %d) : %s", ip, port, message)
+    LOGGER.info("Send message to (%s, %d) : %s", ip, port, packet)
 
 # shutdown tcp server for receiving
 def shutdown():
