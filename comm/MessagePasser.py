@@ -66,14 +66,13 @@ def recvMulticastMsg(message):
         # update message state
         msgState = msgStateMap[msgKey]
         msgState.memStateMap[message["src"]] = 1
-        print msgState
-        DELIVERQUE.append(message["data"])
     else:
         msgStateMap[msgKey] = MessageState(message)
         # flood the same message to others, use simple send is enough
         for member in message["memberList"]:
             #if not member == LOCALNAME:
             send(member, message)
+        DELIVERQUE.append(message["data"])
 
 # called by application to do a multicast 
 def multicast(group, data):
@@ -115,7 +114,7 @@ def normalSend(dst, data):
                }
     send(dst, message)
 
-# called by application to send a message
+# call TCPComm.send to send a message
 def send(dst, message):
     # check if the dst is in conf list
     if not dst in CONF["hosts"]:
@@ -184,4 +183,7 @@ if __name__ == "__main__":
     multicast("group1", "multicast-group1")
     #send('alice', 'normal message')
     while True:
+        msg = receive()
+        if not msg == None:
+            print msg
         pass

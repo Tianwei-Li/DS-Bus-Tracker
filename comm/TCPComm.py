@@ -59,6 +59,7 @@ def receive():
 # Send the message to destination
 def send(ip, port, message):
     global LOCALNAME, SEQ_NUM
+    print SEQ_NUM
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     packet = { "src" : LOCALNAME,
                "dst_ip" : ip,

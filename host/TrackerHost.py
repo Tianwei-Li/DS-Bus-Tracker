@@ -57,16 +57,21 @@ class MainFrame(Frame):
         # TEST ONLY
         self.testButton = Button(self, text="Send", command= lambda: self.send("alice", "hi alice"))
         self.testButton.grid(row=1, column=0)
+        self.testButton = Button(self, text="Multicast", command= lambda: self.multicast("group1", "hi group1"))
+        self.testButton.grid(row=1, column=1)
         self.quitButton = Button(self, text="Quit", command=self.quit)
-        self.quitButton.grid(row=1, column=1)
+        self.quitButton.grid(row=1, column=2)
         
         
     def receive(self):
         self.label["text"] = MessagePasser.receive()
         #self.labelString.set(MessagePasser.receive())
     
-    def send(self, dst, message):
-        MessagePasser.send(dst, message)
+    def send(self, dst, data):
+        MessagePasser.normalSend(dst, data)
+    
+    def multicast(self, group, data):
+        MessagePasser.multicast(group, data)
 
 def receiveThread():
     global APP
