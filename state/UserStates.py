@@ -80,7 +80,6 @@ class State_Req_Waiting(State):
             assert 0, "Req_Waiting: invalid action"
 
 
-    
 class UserSM(StateMachine):
     def __init__(self):
         # Initial state
@@ -92,13 +91,6 @@ UserSM.Ready = State_Ready()
 UserSM.Req_Waiting = State_Req_Waiting()
 
 
-
-# Test only
+# Test Only
 if __name__ == '__main__':
-    UserSM().runAll(
-                    [UserAction.turnOn, 
-                     UserAction.timeout, 
-                     UserAction.recvAck, 
-                     UserAction.request, 
-                     UserAction.recvRes, 
-                     UserAction.turnOff])
+    UserSM().runAll(map(UserAction.UserAction, ["turnOn", "recvAck", "request", "timeout", "recvRes", "turnOff"]))
