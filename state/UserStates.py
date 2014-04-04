@@ -9,6 +9,7 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.UserAction as UserAction
 
+logging.basicConfig()
 LOGGER = logging.getLogger("UserStateMachine")
 LOGGER.setLevel(logging.DEBUG)
 
@@ -18,8 +19,8 @@ class State_Off(State):
 
     def next(self, input):
         if input == UserAction.turnOn:
-            # do something about boot-strap
-            # ping GSN
+            # TODO: do something about boot-strap
+            # TODO: ping GSN
             return UserSM.Init_Waiting
         else:
             # remain off
@@ -31,13 +32,13 @@ class State_Init_Waiting(State):
 
     def next(self, input):
         if input == UserAction.recvAck:
-            # do something
+            # TODO: do something
             return UserSM.Ready
         elif input == UserAction.timeout:
-            # re-ping
+            # TODO: re-ping
             return UserSM.Init_Waiting
         elif input == UserAction.turnOff:
-            # do something to shut-dowm
+            # TODO: do something to shut-down
             return UserSM.Off
         else:
             # for other illegal action
@@ -50,12 +51,15 @@ class State_Ready(State):
 
     def next(self, input):
         if input == UserAction.request:
-            # send a request to GSN
-            pass
+            # TODO: send a request to GSN
+            return UserSM.Req_Waiting
+        elif input == UserAction.turnOff:
+            # TODO: do something to shut-down
+            return UserSM.Off
         else:
-            pass
+            # for other illegal action
+            assert 0, "Ready: invalid action"
 
-        #return MouseTrap.waiting
 
 class State_Req_Waiting(State):
     def run(self):
@@ -63,10 +67,17 @@ class State_Req_Waiting(State):
 
     def next(self, input):
         if input == UserAction.recvRes:
-            # send a request to GSN
-            pass
+            # TODO: return response to GUI
+            return UserSM.Ready
+        elif input == UserAction.timeout:
+            # TODO: re-send request if under threshold
+            return UserSM.Req_Waiting
+        elif input == UserAction.turnOff:
+            # TODO: do something to shut-down
+            return UserSM.Off
         else:
-            pass
+            # for other illegal action
+            assert 0, "Req_Waiting: invalid action"
 
 
     
@@ -78,3 +89,16 @@ class UserSM(StateMachine):
 UserSM.Off = State_Off()
 UserSM.Init_Waiting = State_Init_Waiting()
 UserSM.Ready = State_Ready()
+UserSM.Req_Waiting = State_Req_Waiting()
+
+
+
+# Test only
+if __name__ == '__main__':
+    UserSM().runAll(
+                    [UserAction.turnOn, 
+                     UserAction.timeout, 
+                     UserAction.recvAck, 
+                     UserAction.request, 
+                     UserAction.recvRes, 
+                     UserAction.turnOff])

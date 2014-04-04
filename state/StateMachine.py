@@ -12,6 +12,6 @@ class StateMachine:
     # Template method:
     def runAll(self, inputs):
         for i in inputs:
-            print(i)
+            #print(i)
             self.currentState = self.currentState.next(i)
             self.currentState.run()
