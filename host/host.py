@@ -7,12 +7,15 @@ import sys
 sys.path += ['../']
 
 import comm.MessagePasser as MessagePasser
-import state.UserStates as UserStates
-import state.GSNStates as GSNStates
+import state.UserStateMachine as UserStateMachine
+import state.DriverStateMachine as DriverStateMachine
+import state.RSNStateMachine as RSNStateMachine
+import state.GSNStateMachine as GSNStateMachine
 import time
 import collections
 import threading
 import logging
+import socket
 
 
 logging.basicConfig()
@@ -68,8 +71,8 @@ def initialize(conf, localName, role):
     
     # start state machine
     if ROLE == "USER":
-        UserStates.initialize()
-        DISPATCHERMAP["USER_SM"] = UserStates
+        UserStateMachine.initialize()
+        DISPATCHERMAP["USER_SM"] = UserStateMachine
         
         # turnOn the machine
         enqueue({"SM":"USER_SM", "action":"turnOn"})
@@ -77,10 +80,15 @@ def initialize(conf, localName, role):
         enqueue({"SM":"USER_SM", "action":"recvAck"})
 
     elif ROLE == "DRIVER":
-        pass
+        DriverStateMachine.initialize()
+        DISPATCHERMAP["DRIVER_SM"] = DriverStateMachine
+        
+        # turnOn the machine
+        enqueue({"SM":"DRIVER_SM", "action":"turnOn"})
+        
     elif ROLE == "GSN":
-        GSNStates.initialize()
-        DISPATCHERMAP["GSN_SM"] = GSNStates
+        GSNStateMachine.initialize()
+        DISPATCHERMAP["GSN_SM"] = GSNStateMachine
         
         # turnOn the machine
         enqueue({"SM":"GSN_SM", "action":"turnOn"})
@@ -117,6 +125,7 @@ if __name__ == '__main__':
     name = "alice"
     role = "USER"
 
-    initialize("../testFile.txt", name, role)
-    user_request("123", "north", "center ave")
+    #initialize("../testFile.txt", name, role)
+    #user_request("123", "north", "center ave")
 
+    print socket.gethostbyname('ece.cmu.edu')
