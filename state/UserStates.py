@@ -71,7 +71,6 @@ class State_Ready(State):
             request_message = {
                                "SM" : "GSN_SM",
                                "action" : "recvUserReq",
-                               "action" : "request",
                                "route" : input["route"],
                                "direction" : input["direction"],
                                "destination" : input["destination"]

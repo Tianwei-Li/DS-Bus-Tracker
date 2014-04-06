@@ -3,6 +3,8 @@ Created on Apr 2, 2014
 
 @author: Qian Mao
 '''
+import sys
+sys.path += ['../']
 
 import comm.MessagePasser as MessagePasser
 import state.UserStates as UserStates
@@ -11,6 +13,7 @@ import time
 import collections
 import threading
 import logging
+
 
 logging.basicConfig()
 LOGGER = logging.getLogger("Host")
@@ -109,6 +112,11 @@ def dispatch(message):
 
 # Test Only
 if __name__ == '__main__':
-    initialize("../testFile.txt", "user", "USER")
+    #name = sys.argv[1]
+    #role = sys.argv[2]
+    name = "alice"
+    role = "USER"
+
+    initialize("../testFile.txt", name, role)
     user_request("123", "north", "center ave")
 
