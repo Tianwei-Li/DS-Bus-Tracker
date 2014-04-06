@@ -23,6 +23,11 @@ class DriverAction(object):
     def __hash__(self):
         return hash(self.action)
 
-DriverAction.initialize = DriverAction("initialize")
-DriverAction.request = DriverAction("request")
-DriverAction.close = DriverAction("close")
+turnOn = DriverAction("turnOn")
+pingGSN = DriverAction("pingGSN")
+pingRSN = DriverAction("pingRSN")
+recvRst = DriverAction("recvRst")
+turnOff = DriverAction("turnOff")
+
+timeout = DriverAction("timeout")
+recvAck = DriverAction("recvAck")
