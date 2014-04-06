@@ -15,3 +15,10 @@ class StateMachine:
             #print(i)
             self.currentState = self.currentState.next(i)
             self.currentState.run()
+    
+    def run(self, input):
+        self.currentState = self.currentState.next(input)
+        self.currentState.run()
+
+    def state(self):
+        pass

@@ -5,6 +5,8 @@ Created on Mar 13, 2014
 
 @author: Qian Mao
 '''
+import sys
+sys.path += ['../']
 
 from Tkinter import Tk, BOTH
 import os
@@ -13,7 +15,7 @@ import tkFileDialog
 import tkSimpleDialog
 from ttk import Frame, Button, Style, Label
 
-from comm import MessagePasser
+import comm.MessagePasser as MessagePasser
 
 
 ROOT = None

@@ -9,6 +9,7 @@ Created on Mar 12, 2014
 '''
 
 import socket
+import TCPComm
 
 
 def client(ip, port, message):
@@ -22,4 +23,12 @@ def client(ip, port, message):
         sock.close()
         
 if __name__ == "__main__":
-    client("localhost", 20000, "test")
+    #client("localhost", 20000, "")
+    message = {"type" : "NORMAL",
+               "src" : "GSN",
+               "seq" : None,
+               "group" : None,
+               "memberList" : [],
+               "data" : "GSN_USER_ACK"
+               }
+    TCPComm.send("localhost", 20000, message)

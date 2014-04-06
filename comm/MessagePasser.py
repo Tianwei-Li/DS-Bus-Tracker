@@ -102,7 +102,9 @@ def receiveThread():
                 DELIVERQUE.append(message["data"])
             elif type == "MULTICAST":
                 recvMulticastMsg(message)
-
+            else:
+                DELIVERQUE.append(message["data"])
+                
 # called by application to send a message
 def normalSend(dst, data):
     message = {"type" : "NORMAL",

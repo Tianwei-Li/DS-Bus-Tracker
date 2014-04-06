@@ -3,9 +3,18 @@ hosts:
   - name:   alice
     ip: 127.0.0.1
     port: 20000
-  - name:   bob
+  - name:   user
     ip: 127.0.0.1
     port: 30009
+  - name:   gsn
+    ip: 127.0.0.1
+    port: 40000
+  - name:   bus
+    ip: 127.0.0.1
+    port: 41000
+  - name:   rsn
+    ip: 127.0.0.1
+    port: 42000
 
 groups:
   - name:   group1
