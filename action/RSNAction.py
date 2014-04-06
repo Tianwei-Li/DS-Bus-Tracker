@@ -4,7 +4,7 @@ Created on Apr 5, 2014
 @author: Terry Li
 '''
 
-class DriverAction(object):
+class RSNAction(object):
     '''
     classdocs
     '''
@@ -23,11 +23,12 @@ class DriverAction(object):
     def __hash__(self):
         return hash(self.action)
 
-turnOn = DriverAction("turnOn")
-recvGSNAck = DriverAction("recvGSNAck")
-recvRSNAck = DriverAction("recvRSNAck")
-recvLocReq = DriverAction("recvLocReq")
-turnOff = DriverAction("turnOff")
+turnOn = RSNAction("turnOn")
+recvGSNAck = RSNAction("recvGSNAck")
+recvLocReq = RSNAction("recvLocReq")
+recvDriverLoc = RSNAction("recvDriverLoc")
 
-timeout = DriverAction("timeout")
+timeout = RSNAction("timeout")
+turnOff = RSNAction("turnOff")
+
 

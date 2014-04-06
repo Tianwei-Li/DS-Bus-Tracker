@@ -1,4 +1,8 @@
+'''
+Created on Apr 5, 2014
 
+@author: Terry Li
+'''
 
 import logging
 from state.State import State
@@ -24,12 +28,13 @@ class State_Off(State):
         if action == DriverAction.turnOn:
             # TODO: do something about boot-strap
             # TODO: ping DNS
-            return DriverSM.Init
+            # TODO: ping GNS
+            return DriverSM.Init_Waiting
         else:
             # remain off
             return DriverSM.Off
     
-class State_Init(State):
+class State_Init_Waiting(State):
     def run(self):
         LOGGER.info("Waiting: Connecting to GSN")
 
@@ -38,18 +43,19 @@ class State_Init(State):
     
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
-        if action == DriverAction.recvAck:
+        if action == DriverAction.recvGSNAck:
+            # TODO: get RSN addr from the input
             # TODO: ping RSN to add into the group
             return DriverSM.Setup
         elif action == DriverAction.timeout:
             # TODO: re-ping
-            return DriverSM.Init
+            return DriverSM.Init_Waiting
         elif action == DriverAction.turnOff:
             # TODO: do something to shut-down
             return DriverSM.Off
         else:
             # for other illegal action
-            assert 0, "Init: invalid action: %s" % str(input)
+            assert 0, "Init_Waiting: invalid action: %s" % str(input)
 
 
 class State_Setup(State):
@@ -61,7 +67,7 @@ class State_Setup(State):
     
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
-        if action == DriverAction.recvAck:
+        if action == DriverAction.recvRSNAck:
             # TODO: record the RSN address
             return DriverSM.Ready
         elif action == DriverAction.timeout:
@@ -84,9 +90,9 @@ class State_Ready(State):
     
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
-        if action == DriverAction.recvRst:
+        if action == DriverAction.recvLocReq:
             # TODO: response the current location
-            LOGGER.info("received RSN request: %s" % input)
+            LOGGER.info("received RSN location request: %s" % input)
             request_message = {
                                "SM" : "RSN_SM",
                                "action" : "recvRes",
@@ -94,7 +100,7 @@ class State_Ready(State):
                                "bus_id" : 1
                                }
             # TODO: TEST ONLY; gsn should be modified
-            MessagePasser.normalSend("gsn", request_message)
+            MessagePasser.normalSend("rsn", request_message)
             
             return DriverSM.Ready
         elif action == DriverAction.turnOff:
@@ -135,7 +141,7 @@ def offerMsgs(messages):
         offerMsg(message)
 
 DriverSM.Off = State_Off()
-DriverSM.Init = State_Init()
+DriverSM.Init_Waiting = State_Init_Waiting()
 DriverSM.Setup = State_Setup()
 DriverSM.Ready = State_Ready()
 
@@ -149,7 +155,7 @@ if __name__ == '__main__':
                }
     message2 = {
                "SM" : "DRIVER_SM",
-               "action" : "recvAck"
+               "action" : "recvGNSAck"
                }
     #offerMsg(message1)
     offerMsgs([message1, message2])
