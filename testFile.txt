@@ -20,4 +20,3 @@ groups:
   - name:   group1
     members:
         - alice
-        - bob

@@ -26,6 +26,7 @@ class RSNAction(object):
 turnOn = RSNAction("turnOn")
 recvGSNAck = RSNAction("recvGSNAck")
 recvLocReq = RSNAction("recvLocReq")
+recvBusChange = RSNAction("recvBusChange")   # receive bus add or remove request form GSN
 recvDriverLoc = RSNAction("recvDriverLoc")
 
 timeout = RSNAction("timeout")

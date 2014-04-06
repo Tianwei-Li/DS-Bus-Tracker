@@ -26,6 +26,8 @@ CONFMAP = {}
 CONF = {}
 CONFFILE = None
 LOCALNAME = None
+localIP = None
+localPort = 0
 
 # multicast
 MULTICAST_SEQ = 0
@@ -124,6 +126,9 @@ def send(dst, message):
     
     TCPComm.send(CONF["hosts"][dst]["ip"], CONF["hosts"][dst]["port"], message)
 
+def directSend(dstIP, dstPort, message):
+    TCPComm.send(dstIP, dstPort, message)
+
 # called by application to deliver a message
 def receive():
     global DELIVERQUE
@@ -140,7 +145,7 @@ def initialize(confFileName, localName):
     loadConfiguration(confFileName)
     
     # check if localName exists
-    localIP,localPort = None, 0
+    global localIP, localPort
     
     if localName in CONF["hosts"]:
         LOCALNAME = localName

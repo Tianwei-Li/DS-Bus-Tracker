@@ -84,6 +84,9 @@ class State_Ready(State):
         elif action == RSNAction.recvDriverLoc:
             # TODO: update local cache
             return RSNSM.Ready
+        elif action == RSNAction.recvBusChange:
+            # TODO: add or remove a bus from current group
+            return RSNSM.Ready
         elif action == RSNAction.turnOff:
             # TODO: do something to shut-down
             return RSNSM.Off
