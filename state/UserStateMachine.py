@@ -73,7 +73,9 @@ class State_Ready(State):
                                "action" : "recvUserReq",
                                "route" : input["route"],
                                "direction" : input["direction"],
-                               "destination" : input["destination"]
+                               "destination" : input["destination"],
+                               "userIP" : MessagePasser.localIP,
+                               "userPort" : MessagePasser.localPort
                                }
             # TODO: TEST ONLY; gsn should be modified
             MessagePasser.normalSend("gsn", request_message)

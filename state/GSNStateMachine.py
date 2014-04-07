@@ -8,12 +8,31 @@ import logging
 from state.State import State
 from state.StateMachine import StateMachine
 import action.GSNAction as GSNAction
+import comm.MessagePasser as MessagePasser
 
 logging.basicConfig()
 LOGGER = logging.getLogger("GSNStateMachine")
 LOGGER.setLevel(logging.DEBUG)
 
 GSN_SM = None
+RoutTable = []
+
+class AddrTableElm:
+    IP = None
+    Port = 0
+
+class RoutTableElm:
+    rsnIP = None
+    rsnPort = 0
+    routName = ""
+    AddrTableElem = []
+
+def getRSNByName(routName):
+    for elm in RoutTable:
+        if routName == elm.routName:
+            return elm
+    return None
+            
 
 class State_Off(State):
     def run(self):
@@ -23,7 +42,8 @@ class State_Off(State):
         return "State_Off"
 
     def next(self, input):
-        if input == GSNAction.turnOn:
+        action = map(GSNAction.GSNAction, [input["action"]])[0]
+        if action == GSNAction.turnOn:
             # do something about boot-strap
             # 
             return GSNSM.Ready
@@ -39,12 +59,37 @@ class State_Ready(State):
         return "State_Ready"
 
     def next(self, input):
-        # TODO: other input option
-        if input == GSNAction.recvUserReq:
+        action = map(GSNAction.GSNAction, [input["action"]])[0]
+        if action == GSNAction.recvUserReq:
             # TODO: forward user request to responding RSN
+            LOGGER.info("forward user request to RSN")
+            rsnAddr = getRSNByName(input["route"])
+            request_message = {
+                               "SM" : "RSN_SM",
+                               "action" : "recvLocReq",
+                               "route" : input["route"],
+                               "direction" : input["direction"],
+                               "destination" : input["destination"],
+                               "userIP" : input["userIP"],
+                               "userPort" : input["userPort"]
+                               }
+            MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
+            
             return GSNSM.Ready
+        
         elif input == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
+            LOGGER.info("forward bus request to RSN")
+            rsnAddr = getRSNByName(input["route"])
+            request_message = {
+                               "SM" : "RSN_SM",
+                               "action" : "recvBusChange",
+                               "type" : input["type"],    # add or remove
+                               "route" : input["route"],
+                               "busIP" : input["busIP"],
+                               "busPort" : input["busPort"]
+                               }
+            MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
             return GSNSM.Ready
         elif input == GSNAction.turnOff:
             # TODO: do something to shut-down
@@ -58,14 +103,12 @@ class GSNSM(StateMachine):
         StateMachine.__init__(self, GSNSM.Off)
         
     def run(self, input):
-        self.currentState = self.currentState.next(map(GSNAction.GSNAction, [input])[0])
+        self.currentState = self.currentState.next(input)
         self.currentState.run()
         
     def runAll(self, inputs):
-        actions = map(GSNAction.GSNAction, inputs)
-        for i in actions:
-            self.currentState = self.currentState.next(i)
-            self.currentState.run()
+        for input in inputs:
+            self.run(input)
             
     def state(self):
         return self.currentState
@@ -77,7 +120,7 @@ def initialize():
 def offerMsg(message):
     global GSN_SM
     if message["SM"] == "GSN_SM":
-        GSN_SM.run(message["action"])
+        GSN_SM.run(message)
         
 def offerMsgs(messages):
     for message in messages:

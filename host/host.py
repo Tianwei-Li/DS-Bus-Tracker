@@ -125,7 +125,7 @@ if __name__ == '__main__':
     name = "alice"
     role = "USER"
 
-    #initialize("../testFile.txt", name, role)
+    initialize("../testFile.txt", name, role)
     #user_request("123", "north", "center ave")
 
     print socket.gethostbyname('ece.cmu.edu')
