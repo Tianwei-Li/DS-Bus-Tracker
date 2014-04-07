@@ -76,7 +76,8 @@ class State_Init_Waiting(State):
             # TODO: ping RSN to add into the group
             add_message = {
                            "SM" : "GSN_SM",
-                            "action" : "recvBusReq",
+                            "action" : "recvBusChange",
+                            "type" : "add",
                             "route" : ROUTE_NO,
                             "direction" : DIRECTION,
                             "bus_id" : BUS_ID,
@@ -107,7 +108,8 @@ class State_Setup(State):
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.recvRSNAck:
-            # TODO: record the RSN address, Qian: it is recorded in previous stage
+            # TODO: record the RSN address
+            # Qian: it is recorded in previous stage
             return DriverSM.Ready
         elif action == DriverAction.timeout:
             # TODO: re-ping
@@ -131,15 +133,18 @@ class State_Ready(State):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.recvLocReq:
             # TODO: response the current location
+            global ROUTE_NO, DIRECTION, LOCATION
             LOGGER.info("received RSN location request: %s" % input)
-            request_message = {
-                               "SM" : "RSN_SM",
-                               "action" : "recvRes",
-                               "location" : (1, 1),
-                               "bus_id" : 1
-                               }
-            # TODO: TEST ONLY; gsn should be modified
-            MessagePasser.normalSend("rsn", request_message)
+            loc_message = {
+                           "SM" : "RSN_SM",
+                           "action" : "recvDriverLoc",
+                           "route" : ROUTE_NO,
+                           "direction" : DIRECTION,
+                           "bus_id" : BUS_ID,
+                           "location" : LOCATION,
+                           }
+            # TODO: TEST ONLY; rsn should be modified
+            MessagePasser.normalSend("rsn", loc_message)
             
             return DriverSM.Ready
         elif action == DriverAction.turnOff:

@@ -16,7 +16,10 @@ LOGGER.setLevel(logging.DEBUG)
 
 RSN_SM = None
 
+GROUP_MEMBER = []
 BUS_TABLE = {}
+
+ROUTE_NO = None
 
 class State_Off(State):
     def run(self):
@@ -30,7 +33,15 @@ class State_Off(State):
         if action == RSNAction.turnOn:
             # TODO: do something about boot-strap
             # TODO: ping DNS
-            # TODO: ping GNS
+            # TODO: ping GSN
+            # Qian: turnOn is called by host, thus, it is not necessary to make a DNS query.
+            # just pass it within input
+            # This part is not clear. Please think deeply about the bootstrap of RSN
+            # RSN can be set by:
+            # 1. There is one bus asking for adding but there is no RSN yet (that bus is the first one in its route)
+            # 2. The previous RSN is lost
+            # for situation 1, the driver state machine will be hung up because he needs to wait for the initialization of RSN state machine
+            # In situation 2, the GSN will send a backup group info to the new RSN. (Backup is not necessary for situation 1)
             return RSNSM.Init_Waiting
         else:
             # remain off
@@ -83,11 +94,49 @@ class State_Ready(State):
             MessagePasser.normalSend("user", response_message)
             
             return RSNSM.Ready
+        elif action == RSNAction.askBusLoc:
+            # periodically ask each buses' location
+            # TODO: triggered by host timer
+            global GROUP_MEMBER
+            req_loc_message = {
+                               "SM" : "DRIVER_SM",
+                               "action" : "recvLocReq"
+                               #"route" : ROUTE_NO,
+                               }
+            #MessagePasser.multicast(GROUP_MEMBER, req_loc_message)
+            # TODO: replace the code below with a multicast version
+            for member in GROUP_MEMBER:
+                MessagePasser.normalSend(member, req_loc_message)
+                
+            return RSNSM.Ready
         elif action == RSNAction.recvDriverLoc:
             # TODO: update local cache
+            global BUS_TABLE, ROUTE_NO
+
+            if input["route"] == ROUTE_NO:
+                BUS_TABLE[input["bus_id"]] = {
+                                              "direction" : input["direction"],
+                                              "location" : input["location"]
+                                              }
+            
             return RSNSM.Ready
         elif action == RSNAction.recvBusChange:
             # TODO: add or remove a bus from current group
+            global GROUP_MEMBER, BUS_TABLE, ROUTE_NO
+            
+            if input["route"] == ROUTE_NO:
+                if input["type"] == "add":
+                    if not input["bus_id"] in GROUP_MEMBER:
+                        GROUP_MEMBER.append(input["bus_id"])
+                        BUS_TABLE[input["bus_id"]] = {
+                                                      "direction" : input["direction"],
+                                                      "location" : input["location"],
+                                                      "last_update" : 0 # TODO: use local time stamp
+                                                      }
+                elif input["type"] == "remove":
+                    if input["bus_id"] in GROUP_MEMBER:
+                        GROUP_MEMBER.remove(input["bus_id"])
+                        BUS_TABLE.pop(input["bus_id"])
             return RSNSM.Ready
         elif action == RSNAction.turnOff:
             # TODO: do something to shut-down
