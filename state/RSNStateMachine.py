@@ -16,6 +16,8 @@ LOGGER.setLevel(logging.DEBUG)
 
 RSN_SM = None
 
+BUS_TABLE = {}
+
 class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
@@ -74,7 +76,7 @@ class State_Ready(State):
             response_message = {
                                "SM" : "USER_SM",
                                "action" : "recvRes",
-                               "location" : (1, 1),
+                               "location" : (1, 1), # location should be fetched from table
                                "bus_id" : 1
                                }
             # TODO: TEST ONLY; gsn should be modified
