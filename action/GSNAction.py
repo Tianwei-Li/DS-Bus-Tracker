@@ -25,7 +25,8 @@ class GSNAction(object):
 
 turnOn = GSNAction("turnOn")
 recvUserReq = GSNAction("recvUserReq")
-recvBusReq = GSNAction("recvBusReq")
+recvBusReq = GSNAction("recvBusReq")    # add or remove a bus from a bus line
+recvElecReq = GSNAction("recvElecReq")  # request to elect a new rsn
 timeout = GSNAction("timeout")
 turnOff = GSNAction("turnOff")
 

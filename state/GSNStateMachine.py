@@ -17,7 +17,7 @@ LOGGER.setLevel(logging.DEBUG)
 GSN_SM = None
 RoutTable = []
 
-class AddrTableElm:
+class Addr:
     IP = None
     Port = 0
 
@@ -25,7 +25,7 @@ class RoutTableElm:
     rsnIP = None
     rsnPort = 0
     routName = ""
-    AddrTableElem = []
+    busTable = []
 
 def getRSNByName(routName):
     for elm in RoutTable:
@@ -77,7 +77,7 @@ class State_Ready(State):
             
             return GSNSM.Ready
         
-        elif input == GSNAction.recvBusReq:
+        elif action == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
             LOGGER.info("forward bus request to RSN")
             rsnAddr = getRSNByName(input["route"])
@@ -91,7 +91,25 @@ class State_Ready(State):
                                }
             MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
             return GSNSM.Ready
-        elif input == GSNAction.turnOff:
+        elif action == GSNAction.recvElecReq:
+            # receive election rsn request for a bus
+            rout_no = input["rout-no"]
+            elm = getRSNByName(rout_no)
+            # TODO: select a bus from the table to be the new rsn
+            elm.rsnIP = elm.busTable[0].IP
+            elm.rsnPort = elm.busTable[0].Port
+            
+            LOGGER.info("send message to new rsn")
+            request_message = {
+                               "SM" : "RSN_SM",
+                               "action" : "recvRSNAssign",
+                               "group_member" : elm.busTable
+                               }
+            # TODO: TEST ONLY; gsn should be modified
+            MessagePasser.directSend(elm.rsnIP, elm.rsnPort, request_message)
+            
+            return GSNSM.Ready
+        elif action == GSNAction.turnOff:
             # TODO: do something to shut-down
             return GSNSM.Off
 

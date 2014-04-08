@@ -28,6 +28,7 @@ recvGSNAck = RSNAction("recvGSNAck")
 askBusLoc = RSNAction("askBusLoc")
 recvLocReq = RSNAction("recvLocReq")
 recvBusChange = RSNAction("recvBusChange")   # receive bus add or remove request form GSN
+recvRSNAssign = RSNAction("recvRSNAssign")   # receive gsn message to indicate it is the new RSN
 recvDriverLoc = RSNAction("recvDriverLoc")
 
 timeout = RSNAction("timeout")

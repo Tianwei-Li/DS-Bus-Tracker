@@ -21,6 +21,8 @@ BUS_TABLE = {}
 
 ROUTE_NO = None
 
+GSN_ADDR = None
+
 class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
@@ -30,18 +32,23 @@ class State_Off(State):
     
     def next(self, input):
         action = map(RSNAction.RSNAction, [input["action"]])[0]
-        if action == RSNAction.turnOn:
+        if action == RSNAction.recvRSNAssign:
             # TODO: do something about boot-strap
-            # TODO: ping DNS
             # TODO: ping GSN
             # Qian: turnOn is called by host, thus, it is not necessary to make a DNS query.
             # just pass it within input
-            # This part is not clear. Please think deeply about the bootstrap of RSN
             # RSN can be set by:
             # 1. There is one bus asking for adding but there is no RSN yet (that bus is the first one in its route)
             # 2. The previous RSN is lost
             # for situation 1, the driver state machine will be hung up because he needs to wait for the initialization of RSN state machine
             # In situation 2, the GSN will send a backup group info to the new RSN. (Backup is not necessary for situation 1)
+            
+            
+            # Terry: when a rsn turn on, it means gsn sent a message to bus to indicate it to be a rsn
+            # Terry: the message should include the route and group info
+            GROUP_MEMBER = input["group_member"]
+            BUS_TABLE = input["bus_table"]
+            
             return RSNSM.Init_Waiting
         else:
             # remain off
@@ -59,9 +66,11 @@ class State_Init_Waiting(State):
         if action == RSNAction.recvGSNAck:
             # TODO: received the group info from GSN
             # TODO: store the group info
+            GROUP_MEMBER = input["group_member"]
             return RSNSM.Ready
         elif action == RSNAction.timeout:
             # TODO: re-ping
+            # Terry: seems no need to re-ping gsn
             return RSNSM.Init_Waiting
         elif action == RSNAction.turnOff:
             # TODO: do something to shut-down
