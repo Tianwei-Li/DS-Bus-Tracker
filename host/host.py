@@ -28,6 +28,9 @@ STATE = None
 USERSM = None
 DRIVERSM = None
 
+GSN_ADDR = None
+SELF_ADDR = None
+
 DISPATCHERMAP = {}
 DISPATCH_QUEUE = collections.deque()
 
@@ -53,10 +56,12 @@ def receiveThread():
 
 # must be first called by GUI app 
 def initialize(conf, localName, role):
-    global LOCALNAME, ROLE, USERSM
+    global LOCALNAME, ROLE, USERSM, SELF_ADDR
     LOCALNAME = localName
     ROLE = role
+    # TODO: conf might be changed
     MessagePasser.initialize(conf, localName)
+    SELF_ADDR = socket.gethostbyname(socket.getfqdn())
     
     LOGGER.info("Initializing Host")
     
@@ -129,3 +134,5 @@ if __name__ == '__main__':
     #user_request("123", "north", "center ave")
 
     print socket.gethostbyname('ece.cmu.edu')
+    print socket.gethostbyname(socket.getfqdn())
+

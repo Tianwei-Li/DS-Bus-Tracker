@@ -15,22 +15,23 @@ LOGGER = logging.getLogger("GSNStateMachine")
 LOGGER.setLevel(logging.DEBUG)
 
 GSN_SM = None
-RoutTable = []
+ROUTE_TABLE = {}
 
 class Addr:
-    IP = None
-    Port = 0
+    def __init__(self, ip, port):
+        self.ip = ip
+        self.port = port
 
 class RoutTableElm:
-    rsnIP = None
-    rsnPort = 0
-    routName = ""
-    busTable = []
+    def __init__(self, routeName, rsnAddr, busTable):
+        self.rsnAddr = rsnAddr
+        self.routeName = routeName
+        self.busTable = busTable
 
-def getRSNByName(routName):
-    for elm in RoutTable:
-        if routName == elm.routName:
-            return elm
+def getRSNByName(routeName):
+    global ROUTE_TABLE
+    if routeName in ROUTE_TABLE:
+        return ROUTE_TABLE[routeName]
     return None
             
 
@@ -80,7 +81,17 @@ class State_Ready(State):
         elif action == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
             LOGGER.info("forward bus request to RSN")
-            rsnAddr = getRSNByName(input["route"])
+            rsnAddr = getRSNByName()
+            # if there is no RSN, assign the request bus as the RSN
+            if rsnAddr == None:
+                ROUTE_TABLE[input["route"]] = RoutTableElm(input["route"], 
+                                                           Addr(input["ip"], input["port"]), 
+                                                           [Addr(input["ip"], input["port"])])
+                assign_message = {
+                              "SM" : "RSN_SM",
+                              "action" : "recvRSNAssign",
+                              "groupMember" : elm.busTable
+                              }
             request_message = {
                                "SM" : "RSN_SM",
                                "action" : "recvBusChange",
@@ -93,18 +104,18 @@ class State_Ready(State):
             return GSNSM.Ready
         elif action == GSNAction.recvElecReq:
             # receive election rsn request for a bus
-            rout_no = input["rout-no"]
-            elm = getRSNByName(rout_no)
-            # TODO: select a bus from the table to be the new rsn
+            route_no = input["routeNo"]
+            elm = getRSNByName(route_no)
+            # TODO: select a bus from the table to be the new rsn, below code just selects the first driver
             elm.rsnIP = elm.busTable[0].IP
             elm.rsnPort = elm.busTable[0].Port
             
             LOGGER.info("send message to new rsn")
-            request_message = {
-                               "SM" : "RSN_SM",
-                               "action" : "recvRSNAssign",
-                               "group_member" : elm.busTable
-                               }
+            assign_message = {
+                              "SM" : "RSN_SM",
+                              "action" : "recvRSNAssign",
+                              "groupMember" : elm.busTable
+                              }
             # TODO: TEST ONLY; gsn should be modified
             MessagePasser.directSend(elm.rsnIP, elm.rsnPort, request_message)
             

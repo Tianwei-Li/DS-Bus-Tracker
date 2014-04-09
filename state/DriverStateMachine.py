@@ -68,7 +68,7 @@ class State_Init_Waiting(State):
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.recvGSNAck:
-            global RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
+            global MYSELF_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
             # TODO: get RSN addr from the input
             RSN_ADDR["ip"] = input["rsn_ip"]
             RSN_ADDR["port"] = input["rsn_port"]
@@ -81,7 +81,9 @@ class State_Init_Waiting(State):
                             "route" : ROUTE_NO,
                             "direction" : DIRECTION,
                             "bus_id" : BUS_ID,
-                            "location" : LOCATION
+                            "location" : LOCATION,
+                            "ip" : MessagePasser.localIP,
+                            "port" : MessagePasser.localPort
                            }
             
             # TODO: should use real rsn
