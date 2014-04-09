@@ -6,6 +6,7 @@ Created on Apr 2, 2014
 import sys
 sys.path += ['../']
 
+import os
 import comm.MessagePasser as MessagePasser
 import state.UserStateMachine as UserStateMachine
 import state.DriverStateMachine as DriverStateMachine
@@ -92,6 +93,54 @@ def initialize(conf, localName, role):
         
         # turnOn the machine
         enqueue({"SM":"GSN_SM", "action":"turnOn"})
+        
+        
+def autoInitialize(ip, port, localName, role, routNo, interval):
+    global LOCALNAME, ROLE, USERSM
+    LOCALNAME = localName
+    ROLE = role
+    MessagePasser.autoInitialize(ip, port, localName)
+    
+    LOGGER.info("Initializing Host")
+    
+    # initialize dispatching and receiving thread
+    recv_thread = threading.Thread(target=receiveThread, args = ())
+    recv_thread.daemon = False
+    recv_thread.start()
+    
+    dipatch_thread = threading.Thread(target=dispatcherThread, args = ())
+    dipatch_thread.daemon = True
+    dipatch_thread.start()
+    
+    # start state machine
+    if ROLE == "USER":
+        UserStateMachine.initialize()
+        DISPATCHERMAP["USER_SM"] = UserStateMachine
+        
+        # turnOn the machine
+        enqueue({"SM":"USER_SM", "action":"turnOn"})
+        # TODO: DNS bootstrap Test ONLY 
+        enqueue({"SM":"USER_SM", "action":"recvAck"})
+        
+        # send bus query periodically
+        while True:
+            os.sleep(interval)
+            # TODO: send query message
+            
+
+    elif ROLE == "DRIVER":
+        DriverStateMachine.initialize()
+        DISPATCHERMAP["DRIVER_SM"] = DriverStateMachine
+        
+        # turnOn the machine
+        enqueue({"SM":"DRIVER_SM", "action":"turnOn"})
+        
+    elif ROLE == "GSN":
+        GSNStateMachine.initialize()
+        DISPATCHERMAP["GSN_SM"] = GSNStateMachine
+        
+        # turnOn the machine
+        enqueue({"SM":"GSN_SM", "action":"turnOn"})
 
 # request by GUI app to find the nearest bus
 # maybe can move this function to gui
@@ -120,12 +169,15 @@ def dispatch(message):
 
 # Test Only
 if __name__ == '__main__':
-    #name = sys.argv[1]
-    #role = sys.argv[2]
-    name = "alice"
-    role = "USER"
+    ip = sys.argv[1]
+    port = sys.argv[2]
+    localName = sys.argv[3]
+    role = sys.argv[4]
+    routNo = sys.argv[5]
+    interval = sys.argv[6]
 
-    initialize("../testFile.txt", name, role)
+    #initialize("../testFile.txt", name, role)
+    autoInitialize(ip, int(port), localName, role, routNo, interval)
     #user_request("123", "north", "center ave")
 
     print socket.gethostbyname('ece.cmu.edu')

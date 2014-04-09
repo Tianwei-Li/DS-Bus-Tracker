@@ -164,6 +164,31 @@ def initialize(confFileName, localName):
     thread.daemon = True
     thread.start()
     
+def autoInitialize(ip, port, localName):
+    global CONF, LOCALNAME
+    
+    #loadConfiguration(confFileName)
+    
+    # check if localName exists
+    global localIP, localPort
+    
+    #if localName in CONF["hosts"]:
+    LOCALNAME = localName
+    localIP = ip
+    localPort = port
+        
+    if LOCALNAME != None:
+        TCPComm.runServer(localIP, localPort, LOCALNAME)
+    else:
+        # TODO throw an ERROR
+        print "NO matched local name"
+        pass
+    
+    # initialize receiving thread
+    thread = threading.Thread(target=receiveThread, args = ())
+    thread.daemon = True
+    thread.start()
+    
 # check if the configuration file has been modified
 def checkConfChange(confFileName):
     #TODO
