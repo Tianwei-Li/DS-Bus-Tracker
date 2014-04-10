@@ -65,7 +65,7 @@ class State_Off(State):
     
 class State_Idle(State):
     def run(self):
-        LOGGER.info("Idle: waiting for assignment")
+        LOGGER.info("Idle")
 
     def __str__(self): 
         return "State_Idle"
@@ -105,7 +105,7 @@ class State_Idle(State):
 
 class State_Ready(State):
     def run(self):
-        LOGGER.info("Ready for request")
+        LOGGER.info("Ready")
 
     def __str__(self): 
         return "State_Ready"
@@ -159,17 +159,18 @@ class State_Ready(State):
             
             if input["route"] == ROUTE_NO:
                 if input["type"] == "add":
-                    if not input["bus_id"] in GROUP_MEMBER:
-                        GROUP_MEMBER.append(input["bus_id"])
-                        BUS_TABLE[input["bus_id"]] = {
+                    if not input["busId"] in GROUP_MEMBER:
+                        GROUP_MEMBER.append(input["busId"])
+                        BUS_TABLE[input["busId"]] = {
                                                       "direction" : input["direction"],
                                                       "location" : input["location"],
+                                                      "addr" : Addr(input["driverIp"], input["driverPort"]),
                                                       "last_update" : 0 # TODO: use local time stamp
                                                       }
                 elif input["type"] == "remove":
-                    if input["bus_id"] in GROUP_MEMBER:
-                        GROUP_MEMBER.remove(input["bus_id"])
-                        BUS_TABLE.pop(input["bus_id"])
+                    if input["busId"] in GROUP_MEMBER:
+                        GROUP_MEMBER.remove(input["busId"])
+                        BUS_TABLE.pop(input["busId"])
             return RSNSM.Ready
         elif action == RSNAction.turnOff:
             # TODO: do something to shut-down

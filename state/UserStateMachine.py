@@ -49,7 +49,7 @@ class State_Off(State):
     
 class State_Ready(State):
     def run(self):
-        LOGGER.info("Ready for request")
+        LOGGER.info("Ready")
 
     def __str__(self): 
         return "State_Ready"
@@ -64,6 +64,7 @@ class State_Ready(State):
                                "SM" : "GSN_SM",
                                "action" : "recvUserReq",
                                "requestId" : USER_ID + str(REQUEST_SEQ),
+                               "userId" : USER_ID,
                                "route" : input["route"],
                                "direction" : input["direction"],
                                "destination" : input["destination"],
@@ -84,7 +85,7 @@ class State_Ready(State):
 
 class State_Req_Waiting(State):
     def run(self):
-        LOGGER.info("Waiting: requesting")
+        LOGGER.info("Req_Waiting: requesting")
 
     def __str__(self): 
         return "State_Req_Waiting"

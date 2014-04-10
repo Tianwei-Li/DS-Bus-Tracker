@@ -57,7 +57,7 @@ class State_Off(State):
 
 class State_Idle(State):
     def run(self):
-        LOGGER.info("Idle: waiting for starting")
+        LOGGER.info("Idle")
 
     def __str__(self): 
         return "State_Idle"
@@ -100,7 +100,7 @@ class State_Idle(State):
             
 class State_Init_Waiting(State):
     def run(self):
-        LOGGER.info("Waiting: Connecting to GSN")
+        LOGGER.info("Init_Waiting")
 
     def __str__(self): 
         return "State_Init"
@@ -130,7 +130,7 @@ class State_Init_Waiting(State):
 
 class State_Ready(State):
     def run(self):
-        LOGGER.info("Ready for request")
+        LOGGER.info("Ready")
 
     def __str__(self): 
         return "State_Ready"

@@ -76,9 +76,9 @@ class State_Ready(State):
         elif action == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
             LOGGER.info("receive bus request")
-            rsnAddr = getRSNByName(input["route"])
+            rsn = getRSNByName(input["route"])
             # if there is no RSN, assign the request bus as the RSN
-            if rsnAddr == None:
+            if rsn == None:
                 # Qian: some checks: (1) if there is no rsn but receive a remove req
                 LOGGER.info("assign new RSN")
                 """
@@ -111,10 +111,11 @@ class State_Ready(State):
                                    "action" : "recvBusChange",
                                    "type" : input["type"],    # add or remove
                                    "route" : input["route"],
-                                   "busIP" : input["busIP"],
-                                   "busPort" : input["busPort"]
+                                   "busId" : input["busId"],
+                                   "busIP" : input["driverIp"],
+                                   "busPort" : input["driverPort"]
                                    }
-                MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
+                MessagePasser.directSend(rsn["rsnAddr"].ip, rsn["rsnAddr"].port, request_message)
             return GSNSM.Ready
         elif action == GSNAction.recvElecReq:
             # receive election rsn request for a bus
