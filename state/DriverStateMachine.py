@@ -9,6 +9,7 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.DriverAction as DriverAction
 import comm.MessagePasser as MessagePasser
+from util.Addr import Addr
 
 import socket
 
@@ -21,8 +22,10 @@ DRIVER_SM = None
 ROUTE_NO = -1
 DIRECTION = None
 BUS_ID = 0
-LOCATION = (0, 0)
+LOCATION = (0, 0)    # should be updated by some other module
 
+LOCAL_ADDR = None
+GSN_ADDR = None
 RSN_ADDR = None
 
 class State_Off(State):
@@ -35,29 +38,66 @@ class State_Off(State):
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.turnOn:
+            global ROUTE_NO, DIRECTION, BUS_ID, LOCAL_ADDR, GSN_ADDR
+
             # TODO: do something about boot-strap
             # TODO: DNS query, need to read this name from config.
             # gsn_ip = socket.gethostbyname('ece.cmu.edu')
-            gsn_ip = socket.gethostbyname('localhost')
-            gsn_port = 20000  # pre-configured
+            gsnIp = socket.gethostbyname('localhost')
+            gsnPort = 40000  # pre-configured
+            GSN_ADDR = Addr(gsnIp, gsnPort)
             
-            # TODO: ping GSN
-            global ROUTE_NO, DIRECTION, BUS_ID
-            ROUTE_NO = input["route"]
-            DIRECTION = input["direction"]
-            BUS_ID = input["bus_id"]
-            add_message = {
-                           "SM" : "GSN_SM",
-                            "action" : "recvBusReq"
-                           }
-            # TODO: should use real gsn 
-            MessagePasser.normalSend("gsn", add_message)
+            LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
+            BUS_ID = input["busId"]            
             
-            return DriverSM.Init_Waiting
+            return DriverSM.Idle
         else:
             # remain off
             return DriverSM.Off
+
+class State_Idle(State):
+    def run(self):
+        LOGGER.info("Idle: waiting for starting")
+
+    def __str__(self): 
+        return "State_Idle"
     
+    def next(self, input):
+        action = map(DriverAction.DriverAction, [input["action"]])[0]
+        if action == DriverAction.start:
+            global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
+            
+            ROUTE_NO = input["route"]
+            DIRECTION = input["direction"]
+            LOCATION = input["location"]
+            
+            # TODO: ping RSN to add into the group
+            add_message = {
+                           "SM" : "GSN_SM",
+                           "action" : "recvBusReq",
+                           "type" : "add",
+                           "route" : ROUTE_NO,
+                           "direction" : LOCATION,
+                           "busId" : BUS_ID,
+                           "location" : LOCATION, 
+                           "driverIp" : LOCAL_ADDR.ip,
+                           "driverPort" : LOCAL_ADDR.port
+                           }
+            # TODO: should use real gsn 
+            MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, add_message)
+            
+            return DriverSM.Setup
+        elif action == DriverAction.timeout:
+            # TODO: re-ping
+            return DriverSM.Idle
+        elif action == DriverAction.turnOff:
+            # TODO: do something to shut-down
+            return DriverSM.Off
+        else:
+            # for other illegal action
+            assert 0, "Idle: invalid action: %s" % str(input)
+            
+            
 class State_Init_Waiting(State):
     def run(self):
         LOGGER.info("Waiting: Connecting to GSN")
@@ -67,28 +107,16 @@ class State_Init_Waiting(State):
     
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
-        if action == DriverAction.recvGSNAck:
+        if action == DriverAction.recvRSNAck:
             global MYSELF_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
-            # TODO: get RSN addr from the input
-            RSN_ADDR["ip"] = input["rsn_ip"]
-            RSN_ADDR["port"] = input["rsn_port"]
+
+            # if the response route number doesn't match
+            if input["route"] != ROUTE_NO:
+                return DriverSM.Init_Waiting
             
-            # TODO: ping RSN to add into the group
-            add_message = {
-                           "SM" : "GSN_SM",
-                            "action" : "recvBusChange",
-                            "type" : "add",
-                            "route" : ROUTE_NO,
-                            "direction" : DIRECTION,
-                            "bus_id" : BUS_ID,
-                            "location" : LOCATION,
-                            "ip" : MessagePasser.localIP,
-                            "port" : MessagePasser.localPort
-                           }
-            
-            # TODO: should use real rsn
-            MessagePasser.normalSend("rsn", add_message)
-            return DriverSM.Setup
+            RSN_ADDR = Addr(input["rsnIP"], input["rsnPort"])
+
+            return DriverSM.Ready
         elif action == DriverAction.timeout:
             # TODO: re-ping
             return DriverSM.Init_Waiting
@@ -98,30 +126,6 @@ class State_Init_Waiting(State):
         else:
             # for other illegal action
             assert 0, "Init_Waiting: invalid action: %s" % str(input)
-
-
-class State_Setup(State):
-    def run(self):
-        LOGGER.info("Setuping: Connecting to RSN")
-
-    def __str__(self): 
-        return "State_Setup"
-    
-    def next(self, input):
-        action = map(DriverAction.DriverAction, [input["action"]])[0]
-        if action == DriverAction.recvRSNAck:
-            # TODO: record the RSN address
-            # Qian: it is recorded in previous stage
-            return DriverSM.Ready
-        elif action == DriverAction.timeout:
-            # TODO: re-ping
-            return DriverSM.Setup
-        elif action == DriverAction.turnOff:
-            # TODO: do something to shut-down
-            return DriverSM.Off
-        else:
-            # for other illegal action
-            assert 0, "Setup: invalid action: %s" % str(input)
 
 
 class State_Ready(State):
@@ -135,7 +139,8 @@ class State_Ready(State):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.recvLocReq:
             # TODO: response the current location
-            global ROUTE_NO, DIRECTION, LOCATION
+            # check if the rsn is my RSN, route matched?
+            global ROUTE_NO, DIRECTION, LOCATION, RSN_ADDR
             LOGGER.info("received RSN location request: %s" % input)
             loc_message = {
                            "SM" : "RSN_SM",
@@ -146,7 +151,7 @@ class State_Ready(State):
                            "location" : LOCATION,
                            }
             # TODO: TEST ONLY; rsn should be modified
-            MessagePasser.normalSend("rsn", loc_message)
+            MessagePasser.directSend(RSN_ADDR.ip, RSN_ADDR.port, loc_message)
             
             return DriverSM.Ready
         elif action == DriverAction.turnOff:
@@ -187,8 +192,8 @@ def offerMsgs(messages):
         offerMsg(message)
 
 DriverSM.Off = State_Off()
+DriverSM.Idle = State_Idle()
 DriverSM.Init_Waiting = State_Init_Waiting()
-DriverSM.Setup = State_Setup()
 DriverSM.Ready = State_Ready()
 
 

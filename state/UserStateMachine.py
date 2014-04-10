@@ -9,12 +9,20 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.UserAction as UserAction
 import comm.MessagePasser as MessagePasser
+import util.Addr as Addr
+import socket
 
 logging.basicConfig()
 LOGGER = logging.getLogger("UserStateMachine")
 LOGGER.setLevel(logging.DEBUG)
 
 USER_SM = None
+
+GSN_ADDR = None
+LOCAL_ADDR = None
+
+USER_ID = None
+REQUEST_SEQ =0
 
 class State_Off(State):
     def run(self):
@@ -26,13 +34,19 @@ class State_Off(State):
     def next(self, input):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.turnOn:
+            global LOCAL_ADDR, GSN_ADDR, USER_ID
             # TODO: do something about boot-strap
             # TODO: ping DNS
-            return UserSM.Init_Waiting
+            LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
+            gsnIp = socket.gethostbyname('localhost')
+            gsnPort = 40000  # pre-configured
+            GSN_ADDR = Addr(gsnIp, gsnPort)
+            USER_ID = input["userId"]
+            return UserSM.Ready
         else:
             # remain off
             return UserSM.Off
-    
+"""
 class State_Init_Waiting(State):
     def run(self):
         LOGGER.info("Waiting: Connecting to GSN")
@@ -54,7 +68,7 @@ class State_Init_Waiting(State):
         else:
             # for other illegal action
             assert 0, "Init_Waiting: invalid action: %s" % str(input)
-
+"""
     
 class State_Ready(State):
     def run(self):
@@ -66,19 +80,22 @@ class State_Ready(State):
     def next(self, input):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.request:
+            global LOCAL_ADDR, GSN_ADDR, USER_ID, REQUEST_SEQ
             # TODO: send a request to GSN
             LOGGER.info("send user request: %s" % input)
             request_message = {
                                "SM" : "GSN_SM",
                                "action" : "recvUserReq",
+                               "requestId" : USER_ID + str(REQUEST_SEQ),
                                "route" : input["route"],
                                "direction" : input["direction"],
                                "destination" : input["destination"],
-                               "userIP" : MessagePasser.localIP,
-                               "userPort" : MessagePasser.localPort
+                               "location" : input["location"],
+                               "userIP" : LOCAL_ADDR.ip,
+                               "userPort" : LOCAL_ADDR.port
                                }
             # TODO: TEST ONLY; gsn should be modified
-            MessagePasser.normalSend("gsn", request_message)
+            MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, request_message)
             return UserSM.Req_Waiting
         elif action == UserAction.turnOff:
             # TODO: do something to shut-down
@@ -99,6 +116,7 @@ class State_Req_Waiting(State):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.recvRes:
             # TODO: return response to GUI
+            LOGGER.info("receive response from RSN")
             return UserSM.Ready
         elif action == UserAction.timeout:
             # TODO: re-send request if under threshold
@@ -141,7 +159,7 @@ def offerMsgs(messages):
         offerMsg(message)
 
 UserSM.Off = State_Off()
-UserSM.Init_Waiting = State_Init_Waiting()
+#UserSM.Init_Waiting = State_Init_Waiting()
 UserSM.Ready = State_Ready()
 UserSM.Req_Waiting = State_Req_Waiting()
 

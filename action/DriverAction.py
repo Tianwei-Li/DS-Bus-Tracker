@@ -24,6 +24,7 @@ class DriverAction(object):
         return hash(self.action)
 
 turnOn = DriverAction("turnOn")
+start = DriverAction("start")
 recvGSNAck = DriverAction("recvGSNAck")
 recvRSNAck = DriverAction("recvRSNAck")
 recvLocReq = DriverAction("recvLocReq")

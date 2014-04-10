@@ -9,6 +9,8 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.RSNAction as RSNAction
 import comm.MessagePasser as MessagePasser
+import util.Addr as Addr
+import socket
 
 logging.basicConfig()
 LOGGER = logging.getLogger("RSNStateMachine")
@@ -16,12 +18,13 @@ LOGGER.setLevel(logging.DEBUG)
 
 RSN_SM = None
 
-GROUP_MEMBER = []
+GROUP_MEMBER = None
 BUS_TABLE = {}
 
 ROUTE_NO = None
 
 GSN_ADDR = None
+LOCAL_ADDR = None
 
 class State_Off(State):
     def run(self):
@@ -32,7 +35,7 @@ class State_Off(State):
     
     def next(self, input):
         action = map(RSNAction.RSNAction, [input["action"]])[0]
-        if action == RSNAction.recvRSNAssign:
+        if action == RSNAction.turnOn:
             # TODO: do something about boot-strap
             # TODO: ping GSN
             # Qian: turnOn is called by host, thus, it is not necessary to make a DNS query.
@@ -46,38 +49,57 @@ class State_Off(State):
             
             # Terry: when a rsn turn on, it means gsn sent a message to bus to indicate it to be a rsn
             # Terry: the message should include the route and group info
-            GROUP_MEMBER = input["group_member"]
-            BUS_TABLE = input["bus_table"]
+            #GROUP_MEMBER = input["group_member"]
+            #BUS_TABLE = input["bus_table"]
+            gsnIp = socket.gethostbyname('localhost')
+            gsnPort = 40000  # pre-configured
+            GSN_ADDR = Addr(gsnIp, gsnPort)
             
-            return RSNSM.Init_Waiting
+            LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
+
+            return RSNSM.Idle
         else:
             # remain off
             return RSNSM.Off
     
-class State_Init_Waiting(State):
+class State_Idle(State):
     def run(self):
-        LOGGER.info("Waiting: Connecting to GSN")
+        LOGGER.info("Idle: waiting for assignment")
 
     def __str__(self): 
-        return "State_Init"
+        return "State_Idle"
     
     def next(self, input):
         action = map(RSNAction.RSNAction, [input["action"]])[0]
-        if action == RSNAction.recvGSNAck:
+        if action == RSNAction.recvRSNAssign:
             # TODO: received the group info from GSN
             # TODO: store the group info
-            GROUP_MEMBER = input["group_member"]
+            
+            global LOCAL_ADDR, ROUTE_NO, GROUP_MEMBER
+            ROUTE_NO = input["route"]
+            GROUP_MEMBER = input["groupMember"]
+
+            # if the RSN is the Driver itself, send a recvRSNAck to driver role
+            if input["type"] == "self":
+                rsn_ack = {
+                           "SM" : "DRIVER_SM",
+                           "action" : "recvRSNAck",
+                           "route" : ROUTE_NO,
+                           "rsnIP" : LOCAL_ADDR.ip,
+                           "rsnPort" : LOCAL_ADDR.port
+                           }
+                MessagePasser.directSend(input["original"]["driverIp"], input["original"]["driverPort"], rsn_ack)
             return RSNSM.Ready
         elif action == RSNAction.timeout:
             # TODO: re-ping
             # Terry: seems no need to re-ping gsn
-            return RSNSM.Init_Waiting
+            return RSNSM.Idle
         elif action == RSNAction.turnOff:
             # TODO: do something to shut-down
             return RSNSM.Off
         else:
             # for other illegal action
-            assert 0, "Init: invalid action: %s" % str(input)
+            assert 0, "Idle: invalid action: %s" % str(input)
 
 
 class State_Ready(State):
@@ -94,13 +116,14 @@ class State_Ready(State):
             # TODO: response to user directly
             LOGGER.info("received location request: %s" % input)
             response_message = {
-                               "SM" : "USER_SM",
-                               "action" : "recvRes",
-                               "location" : (1, 1), # location should be fetched from table
-                               "bus_id" : 1
+                                "SM" : "USER_SM",
+                                "action" : "recvRes",
+                                "location" : (1, 1), # location should be fetched from table
+                                "busId" : "alice",
+                                "original" : input["original"]
                                }
-            # TODO: TEST ONLY; gsn should be modified
-            MessagePasser.normalSend("user", response_message)
+
+            MessagePasser.directSend(input["original"]["userIP"], input["original"]["userPort"], response_message)
             
             return RSNSM.Ready
         elif action == RSNAction.askBusLoc:
@@ -185,7 +208,7 @@ def offerMsgs(messages):
         offerMsg(message)
 
 RSNSM.Off = State_Off()
-RSNSM.Init = State_Init_Waiting()
+RSNSM.Idle = State_Idle()
 RSNSM.Ready = State_Ready()
 
 

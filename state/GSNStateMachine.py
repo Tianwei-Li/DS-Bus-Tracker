@@ -9,6 +9,9 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.GSNAction as GSNAction
 import comm.MessagePasser as MessagePasser
+import util.RouteTableElm as RouteTableElm
+from util.Addr import Addr
+import util.BusTableElm as BusTableElm
 
 logging.basicConfig()
 LOGGER = logging.getLogger("GSNStateMachine")
@@ -17,16 +20,8 @@ LOGGER.setLevel(logging.DEBUG)
 GSN_SM = None
 ROUTE_TABLE = {}
 
-class Addr:
-    def __init__(self, ip, port):
-        self.ip = ip
-        self.port = port
-
-class RoutTableElm:
-    def __init__(self, routeName, rsnAddr, busTable):
-        self.rsnAddr = rsnAddr
-        self.routeName = routeName
-        self.busTable = busTable
+GSN_ID = None
+LOCAL_ADDR = None
 
 def getRSNByName(routeName):
     global ROUTE_TABLE
@@ -45,8 +40,12 @@ class State_Off(State):
     def next(self, input):
         action = map(GSNAction.GSNAction, [input["action"]])[0]
         if action == GSNAction.turnOn:
+            global LOCAL_ADDR, GSN_ID
             # do something about boot-strap
-            # 
+            # Qian: seems we don't need to do anything
+            LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
+            GSN_ID = input["gsnId"]
+            
             return GSNSM.Ready
         else:
             # remain off
@@ -68,11 +67,7 @@ class State_Ready(State):
             request_message = {
                                "SM" : "RSN_SM",
                                "action" : "recvLocReq",
-                               "route" : input["route"],
-                               "direction" : input["direction"],
-                               "destination" : input["destination"],
-                               "userIP" : input["userIP"],
-                               "userPort" : input["userPort"]
+                               "original" : input
                                }
             MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
             
@@ -80,27 +75,42 @@ class State_Ready(State):
         
         elif action == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
-            LOGGER.info("forward bus request to RSN")
+            LOGGER.info("receive bus request")
             rsnAddr = getRSNByName()
             # if there is no RSN, assign the request bus as the RSN
             if rsnAddr == None:
-                ROUTE_TABLE[input["route"]] = RoutTableElm(input["route"], 
-                                                           Addr(input["ip"], input["port"]), 
-                                                           [Addr(input["ip"], input["port"])])
+                # Qian: some checks: (1) if there is no rsn but receive a remove req
+                LOGGER.info("assign new RSN")
+                """
+                routeTableElm = RouteTableElm(input["route"], 
+                                              Addr(input["driverIp"], input["driverPort"]), 
+                                              [])
+                routeTableElm.busTable.append(BusTableElm(Addr(input["driverIp"], input["driverPort"])))
+                """
+                
+                ROUTE_TABLE[input["route"]] = None
                 assign_message = {
-                              "SM" : "RSN_SM",
-                              "action" : "recvRSNAssign",
-                              "groupMember" : elm.busTable
-                              }
-            request_message = {
-                               "SM" : "RSN_SM",
-                               "action" : "recvBusChange",
-                               "type" : input["type"],    # add or remove
-                               "route" : input["route"],
-                               "busIP" : input["busIP"],
-                               "busPort" : input["busPort"]
-                               }
-            MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
+                                  "SM" : "RSN_SM",
+                                  "action" : "recvRSNAssign",
+                                  "type" : "self", 
+                                  "route" : input["route"],
+                                  "original" : input,
+                                  "groupMember" : [input["busId"]]
+                                  }
+                
+                MessagePasser.directSend(input["driverIp"], input["driverPort"], assign_message)
+            else:
+                # Qian: GSN will just forward it to rsn
+                # may change this design
+                request_message = {
+                                   "SM" : "RSN_SM",
+                                   "action" : "recvBusChange",
+                                   "type" : input["type"],    # add or remove
+                                   "route" : input["route"],
+                                   "busIP" : input["busIP"],
+                                   "busPort" : input["busPort"]
+                                   }
+                MessagePasser.directSend(rsnAddr.rsnIP, rsnAddr.rsnPort, request_message)
             return GSNSM.Ready
         elif action == GSNAction.recvElecReq:
             # receive election rsn request for a bus

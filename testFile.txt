@@ -5,14 +5,14 @@ hosts:
     port: 20000
   - name:   user
     ip: 127.0.0.1
-    port: 30009
+    port: 30000
   - name:   gsn
     ip: 127.0.0.1
     port: 40000
   - name:   bus
     ip: 127.0.0.1
     port: 41000
-  - name:   rsn
+  - name:   driver
     ip: 127.0.0.1
     port: 42000
 

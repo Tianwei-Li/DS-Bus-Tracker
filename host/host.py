@@ -56,7 +56,7 @@ def receiveThread():
         time.sleep(0.05)
 
 # must be first called by GUI app 
-def initialize(conf, localName, role):
+def initialize(conf, localName, role, id, localIP, localPort):
     global LOCALNAME, ROLE, USERSM, SELF_ADDR
     LOCALNAME = localName
     ROLE = role
@@ -81,24 +81,26 @@ def initialize(conf, localName, role):
         DISPATCHERMAP["USER_SM"] = UserStateMachine
         
         # turnOn the machine
-        enqueue({"SM":"USER_SM", "action":"turnOn"})
-        # TODO: DNS bootstrap Test ONLY 
-        enqueue({"SM":"USER_SM", "action":"recvAck"})
+        enqueue({"SM":"USER_SM", "action":"turnOn", "userId":id, "localIP":localIP, "localPort":localPort})
 
     elif ROLE == "DRIVER":
         DriverStateMachine.initialize()
         DISPATCHERMAP["DRIVER_SM"] = DriverStateMachine
         
+        RSNStateMachine.initialize()
+        DISPATCHERMAP["RSN_SM"] = RSNStateMachine
+        
         # turnOn the machine
-        enqueue({"SM":"DRIVER_SM", "action":"turnOn"})
+        enqueue({"SM":"DRIVER_SM", "action":"turnOn", "busId":id, "localIP":localIP, "localPort":localPort})
+        enqueue({"SM":"RSN_SM", "action":"turnOn", "rsnId":id, "localIP":localIP, "localPort":localPort})
+        
         
     elif ROLE == "GSN":
         GSNStateMachine.initialize()
         DISPATCHERMAP["GSN_SM"] = GSNStateMachine
         
         # turnOn the machine
-        enqueue({"SM":"GSN_SM", "action":"turnOn"})
-        
+        enqueue({"SM":"GSN_SM", "action":"turnOn", "gsnId":id, "localIP":localIP, "localPort":localPort})
         
 def autoInitialize(ip, port, localName, role, routNo, interval):
     global LOCALNAME, ROLE, USERSM
@@ -129,7 +131,7 @@ def autoInitialize(ip, port, localName, role, routNo, interval):
         
         # send bus query periodically
         while True:
-            os.sleep(interval)
+            time.sleep(interval)
             # TODO: send query message
             
 
@@ -174,17 +176,27 @@ def dispatch(message):
 
 # Test Only
 if __name__ == '__main__':
+    '''
     ip = sys.argv[1]
     port = sys.argv[2]
     localName = sys.argv[3]
     role = sys.argv[4]
     routNo = sys.argv[5]
     interval = sys.argv[6]
-
+    '''
     #initialize("../testFile.txt", name, role)
-    autoInitialize(ip, int(port), localName, role, routNo, interval)
+    #autoInitialize(ip, int(port), localName, role, routNo, interval)
     #user_request("123", "north", "center ave")
 
-    print socket.gethostbyname('ece.cmu.edu')
-    print socket.gethostbyname(socket.getfqdn())
+    #print socket.gethostbyname('ece.cmu.edu')
+    #print socket.gethostbyname(socket.getfqdn())
+    
+    localName = sys.argv[1]
+    SM = sys.argv[2]
+    id = sys.argv[3]
+    localIP = sys.argv[4]
+    localPort = sys.argv[5]
+
+    #initialize("../testFile.txt", "gsn", "GSN", "gsn_1", "127.0.0.1", 40000)
+    initialize("../testFile.txt", localName, SM, id, localIP, localPort)
 
