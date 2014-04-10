@@ -126,7 +126,14 @@ def send(dst, message):
     
     TCPComm.send(CONF["hosts"][dst]["ip"], CONF["hosts"][dst]["port"], message)
 
-def directSend(dstIP, dstPort, message):
+def directSend(dstIP, dstPort, data):
+    message = {"type" : "NORMAL",
+               "src" : LOCALNAME,
+               "seq" : None,
+               "group" : None,
+               "memberList" : [],
+               "data" : data
+               }
     TCPComm.send(dstIP, dstPort, message)
 
 # called by application to deliver a message

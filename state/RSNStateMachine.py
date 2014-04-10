@@ -9,7 +9,7 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.RSNAction as RSNAction
 import comm.MessagePasser as MessagePasser
-import util.Addr as Addr
+from util.Addr import Addr
 import socket
 
 logging.basicConfig()
@@ -51,6 +51,7 @@ class State_Off(State):
             # Terry: the message should include the route and group info
             #GROUP_MEMBER = input["group_member"]
             #BUS_TABLE = input["bus_table"]
+            global GSN_ADDR, LOCAL_ADDR
             gsnIp = socket.gethostbyname('localhost')
             gsnPort = 40000  # pre-configured
             GSN_ADDR = Addr(gsnIp, gsnPort)

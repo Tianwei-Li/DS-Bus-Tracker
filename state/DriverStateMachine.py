@@ -86,7 +86,7 @@ class State_Idle(State):
             # TODO: should use real gsn 
             MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, add_message)
             
-            return DriverSM.Setup
+            return DriverSM.Init_Waiting
         elif action == DriverAction.timeout:
             # TODO: re-ping
             return DriverSM.Idle

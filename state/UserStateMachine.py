@@ -9,7 +9,7 @@ from state.State import State
 from state.StateMachine import StateMachine
 import action.UserAction as UserAction
 import comm.MessagePasser as MessagePasser
-import util.Addr as Addr
+from util.Addr import Addr
 import socket
 
 logging.basicConfig()
@@ -46,29 +46,6 @@ class State_Off(State):
         else:
             # remain off
             return UserSM.Off
-"""
-class State_Init_Waiting(State):
-    def run(self):
-        LOGGER.info("Waiting: Connecting to GSN")
-
-    def __str__(self): 
-        return "State_Init_Waiting"
-    
-    def next(self, input):
-        action = map(UserAction.UserAction, [input["action"]])[0]
-        if action == UserAction.recvAck:
-            # TODO: do something
-            return UserSM.Ready
-        elif action == UserAction.timeout:
-            # TODO: re-ping
-            return UserSM.Init_Waiting
-        elif action == UserAction.turnOff:
-            # TODO: do something to shut-down
-            return UserSM.Off
-        else:
-            # for other illegal action
-            assert 0, "Init_Waiting: invalid action: %s" % str(input)
-"""
     
 class State_Ready(State):
     def run(self):

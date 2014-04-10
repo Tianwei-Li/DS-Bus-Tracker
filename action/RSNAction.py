@@ -23,7 +23,7 @@ class RSNAction(object):
     def __hash__(self):
         return hash(self.action)
 
-turnOn = RSNAction("recvRSNAssign")
+turnOn = RSNAction("turnOn")
 recvGSNAck = RSNAction("recvGSNAck")
 askBusLoc = RSNAction("askBusLoc")
 recvLocReq = RSNAction("recvLocReq")
