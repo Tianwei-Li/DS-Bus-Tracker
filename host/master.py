@@ -14,11 +14,13 @@ class Application(Frame):
         name = self.userName.get()
         ip = self.userIP.get()
         port = self.userPort.get()
-        routNo = self.queryRout.get()
-        interval = self.timeInter.get()
+        #routNo = self.queryRout.get()
+        routNo = "ttt"
+        interval = "50"
+        #interval = self.timeInter.get()
         print "new user launched!"
-        print name + " " + ip + " " + port + " " + routNo + " " + interval 
-        os.system("python host.py " + ip + " " + port + " " + name + " USER " + routNo + " " + interval + " &")
+        #print name + " " + ip + " " + port + " " + routNo + " " + interval 
+        os.system("python gui_user.py " + ip + " " + port + " " + name + " " + routNo + " " + interval + " &")
         #host.autoInitialize(ip, int(port), name, "USER", routNo, interval)
     
     def newGSN(self):   
@@ -26,17 +28,18 @@ class Application(Frame):
         ip = self.gsnIP.get()
         port = self.gsnPort.get()
         print "new GSN launched!"  
-        print name + " " + ip + " " + port
-        os.system("python host.py " + ip + " " + port + " " + name + " GNS " + "none" + " " + "none" + " &")
+        #print name + " " + ip + " " + port
+        os.system("python gui_gsn.py " + ip + " " + port + " " + name + " &")
         
     def newDriver(self):  
         name = self.driverName.get() 
         ip = self.driverIP.get()
         port = self.driverPort.get()
-        routNo = self.routeNo.get()
+        #routNo = self.routeNo.get()
+        routNo = "ttt"
         print "new driver launched!"  
-        print name + " " + ip + " " + port   + " " + routNo
-        os.system("python host.py " + ip + " " + port + " " + name + " DRIVER " + routNo + " " + "none" + " &")
+        #print name + " " + ip + " " + port   + " " + routNo
+        os.system("python gui_driver.py " + ip + " " + port + " " + name + " " + routNo + " &")
  
  
     def createUser(self, col):
@@ -58,6 +61,7 @@ class Application(Frame):
         self.userPort = Entry(self, textvariable = defaultPort)
         self.userPort.grid(row = 3, column = col+1)  
         
+        '''
         Label(self, text="Route:").grid(row = 4, column = col)
         defaultRoute = StringVar()
         defaultRoute.set("61C")
@@ -69,7 +73,7 @@ class Application(Frame):
         defaultInterv.set("10 s")
         self.timeInter = Entry(self, textvariable = defaultInterv)
         self.timeInter.grid(row = 5, column = col+1) 
-        
+        '''
         self.newUserBtn = Button(self)
         self.newUserBtn["text"] = "launch user"
         self.newUserBtn["command"] = self.newUser 
@@ -117,13 +121,13 @@ class Application(Frame):
         defaultPort.set("30000")
         self.driverPort = Entry(self, textvariable = defaultPort)
         self.driverPort.grid(row = 3, column = col+1) 
-        
+        '''
         Label(self, text="Route:").grid(row = 4, column = col)
         defaultRoute = StringVar()  
         defaultRoute.set("61C")
         self.routeNo = Entry(self, textvariable = defaultRoute)
         self.routeNo.grid(row = 4, column = col+1) 
-        
+        '''
         self.newDriBtn = Button(self)   
         self.newDriBtn["text"] = "launch Driver"  
         #self.newGSNBtn["fg"]   = "red"  

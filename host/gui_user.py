@@ -8,16 +8,20 @@ Created on Mar 13, 2014
 
 from Tkinter import Tk, BOTH
 import os
+import sys
 import threading
 import tkFileDialog
 import tkSimpleDialog
 from ttk import Frame, Button, Style, Label, Entry
-
+import host
 #from comm import MessagePasser
 
 
 ROOT = None
 APP = None
+IP = None
+PORT = None
+LOCALNAME = None
 
 class MainFrame(Frame):    
     def __init__(self, parent):
@@ -27,7 +31,7 @@ class MainFrame(Frame):
         # define options for opening or saving a file
               
     def initUI(self):
-        self.parent.title("Mobile Live Bus Tracker")
+        self.parent.title("User Control Panel")
         self.style = Style()
         self.style.theme_use("default")
         self.pack(fill=BOTH, expand=1)
@@ -66,6 +70,34 @@ class MainFrame(Frame):
         self.search.grid(row=10, column=0)
         self.search = Button(self, text="61C", width=40)
         self.search.grid(row=11, column=0)
+        
+        
+        ############## used for debug ################
+        self.l2 = Label(self, text="", font=('Helvetica', '14'))
+        self.l2.grid(row=12, column=0)
+        
+        self.turnOnBtn = Button(self, text="Turn On")
+        self.turnOnBtn["command"] = self.turnOn 
+        self.turnOnBtn.grid(row=13, column=0)    
+        
+        self.reqBtn = Button(self, text="Request")
+        self.reqBtn["command"] = self.request 
+        self.reqBtn.grid(row=14, column=0)    
+        
+        self.turnOffBtn = Button(self, text="Turn Off")
+        self.turnOffBtn["command"] = self.turnOff 
+        self.turnOffBtn.grid(row=15, column=0)   
+        
+    def turnOn(self):
+        host.enqueue({"SM":"USER_SM", "action":"turnOn", "userId":LOCALNAME, "localIP":IP, "localPort":int(PORT)})
+        
+    def request(self):
+        host.enqueue({"SM":"USER_SM", "action":"request", "route":"71A", "direction":"north", "destination":(1,1), "location":(0,1)})
+        
+    def turnOff(self):
+        host.enqueue({"SM":"USER_SM", "action":"turnOff"})
+        
+        
 
 
 #    def receive(self):
@@ -87,6 +119,8 @@ class MainFrame(Frame):
 def main():
     global ROOT, APP
     
+    host.initialize("../testFile.txt", "user", "USER", LOCALNAME, IP, int(PORT))
+
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)
@@ -99,4 +133,11 @@ def main():
 
 
 if __name__ == '__main__':
+    global IP, PORT, LOCALNAME
+    
+    IP = sys.argv[1]
+    PORT = sys.argv[2]
+    LOCALNAME = sys.argv[3]
+    routNo = sys.argv[4]
+    interval = sys.argv[5]
     main() 
