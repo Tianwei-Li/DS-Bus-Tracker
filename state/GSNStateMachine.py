@@ -89,7 +89,7 @@ class State_Ready(State):
                 """
                 route_table_entry = {
                                      "rsnId" : input["busId"],
-                                     "rsnAddr" : Addr(input["driverIp"], input["driverPort"])
+                                     "rsnAddr" : Addr(input["busIP"], input["busPort"])
                                      }
                 
                 ROUTE_TABLE[input["route"]] = route_table_entry
@@ -102,7 +102,7 @@ class State_Ready(State):
                                   "groupMember" : [input["busId"]]
                                   }
                 
-                MessagePasser.directSend(input["driverIp"], input["driverPort"], assign_message)
+                MessagePasser.directSend(input["busIP"], input["busPort"], assign_message)
             else:
                 # Qian: GSN will just forward it to rsn
                 # may change this design
@@ -111,9 +111,11 @@ class State_Ready(State):
                                    "action" : "recvBusChange",
                                    "type" : input["type"],    # add or remove
                                    "route" : input["route"],
+                                   "direction" : input["direction"],
+                                   "location" : input["location"],
                                    "busId" : input["busId"],
-                                   "busIP" : input["driverIp"],
-                                   "busPort" : input["driverPort"]
+                                   "busIP" : input["busIP"],
+                                   "busPort" : input["busPort"]
                                    }
                 MessagePasser.directSend(rsn["rsnAddr"].ip, rsn["rsnAddr"].port, request_message)
             return GSNSM.Ready

@@ -1,7 +1,7 @@
 '''
 Created on Apr 5, 2014
 
-@author: Terry Li
+@author: Terry Li, Qian Mao
 '''
 
 import logging
@@ -11,6 +11,8 @@ import action.RSNAction as RSNAction
 import comm.MessagePasser as MessagePasser
 from util.Addr import Addr
 import socket
+import threading
+import time
 
 logging.basicConfig()
 LOGGER = logging.getLogger("RSNStateMachine")
@@ -26,6 +28,33 @@ ROUTE_NO = None
 GSN_ADDR = None
 LOCAL_ADDR = None
 
+TIMER_ON = None
+TIMER_OFF = None
+TIMER_THREAD = None
+
+# Timer thread
+
+def timerThread(timerOn, timerOff):
+    while timerOn.wait():
+        while not timerOff.wait(5):     # every 5 secs
+            #print "timer thread"
+            # send a askBusLoc to RSN_SM
+            askBusLoc_message = {
+                                 "SM" : "RSN_SM",
+                                 "action" : "askBusLoc"
+                                 }
+            offerMsg(askBusLoc_message)
+"""
+class TimerThread(threading.Thread):
+    def __init__(self, event):
+        threading.Thread.__init__(self)
+        self.timerOn = event
+
+    def run(self):
+        while self.timerOn.wait(1):
+            print "timer thread"            
+            # call a function
+"""
 class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
@@ -51,12 +80,13 @@ class State_Off(State):
             # Terry: the message should include the route and group info
             #GROUP_MEMBER = input["group_member"]
             #BUS_TABLE = input["bus_table"]
-            global GSN_ADDR, LOCAL_ADDR
+            global GSN_ADDR, LOCAL_ADDR, RSN_ID
             gsnIp = socket.gethostbyname('localhost')
             gsnPort = 40000  # pre-configured
             GSN_ADDR = Addr(gsnIp, gsnPort)
             
             LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
+            RSN_ID = input["rsnId"]
 
             return RSNSM.Idle
         else:
@@ -76,27 +106,44 @@ class State_Idle(State):
             # TODO: received the group info from GSN
             # TODO: store the group info
             
-            global LOCAL_ADDR, ROUTE_NO, GROUP_MEMBER
+            global LOCAL_ADDR, ROUTE_NO, GROUP_MEMBER, BUT_TABLE, TIMER_ON, TIMER_OFF
             ROUTE_NO = input["route"]
             GROUP_MEMBER = input["groupMember"]
 
             # if the RSN is the Driver itself, send a recvRSNAck to driver role
             if input["type"] == "self":
+                BUS_TABLE[input["original"]["busId"]] = {
+                                             "direction" : input["original"]["direction"],
+                                             "location" : input["original"]["location"],
+                                             "addr" : Addr(input["original"]["busIP"], input["original"]["busPort"]),
+                                             "last_update" : 0 # TODO: use local time stamp
+                                             }
+                
                 rsn_ack = {
                            "SM" : "DRIVER_SM",
                            "action" : "recvRSNAck",
                            "route" : ROUTE_NO,
+                           "rsnId" : RSN_ID,
                            "rsnIP" : LOCAL_ADDR.ip,
                            "rsnPort" : LOCAL_ADDR.port
                            }
-                MessagePasser.directSend(input["original"]["driverIp"], input["original"]["driverPort"], rsn_ack)
+                MessagePasser.directSend(input["original"]["busIP"], input["original"]["busPort"], rsn_ack)
+            #elif input["type"] == "normal":
+            #    pass
+            # unblock the timer thread
+            TIMER_OFF.clear()
+            TIMER_ON.set()
+            
             return RSNSM.Ready
         elif action == RSNAction.timeout:
             # TODO: re-ping
             # Terry: seems no need to re-ping gsn
             return RSNSM.Idle
         elif action == RSNAction.turnOff:
+            global TIMER_ON, TIMER_OFF
             # TODO: do something to shut-down
+            TIMER_OFF.set()
+            TIMER_ON.clear()
             return RSNSM.Off
         else:
             # for other illegal action
@@ -119,7 +166,7 @@ class State_Ready(State):
             response_message = {
                                 "SM" : "USER_SM",
                                 "action" : "recvRes",
-                                "location" : (1, 1), # location should be fetched from table
+                                "location" : (1, 1), # TODO: location should be fetched from table
                                 "busId" : "alice",
                                 "original" : input["original"]
                                }
@@ -131,31 +178,40 @@ class State_Ready(State):
             # periodically ask each buses' location
             # TODO: triggered by host timer
             global GROUP_MEMBER
+            LOGGER.info("asking each bus' location")
             req_loc_message = {
                                "SM" : "DRIVER_SM",
-                               "action" : "recvLocReq"
-                               #"route" : ROUTE_NO,
+                               "action" : "recvLocReq",
+                               "rsnId" : RSN_ID,
+                               "route" : ROUTE_NO,
+                               "rsnIP" : LOCAL_ADDR.ip,
+                               "rsnPort" : LOCAL_ADDR.port
                                }
             #MessagePasser.multicast(GROUP_MEMBER, req_loc_message)
             # TODO: replace the code below with a multicast version
+
+            print GROUP_MEMBER
+
             for member in GROUP_MEMBER:
-                MessagePasser.normalSend(member, req_loc_message)
-                
+                MessagePasser.directSend(BUS_TABLE[member]["addr"].ip, BUS_TABLE[member]["addr"].port, req_loc_message)
+ 
             return RSNSM.Ready
         elif action == RSNAction.recvDriverLoc:
             # TODO: update local cache
             global BUS_TABLE, ROUTE_NO
 
-            if input["route"] == ROUTE_NO:
-                BUS_TABLE[input["bus_id"]] = {
+            if input["route"] == ROUTE_NO and input["busId"] in BUS_TABLE:
+                BUS_TABLE[input["busId"]] = {
                                               "direction" : input["direction"],
-                                              "location" : input["location"]
+                                              "location" : input["location"],
+                                              "addr" : Addr(input["busIP"], input["busPort"]),
+                                              "last_update" : 0 # TODO: use local time stamp
                                               }
             
             return RSNSM.Ready
         elif action == RSNAction.recvBusChange:
             # TODO: add or remove a bus from current group
-            global GROUP_MEMBER, BUS_TABLE, ROUTE_NO
+            global GROUP_MEMBER, BUS_TABLE, ROUTE_NO, RSN_ID, LOCAL_ADDR
             
             if input["route"] == ROUTE_NO:
                 if input["type"] == "add":
@@ -164,9 +220,19 @@ class State_Ready(State):
                         BUS_TABLE[input["busId"]] = {
                                                       "direction" : input["direction"],
                                                       "location" : input["location"],
-                                                      "addr" : Addr(input["driverIp"], input["driverPort"]),
+                                                      "addr" : Addr(input["busIP"], input["busPort"]),
                                                       "last_update" : 0 # TODO: use local time stamp
                                                       }
+                        # send an ACK to driver
+                        rsn_ack = {
+                                   "SM" : "DRIVER_SM",
+                                   "action" : "recvRSNAck",
+                                   "route" : ROUTE_NO,
+                                   "rsnId" : RSN_ID,
+                                   "rsnIP" : LOCAL_ADDR.ip,
+                                   "rsnPort" : LOCAL_ADDR.port
+                                   }
+                        MessagePasser.directSend(input["busIP"], input["busPort"], rsn_ack)
                 elif input["type"] == "remove":
                     if input["busId"] in GROUP_MEMBER:
                         GROUP_MEMBER.remove(input["busId"])
@@ -197,8 +263,23 @@ class RSNSM(StateMachine):
         return self.currentState
 
 def initialize():
-    global RSN_SM
+    global RSN_SM, TIMER_ON, TIMER_OFF, TIMER_THREAD
     RSN_SM = RSNSM()
+    
+    # Timer variable
+    TIMER_ON = threading.Event()
+    TIMER_OFF = threading.Event()
+
+    TIMER_THREAD = threading.Thread(target=timerThread,  args=(TIMER_ON, TIMER_OFF))
+    TIMER_THREAD.daemon = True
+
+    TIMER_ON.clear()
+    TIMER_OFF.set()
+    TIMER_THREAD.start()
+    #time.sleep(10)
+
+
+
 
 def offerMsg(message):
     global RSN_SM
@@ -217,13 +298,3 @@ RSNSM.Ready = State_Ready()
 # Test Only
 if __name__ == '__main__':
     initialize()
-    message1 = {
-               "SM" : "RSN_SM",
-               "action" : "turnOn"
-               }
-    message2 = {
-               "SM" : "RSN_SM",
-               "action" : "recvGNSAck"
-               }
-    #offerMsg(message1)
-    offerMsgs([message1, message2])

@@ -6,7 +6,6 @@ Created on Apr 2, 2014
 import sys
 sys.path += ['../']
 
-import os
 import comm.MessagePasser as MessagePasser
 import state.UserStateMachine as UserStateMachine
 import state.DriverStateMachine as DriverStateMachine
@@ -170,7 +169,7 @@ def enqueue(message):
 # offer message to state machine
 def dispatch(message):
     if not message["SM"] in DISPATCHERMAP:
-        LOGGER.info("Target state machine does NOT exist or closed")
+        LOGGER.info("Target state machine does NOT exist or closed: %s" % message)
     else:
         LOGGER.info("Dispatch message [%s]" % message)
         DISPATCHERMAP[message["SM"]].offerMsg(message)
@@ -263,7 +262,7 @@ if __name__ == '__main__':
     
     while True:
         try:
-            print "--------------------\n1. launch a GSN\n2. launch a DRIVER\n3. launch a USER\n--------------------"
+            print "--------------------\n1. launch GSN\n2. launch DRIVER_1\n3. launch DRIVER_2\n4. launch a USER\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 role = "GSN"
@@ -271,14 +270,18 @@ if __name__ == '__main__':
                 gsnConsole()
             elif input == 2:
                 role = "DRIVER"
-                initialize("../testFile.txt", "bus", "DRIVER", "bus_71A_1", "127.0.0.1", 41000)
+                initialize("../testFile.txt", "driver1", "DRIVER", "bus_71A_1", "127.0.0.1", 41000)
                 driverConsole()
             elif input == 3:
+                role = "DRIVER"
+                initialize("../testFile.txt", "driver2", "DRIVER", "bus_71A_2", "127.0.0.1", 42000)
+                driverConsole()
+            elif input == 4:
                 role = "USER"
                 initialize("../testFile.txt", "user", "USER", "user_alice", "127.0.0.1", 30000)
                 userConsole()
             else:
-                raise Exception("please enter number [1-3]")
+                raise Exception("please enter number [1-4]")
         except ValueError:
             print "Not a number"
         except Exception as e:

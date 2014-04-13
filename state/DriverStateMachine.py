@@ -80,8 +80,8 @@ class State_Idle(State):
                            "direction" : LOCATION,
                            "busId" : BUS_ID,
                            "location" : LOCATION, 
-                           "driverIp" : LOCAL_ADDR.ip,
-                           "driverPort" : LOCAL_ADDR.port
+                           "busIP" : LOCAL_ADDR.ip,
+                           "busPort" : LOCAL_ADDR.port
                            }
             # TODO: should use real gsn 
             MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, add_message)
@@ -146,9 +146,11 @@ class State_Ready(State):
                            "SM" : "RSN_SM",
                            "action" : "recvDriverLoc",
                            "route" : ROUTE_NO,
-                           "direction" : DIRECTION,
-                           "bus_id" : BUS_ID,
-                           "location" : LOCATION,
+                           "direction" : LOCATION,
+                           "busId" : BUS_ID,
+                           "location" : LOCATION, 
+                           "busIP" : LOCAL_ADDR.ip,
+                           "busPort" : LOCAL_ADDR.port
                            }
             # TODO: TEST ONLY; rsn should be modified
             MessagePasser.directSend(RSN_ADDR.ip, RSN_ADDR.port, loc_message)

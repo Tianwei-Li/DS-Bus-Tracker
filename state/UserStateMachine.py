@@ -11,6 +11,7 @@ import action.UserAction as UserAction
 import comm.MessagePasser as MessagePasser
 from util.Addr import Addr
 import socket
+import collections
 
 logging.basicConfig()
 LOGGER = logging.getLogger("UserStateMachine")
@@ -23,6 +24,8 @@ LOCAL_ADDR = None
 
 USER_ID = None
 REQUEST_SEQ =0
+
+RESPONSE_QUE = collections.deque()
 
 class State_Off(State):
     def run(self):
@@ -94,7 +97,9 @@ class State_Req_Waiting(State):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.recvRes:
             # TODO: return response to GUI
+            global RESPONSE_QUE
             LOGGER.info("receive response from RSN")
+            RESPONSE_QUE.append(input)
             return UserSM.Ready
         elif action == UserAction.timeout:
             # TODO: re-send request if under threshold

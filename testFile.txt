@@ -9,10 +9,10 @@ hosts:
   - name:   gsn
     ip: 127.0.0.1
     port: 40000
-  - name:   bus
+  - name:   driver1
     ip: 127.0.0.1
     port: 41000
-  - name:   driver
+  - name:   driver2
     ip: 127.0.0.1
     port: 42000
 
