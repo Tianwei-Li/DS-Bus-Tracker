@@ -74,7 +74,7 @@ def initialize(conf, localName, role, id, localIP, localPort):
     dipatch_thread.daemon = True
     dipatch_thread.start()
     
-    # start state machine
+    # start state machineg
     if ROLE == "USER":
         UserStateMachine.initialize()
         DISPATCHERMAP["USER_SM"] = UserStateMachine
