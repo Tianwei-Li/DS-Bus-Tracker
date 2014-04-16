@@ -50,7 +50,7 @@ class MainFrame(Frame):
         
 def main():
     global ROOT, APP
-    host.initialize("../testFile.txt", "gsn", "GSN", LOCALNAME, IP, int(PORT))
+    host.initialize("gsn", "GSN", LOCALNAME, IP, int(PORT))
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)

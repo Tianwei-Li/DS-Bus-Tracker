@@ -146,24 +146,26 @@ def receive():
 
 
 # initialize configuration and start listning server
-def initialize(confFileName, localName):
-    global CONF, LOCALNAME
+def initialize(localIP, localPort, localName):
+    global LOCALNAME
     
-    loadConfiguration(confFileName)
+    LOCALNAME = localName
+    
+    #loadConfiguration(confFileName)
     
     # check if localName exists
-    global localIP, localPort
+    # global localIP, localPort
     
-    if localName in CONF["hosts"]:
-        LOCALNAME = localName
-        localIP = CONF["hosts"][localName]["ip"]
-        localPort = CONF["hosts"][localName]["port"]
+    # if localName in CONF["hosts"]:
+    #    LOCALNAME = localName
+    #    localIP = CONF["hosts"][localName]["ip"]
+    #    localPort = CONF["hosts"][localName]["port"]
         
-    if LOCALNAME != None:
+    if localIP != None and localPort != None:
         TCPComm.runServer(localIP, localPort, LOCALNAME)
     else:
         # TODO throw an ERROR
-        print "NO matched local name"
+        LOGGER.error("Invalid IP or Port")
         pass
     
     # initialize receiving thread
@@ -202,6 +204,7 @@ def checkConfChange(confFileName):
     pass
 
 # load configuration file
+"""
 def loadConfiguration(confFileName):
     LOGGER.info("load configuration")
     global CONFFILE, CONF
@@ -216,7 +219,9 @@ def loadConfiguration(confFileName):
     
     for group in CONFFILE.groups:
         CONF['groups'][group['name']] = {'members' : group['members']}
-        
+
+"""
+
 if __name__ == "__main__":
     initialize("../testFile.txt", "alice")
     multicast("group1", "multicast-group1")

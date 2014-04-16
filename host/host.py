@@ -55,12 +55,12 @@ def receiveThread():
         time.sleep(0.05)
 
 # must be first called by GUI app 
-def initialize(conf, localName, role, id, localIP, localPort):
+def initialize(localName, role, id, localIP, localPort):
     global LOCALNAME, ROLE, USERSM, SELF_ADDR
     LOCALNAME = localName
     ROLE = role
     # TODO: conf might be changed
-    MessagePasser.initialize(conf, localName)
+    MessagePasser.initialize(localIP, localPort, localName)
     SELF_ADDR = socket.gethostbyname(socket.getfqdn())
     
     LOGGER.info("Initializing Host")
@@ -266,19 +266,19 @@ if __name__ == '__main__':
             input = int(raw_input('Input:'))
             if input == 1:
                 role = "GSN"
-                initialize("../testFile.txt", "gsn", "GSN", "gsn_1", "127.0.0.1", 40000)
+                initialize("gsn", "GSN", "gsn_1", "127.0.0.1", 40000)
                 gsnConsole()
             elif input == 2:
                 role = "DRIVER"
-                initialize("../testFile.txt", "driver1", "DRIVER", "bus_71A_1", "127.0.0.1", 41000)
+                initialize("driver1", "DRIVER", "bus_71A_1", "127.0.0.1", 41000)
                 driverConsole()
             elif input == 3:
                 role = "DRIVER"
-                initialize("../testFile.txt", "driver2", "DRIVER", "bus_71A_2", "127.0.0.1", 42000)
+                initialize("driver2", "DRIVER", "bus_71A_2", "127.0.0.1", 42000)
                 driverConsole()
             elif input == 4:
                 role = "USER"
-                initialize("../testFile.txt", "user", "USER", "user_alice", "127.0.0.1", 30000)
+                initialize("user", "USER", "user_alice", "127.0.0.1", 30000)
                 userConsole()
             else:
                 raise Exception("please enter number [1-4]")
