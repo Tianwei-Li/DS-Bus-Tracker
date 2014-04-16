@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+.node {
+  fill: #000;
+}
+
+.node.gsn {
+  fill: #f00;
+}
+
+.node.rsn {
+  fill: #0f0;
+}
+
+.node.user {
+  fill: #00f;
+}
+
+.link {
+  stroke: #999;
+}
+
+</style>
+<body>
+<script src="d3.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var fill = d3.scale.category20();
+
+var force = d3.layout.force()
+    .size([width, height])
+    .nodes([]) // initialize with no node
+    .linkDistance(30)
+    .charge(-60)
+    .on("tick", tick);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .on("mousedown", mousedown);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+var nodes = force.nodes(),
+    links = force.links(),
+    node = svg.selectAll(".node"),
+    link = svg.selectAll(".link");
+
+var jsonNodes = force.nodes();
+var jsonLinks = force.links();
+
+function mousedown() {
+  restart();
+}
+
+function tick() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+function restart() {
+    // read file
+    d3.json("graph.json", function(error, json) {
+      jsonNodes = json.nodes;
+      jsonLinks = json.links;
+    });
+
+    jsonNodes.forEach( function(d) {
+      if(d3.keys(nodes).indexOf("" + d.index) == -1) {
+        console.log("add node with index: " + d.index);
+        n = nodes.push(d);
+      }
+    });
+
+    nodes.forEach( function(d) {
+      if(d3.keys(jsonNodes).indexOf("" + d.index) == -1) {
+        console.log("remove node with index: " + d.index);
+        n = nodes.splice(d.index);
+      }
+    });
+
+    jsonLinks.forEach( function(d) {
+      if(d3.keys(links).indexOf("" + d.index) == -1) {
+        console.log("add link with index: " + d.index);
+        l = links.push(d);
+      }
+    });
+
+    links.forEach( function(d) {
+      if(d3.keys(jsonLinks).indexOf("" + d.index) == -1) {
+        console.log("remove link with index: " + d.index);
+        l = links.splice(d.index);
+      }
+    });
+
+    // update links
+    link = link.data(links, function(d) { 
+        return d.index;
+    });
+
+    link.exit().remove();
+
+    link.enter().insert("line", ".node")
+      .attr("class", "link");
+
+    // update nodes
+    node = node.data(nodes, function(d) { 
+        return d.index;
+    });
+
+    node.exit().remove();
+
+    node.enter().insert("circle")
+      .attr("class", "node")
+      .attr("class", function(d) { return "node " + d.type; })
+      .attr("r", 5)
+      .call(force.drag);
+
+    force.start();
+}
+
+restart();
+setInterval(restart, 1000*2);
+
+</script>
+
