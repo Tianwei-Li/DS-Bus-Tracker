@@ -29,8 +29,7 @@ rect {
 
 </style>
 <body>
-<script src="d3.js"></script>
-<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
 var width = 960,
@@ -138,7 +137,9 @@ function restart() {
 }
 
 restart();
-setInterval(restart, 1000*2);
+
+// sets interval graph gets updated (1sec = 1000ms)
+setInterval(restart, 1000 * 2);
 
 </script>
 
