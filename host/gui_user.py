@@ -119,7 +119,7 @@ class MainFrame(Frame):
 def main():
     global ROOT, APP
     
-    host.initialize("../testFile.txt", "user", "USER", LOCALNAME, IP, int(PORT))
+    host.initialize("user", "USER", LOCALNAME, IP, int(PORT))
 
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
