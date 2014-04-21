@@ -1,10 +1,10 @@
 {"nodes":[
-{"index": 0, "name":"GSN", "type": "gsn"},
+{"index": 0, "name":"GSN", "type": "gsn", "fixed": "true", "x": 480, "y": 40},
 {"index": 1, "name":"User1", "type": "user"},
 {"index": 2, "name":"User2", "type": "user"},
-{"index": 3, "name":"RSN-71A", "type": "rsn"},
-{"index": 4, "name":"RSN-71B", "type": "rsn"},
-{"index": 5, "name":"RSN-61B", "type": "rsn"}],
+{"index": 3, "name":"RSN-71A", "type": "rsn", "fixed": "true", "x": 225, "y": 240},
+{"index": 4, "name":"RSN-71B", "type": "rsn", "fixed": "true", "x": 27, "y": 240},
+{"index": 5, "name":"RSN-61B", "type": "rsn", "fixed": "true", "x": 100, "y": 200}],
 "links":[
 {"index": 0, "source":0,"target":1},
 {"index": 1, "source":0,"target":2},
