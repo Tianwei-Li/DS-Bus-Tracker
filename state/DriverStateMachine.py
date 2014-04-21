@@ -22,7 +22,7 @@ DRIVER_SM = None
 ROUTE_NO = -1
 DIRECTION = None
 BUS_ID = 0
-LOCATION = (0, 0)    # should be updated by some other module
+LOCATION = (5, 10)    # should be updated by some other module
 
 LOCAL_ADDR = None
 GSN_ADDR = None
@@ -145,6 +145,7 @@ class State_Ready(State):
             loc_message = {
                            "SM" : "RSN_SM",
                            "action" : "recvDriverLoc",
+                           "requestNo" : input["requestNo"],
                            "route" : ROUTE_NO,
                            "direction" : LOCATION,
                            "busId" : BUS_ID,
