@@ -10,7 +10,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("map.png");
+  background: url("map_pit.png");
 }
 
 .node {
@@ -22,11 +22,11 @@ svg {
 }
 
 .node.rsn {
-  fill: #0f0;
+  fill: #000;
 }
 
 .node.user {
-  fill: #00f;
+  fill: #000;
 }
 
 .node text {
@@ -40,11 +40,15 @@ svg {
 
 </style>
 <body>
+<div id="log" style="float:right; width: 250px;">
+ Coordinate Click Log:<br/><br/>
+ StopNumber,x,y<br/>
+</div>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 960,
-    height = 500;
+var width = 1000,
+    height = 750;
 
 var fill = d3.scale.category20();
 
@@ -72,8 +76,17 @@ var nodes = force.nodes(),
 var jsonNodes = force.nodes();
 var jsonLinks = force.links();
 
+var count = 0;
+
 function mousedown() {
   restart();
+  
+  // log mouse click coordinates, comment to disable
+  d3.select("#log")
+    .append("span")
+    .html(count + "," + d3.mouse(this)[0] + "," + d3.mouse(this)[1]
+          + "<br/>");
+  count++;
 }
 
 function tick() {
