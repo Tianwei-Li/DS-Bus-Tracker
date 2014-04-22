@@ -21,7 +21,16 @@ LOGGER.setLevel(logging.DEBUG)
 RSN_SM = None
 
 GROUP_MEMBER = None
+
+'''
+key            values:
+busId       direction,
+            location,
+            addr,
+            last_update
+'''
 BUS_TABLE = {}
+
 
 ROUTE_NO = None
 
@@ -31,6 +40,8 @@ LOCAL_ADDR = None
 TIMER_ON = None
 TIMER_OFF = None
 TIMER_THREAD = None
+
+LOC_REQ_NO = 0
 
 # Timer thread
 
@@ -44,17 +55,7 @@ def timerThread(timerOn, timerOff):
                                  "action" : "askBusLoc"
                                  }
             offerMsg(askBusLoc_message)
-"""
-class TimerThread(threading.Thread):
-    def __init__(self, event):
-        threading.Thread.__init__(self)
-        self.timerOn = event
 
-    def run(self):
-        while self.timerOn.wait(1):
-            print "timer thread"            
-            # call a function
-"""
 class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
@@ -162,12 +163,28 @@ class State_Ready(State):
         if action == RSNAction.recvLocReq:
             # TODO: lookup the queried bus location and
             # TODO: response to user directly
+            global BUS_TABLE, LOC_REQ_NO
             LOGGER.info("received location request: %s" % input)
+            
+            # fetch the nearest bus available
+            # TODO: this function should be polished
+            nearest_bus = None;
+            nearest_loc = None;
+            nearest_dist = -1;
+            for key in BUS_TABLE:
+                bus = BUS_TABLE[key]
+                if (int(bus["last_update"]) >= int(LOC_REQ_NO) - 1) and (int(bus["last_update"]) <= int(LOC_REQ_NO)):
+                    distance = (int(input["original"]["location"][0]) - int(bus["location"][0])) ** 2 + (int(input["original"]["location"][1]) - int(bus["location"][1])) ** 2
+                    if nearest_dist < 0 or distance < nearest_dist:
+                        nearest_dist = distance
+                        nearest_bus = bus
+                        nearest_loc = bus["location"]
+            
             response_message = {
                                 "SM" : "USER_SM",
                                 "action" : "recvRes",
-                                "location" : (1, 1), # TODO: location should be fetched from table
-                                "busId" : "alice",
+                                "location" : nearest_loc, # TODO: location should be fetched from table
+                                "busId" : nearest_bus,
                                 "original" : input["original"]
                                }
 
@@ -177,20 +194,22 @@ class State_Ready(State):
         elif action == RSNAction.askBusLoc:
             # periodically ask each buses' location
             # TODO: triggered by host timer
-            global GROUP_MEMBER
-            LOGGER.info("asking each bus' location")
+            global GROUP_MEMBER, RSN_ID, ROUTE_NO, LOCAL_ADDR, LOC_REQ_NO
+            LOGGER.info("asking each bus' location %s" % GROUP_MEMBER)
+            LOC_REQ_NO = LOC_REQ_NO + 1             # maybe overflow!!!
+            
             req_loc_message = {
                                "SM" : "DRIVER_SM",
                                "action" : "recvLocReq",
+                               "requestNo" : LOC_REQ_NO,
                                "rsnId" : RSN_ID,
                                "route" : ROUTE_NO,
                                "rsnIP" : LOCAL_ADDR.ip,
                                "rsnPort" : LOCAL_ADDR.port
                                }
+            
             #MessagePasser.multicast(GROUP_MEMBER, req_loc_message)
             # TODO: replace the code below with a multicast version
-
-            print GROUP_MEMBER
 
             for member in GROUP_MEMBER:
                 MessagePasser.directSend(BUS_TABLE[member]["addr"].ip, BUS_TABLE[member]["addr"].port, req_loc_message)
@@ -200,13 +219,14 @@ class State_Ready(State):
             # TODO: update local cache
             global BUS_TABLE, ROUTE_NO
 
-            if input["route"] == ROUTE_NO and input["busId"] in BUS_TABLE:
+            if input["route"] == ROUTE_NO and input["busId"] in BUS_TABLE and input["requestNo"] > BUS_TABLE[input["busId"]]["last_update"]:
                 BUS_TABLE[input["busId"]] = {
                                               "direction" : input["direction"],
                                               "location" : input["location"],
                                               "addr" : Addr(input["busIP"], input["busPort"]),
-                                              "last_update" : 0 # TODO: use local time stamp
+                                              "last_update" : input["requestNo"]    # TODO: use local time stamp
                                               }
+                print BUS_TABLE
             
             return RSNSM.Ready
         elif action == RSNAction.recvBusChange:

@@ -22,6 +22,8 @@ APP = None
 IP = None
 PORT = None
 LOCALNAME = None
+ROUTNO = None
+USERID = None
 
 class MainFrame(Frame):    
     def __init__(self, parent):
@@ -89,10 +91,10 @@ class MainFrame(Frame):
         self.turnOffBtn.grid(row=15, column=0)   
         
     def turnOn(self):
-        host.enqueue({"SM":"USER_SM", "action":"turnOn", "userId":LOCALNAME, "localIP":IP, "localPort":int(PORT)})
+        host.enqueue({"SM":"USER_SM", "action":"turnOn", "userId":USERID, "localIP":IP, "localPort":int(PORT)})
         
     def request(self):
-        host.enqueue({"SM":"USER_SM", "action":"request", "route":"71A", "direction":"north", "destination":(1,1), "location":(0,1)})
+        host.enqueue({"SM":"USER_SM", "action":"request", "route":ROUTNO, "direction":"north", "destination":(1,1), "location":(0,1)})
         
     def turnOff(self):
         host.enqueue({"SM":"USER_SM", "action":"turnOff"})
@@ -119,7 +121,7 @@ class MainFrame(Frame):
 def main():
     global ROOT, APP
     
-    host.initialize("user", "USER", LOCALNAME, IP, int(PORT))
+    host.initialize(LOCALNAME, "USER", USERID, IP, int(PORT))
 
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
@@ -133,11 +135,12 @@ def main():
 
 
 if __name__ == '__main__':
-    global IP, PORT, LOCALNAME
+    global IP, PORT, LOCALNAME, ROUTNO, USERID
     
     IP = sys.argv[1]
     PORT = sys.argv[2]
     LOCALNAME = sys.argv[3]
-    routNo = sys.argv[4]
-    interval = sys.argv[5]
+    USERID = "user_" + LOCALNAME;
+    ROUTNO = sys.argv[4]
+    #interval = sys.argv[5]
     main() 

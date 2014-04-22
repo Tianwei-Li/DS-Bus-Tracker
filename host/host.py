@@ -3,7 +3,7 @@ Created on Apr 2, 2014
 
 @author: Qian Mao
 '''
-import sys
+import sys, os
 sys.path += ['../']
 
 import comm.MessagePasser as MessagePasser
@@ -174,18 +174,24 @@ def dispatch(message):
         LOGGER.info("Dispatch message [%s]" % message)
         DISPATCHERMAP[message["SM"]].offerMsg(message)
 
+# exit the host
+def exit():
+    os._exit(0)
+
 # Test Only
 def gsnConsole():
     while True:
         try:
-            print "---------GSN--------\n1. turn on\n2. turn off\n--------------------"
+            print "---------GSN--------\n1. turn on\n2. turn off\n3. exit\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 enqueue({"SM":"GSN_SM", "action":"turnOn", "gsnId":"gsn_1", "localIP":"127.0.0.1", "localPort":40000})
             elif input == 2:
                 enqueue({"SM":"GSN_SM", "action":"turnOff"})
+            elif input == 3:
+                exit()
             else:
-                raise Exception("please enter number [1-2]")
+                raise Exception("please enter number [1-3]")
         except ValueError:
             print "Not a number"
         except Exception as e:
@@ -195,7 +201,7 @@ def gsnConsole():
 def driverConsole():
     while True:
         try:
-            print "-------DRIVER-------\n1. turn on\n2. start\n3. turn off\n--------------------"
+            print "-------DRIVER-------\n1. turn on\n2. start\n3. turn off\n4. exit\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 enqueue({"SM":"DRIVER_SM", "action":"turnOn", "busId":"bus_71A_1", "localIP":"127.0.0.1", "localPort":41000})
@@ -203,9 +209,10 @@ def driverConsole():
                 enqueue({"SM":"DRIVER_SM", "action":"start", "route":"71A", "direction":"north", "location":(0,0)})
             elif input == 3:
                 enqueue({"SM":"DRIVER_SM", "action":"turnOff"})
-
+            elif input == 4:
+                exit()
             else:
-                raise Exception("please enter number [1-3]")
+                raise Exception("please enter number [1-4]")
         except ValueError:
             print "Not a number"
         except Exception as e:
@@ -215,7 +222,7 @@ def driverConsole():
 def userConsole():
     while True:
         try:
-            print "--------USER--------\n1. turn on\n2. request\n3. turn off\n--------------------"
+            print "--------USER--------\n1. turn on\n2. request\n3. turn off\n4. exit\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 enqueue({"SM":"USER_SM", "action":"turnOn", "userId":"user_alice", "localIP":"127.0.0.1", "localPort":30000})
@@ -223,9 +230,10 @@ def userConsole():
                 enqueue({"SM":"USER_SM", "action":"request", "route":"71A", "direction":"north", "destination":(1,1), "location":(0,1)})
             elif input == 3:
                 enqueue({"SM":"USER_SM", "action":"turnOff"})
-
+            elif input == 4:
+                exit()
             else:
-                raise Exception("please enter number [1-3]")
+                raise Exception("please enter number [1-4]")
         except ValueError:
             print "Not a number"
         except Exception as e:
@@ -233,36 +241,12 @@ def userConsole():
 
 # Test Only
 if __name__ == '__main__':
-    '''
-    ip = sys.argv[1]
-    port = sys.argv[2]
-    localName = sys.argv[3]
-    role = sys.argv[4]
-    routNo = sys.argv[5]
-    interval = sys.argv[6]
-    '''
-    #initialize("../testFile.txt", name, role)
-    #autoInitialize(ip, int(port), localName, role, routNo, interval)
-    #user_request("123", "north", "center ave")
-
-    #print socket.gethostbyname('ece.cmu.edu')
-    #print socket.gethostbyname(socket.getfqdn())
-    '''
-    localName = sys.argv[1]
-    SM = sys.argv[2]
-    id = sys.argv[3]
-    localIP = sys.argv[4]
-    localPort = sys.argv[5]
-
-    #initialize("../testFile.txt", "gsn", "GSN", "gsn_1", "127.0.0.1", 40000)
-    initialize("../testFile.txt", localName, SM, id, localIP, localPort)
-    '''
     
     role = None
     
     while True:
         try:
-            print "--------------------\n1. launch GSN\n2. launch DRIVER_1\n3. launch DRIVER_2\n4. launch a USER\n--------------------"
+            print "--------------------\n1. launch GSN\n2. launch DRIVER_1\n3. launch DRIVER_2\n4. launch USER\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 role = "GSN"
