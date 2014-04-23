@@ -319,6 +319,11 @@ class State_Hold(State):
             # pet the watch dog
             WATCHDOG.petWatchdog()
             
+            # check if the RSN has changed
+            if RSN_ADDR.ip != input["rsnIP"] or RSN_ADDR.port != input["rsnPort"]:
+                LOGGER.info("RSN has changed")
+                RSN_ADDR = Addr(input["rsnIP"], input["rsnPort"])
+            
             loc_message = {
                            "SM" : "RSN_SM",
                            "action" : "recvDriverLoc",

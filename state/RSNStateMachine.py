@@ -86,6 +86,8 @@ class State_Off(State):
             
             LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
             RSN_ID = input["rsnId"]
+            
+            LOC_REQ_NO = 0
 
             return RSNSM.Idle
         else:
@@ -105,7 +107,7 @@ class State_Idle(State):
             # TODO: received the group info from GSN
             # TODO: store the group info
             
-            global LOCAL_ADDR, ROUTE_NO, BUT_TABLE, TIMER_ON, TIMER_OFF
+            global LOCAL_ADDR, ROUTE_NO, BUS_TABLE, TIMER_ON, TIMER_OFF
             ROUTE_NO = input["route"]
 
             # if the RSN is the Driver itself, send a recvRSNAck to driver role
@@ -126,8 +128,29 @@ class State_Idle(State):
                            "rsnPort" : LOCAL_ADDR.port
                            }
                 MessagePasser.directSend(input["original"]["busIP"], input["original"]["busPort"], rsn_ack)
-            #elif input["type"] == "normal":
-            #    pass
+            elif input["type"] == "normal":
+                BUS_TABLE = input["busTable"]
+                
+                # notify each bus 
+                global GROUP_MEMBER, RSN_ID, ROUTE_NO, LOCAL_ADDR, LOC_REQ_NO
+                LOGGER.info("asking each bus' location %s" % BUS_TABLE.keys())
+                LOC_REQ_NO = 0
+                LOC_REQ_NO = LOC_REQ_NO + 1             # maybe overflow!!!
+            
+                req_loc_message = {
+                                   "SM" : "DRIVER_SM",
+                                   "action" : "recvLocReq",
+                                   "requestNo" : LOC_REQ_NO,
+                                   "rsnId" : RSN_ID,
+                                   "route" : ROUTE_NO,
+                                   "rsnIP" : LOCAL_ADDR.ip,
+                                   "rsnPort" : LOCAL_ADDR.port
+                                   }
+
+                for member in BUS_TABLE:
+                    MessagePasser.directSend(BUS_TABLE[member]["addr"].ip, BUS_TABLE[member]["addr"].port, req_loc_message)
+                
+                
             # unblock the timer thread
             TIMER_OFF.clear()
             TIMER_ON.set()
@@ -236,7 +259,7 @@ class State_Ready(State):
             
             if input["route"] == ROUTE_NO:
                 if input["type"] == "add":
-                    if not input["busId"] in BUS_TABLE:
+                    #if not input["busId"] in BUS_TABLE:
                         #GROUP_MEMBER.append(input["busId"])
                         BUS_TABLE[input["busId"]] = {
                                                       "direction" : input["direction"],

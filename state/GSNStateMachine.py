@@ -235,7 +235,7 @@ class State_Ready(State):
                                   "type" : "normal", 
                                   "route" : input["route"],
                                   "original" : None,
-                                  "bus_table" : bus_table
+                                  "busTable" : bus_table
                                   }
                 
                 ROUTE_TABLE[input["route"]] = {
