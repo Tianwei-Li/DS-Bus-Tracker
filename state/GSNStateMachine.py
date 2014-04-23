@@ -203,8 +203,11 @@ class State_Ready(State):
                                    }
                 MessagePasser.directSend(input["busIP"], input["busPort"], restart_message)
             else:
-                # the RSN is dead, elect a new one, select the bus with the longest potential running time
+                # the RSN is dead, elect a new one, select the bus who sends the request, #with the longest potential running time
+                
+                
                 bus_table = rsn["busTable"]
+                '''
                 rsn_candidate = None
                 min_dist = -1
                 min_bus_id = -1
@@ -215,8 +218,8 @@ class State_Ready(State):
                         min_dist = dist
                         rsn_candidate = bus_table[bus]
                         min_bus_id = bus
-                        
-                LOGGER.info("RSN is dead, select a new RSN [%s] for route [%s]" % (rsn_candidate, input["route"]))
+                '''
+                LOGGER.info("RSN is dead, select a new RSN [%s] for route [%s]" % (input["busId"], input["route"]))
                 
 
                 
@@ -225,7 +228,7 @@ class State_Ready(State):
                                   "SM" : "RSN_SM",
                                   "action" : "recvRSNResign"
                                   }
-                MessagePasser.directSend(rsn["rsnAddr"].ip, rsn["rsnAddr"].port, rsn["rsnAddr"])
+                MessagePasser.directSend(rsn["rsnAddr"].ip, rsn["rsnAddr"].port, resign_message)
 
                 
                 # assign a new RSN
@@ -239,13 +242,13 @@ class State_Ready(State):
                                   }
                 
                 ROUTE_TABLE[input["route"]] = {
-                                               "rsnId" : min_bus_id,
-                                               "rsnAddr" : rsn_candidate["addr"],
+                                               "rsnId" : input["busId"],
+                                               "rsnAddr" : Addr(input["busIP"], input["busPort"]),
                                                "busTable" : bus_table,
                                                "last_update" : HB_NO
                                                }
                 
-                MessagePasser.directSend(rsn_candidate["addr"].ip, rsn_candidate["addr"].port, assign_message)
+                MessagePasser.directSend(input["busIP"], input["busPort"], assign_message)
                 
             
             # TODO: select a bus from the table to be the new rsn, below code just selects the first driver

@@ -131,6 +131,10 @@ class State_Idle(State):
             elif input["type"] == "normal":
                 BUS_TABLE = input["busTable"]
                 
+                # reset all time stampes
+                for bus in BUS_TABLE:
+                    BUS_TABLE[bus]["last_update"] = 0
+                
                 # notify each bus 
                 global GROUP_MEMBER, RSN_ID, ROUTE_NO, LOCAL_ADDR, LOC_REQ_NO
                 LOGGER.info("asking each bus' location %s" % BUS_TABLE.keys())
@@ -146,7 +150,6 @@ class State_Idle(State):
                                    "rsnIP" : LOCAL_ADDR.ip,
                                    "rsnPort" : LOCAL_ADDR.port
                                    }
-
                 for member in BUS_TABLE:
                     MessagePasser.directSend(BUS_TABLE[member]["addr"].ip, BUS_TABLE[member]["addr"].port, req_loc_message)
                 
@@ -255,7 +258,7 @@ class State_Ready(State):
         elif action == RSNAction.recvBusChange:
             # TODO: add or remove a bus from current group
             LOGGER.info("Receive bus change request: %s" % input)
-            global GROUP_MEMBER, BUS_TABLE, ROUTE_NO, RSN_ID, LOCAL_ADDR
+            global GROUP_MEMBER, BUS_TABLE, ROUTE_NO, RSN_ID, LOCAL_ADDR, LOC_REQ_NO
             
             if input["route"] == ROUTE_NO:
                 if input["type"] == "add":
@@ -265,7 +268,7 @@ class State_Ready(State):
                                                       "direction" : input["direction"],
                                                       "location" : input["location"],
                                                       "addr" : Addr(input["busIP"], input["busPort"]),
-                                                      "last_update" : 0 # TODO: use local time stamp
+                                                      "last_update" : LOC_REQ_NO # TODO: use local time stamp
                                                       }
                         # send an ACK to driver
                         rsn_ack = {
@@ -286,7 +289,16 @@ class State_Ready(State):
         elif action == RSNAction.recvGSNHB:
             LOGGER.info("Receive GSN heart beat: %s" % input["HBNo"])
             
-            global BUS_TABLE, RSN_ID, ROUTE_NO, LOCAL_ADDR, GSN_ADDR
+            global BUS_TABLE, RSN_ID, ROUTE_NO, LOCAL_ADDR, GSN_ADDR, LOC_REQ_NO
+            
+            # filter out some dead buses
+            remove_list = []
+            for bus in BUS_TABLE:
+                if int(BUS_TABLE[bus]["last_update"]) + 1 < LOC_REQ_NO:
+                    remove_list.append(bus)
+            for bus in remove_list:
+                BUS_TABLE.pop(bus)
+                    
             # send current route table to GSN
             HB_res_message = {
                               "SM" : "GSN_SM",
