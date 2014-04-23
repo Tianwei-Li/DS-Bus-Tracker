@@ -27,9 +27,11 @@ turnOn = RSNAction("turnOn")
 recvGSNAck = RSNAction("recvGSNAck")
 askBusLoc = RSNAction("askBusLoc")
 recvLocReq = RSNAction("recvLocReq")
+recvGSNHB = RSNAction("recvGSNHB")           # receive GSN heart beat
 recvBusChange = RSNAction("recvBusChange")   # receive bus add or remove request form GSN
 recvRSNAssign = RSNAction("recvRSNAssign")   # receive gsn message to indicate it is the new RSN
 recvDriverLoc = RSNAction("recvDriverLoc")
+recvRSNResign = RSNAction("recvRSNResign")
 
 timeout = RSNAction("timeout")
 turnOff = RSNAction("turnOff")

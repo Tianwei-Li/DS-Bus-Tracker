@@ -27,6 +27,8 @@ turnOn = GSNAction("turnOn")
 recvUserReq = GSNAction("recvUserReq")
 recvBusReq = GSNAction("recvBusReq")    # add or remove a bus from a bus line
 recvElecReq = GSNAction("recvElecReq")  # request to elect a new rsn
+heartBeat = GSNAction("heartBeat")      # hearbeat request triggered by timer
+recvHBRes = GSNAction("recvHBRes")      # receive heart beat response from RSN
 timeout = GSNAction("timeout")
 turnOff = GSNAction("turnOff")
 

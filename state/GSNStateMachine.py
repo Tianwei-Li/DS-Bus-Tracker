@@ -13,15 +13,41 @@ import util.RouteTableElm as RouteTableElm
 from util.Addr import Addr
 import util.BusTableElm as BusTableElm
 
+import threading
+
 logging.basicConfig()
 LOGGER = logging.getLogger("GSNStateMachine")
 LOGGER.setLevel(logging.DEBUG)
 
 GSN_SM = None
+'''
+key        value
+route     "rsnId" : busId,
+          "rsnAddr" : Addr(busIP, busPort)
+          "busTable" : 
+          "last_update" : timestamp
+'''
 ROUTE_TABLE = {}
 
 GSN_ID = None
 LOCAL_ADDR = None
+
+TIMER_ON = None
+TIMER_OFF = None
+TIMER_THREAD = None
+
+HB_NO = 0
+
+# Timer thread
+def timerThread(timerOn, timerOff):
+    while timerOn.wait():
+        while not timerOff.wait(5):     # every 5 secs
+            # send a askBusLoc to RSN_SM
+            heartbeat_message = {
+                                 "SM" : "GSN_SM",
+                                 "action" : "heartBeat"
+                                 }
+            offerMsg(heartbeat_message)
 
 def getRSNByName(routeName):
     global ROUTE_TABLE
@@ -40,11 +66,15 @@ class State_Off(State):
     def next(self, input):
         action = map(GSNAction.GSNAction, [input["action"]])[0]
         if action == GSNAction.turnOn:
-            global LOCAL_ADDR, GSN_ID
+            global LOCAL_ADDR, GSN_ID, TIMER_OFF, TIMER_ON
             # do something about boot-strap
             # Qian: seems we don't need to do anything
             LOCAL_ADDR = Addr(input["localIP"], input["localPort"])
             GSN_ID = input["gsnId"]
+            
+            # unblock the timer thread
+            TIMER_OFF.clear()
+            TIMER_ON.set()
             
             return GSNSM.Ready
         else:
@@ -73,6 +103,41 @@ class State_Ready(State):
             
             return GSNSM.Ready
         
+        elif action == GSNAction.heartBeat:
+            LOGGER.info("send heart beat to each RSN")
+            global HB_NO
+            HB_NO = HB_NO + 1
+            
+            hb_message = {
+                          "SM" : "RSN_SM",
+                          "action" : "recvGSNHB",
+                          "HBNo" : HB_NO
+                          }
+
+            for route in ROUTE_TABLE:
+                MessagePasser.directSend(ROUTE_TABLE[route]["rsnAddr"].ip, ROUTE_TABLE[route]["rsnAddr"].port, hb_message)
+            
+            return GSNSM.Ready
+        
+        elif action == GSNAction.recvHBRes:
+            LOGGER.info("receive HB response")
+            
+            global ROUTE_TABLE, HB_NO
+            
+            # update ROUTE_TABLE
+            if input["route"] in ROUTE_TABLE:
+                if input["rsnId"] == ROUTE_TABLE[input["route"]]["rsnId"]:
+                    ROUTE_TABLE[input["route"]]["rsnAddr"] = Addr(input["rsnIP"], input["rsnPort"])
+                    ROUTE_TABLE[input["route"]]["busTable"] = input["busTable"]
+                    ROUTE_TABLE[input["route"]]["last_update"] = input["HBNo"]
+                else:
+                    # TODO: the rsnId is not recorded
+                    pass
+            else:
+                # TODO: the route is not recorded.
+                pass
+            
+            return GSNSM.Ready
         elif action == GSNAction.recvBusReq:
             # TODO: update route table and forward user request to responding RSN
             LOGGER.info("receive bus request")
@@ -89,7 +154,9 @@ class State_Ready(State):
                 """
                 route_table_entry = {
                                      "rsnId" : input["busId"],
-                                     "rsnAddr" : Addr(input["busIP"], input["busPort"])
+                                     "rsnAddr" : Addr(input["busIP"], input["busPort"]),
+                                     "busTable" : None,
+                                     "last_update" : HB_NO
                                      }
                 
                 ROUTE_TABLE[input["route"]] = route_table_entry
@@ -121,11 +188,70 @@ class State_Ready(State):
             return GSNSM.Ready
         elif action == GSNAction.recvElecReq:
             # receive election rsn request for a bus
-            route_no = input["routeNo"]
-            elm = getRSNByName(route_no)
+            LOGGER.info("receive election request")
+            global HB_NO
+            
+            rsn = getRSNByName(input["route"])
+            
+            # check if the rsn is live by checking the time stamp
+            if rsn["last_update"] + 1 >= HB_NO:
+                # means the RSN is alive, tell the driver to reboot
+                LOGGER.info("RSN is alive, ask the driver to reboot")
+                restart_message = {
+                                   "SM" : "DRIVER_SM",
+                                   "action" : "restart"
+                                   }
+                MessagePasser.directSend(input["busIP"], input["busPort"], restart_message)
+            else:
+                # the RSN is dead, elect a new one, select the bus with the longest potential running time
+                bus_table = rsn["busTable"]
+                rsn_candidate = None
+                min_dist = -1
+                min_bus_id = -1
+                
+                for bus in bus_table:
+                    dist = int(bus_table[bus]["location"])
+                    if min_dist < 0 or dist < min_dist:
+                        min_dist = dist
+                        rsn_candidate = bus_table[bus]
+                        min_bus_id = bus
+                        
+                LOGGER.info("RSN is dead, select a new RSN [%s] for route [%s]" % (rsn_candidate, input["route"]))
+                
+
+                
+                # explicitly send a message to shut down the previous RSN
+                resign_message = {
+                                  "SM" : "RSN_SM",
+                                  "action" : "recvRSNResign"
+                                  }
+                MessagePasser.directSend(rsn["rsnAddr"].ip, rsn["rsnAddr"].port, rsn["rsnAddr"])
+
+                
+                # assign a new RSN
+                assign_message = {
+                                  "SM" : "RSN_SM",
+                                  "action" : "recvRSNAssign",
+                                  "type" : "normal", 
+                                  "route" : input["route"],
+                                  "original" : None,
+                                  "bus_table" : bus_table
+                                  }
+                
+                ROUTE_TABLE[input["route"]] = {
+                                               "rsnId" : min_bus_id,
+                                               "rsnAddr" : rsn_candidate["addr"],
+                                               "busTable" : bus_table,
+                                               "last_update" : HB_NO
+                                               }
+                
+                MessagePasser.directSend(rsn_candidate["addr"].ip, rsn_candidate["addr"].port, assign_message)
+                
+            
             # TODO: select a bus from the table to be the new rsn, below code just selects the first driver
-            elm.rsnIP = elm.busTable[0].IP
-            elm.rsnPort = elm.busTable[0].Port
+            '''
+            elm.rsnIP = elm.busTable[0]["rsnAddr"].ip
+            elm.rsnPort = elm.busTable[0]["rsnAddr"].port
             
             LOGGER.info("send message to new rsn")
             assign_message = {
@@ -135,7 +261,7 @@ class State_Ready(State):
                               }
             # TODO: TEST ONLY; gsn should be modified
             MessagePasser.directSend(elm.rsnIP, elm.rsnPort, request_message)
-            
+            '''
             return GSNSM.Ready
         elif action == GSNAction.turnOff:
             # TODO: do something to shut-down
@@ -160,8 +286,19 @@ class GSNSM(StateMachine):
         return self.currentState
         
 def initialize():
-    global GSN_SM
+    global GSN_SM, TIMER_OFF, TIMER_ON
     GSN_SM = GSNSM()
+    
+    # Timer variable
+    TIMER_ON = threading.Event()
+    TIMER_OFF = threading.Event()
+
+    TIMER_THREAD = threading.Thread(target=timerThread, args=(TIMER_ON, TIMER_OFF))
+    TIMER_THREAD.daemon = True
+
+    TIMER_ON.clear()
+    TIMER_OFF.set()
+    TIMER_THREAD.start()
 
 def offerMsg(message):
     global GSN_SM

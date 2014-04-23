@@ -25,10 +25,12 @@ class DriverAction(object):
 
 turnOn = DriverAction("turnOn")
 start = DriverAction("start")
+restart = DriverAction("restart")
 recvGSNAck = DriverAction("recvGSNAck")
 recvRSNAck = DriverAction("recvRSNAck")
 recvLocReq = DriverAction("recvLocReq")
 turnOff = DriverAction("turnOff")
+RSNTimeout = DriverAction("RSNTimeout")
 
 timeout = DriverAction("timeout")
 

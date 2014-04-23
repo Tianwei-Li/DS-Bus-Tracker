@@ -206,7 +206,7 @@ def driverConsole():
             if input == 1:
                 enqueue({"SM":"DRIVER_SM", "action":"turnOn", "busId":"bus_71A_1", "localIP":"127.0.0.1", "localPort":41000})
             elif input == 2:
-                enqueue({"SM":"DRIVER_SM", "action":"start", "route":"71A", "direction":"north", "location":(0,0)})
+                enqueue({"SM":"DRIVER_SM", "action":"start", "route":"71A", "direction":"north", "location":0})
             elif input == 3:
                 enqueue({"SM":"DRIVER_SM", "action":"turnOff"})
             elif input == 4:
@@ -227,7 +227,7 @@ def userConsole():
             if input == 1:
                 enqueue({"SM":"USER_SM", "action":"turnOn", "userId":"user_alice", "localIP":"127.0.0.1", "localPort":30000})
             elif input == 2:
-                enqueue({"SM":"USER_SM", "action":"request", "route":"71A", "direction":"north", "destination":(1,1), "location":(0,1)})
+                enqueue({"SM":"USER_SM", "action":"request", "route":"71A", "direction":"north", "destination":4, "location":2})
             elif input == 3:
                 enqueue({"SM":"USER_SM", "action":"turnOff"})
             elif input == 4:
