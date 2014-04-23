@@ -21,6 +21,7 @@ APP = None
 IP = None
 PORT = None
 LOCALNAME = None
+GSNID = None
 
 class MainFrame(Frame):    
     def __init__(self, parent):
@@ -43,14 +44,14 @@ class MainFrame(Frame):
         self.turnOffBtn.grid(row=0, column=1)   
     
     def turnOn(self):
-        host.enqueue({"SM":"GSN_SM", "action":"turnOn", "gsnId":LOCALNAME, "localIP":IP, "localPort":int(PORT)})
+        host.enqueue({"SM":"GSN_SM", "action":"turnOn", "gsnId":GSNID, "localIP":IP, "localPort":int(PORT)})
         
     def turnOff(self):
         host.enqueue({"SM":"GSN_SM", "action":"turnOff"})
         
 def main():
     global ROOT, APP
-    host.initialize("gsn", "GSN", LOCALNAME, IP, int(PORT))
+    host.initialize(LOCALNAME, "GSN", GSNID, IP, int(PORT))
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)
@@ -59,9 +60,10 @@ def main():
 
 
 if __name__ == '__main__':
-    global IP, PORT, LOCALNAME
+    global IP, PORT, LOCALNAME, GSNID
     
     IP = sys.argv[1]
     PORT = sys.argv[2]
     LOCALNAME = sys.argv[3]
+    GSNID = "id" + LOCALNAME
     main() 

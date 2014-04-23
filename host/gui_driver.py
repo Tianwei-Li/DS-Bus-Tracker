@@ -20,6 +20,8 @@ APP = None
 IP = None
 PORT = None
 LOCALNAME = None
+ROUTNO = None
+DRIVERID = None
 
 class MainFrame(Frame):    
     def __init__(self, parent):
@@ -72,10 +74,10 @@ class MainFrame(Frame):
         self.turnOffBtn.grid(row=8, column=0)   
         
     def turnOn(self):
-        host.enqueue({"SM":"DRIVER_SM", "action":"turnOn", "busId":LOCALNAME, "localIP":IP, "localPort":int(PORT)})
+        host.enqueue({"SM":"DRIVER_SM", "action":"turnOn", "busId":DRIVERID, "localIP":IP, "localPort":int(PORT)})
         
     def start(self):
-        host.enqueue({"SM":"DRIVER_SM", "action":"start", "route":"71A", "direction":"north", "location":(0,0)})
+        host.enqueue({"SM":"DRIVER_SM", "action":"start", "route":ROUTNO, "direction":"north", "location":(0,0)})
         
     def turnOff(self):
         host.enqueue({"SM":"DRIVER_SM", "action":"turnOff"})    
@@ -83,7 +85,7 @@ class MainFrame(Frame):
 def main():
     global ROOT, APP
     
-    host.initialize("driver1", "DRIVER", LOCALNAME, IP, int(PORT))
+    host.initialize(LOCALNAME, "DRIVER", DRIVERID, IP, int(PORT))
     ROOT = Tk()
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)
@@ -92,10 +94,11 @@ def main():
 
 
 if __name__ == '__main__':
-    global IP, PORT, LOCALNAME
+    global IP, PORT, LOCALNAME, ROUTNO, DRIVERID
     
     IP = sys.argv[1]
     PORT = sys.argv[2]
     LOCALNAME = sys.argv[3]
-    routNo = sys.argv[4]
+    ROUTNO = sys.argv[4]
+    DRIVERID = ROUTNO + LOCALNAME
     main() 
