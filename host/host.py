@@ -246,7 +246,7 @@ if __name__ == '__main__':
     
     while True:
         try:
-            print "--------------------\n1. launch GSN\n2. launch DRIVER_1\n3. launch DRIVER_2\n4. launch USER\n--------------------"
+            print "--------------------\n1. launch GSN\n2. launch DRIVER_1\n3. launch DRIVER_2\n4. launch DRIVER_3\n5. launch USER\n--------------------"
             input = int(raw_input('Input:'))
             if input == 1:
                 role = "GSN"
@@ -261,6 +261,10 @@ if __name__ == '__main__':
                 initialize("driver2", "DRIVER", "bus_71A_2", "127.0.0.1", 42000)
                 driverConsole()
             elif input == 4:
+                role = "DRIVER"
+                initialize("driver2", "DRIVER", "bus_71A_3", "127.0.0.1", 43000)
+                driverConsole()
+            elif input == 5:
                 role = "USER"
                 initialize("user", "USER", "user_alice", "127.0.0.1", 30000)
                 userConsole()

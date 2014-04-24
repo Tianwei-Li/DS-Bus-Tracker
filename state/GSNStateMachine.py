@@ -26,6 +26,7 @@ route     "rsnId" : busId,
           "rsnAddr" : Addr(busIP, busPort)
           "busTable" : 
           "last_update" : timestamp
+          "isElect" : True/False
 '''
 ROUTE_TABLE = {}
 
@@ -130,6 +131,7 @@ class State_Ready(State):
                     ROUTE_TABLE[input["route"]]["rsnAddr"] = Addr(input["rsnIP"], input["rsnPort"])
                     ROUTE_TABLE[input["route"]]["busTable"] = input["busTable"]
                     ROUTE_TABLE[input["route"]]["last_update"] = input["HBNo"]
+                    ROUTE_TABLE[input["route"]]["isElect"] = False
                 else:
                     # TODO: the rsnId is not recorded
                     pass
@@ -195,13 +197,16 @@ class State_Ready(State):
             
             # check if the rsn is live by checking the time stamp
             if rsn["last_update"] + 1 >= HB_NO:
-                # means the RSN is alive, tell the driver to reboot
-                LOGGER.info("RSN is alive, ask the driver to reboot")
-                restart_message = {
-                                   "SM" : "DRIVER_SM",
-                                   "action" : "restart"
-                                   }
-                MessagePasser.directSend(input["busIP"], input["busPort"], restart_message)
+                # means the RSN is alive, tell the driver to wait or reboot
+                if rsn["isElect"] == True:
+                    LOGGER.info("new RSN has been elected, ignore the elect request")
+                else:
+                    LOGGER.info("RSN is alive, ask the driver to reboot")
+                    restart_message = {
+                                       "SM" : "DRIVER_SM",
+                                       "action" : "restart"
+                                       }
+                    MessagePasser.directSend(input["busIP"], input["busPort"], restart_message)
             else:
                 # the RSN is dead, elect a new one, select the bus who sends the request, #with the longest potential running time
                 
@@ -245,7 +250,8 @@ class State_Ready(State):
                                                "rsnId" : input["busId"],
                                                "rsnAddr" : Addr(input["busIP"], input["busPort"]),
                                                "busTable" : bus_table,
-                                               "last_update" : HB_NO
+                                               "last_update" : HB_NO,
+                                               "isElect" : True,
                                                }
                 
                 MessagePasser.directSend(input["busIP"], input["busPort"], assign_message)
