@@ -48,11 +48,16 @@ class MainFrame(Frame):
         
     def turnOff(self):
         host.enqueue({"SM":"GSN_SM", "action":"turnOff"})
-        
+
+def close_handler():
+    host.exit()
+    ROOT.quit()
+      
 def main():
     global ROOT, APP
     host.initialize(LOCALNAME, "GSN", GSNID, IP, int(PORT))
     ROOT = Tk()
+    ROOT.protocol("WM_DELETE_WINDOW", close_handler)
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)
       

@@ -9,6 +9,7 @@ import os
 import json
 from Tkinter import *  
 import threading
+import time
 import host 
 import google_map
 
@@ -30,6 +31,16 @@ class Application(Frame):
         dic["index"] = len(NODES)
         dic["name"] = name
         dic["type"] = type
+        if type == "gsn":
+            dic["fixed"] = "true"
+            dic["x"] = 480
+            dic["y"] = 40
+        
+        if type == "driver" or type == "rsn":
+            dic["fixed"] = "true"
+            dic["x"] = 27
+            dic["y"] = 240
+            
         NODES.append(dic)
         
         if type != "gsn":
@@ -47,6 +58,24 @@ class Application(Frame):
         json.dump(DIC, self.outfile)
         self.outfile.close()
         
+    def updateJsonFile(self, name, type, busLine):
+        node = self.getNodeByName(name)
+        if node != None:
+            node["x"] += 100
+        
+        self.outfile = open("../visualization/graph.json", "w")
+        json.dump(DIC, self.outfile)
+        self.outfile.close()
+        
+        
+    def getNodeByName(self, name):
+        for elm in NODES:
+            if elm["name"] == name:
+                return elm
+        
+        return None
+        
+        
     def newUser(self):
         name = self.userName.get()
         ip = self.userIP.get()
@@ -56,7 +85,7 @@ class Application(Frame):
         interval = "50"
         #interval = self.timeInter.get()
         print "new user launched!"
-        #os.system("python gui_user.py " + ip + " " + port + " " + name + " " + routNo + " " + interval + " &")
+        os.system("python gui_user.py " + ip + " " + port + " " + name + " " + routNo + " " + interval + " &")
         
         self.writeJsonFile(name, "user", "")
     
@@ -66,7 +95,7 @@ class Application(Frame):
         port = self.gsnPort.get()
         print "new GSN launched!"  
         #print name + " " + ip + " " + port
-        #os.system("python gui_gsn.py " + ip + " " + port + " " + name + " &")
+        os.system("python gui_gsn.py " + ip + " " + port + " " + name + " &")
         
         self.writeJsonFile(name, "gsn", "")
         
@@ -77,14 +106,20 @@ class Application(Frame):
         routNo = self.routeNo.get()
         #routNo = "61A"
         print "new driver launched!"  
-        #os.system("python gui_driver.py " + ip + " " + port + " " + name + " " + routNo + " &")
+        os.system("python gui_driver.py " + ip + " " + port + " " + name + " " + routNo + " &")
         
         if BUSCNT.has_key(routNo) == True:
             self.writeJsonFile(name, "driver", routNo)
             BUSCNT[routNo] += 1
+            for idx in range(8):
+                self.updateJsonFile(name, "driver", routNo)
+                time.sleep(2)
         else:
             self.writeJsonFile("RSN-"+routNo, "rsn", routNo)
             BUSCNT[routNo] = 1
+            for idx in range(8):
+                self.updateJsonFile("RSN-"+routNo, "rsn", routNo)
+                time.sleep(2)
  
     def createUser(self, col):
         Label(self, text="name:").grid(row = 1, column = col)
@@ -203,8 +238,8 @@ class Application(Frame):
         
 
 def main():
-    thread = threading.Thread(target=google_map.display, args = ())
-    thread.start()
+    #thread = threading.Thread(target=google_map.display, args = ())
+    #thread.start()
 
     win = Tk()   
     win.title("Master")

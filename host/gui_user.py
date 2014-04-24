@@ -6,7 +6,8 @@ Created on Mar 13, 2014
 @author: Qian Mao
 '''
 
-from Tkinter import Tk, BOTH
+from Tkinter import *
+import tkMessageBox
 import os
 import sys
 import threading
@@ -118,12 +119,19 @@ class MainFrame(Frame):
 #    while True:
 #        APP.receive()
 
+def close_handler():
+    host.exit()
+    ROOT.quit()
+            
 def main():
     global ROOT, APP
     
     host.initialize(LOCALNAME, "USER", USERID, IP, int(PORT))
 
+            
     ROOT = Tk()
+    ROOT.protocol("WM_DELETE_WINDOW", close_handler)
+    
     ROOT.geometry("320x480+300+300")
     APP = MainFrame(ROOT)
     
