@@ -68,6 +68,14 @@ svg.append("rect")
     .attr("width", width)
     .attr("height", height);
 
+//Draw the GSN area
+var gsnArea = svg.append("rect")
+.attr("x", 380)
+.attr("y", 0)
+.attr("width", 220)
+.attr("height", 40)
+.style("fill", "#fff");
+
 var nodes = force.nodes(),
     links = force.links(),
     node = svg.selectAll(".node"),
@@ -81,12 +89,14 @@ var count = 0;
 function mousedown() {
   restart();
   
-  // log mouse click coordinates, comment to disable
+  // log mouse click coordinates, uncomment to enable
+/*
   d3.select("#log")
     .append("span")
     .html(count + "," + d3.mouse(this)[0] + "," + d3.mouse(this)[1]
           + "<br/>");
   count++;
+*/
 }
 
 function tick() {
@@ -97,6 +107,18 @@ function tick() {
 
   node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
+
+  // update node icon
+  node.select("image").attr("xlink:href", function(d) {
+        if(d.type == "gsn")
+          return "img/iconGSN.png";
+        else if (d.type == "rsn")
+          return "img/iconRSN.png";
+        else if (d.type == "user")
+          return "img/iconUser.png";
+        else
+          return "img/circle.png";
+      });
 
   node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
@@ -112,7 +134,7 @@ function restart() {
     jsonNodes.forEach( function(d) {
       var nodeIndex = d3.keys(nodes).indexOf("" + d.index);
       if(nodeIndex == -1) {
-        console.log("add node with index: " + d.index);
+//        console.log("add node with index: " + d.index);
         n = nodes.push(d);
       } else if(d.fixed == "true") {
         // update coordinates
@@ -121,6 +143,10 @@ function restart() {
         nodes[nodeIndex].y = d.y;
         nodes[nodeIndex].px = d.x;
         nodes[nodeIndex].py = d.y;
+
+        // update type
+        nodes[nodeIndex].type = d.type;
+
         tick();
       }
     });
@@ -128,23 +154,33 @@ function restart() {
     // remove old nodes
     nodes.forEach( function(d) {
       if(d3.keys(jsonNodes).indexOf("" + d.index) == -1) {
-        console.log("remove node with index: " + d.index);
+//        console.log("remove node with index: " + d.index);
         n = nodes.splice(d.index);
       }
     });
 
     // add new links
     jsonLinks.forEach( function(d) {
-      if(d3.keys(links).indexOf("" + d.index) == -1) {
-        console.log("add link with index: " + d.index);
+      var linkIndex = d3.keys(links).indexOf("" + d.index);
+      if(linkIndex == -1) {
+//        console.log("add link with index: " + d.index);
         l = links.push(d);
+      } else {
+        // update links
+        if (links[linkIndex].source.index != d.source || 
+            links[linkIndex].target.index != d.target) {
+          links[linkIndex].source = d.source;
+          links[linkIndex].target = d.target;
+        }
+
+        tick();
       }
     });
 
     // remove old links
     links.forEach( function(d) {
       if(d3.keys(jsonLinks).indexOf("" + d.index) == -1) {
-        console.log("remove link with index: " + d.index);
+//        console.log("remove link with index: " + d.index);
         l = links.splice(d.index);
       }
     });
@@ -166,13 +202,22 @@ function restart() {
 
     node.exit().remove();
 
-    var nn = node.enter().append("g") // insert?
+    var nn = node.enter().append("g")
       .attr("class", "node")
       .attr("class", function(d) { return "node " + d.type; })
       .attr("r", 5);
 
     nn.append("image")
-      .attr("xlink:href", "circle.png")
+      .attr("xlink:href", function(d) {
+        if(d.type == "gsn")
+          return "img/iconGSN.png";
+        else if (d.type == "rsn")
+          return "img/iconRSN.png";
+        else if (d.type == "user")
+          return "img/iconUser.png";
+        else
+          return "img/circle.png";
+      })
       .attr("x", -8)
       .attr("y", -8)
       .attr("width", 16)
@@ -181,7 +226,7 @@ function restart() {
     nn.append("text")
       .attr("dx", 12)
       .attr("dy", ".35em")
-      .text(function(d) { console.log(d.name); return d.name });
+      .text(function(d) { return d.name });
 
     force.start();
 }
