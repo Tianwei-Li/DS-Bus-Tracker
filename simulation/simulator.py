@@ -11,6 +11,7 @@ import collections
 import SocketServer
 import pickle
 import threading
+import sys
 
 
 
@@ -53,9 +54,14 @@ def runServer(ip, port):
         
 # should be called by master
 if __name__ == '__main__':
-    global MSG_QUEUE
+    global MSG_QUEUE, TCP_IP, TCP_PORT
     LOGGER.info("Simulator starts! Hello from simulator!")
+
+    TCP_IP = sys.argv[1]
+    TCP_PORT = int(sys.argv[2])
+
     runServer(TCP_IP, TCP_PORT)
+    
     while True:
         if MSG_QUEUE:
             command = MSG_QUEUE.popleft()
