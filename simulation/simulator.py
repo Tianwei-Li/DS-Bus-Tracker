@@ -3,6 +3,8 @@ Created on Apr 24, 2014
 
 @author: Qian Mao
 '''
+import sys
+sys.path += ['../']
 
 import host.host as host
 import logging
@@ -11,8 +13,8 @@ import collections
 import SocketServer
 import pickle
 import threading
-import sys
-
+import os
+from time import sleep
 
 
 logging.basicConfig()
@@ -65,8 +67,11 @@ if __name__ == '__main__':
     while True:
         if MSG_QUEUE:
             command = MSG_QUEUE.popleft()
-            
             if command["action"] == "initialize":
                 host.initialize(command["localName"], command["role"], command["id"], command["localIP"], command["localPort"])
+            if command["action"] == "start":    # start a bus
+                host.enqueue({"SM":"DRIVER_SM", "action":"start", "route":command["route"], "direction":command["direction"], "location":command["location"]})
+            if command["action"] == "sleep":
+                sleep(command["time"])
             if command["action"] == "exit":
-                break
+                os._exit(0)

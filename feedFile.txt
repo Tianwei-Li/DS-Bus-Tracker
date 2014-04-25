@@ -1,0 +1,7 @@
+GSN {"action" : "initialize", "localName" : "gsn_1", "role" : "GSN", "id" : "gsn_pittsburgh_1", "localIP" : "127.0.0.1", "localPort" : 40000}
+GSN {"action" : "sleep", "time" : 60}
+GSN {"action" : "exit"}
+DRIVER_1 {"action" : "initialize", "localName" : "dirver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 41000}
+DRIVER_1 {"action":"start", "route":"71A", "direction":0, "location":0}
+DRIVER_1 {"action":"sleep", "time": 60}
+DRIVER_1 {"action" : "exit"}
