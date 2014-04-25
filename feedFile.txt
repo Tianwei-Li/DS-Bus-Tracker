@@ -1,3 +1,6 @@
+# I am a comment
+# 
+
 # GSN
 GSN {"action" : "initialize", "localName" : "gsn_1", "role" : "GSN", "id" : "gsn_pittsburgh_1", "localIP" : "127.0.0.1", "localPort" : 40000}
 GSN {"action" : "sleep", "time" : 60}
@@ -14,3 +17,12 @@ DRIVER_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER",
 DRIVER_2 {"action":"start", "route":"71A", "direction":0, "location":0}
 DRIVER_2 {"action":"sleep", "time": 60}
 DRIVER_2 {"action" : "exit"}
+
+# USER_1
+USER_1 {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "qianmao", "localIP" : "127.0.0.1", "localPort" : 50000}
+USER_1 {"action" : "sleep", "time" : 10}
+USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":4, "location":2}
+USER_1 {"action" : "sleep", "time" : 10}
+USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":5, "location":0}
+USER_1 {"action" : "sleep", "time" : 10}
+USER_1 {"action" : "exit"}

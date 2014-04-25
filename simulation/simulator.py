@@ -71,6 +71,8 @@ if __name__ == '__main__':
                 host.initialize(command["localName"], command["role"], command["id"], command["localIP"], command["localPort"])
             if command["action"] == "start":    # start a bus
                 host.enqueue({"SM":"DRIVER_SM", "action":"start", "route":command["route"], "direction":command["direction"], "location":command["location"]})
+            if command["action"] == "request":  # user send a request
+                host.enqueue({"SM":"USER_SM", "action":"request", "route":command["route"], "direction":command["direction"], "destination":command["destination"], "location":command["location"]})
             if command["action"] == "sleep":
                 sleep(command["time"])
             if command["action"] == "exit":
