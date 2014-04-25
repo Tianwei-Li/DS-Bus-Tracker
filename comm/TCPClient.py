@@ -17,18 +17,30 @@ def client(ip, port, message):
     sock.connect((ip, port))
     try:
         sock.sendall(message)
-        #response = sock.recv(1024)
-        #print "Received: {}".format(response)
+        # response = sock.recv(1024)
+        # print "Received: {}".format(response)
     finally:
         sock.close()
         
 if __name__ == "__main__":
-    #client("localhost", 20000, "")
-    message = {"type" : "NORMAL",
-               "src" : "GSN",
-               "seq" : None,
-               "group" : None,
-               "memberList" : [],
-               "data" : "GSN_USER_ACK"
-               }
-    TCPComm.send("localhost", 20000, message)
+    
+    # client("localhost", 9999, "123")
+    
+    message_init_driver = {"action" : "initialize",
+                           "localName" : "dirver_alice",
+                           "role" : "DRIVER",
+                           "id" : "bus_71A_alice",
+                           "localIP" : "127.0.0.1",
+                           "localPort" : 41000
+                           }
+    message_init_gsn = {"action" : "initialize",
+                        "localName" : "gsn_1",
+                        "role" : "GSN",
+                        "id" : "gsn_pittsburgh_1",
+                        "localIP" : "127.0.0.1",
+                        "localPort" : 40000
+                        }
+    message_exit = {"action" : "exit"
+                    }
+    TCPComm.send("localhost", 9999, message_exit)
+    
