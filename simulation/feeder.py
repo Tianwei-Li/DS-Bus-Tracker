@@ -12,13 +12,18 @@ from time import sleep
 CONF = {
         "GSN" : "127.0.0.1:9000",
         "DRIVER_1" : "127.0.0.1:9100",
-        "DRIVER_2" : "127.0.0.1:9200"
+        "DRIVER_2" : "127.0.0.1:9200",
+        "DRIVER_3" : "127.0.0.1:9300"
         }
 
 if __name__ == "__main__":
     
     file = open("../feedFile.txt", "r")
     for line in file:
+        # skip blank lines
+        if not line.strip():
+            continue
+
         # ignore comment
         if line.startswith("#"):
             continue
