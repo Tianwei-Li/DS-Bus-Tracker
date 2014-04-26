@@ -370,7 +370,7 @@ def offerMsgs(messages):
 
 def state():
     global RSN_SM
-    return RSN_SM.currentState
+    return str(RSN_SM.currentState)
 
 def busTable():
     global BUS_TABLE
@@ -384,3 +384,4 @@ RSNSM.Ready = State_Ready()
 # Test Only
 if __name__ == '__main__':
     initialize()
+    print RSNSM.Ready

@@ -139,7 +139,8 @@ def state():
     if "RSN_SM" in DISPATCHERMAP:
         state = {}
         state["SM"] = "RSN_SM"
-        state["id"] = DISPATCHERMAP["RSN_SM"].RSN_ID
+        state["rsnId"] = DISPATCHERMAP["RSN_SM"].RSN_ID
+        state["busId"] = DISPATCHERMAP["DRIVER_SM"].BUS_ID
         state["localName"] = LOCALNAME
         state["state"] = DISPATCHERMAP["RSN_SM"].state()
         state["BUS_TABLE"] = DISPATCHERMAP["RSN_SM"].busTable()

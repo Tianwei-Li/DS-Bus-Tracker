@@ -17,6 +17,7 @@ import os
 import util.Location as Location
 from time import sleep
 import comm.TCPComm as TCPComm
+import state.RSNStateMachine as RSNStateMachine
 #import json
 
 
@@ -36,9 +37,7 @@ MSG_QUEUE = collections.deque()
 # tcp server for receiving
 TCP_SERVER = None
 
-TIMER_ON1 = None
-TIMER_OFF1 = None
-TIMER_THREAD1 = None
+IS_BUS_START = False
 
 class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 
@@ -68,26 +67,31 @@ def reporterThread():
     
     while True:
         state = host.state()
-        if state != None:
+        if state != None and state["state"] == str(RSNStateMachine.RSN_SM.Ready):
             LOGGER.info("report state: %s" % state)
             TCPComm.send(MASTER_IP, MASTER_PORT, state)
         sleep(5)
 
 def updateLocThread():
+    global IS_BUS_START
     while True:
-        Location.moveOneStop()
-        LOGGER.info("Update Location")
-        sleep(10)       # take 10 seconds to move to next stop
+        if IS_BUS_START == True:
+            Location.moveOneStop()
+            LOGGER.info("Update Location")
+            sleep(10)       # take 10 seconds to move to next stop
 
 
 # should be called by master
 if __name__ == '__main__':
-    global MSG_QUEUE, TCP_IP, TCP_PORT    
+    global MSG_QUEUE, TCP_IP, TCP_PORT, MASTER_IP, MASTER_PORT, IS_BUS_START
 
     LOGGER.info("Simulator starts! Hello from simulator!")
 
     TCP_IP = sys.argv[1]
     TCP_PORT = int(sys.argv[2])
+    
+    MASTER_IP = sys.argv[3]
+    MASTER_PORT =int(sys.argv[4])
     
     runServer(TCP_IP, TCP_PORT)
     
@@ -104,10 +108,12 @@ if __name__ == '__main__':
     while True:
         if MSG_QUEUE:
             command = MSG_QUEUE.popleft()
+            LOGGER.info("perform action: %s" % command)
             if command["action"] == "initialize":
                 host.initialize(command["localName"], command["role"], command["id"], command["localIP"], command["localPort"])
             if command["action"] == "start":    # start a bus
                 host.enqueue({"SM":"DRIVER_SM", "action":"start", "route":command["route"], "direction":command["direction"], "location":command["location"]})
+                IS_BUS_START = True
             if command["action"] == "request":  # user send a request
                 host.enqueue({"SM":"USER_SM", "action":"request", "route":command["route"], "direction":command["direction"], "destination":command["destination"], "location":command["location"]})
             if command["action"] == "sleep":
