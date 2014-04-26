@@ -87,7 +87,7 @@ class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Off"
     
     def next(self, input):
@@ -114,7 +114,7 @@ class State_Idle(State):
     def run(self):
         LOGGER.info("Idle")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Idle"
     
     def next(self, input):
@@ -163,7 +163,7 @@ class State_Init_Waiting(State):
     def run(self):
         LOGGER.info("Init_Waiting")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Init"
     
     def next(self, input):
@@ -244,7 +244,7 @@ class State_Ready(State):
     def run(self):
         LOGGER.info("Ready")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Ready"
     
     def next(self, input):
@@ -305,7 +305,7 @@ class State_Hold(State):
     def run(self):
         LOGGER.info("Hold")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Hold"
     
     def next(self, input):
@@ -439,7 +439,7 @@ class DriverSM(StateMachine):
             self.run(input)
             
     def state(self):
-        return self.currentState
+        return str(self.currentState)
 
 def initialize():
     global DRIVER_SM, WATCHDOG

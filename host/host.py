@@ -11,6 +11,7 @@ import state.UserStateMachine as UserStateMachine
 import state.DriverStateMachine as DriverStateMachine
 import state.RSNStateMachine as RSNStateMachine
 import state.GSNStateMachine as GSNStateMachine
+import util.Location as Location
 import time
 import collections
 import threading
@@ -130,6 +131,21 @@ def dispatch(message):
 # exit the host
 def exit():
     os._exit(0)
+    
+# return current status
+def state():
+    global DISPATCHERMAP, LOCALNAME
+    
+    if "RSN_SM" in DISPATCHERMAP:
+        state = {}
+        state["SM"] = "RSN_SM"
+        state["name"] = LOCALNAME
+        state["state"] = DISPATCHERMAP["RSN_SM"].state()
+        state["BUS_TABLE"] = DISPATCHERMAP["RSN_SM"].busTable()
+        state["location"] = Location.getLocation()
+        return state
+    else:
+        return None
 
 # Test Only
 def gsnConsole():

@@ -14,6 +14,7 @@ import SocketServer
 import pickle
 import threading
 import os
+import util.Location as Location
 from time import sleep
 
 
@@ -52,7 +53,14 @@ def runServer(ip, port):
     server_thread.daemon = True
     server_thread.start()
         
-
+def reporterThread():
+    while True:
+        # For Shiva
+        print host.state()
+        
+        # TODO: return host.state() to Master
+        
+        sleep(2)
         
 # should be called by master
 if __name__ == '__main__':
@@ -63,6 +71,12 @@ if __name__ == '__main__':
     TCP_PORT = int(sys.argv[2])
 
     runServer(TCP_IP, TCP_PORT)
+    
+    # initialize reporter thread
+    thread = threading.Thread(target=reporterThread, args = ())
+    thread.daemon = True
+    thread.start()
+    
     
     while True:
         if MSG_QUEUE:
@@ -77,3 +91,7 @@ if __name__ == '__main__':
                 sleep(command["time"])
             if command["action"] == "exit":
                 os._exit(0)
+        sleep(1)
+        state = host.state()
+        if state != None:
+            print state

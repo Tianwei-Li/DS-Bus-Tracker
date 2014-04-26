@@ -31,7 +31,7 @@ class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Off"
     
     def next(self, input):
@@ -54,7 +54,7 @@ class State_Ready(State):
     def run(self):
         LOGGER.info("Ready")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Ready"
     
     def next(self, input):
@@ -90,7 +90,7 @@ class State_Req_Waiting(State):
     def run(self):
         LOGGER.info("Req_Waiting: requesting")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Req_Waiting"
     
     def next(self, input):
@@ -140,6 +140,10 @@ def offerMsg(message):
 def offerMsgs(messages):
     for message in messages:
         offerMsg(message)
+
+def state():
+    global USER_SM
+    return str(USER_SM.currentState)
 
 UserSM.Off = State_Off()
 #UserSM.Init_Waiting = State_Init_Waiting()

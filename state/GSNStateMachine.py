@@ -61,7 +61,7 @@ class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
         
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Off"
 
     def next(self, input):
@@ -86,7 +86,7 @@ class State_Ready(State):
     def run(self):
         LOGGER.info("Ready")
         
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Ready"
 
     def next(self, input):
@@ -292,7 +292,7 @@ class GSNSM(StateMachine):
             self.run(input)
             
     def state(self):
-        return self.currentState
+        return str(self.currentState)
         
 def initialize():
     global GSN_SM, TIMER_OFF, TIMER_ON
@@ -317,6 +317,10 @@ def offerMsg(message):
 def offerMsgs(messages):
     for message in messages:
         offerMsg(message)
+        
+def state():
+    global GSN_SM
+    return GSN_SM.currentState
 
 GSNSM.Off = State_Off()
 GSNSM.Ready = State_Ready()

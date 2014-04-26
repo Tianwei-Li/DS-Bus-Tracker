@@ -58,7 +58,7 @@ class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Off"
     
     def next(self, input):
@@ -98,7 +98,7 @@ class State_Idle(State):
     def run(self):
         LOGGER.info("Idle")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Idle"
     
     def next(self, input):
@@ -178,7 +178,7 @@ class State_Ready(State):
     def run(self):
         LOGGER.info("Ready")
 
-    def __str__(self): 
+    def __repr__(self): 
         return "State_Ready"
     
     def next(self, input):
@@ -341,7 +341,7 @@ class RSNSM(StateMachine):
             self.run(input)
             
     def state(self):
-        return self.currentState
+        return str(self.currentState)
 
 def initialize():
     global RSN_SM, TIMER_ON, TIMER_OFF, TIMER_THREAD
@@ -360,8 +360,6 @@ def initialize():
     #time.sleep(10)
 
 
-
-
 def offerMsg(message):
     global RSN_SM
     if message["SM"] == "RSN_SM":
@@ -370,6 +368,14 @@ def offerMsg(message):
 def offerMsgs(messages):
     for message in messages:
         offerMsg(message)
+
+def state():
+    global RSN_SM
+    return RSN_SM.currentState
+
+def busTable():
+    global BUS_TABLE
+    return BUS_TABLE
 
 RSNSM.Off = State_Off()
 RSNSM.Idle = State_Idle()
