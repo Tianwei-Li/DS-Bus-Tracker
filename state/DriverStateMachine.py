@@ -10,6 +10,7 @@ from state.StateMachine import StateMachine
 import action.DriverAction as DriverAction
 import comm.MessagePasser as MessagePasser
 from util.Addr import Addr
+import util.Location as Location
 
 import socket
 import threading
@@ -27,7 +28,6 @@ DRIVER_SM = None
 ROUTE_NO = -1
 DIRECTION = None
 BUS_ID = 0
-LOCATION = 1    # should be updated by some other module
 
 LOCAL_ADDR = None
 GSN_ADDR = None
@@ -120,11 +120,11 @@ class State_Idle(State):
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.start:
-            global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION, WATCHDOG
+            global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, WATCHDOG
             
             ROUTE_NO = input["route"]
             DIRECTION = input["direction"]
-            LOCATION = input["location"]
+            Location.setLocation(int(input["location"]))
             
             # TODO: ping RSN to add into the group
             add_message = {
@@ -132,9 +132,9 @@ class State_Idle(State):
                            "action" : "recvBusReq",
                            "type" : "add",
                            "route" : ROUTE_NO,
-                           "direction" : LOCATION,
+                           "direction" : DIRECTION,
                            "busId" : BUS_ID,
-                           "location" : LOCATION, 
+                           "location" : Location.getLocation(), 
                            "busIP" : LOCAL_ADDR.ip,
                            "busPort" : LOCAL_ADDR.port
                            }
@@ -169,7 +169,7 @@ class State_Init_Waiting(State):
     def next(self, input):
         action = map(DriverAction.DriverAction, [input["action"]])[0]
         if action == DriverAction.recvRSNAck:
-            global MYSELF_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
+            global MYSELF_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID
 
             # if the response route number doesn't match
             if input["route"] != ROUTE_NO:
@@ -188,16 +188,16 @@ class State_Init_Waiting(State):
                 LOGGER.info("RESEND_ELECT_NUM reaches the limit, reboot now.")
                 RESEND_ELECT_NUM = 0
                 # restart
-                global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
+                global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID
 
                 add_message = {
                                "SM" : "GSN_SM",
                                "action" : "recvBusReq",
                                "type" : "add",
                                "route" : ROUTE_NO,
-                               "direction" : LOCATION,
+                               "direction" : DIRECTION,
                                "busId" : BUS_ID,
-                               "location" : LOCATION, 
+                               "location" : Location.getLocation(), 
                                "busIP" : LOCAL_ADDR.ip,
                                "busPort" : LOCAL_ADDR.port
                                }
@@ -218,7 +218,7 @@ class State_Init_Waiting(State):
                                      "busId" : BUS_ID,
                                      "route" : ROUTE_NO,
                                      "direction" : DIRECTION,
-                                     "location" : LOCATION,
+                                     "location" : Location.getLocation(),
                                      "busIP" : LOCAL_ADDR.ip,
                                      "busPort" : LOCAL_ADDR.port
                                      }
@@ -252,7 +252,7 @@ class State_Ready(State):
         if action == DriverAction.recvLocReq:
             # TODO: response the current location
             # check if the rsn is my RSN, route matched?
-            global ROUTE_NO, DIRECTION, LOCATION, RSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
+            global ROUTE_NO, DIRECTION, RSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
             LOGGER.info("received RSN location request: %s" % input)
             
             # pet the watch dog
@@ -263,9 +263,9 @@ class State_Ready(State):
                            "action" : "recvDriverLoc",
                            "requestNo" : input["requestNo"],
                            "route" : ROUTE_NO,
-                           "direction" : LOCATION,
+                           "direction" : DIRECTION,
                            "busId" : BUS_ID,
-                           "location" : LOCATION, 
+                           "location" : Location.getLocation(), 
                            "busIP" : LOCAL_ADDR.ip,
                            "busPort" : LOCAL_ADDR.port
                            }
@@ -276,7 +276,7 @@ class State_Ready(State):
         elif action == DriverAction.timeout:
             # don't hear from RSN for 15 secs
             # send re-elect message to GSN
-            global ROUTE_NO, DIRECTION, LOCATION, GSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
+            global ROUTE_NO, DIRECTION, GSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
             LOGGER.info("send re-elect request to GSN")
             RSN_elect_message = {
                                  "SM" : "GSN_SM",
@@ -284,7 +284,7 @@ class State_Ready(State):
                                  "busId" : BUS_ID,
                                  "route" : ROUTE_NO,
                                  "direction" : DIRECTION,
-                                 "location" : LOCATION,
+                                 "location" : Location.getLocation(),
                                  "busIP" : LOCAL_ADDR.ip,
                                  "busPort" : LOCAL_ADDR.port
                                  }
@@ -313,7 +313,7 @@ class State_Hold(State):
         if action == DriverAction.recvLocReq:
             # TODO: response the current location
             # check if the rsn is my RSN, route matched?
-            global ROUTE_NO, DIRECTION, LOCATION, RSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
+            global ROUTE_NO, DIRECTION, RSN_ADDR, LOCAL_ADDR, BUS_ID, WATCHDOG
             LOGGER.info("received RSN location request: %s" % input)
             
             # pet the watch dog
@@ -329,9 +329,9 @@ class State_Hold(State):
                            "action" : "recvDriverLoc",
                            "requestNo" : input["requestNo"],
                            "route" : ROUTE_NO,
-                           "direction" : LOCATION,
+                           "direction" : DIRECTION,
                            "busId" : BUS_ID,
-                           "location" : LOCATION, 
+                           "location" : Location.getLocation(), 
                            "busIP" : LOCAL_ADDR.ip,
                            "busPort" : LOCAL_ADDR.port
                            }
@@ -342,7 +342,7 @@ class State_Hold(State):
         
         elif action == DriverAction.restart:
             # restart
-            global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION, RESEND_ELECT_NUM
+            global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, RESEND_ELECT_NUM
 
             LOGGER.info("Receive restart message from GSN. Restart now.")
                 
@@ -353,9 +353,9 @@ class State_Hold(State):
                            "action" : "recvBusReq",
                            "type" : "add",
                            "route" : ROUTE_NO,
-                           "direction" : LOCATION,
+                           "direction" : DIRECTION,
                            "busId" : BUS_ID,
-                           "location" : LOCATION, 
+                           "location" : Location.getLocation(), 
                            "busIP" : LOCAL_ADDR.ip,
                            "busPort" : LOCAL_ADDR.port
                            }
@@ -375,16 +375,16 @@ class State_Hold(State):
                 LOGGER.info("RESEND_ELECT_NUM reaches the limit, reboot now.")
                 RESEND_ELECT_NUM = 0
                 # restart
-                global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID, LOCATION
+                global LOCAL_ADDR, RSN_ADDR, ROUTE_NO, DIRECTION, BUS_ID
 
                 add_message = {
                                "SM" : "GSN_SM",
                                "action" : "recvBusReq",
                                "type" : "add",
                                "route" : ROUTE_NO,
-                               "direction" : LOCATION,
+                               "direction" : DIRECTION,
                                "busId" : BUS_ID,
-                               "location" : LOCATION, 
+                               "location" : Location.getLocation(), 
                                "busIP" : LOCAL_ADDR.ip,
                                "busPort" : LOCAL_ADDR.port
                                }
@@ -405,7 +405,7 @@ class State_Hold(State):
                                      "busId" : BUS_ID,
                                      "route" : ROUTE_NO,
                                      "direction" : DIRECTION,
-                                     "location" : LOCATION,
+                                     "location" : Location.getLocation(),
                                      "busIP" : LOCAL_ADDR.ip,
                                      "busPort" : LOCAL_ADDR.port
                                      }

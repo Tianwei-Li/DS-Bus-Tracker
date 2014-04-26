@@ -20,8 +20,6 @@ import comm.TCPComm as TCPComm
 #import json
 
 
-
-
 logging.basicConfig()
 LOGGER = logging.getLogger("Simulator")
 LOGGER.setLevel(logging.DEBUG)
@@ -41,30 +39,6 @@ TCP_SERVER = None
 TIMER_ON1 = None
 TIMER_OFF1 = None
 TIMER_THREAD1 = None
-
-def timerThread1():
-    d1 = 0
-    d2 = 4
-    #while timerOn.wait():
-    #    while not timerOff.wait(5):     # every 5 secs
-            # write to json file
-            #a = Call API to get location table 
-    while True:
-        d1 = d1 + 1
-        if(d1 > 29):
-            d1 = 0
-        d2 = d2 + 1
-        if(d2 > 29):
-            d2 = 0
-         
-        
-        LOGGER.info("Sending location update every 5s")
-        a = {"driver_alice": d1, "super_bob": d2}
-        #location_info_str = json.dumps(a)
-        TCPComm.send(MASTER_IP, MASTER_PORT, a)
-        sleep(5)
-            
-            
 
 class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 
@@ -90,29 +64,25 @@ def runServer(ip, port):
     server_thread.start()
         
 def reporterThread():
+    global MASTER_IP, MASTER_PORT
+    
     while True:
-        # For Shiva
-        print host.state()
-        
-        # TODO: return host.state() to Master
-        
-        sleep(2)
-        
+        state = host.state()
+        if state != None:
+            print state
+            TCPComm.send(MASTER_IP, MASTER_PORT, state)
+        sleep(5)
+
+def updateLocThread():
+    while True:
+        Location.moveOneStop()
+        LOGGER.info("Update Location")
+        sleep(10)       # take 10 seconds to move to next stop
+
+
 # should be called by master
 if __name__ == '__main__':
-    global MSG_QUEUE, TCP_IP, TCP_PORT
-    global TIMER_ON1, TIMER_OFF1, TIMER_THREAD1
-    
-    # Timer variable
-#     TIMER_ON1 = threading.Event()
-#     TIMER_OFF1 = threading.Event()
-# 
-#     TIMER_THREAD1 = threading.Thread(target=timerThread, args=(TIMER_ON1, TIMER_OFF1))
-#     TIMER_THREAD1.daemon = True
-# 
-#     TIMER_ON1.clear()
-#     TIMER_OFF1.set()
-#     TIMER_THREAD1.start()
+    global MSG_QUEUE, TCP_IP, TCP_PORT    
 
     LOGGER.info("Simulator starts! Hello from simulator!")
 
@@ -120,15 +90,16 @@ if __name__ == '__main__':
     TCP_PORT = int(sys.argv[2])
     
     runServer(TCP_IP, TCP_PORT)
-    threading.Thread(timerThread1())
-
-    
     
     # initialize reporter thread
-    thread = threading.Thread(target=reporterThread, args = ())
-    thread.daemon = True
-    thread.start()
+    reporterThread = threading.Thread(target=reporterThread, args = ())
+    reporterThread.daemon = True
+    reporterThread.start()
     
+    # initialize updateLocThread
+    updateLocThread = threading.Thread(target=updateLocThread, args = ())
+    updateLocThread.daemon = True
+    updateLocThread.start()
     
     while True:
         if MSG_QUEUE:
@@ -143,7 +114,5 @@ if __name__ == '__main__':
                 sleep(command["time"])
             if command["action"] == "exit":
                 os._exit(0)
-        sleep(1)
-        state = host.state()
-        if state != None:
-            print state
+        sleep(0.1)
+        

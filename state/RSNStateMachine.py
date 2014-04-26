@@ -252,7 +252,6 @@ class State_Ready(State):
                                               "addr" : Addr(input["busIP"], input["busPort"]),
                                               "last_update" : input["requestNo"]    # TODO: use local time stamp
                                               }
-                print BUS_TABLE
             
             return RSNSM.Ready
         elif action == RSNAction.recvBusChange:
