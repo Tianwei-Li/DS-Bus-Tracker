@@ -1,14 +1,21 @@
 {"nodes":[
-{"index": 0, "name":"GSN", "type": "gsn", "fixed": "true", "x": 480, "y": 40},
-{"index": 1, "name":"User1", "type": "user"},
-{"index": 2, "name":"User2", "type": "user"},
-{"index": 3, "name":"RSN-71A", "type": "rsn", "fixed": "true", "x": 76, "y": 416},
-{"index": 4, "name":"RSN-71B", "type": "rsn", "fixed": "true", "x": 27, "y": 240},
-{"index": 5, "name":"RSN-61B", "type": "rsn", "fixed": "true", "x": 100, "y": 200}],
+{"index": 0, "name":"GSN", "type": "gsn", "fixed": "true", "x": 492, "y": 30},
+{"index": 1, "name":"GSN Replica 1", "type": "gsn", "fixed": "true", "x": 580, "y": 10},
+{"index": 2, "name":"GSN Replica 2", "type": "gsn", "fixed": "true", "x": 400, "y": 10},
+{"index": 3, "name":"User1", "type": "user"},
+{"index": 4, "name":"User2", "type": "user"},
+{"index": 5, "name":"RSN-71A", "type": "rsn", "fixed": "true", "x": 76, "y": 416},
+{"index": 6, "name":"RSN-71B", "type": "rsn", "fixed": "true", "x": 27, "y": 240},
+{"index": 7, "name":"RSN-61B", "type": "rsn", "fixed": "true", "x": 100, "y": 200},
+{"index": 8, "name":"71-A Bus 5", "type": "bus", "fixed": "true", "x": 362, "y": 409},
+{"index": 9, "name":"RSN-61B", "type": "rsn", "fixed": "true", "x": 100, "y": 200}],
 "links":[
 {"index": 0, "source":0,"target":1},
 {"index": 1, "source":0,"target":2},
 {"index": 2, "source":0,"target":3},
 {"index": 3, "source":0,"target":4},
-{"index": 4, "source":0,"target":5}
+{"index": 4, "source":0,"target":5},
+{"index": 5, "source":0,"target":6},
+{"index": 6, "source":0,"target":7},
+{"index": 7, "source":5,"target":8}
 ]}

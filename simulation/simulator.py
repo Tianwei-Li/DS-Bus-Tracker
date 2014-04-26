@@ -16,6 +16,10 @@ import threading
 import os
 import util.Location as Location
 from time import sleep
+import comm.TCPComm as TCPComm
+#import json
+
+
 
 
 logging.basicConfig()
@@ -25,10 +29,42 @@ LOGGER.setLevel(logging.DEBUG)
 TCP_IP = '127.0.0.1'
 TCP_PORT = 9999
 
+MASTER_IP = '127.0.0.1'
+MASTER_PORT = 60000
+
+
 MSG_QUEUE = collections.deque()
 
 # tcp server for receiving
 TCP_SERVER = None
+
+TIMER_ON1 = None
+TIMER_OFF1 = None
+TIMER_THREAD1 = None
+
+def timerThread1():
+    d1 = 0
+    d2 = 4
+    #while timerOn.wait():
+    #    while not timerOff.wait(5):     # every 5 secs
+            # write to json file
+            #a = Call API to get location table 
+    while True:
+        d1 = d1 + 1
+        if(d1 > 29):
+            d1 = 0
+        d2 = d2 + 1
+        if(d2 > 29):
+            d2 = 0
+         
+        
+        LOGGER.info("Sending location update every 5s")
+        a = {"driver_alice": d1, "super_bob": d2}
+        #location_info_str = json.dumps(a)
+        TCPComm.send(MASTER_IP, MASTER_PORT, a)
+        sleep(5)
+            
+            
 
 class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 
@@ -65,12 +101,28 @@ def reporterThread():
 # should be called by master
 if __name__ == '__main__':
     global MSG_QUEUE, TCP_IP, TCP_PORT
+    global TIMER_ON1, TIMER_OFF1, TIMER_THREAD1
+    
+    # Timer variable
+#     TIMER_ON1 = threading.Event()
+#     TIMER_OFF1 = threading.Event()
+# 
+#     TIMER_THREAD1 = threading.Thread(target=timerThread, args=(TIMER_ON1, TIMER_OFF1))
+#     TIMER_THREAD1.daemon = True
+# 
+#     TIMER_ON1.clear()
+#     TIMER_OFF1.set()
+#     TIMER_THREAD1.start()
+
     LOGGER.info("Simulator starts! Hello from simulator!")
 
     TCP_IP = sys.argv[1]
     TCP_PORT = int(sys.argv[2])
-
+    
     runServer(TCP_IP, TCP_PORT)
+    threading.Thread(timerThread1())
+
+    
     
     # initialize reporter thread
     thread = threading.Thread(target=reporterThread, args = ())

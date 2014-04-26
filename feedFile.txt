@@ -7,16 +7,16 @@ GSN {"action" : "sleep", "time" : 60}
 GSN {"action" : "exit"}
 
 # DRIVER_1
-DRIVER_1 {"action" : "initialize", "localName" : "dirver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 41000}
+DRIVER_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 41000}
 DRIVER_1 {"action":"start", "route":"71A", "direction":0, "location":0}
 DRIVER_1 {"action":"sleep", "time": 60}
 DRIVER_1 {"action" : "exit"}
   
 # DRIVER_2
-DRIVER_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_71A_bob", "localIP" : "127.0.0.1", "localPort" : 42000}
-DRIVER_2 {"action":"start", "route":"71A", "direction":0, "location":0}
-DRIVER_2 {"action":"sleep", "time": 60}
-DRIVER_2 {"action" : "exit"}
+#DRIVER_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_71A_bob", "localIP" : "127.0.0.1", "localPort" : 42000}
+#DRIVER_2 {"action":"start", "route":"71A", "direction":0, "location":0}
+#DRIVER_2 {"action":"sleep", "time": 60}
+#DRIVER_2 {"action" : "exit"}
 
 # DRIVER_3
 DRIVER_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_71A_charlie", "localIP" : "127.0.0.1", "localPort" : 43000}
