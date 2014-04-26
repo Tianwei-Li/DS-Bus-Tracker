@@ -31,7 +31,7 @@ busId       direction,
 '''
 BUS_TABLE = {}
 
-
+RSN_ID = None
 ROUTE_NO = None
 
 GSN_ADDR = None

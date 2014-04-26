@@ -69,7 +69,7 @@ def reporterThread():
     while True:
         state = host.state()
         if state != None:
-            print state
+            LOGGER.info("report state: %s" % state)
             TCPComm.send(MASTER_IP, MASTER_PORT, state)
         sleep(5)
 
