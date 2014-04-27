@@ -339,6 +339,12 @@ def updateJsonFile():
             outfile = open("../visualization/graph.json", "w")
             json.dump(DIC, outfile)
             outfile.close()
+            
+            locationFile = open("../visualization/locList.txt", "w")
+            for elm in NODES:
+                if elm["type"] == "DRIVER" or elm["type"] == "RSN":
+                    locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
+            locationFile.close()
             time.sleep(5)
             
     '''
