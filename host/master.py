@@ -339,6 +339,11 @@ def updateJsonFile():
             outfile = open("../visualization/graph.json", "w")
             json.dump(DIC, outfile)
             outfile.close()
+            
+            locationFile = open("../visualization/locList.txt", "w")
+            for elm in NODES:
+                locationFile.write(elm["name"] + " " + elm["x"] + " " + elm["y"] + "\n")
+            locationFile.close()
             time.sleep(5)
             
     '''
