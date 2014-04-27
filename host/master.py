@@ -209,16 +209,36 @@ class Application(Frame):
     '''
     
     def setupSim(self):
-        addr = CONF["GSN"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_1"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_2"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_3"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["USER_1"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        global CONF
+        file = open("../feedFile.txt", "r")
+        for line in file:
+            # skip blank lines
+            if not line.strip():
+                continue
+
+            # ignore comment
+            if line.startswith("#"):
+                continue
+        
+            # print line
+            line = line.rstrip()
+            if line.startswith("CONF"):
+                tokens = line.split(' ')
+                CONF[tokens[1]] = {"IP" : tokens[2], "Port" : tokens[3]}
+                
+        file.close()
+        
+        
+        addr = CONF["GSN"]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["DRIVER_1"]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["DRIVER_2"]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["DRIVER_3"]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["USER_1"]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
         #addr = CONF["USER_2"].split(':')
         #os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + MASTER_IP + " " + str(MASTER_PORT) + " &")
     
@@ -236,14 +256,15 @@ class Application(Frame):
                 continue
         
             # print line
-            tokens = line.split(' ', 1)
-            addr = CONF[tokens[0]].split(':')
-            message = eval(tokens[1])
-            #if (message["action"] == "initialize"):
-            #    self.writeJsonFile(message["localName"], message["role"], "71A")
-            ip = addr[0]
-            port = int(addr[1])
-            TCPComm.send(ip, port, message)
+            if line.startswith("CONF") == False:
+                tokens = line.split(' ', 1)
+                addr = CONF[tokens[0]]
+                message = eval(tokens[1])
+                #if (message["action"] == "initialize"):
+                #    self.writeJsonFile(message["localName"], message["role"], "71A")
+                ip = addr["IP"]
+                port = int(addr["Port"])
+                TCPComm.send(ip, port, message)
            
     def createWidgets(self):
         
