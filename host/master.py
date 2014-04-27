@@ -25,11 +25,14 @@ from time import sleep
 CONF = {
         "GSN" : "127.0.0.1:9000",
         "DRIVER_1" : "127.0.0.1:9100",
-        "USER_1" : "127.0.0.1:10000"
+        "DRIVER_2" : "127.0.0.1:9200",
+        "DRIVER_3" : "127.0.0.1:9300",
+        "USER_1" : "127.0.0.1:10000",
+        "USER_2" : "127.0.0.1:20000",
         }
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 60000
+MASTER_IP = '127.0.0.1'
+MASTER_PORT = 60000
 #import google_map
 
 
@@ -66,46 +69,8 @@ def runServer(ip, port):
     server_thread.start()
 
 class Application(Frame):
-    def getIdxByName(self, name):
-        for i in range(len(NODES)):
-            if NODES[i]["name"] == name:
-                return NODES[i]["index"]
         
-        return 0
-    
-    def writeJsonFile(self, name, type, busLine):
-        dic = {}
-        dic["index"] = len(NODES)
-        dic["name"] = name
-        dic["type"] = type
-        if type == "gsn":
-            dic["fixed"] = "true"
-            dic["x"] = 480
-            dic["y"] = 40
-        
-        if type == "DRIVER" or type == "RSN":
-            dic["fixed"] = "true"
-            dic["x"] = ROUTTABLE[busLine][0]["x"]
-            dic["y"] = ROUTTABLE[busLine][0]["y"]
-            
-        NODES.append(dic)
-        
-        if type != "gsn":
-            dic = {}
-            dic["index"] = len(LINKS)
-            if (type == "DRIVER"):
-                rsnName = "RSN-" + busLine
-                dic["source"] = self.getIdxByName(rsnName)
-            else:
-                dic["source"] = 0
-            dic["target"] = len(NODES) - 1
-            LINKS.append(dic)
-        
-        self.outfile = open("../visualization/graph.json", "w")
-        json.dump(DIC, self.outfile)
-        self.outfile.close()
-        
-        
+    '''    
     def newUser(self):
         name = self.userName.get()
         ip = self.userIP.get()
@@ -175,13 +140,13 @@ class Application(Frame):
         self.queryRout = Entry(self, textvariable = defaultRoute)
         self.queryRout.grid(row = 4, column = col+1) 
         
-        '''
+        
         Label(self, text="Query Interval:").grid(row = 5, column = col)
         defaultInterv = StringVar()
         defaultInterv.set("10 s")
         self.timeInter = Entry(self, textvariable = defaultInterv)
         self.timeInter.grid(row = 5, column = col+1) 
-        '''
+        
         self.newUserBtn = Button(self)
         self.newUserBtn["text"] = "launch user"
         self.newUserBtn["command"] = self.newUser 
@@ -241,19 +206,24 @@ class Application(Frame):
         #self.newGSNBtn["fg"]   = "red"  
         self.newDriBtn["command"] =  self.newDriver   
         self.newDriBtn.grid(row = 6, column = col+1)  
+    '''
     
     def setupSim(self):
         addr = CONF["GSN"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " &")
+        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
         addr = CONF["DRIVER_1"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " &")
+        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["DRIVER_2"].split(':')
+        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        addr = CONF["DRIVER_3"].split(':')
+        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
         addr = CONF["USER_1"].split(':')
-        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " &")
-        #addr = CONF["DRIVER_3"].split(':')
-        #os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " &")
-        #addr = CONF["USER_1"].split(':')
-        #os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " &")
+        os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        #addr = CONF["USER_2"].split(':')
+        #os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + MASTER_IP + " " + str(MASTER_PORT) + " &")
+    
 
+    
     def startSim(self):
         file = open("../feedFile.txt", "r")
         for line in file:
@@ -269,26 +239,20 @@ class Application(Frame):
             tokens = line.split(' ', 1)
             addr = CONF[tokens[0]].split(':')
             message = eval(tokens[1])
-            if (message["action"] == "initialize"):
-                self.writeJsonFile(message["localName"], message["role"], "61A")
+            #if (message["action"] == "initialize"):
+            #    self.writeJsonFile(message["localName"], message["role"], "71A")
             ip = addr[0]
             port = int(addr[1])
             TCPComm.send(ip, port, message)
            
     def createWidgets(self):
-        global NODES, LINKS, DIC, BUSCNT
-        NODES = []
-        LINKS = []
-        DIC = {}
-        DIC["nodes"] = NODES
-        DIC["links"] = LINKS
         
-        BUSCNT = {}
+        
         
         Label(self, text="").grid(row = 0)
-        self.createUser(0)
-        self.createGSN(2)
-        self.createDriv(4)
+        #self.createUser(0)
+        #self.createGSN(2)
+        #self.createDriv(4)
         
         self.confBtn = Button(self)
         self.confBtn["text"] = "setup sim"
@@ -326,7 +290,119 @@ def updateNodePos(name, busLine, idx):
         node["x"] = ROUTTABLE[busLine][idx]["x"]
         node["y"] = ROUTTABLE[busLine][idx]["y"]
 
+def getIdxByName(name):
+    for i in range(len(NODES)):
+        if NODES[i]["name"] == name:
+            return NODES[i]["index"]
+        
+    return 0
     
+def writeJsonFile():
+    global NODES, LINKS, DIC
+    
+    '''
+    dic = {}
+    dic["index"] = len(NODES)
+    dic["name"] = "qianmao2"
+    dic["type"] = "USER"
+    NODES.append(dic)
+    
+    link_dic = {}
+    link_dic["index"] = len(LINKS)
+    link_dic["source"] = 0
+    link_dic["target"] = len(NODES) - 1
+    LINKS.append(link_dic)
+    '''
+        
+    while True:
+        if MSG_QUEUE:
+            NODES = []
+            LINKS = []
+            DIC = {}
+            DIC["nodes"] = NODES
+            DIC["links"] = LINKS
+    
+            dic = {}
+            dic["index"] = 0
+            dic["name"] = "GSN_1"
+            dic["type"] = "GSN"
+            dic["fixed"] = "true"
+            dic["x"] = 480
+            dic["y"] = 40
+        
+            NODES.append(dic)
+    
+            link_dic = {}
+            link_dic["index"] = len(LINKS)
+            link_dic["source"] = 0
+            link_dic["target"] = len(NODES) - 1
+            LINKS.append(link_dic)
+    
+            dic = {}
+            dic["index"] = len(NODES)
+            dic["name"] = "qianmao"
+            dic["type"] = "USER" 
+            NODES.append(dic)
+    
+            link_dic = {}
+            link_dic["index"] = len(LINKS)
+            link_dic["source"] = 0
+            link_dic["target"] = len(NODES) - 1
+            LINKS.append(link_dic)
+            
+            
+            command = MSG_QUEUE.popleft()
+            rsn_busId = command["busId"]
+            bus_table = command["BUS_TABLE"]
+            
+            rsn_data = bus_table.get(rsn_busId)
+            dic = {}
+            dic["index"] = len(NODES)
+            dic["name"] = rsn_busId
+            dic["type"] = "RSN"
+              
+            dic["fixed"] = "true"
+            dic["x"] = ROUTTABLE[command["route"]][rsn_data["location"]]["x"]
+            dic["y"] = ROUTTABLE[command["route"]][rsn_data["location"]]["y"]
+            NODES.append(dic)
+            
+            link_dic = {}
+            link_dic["index"] = len(LINKS)
+            link_dic["source"] = 0
+            link_dic["target"] = len(NODES) - 1
+            LINKS.append(link_dic)
+            
+            for item in bus_table.items():
+                if item[0] != rsn_busId:
+                    dic = {}
+                    dic["index"] = len(NODES)
+                    dic["name"] = item[0]
+                    dic["type"] = "DRIVER" 
+                    dic["fixed"] = "true"
+                    dic["x"] = ROUTTABLE[command["route"]][item[1]["location"]]["x"]
+                    dic["y"] = ROUTTABLE[command["route"]][item[1]["location"]]["y"]
+                    NODES.append(dic)
+                
+                    link_dic = {}
+                    link_dic["index"] = len(LINKS)
+                    link_dic["source"] = getIdxByName(rsn_busId)
+                
+                    link_dic["target"] = len(NODES) - 1
+                    LINKS.append(link_dic)
+                
+                    
+            outfile = open("../visualization/graph.json", "w")
+            json.dump(DIC, outfile)
+            outfile.close()
+            
+            '''
+            locationFile = open("../visualization/locList.txt", "w")
+            for elm in NODES:
+                if elm["type"] == "DRIVER" or elm["type"] == "RSN":
+                    locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
+            locationFile.close()
+            '''
+            time.sleep(5)
 
 
 def updateJsonFile():
@@ -335,7 +411,7 @@ def updateJsonFile():
         if MSG_QUEUE:
             command = MSG_QUEUE.popleft()
             for item in command.items():
-                updateNodePos(item[0], "61A", item[1])
+                updateNodePos(item[0], "71A", item[1])
             outfile = open("../visualization/graph.json", "w")
             json.dump(DIC, outfile)
             outfile.close()
@@ -347,32 +423,17 @@ def updateJsonFile():
             locationFile.close()
             time.sleep(5)
             
-    '''
-    rout61File = "rout61.json"
-    rout71File = "rout71.json"
-    with FileLock(rout61File):
-        json_data = open(rout61File)
-        rout61Bus = json.load(json_data)
-        for item in rout61Bus.items():
-            updateNodePos(item[0], "61A", item[1])
-            
-        
-    with FileLock(rout71File):
-        json_data = open(rout71File)
-        rout71Bus = json.load(json_data)
-        for item in rout71Bus.items():
-            updateNodePos(item[0], "71B", item[1])
-    '''
+    
     
     
 def main():
     readRoutTable()
     
-    global MSG_QUEUE, TCP_IP, TCP_PORT
+    global MSG_QUEUE, MASTER_IP, MASTER_PORT
 
 
-    runServer(TCP_IP, TCP_PORT)
-    thread = threading.Thread(target=updateJsonFile, args = ())
+    runServer(MASTER_IP, MASTER_PORT)
+    thread = threading.Thread(target=writeJsonFile, args = ())
     thread.start()
     win = Tk()   
     win.title("Master")
