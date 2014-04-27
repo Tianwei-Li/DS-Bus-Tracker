@@ -22,14 +22,7 @@ sys.path += ['../']
 import comm.TCPComm as TCPComm
 from time import sleep
 
-CONF = {
-        "GSN" : "127.0.0.1:9000",
-        "DRIVER_1" : "127.0.0.1:9100",
-        "DRIVER_2" : "127.0.0.1:9200",
-        "DRIVER_3" : "127.0.0.1:9300",
-        "USER_1" : "127.0.0.1:10000",
-        "USER_2" : "127.0.0.1:20000",
-        }
+CONF = {}
 
 MASTER_IP = '127.0.0.1'
 MASTER_PORT = 60000
@@ -228,20 +221,9 @@ class Application(Frame):
                 
         file.close()
         
-        
-        addr = CONF["GSN"]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_1"]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_2"]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["DRIVER_3"]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        addr = CONF["USER_1"]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
-        #addr = CONF["USER_2"].split(':')
-        #os.system("python ../simulation/simulator.py " + addr[0] + " " + addr[1] + MASTER_IP + " " + str(MASTER_PORT) + " &")
-    
+        for player in CONF:
+            addr = CONF[player]
+            os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
 
     
     def startSim(self):

@@ -171,7 +171,8 @@ class State_Idle(State):
             return RSNSM.Off
         else:
             # for other illegal action
-            assert 0, "Idle: invalid action: %s" % str(input)
+            # assert 0, "Idle: invalid action: %s" % str(input)
+            pass
 
 
 class State_Ready(State):
@@ -323,7 +324,8 @@ class State_Ready(State):
             return RSNSM.Off
         else:
             # for other illegal action
-            assert 0, "Ready: invalid action: %s" % str(input)
+            # assert 0, "Ready: invalid action: %s" % str(input)
+            pass
 
 
 class RSNSM(StateMachine):

@@ -120,7 +120,8 @@ class State_Idle(State):
             return DriverSM.Off
         else:
             # for other illegal action
-            assert 0, "Idle: invalid action: %s" % str(input)
+            # assert 0, "Idle: invalid action: %s" % str(input)
+            pass
             
             
 class State_Init_Waiting(State):
@@ -201,7 +202,8 @@ class State_Init_Waiting(State):
             return DriverSM.Off
         else:
             # for other illegal action
-            assert 0, "Init_Waiting: invalid action: %s" % str(input)
+            # assert 0, "Init_Waiting: invalid action: %s" % str(input)
+            pass
 
 
 class State_Ready(State):
@@ -262,7 +264,8 @@ class State_Ready(State):
             return DriverSM.Off
         else:
             # for other illegal action
-            assert 0, "Ready: invalid action: %s" % str(input)
+            # assert 0, "Ready: invalid action: %s" % str(input)
+            pass
 
 
 class State_Hold(State):
@@ -386,7 +389,8 @@ class State_Hold(State):
             return DriverSM.Off
         else:
             # for other illegal action
-            assert 0, "Init_Waiting: invalid action: %s" % str(input)
+            # assert 0, "Init_Waiting: invalid action: %s" % str(input)
+            pass
             
             
 class DriverSM(StateMachine):

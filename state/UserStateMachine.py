@@ -110,7 +110,8 @@ class State_Ready(State):
             return UserSM.Off
         else:
             # for other illegal action
-            assert 0, "Ready: invalid action: %s" % str(input)
+            # assert 0, "Ready: invalid action: %s" % str(input)
+            pass
 
 
 class State_Req_Waiting(State):
@@ -148,7 +149,8 @@ class State_Req_Waiting(State):
             return UserSM.Off
         else:
             # for other illegal action
-            assert 0, "Req_Waiting: invalid action: %s" % str(input)
+            # assert 0, "Req_Waiting: invalid action: %s" % str(input)
+            pass
 
 
 class UserSM(StateMachine):

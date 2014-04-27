@@ -3,8 +3,12 @@
 
 CONF GSN 127.0.0.1 9000
 CONF DRIVER_1 127.0.0.1 9100
-CONF DRIVER_2 127.0.0.1 9200
-CONF DRIVER_3 127.0.0.1 9300
+CONF DRIVER_2 127.0.0.1 9110
+CONF DRIVER_3 127.0.0.1 9120
+CONF DRIVER_4 127.0.0.1 9210
+CONF DRIVER_5 127.0.0.1 9220
+CONF DRIVER_6 127.0.0.1 9230
+
 CONF USER_1 127.0.0.1 10000
 
 
@@ -16,14 +20,14 @@ GSN {"action" : "exit"}
 # DRIVER_1
 DRIVER_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 41000}
 DRIVER_1 {"action":"sleep", "time": 5}
-DRIVER_1 {"action":"start", "route":"71A", "direction":0, "location":0}
+DRIVER_1 {"action":"start", "route":"71A", "direction":0, "location":3}
 DRIVER_1 {"action":"sleep", "time": 300}
 DRIVER_1 {"action" : "exit"}
   
 # DRIVER_2
 DRIVER_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_71A_bob", "localIP" : "127.0.0.1", "localPort" : 42000}
 DRIVER_2 {"action":"sleep", "time": 30}
-DRIVER_2 {"action":"start", "route":"71A", "direction":0, "location":0}
+DRIVER_2 {"action":"start", "route":"71A", "direction":0, "location":2}
 DRIVER_2 {"action":"sleep", "time": 300}
 DRIVER_2 {"action" : "exit"}
 
@@ -34,11 +38,33 @@ DRIVER_3 {"action":"start", "route":"71A", "direction":0, "location":0}
 DRIVER_3 {"action":"sleep", "time": 300}
 DRIVER_3 {"action" : "exit"}
 
+# DRIVER_4
+DRIVER_4 {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_61A_david", "localIP" : "127.0.0.1", "localPort" : 44000}
+DRIVER_4 {"action":"sleep", "time": 6}
+DRIVER_4 {"action":"start", "route":"61A", "direction":0, "location":2}
+DRIVER_4 {"action":"sleep", "time": 300}
+DRIVER_4 {"action" : "exit"}
+
+# DRIVER_5
+DRIVER_5 {"action" : "initialize", "localName" : "EVA", "role" : "DRIVER", "id" : "bus_61A_eva", "localIP" : "127.0.0.1", "localPort" : 45000}
+DRIVER_5 {"action":"sleep", "time": 16}
+DRIVER_5 {"action":"start", "route":"61A", "direction":0, "location":1}
+DRIVER_5 {"action":"sleep", "time": 300}
+DRIVER_5 {"action" : "exit"}
+
+# DRIVER_6
+DRIVER_6 {"action" : "initialize", "localName" : "Fisher's iphone", "role" : "DRIVER", "id" : "bus_61A_fisher", "localIP" : "127.0.0.1", "localPort" : 46000}
+DRIVER_6 {"action":"sleep", "time": 30}
+DRIVER_6 {"action":"start", "route":"61A", "direction":0, "location":0}
+DRIVER_6 {"action":"sleep", "time": 300}
+DRIVER_6 {"action" : "exit"}
+
 # USER_1
-USER_1 {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "qianmao", "localIP" : "127.0.0.1", "localPort" : 50000}
+USER_1 {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "Channing Mao", "localIP" : "127.0.0.1", "localPort" : 50000}
 USER_1 {"action" : "sleep", "time" : 10}
 USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":4, "location":2}
 USER_1 {"action" : "sleep", "time" : 10}
 USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":5, "location":0}
-USER_1 {"action" : "sleep", "time" : 10}
+USER_1 {"action" : "sleep", "time" : 40}
+USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":5, "location":0}
 USER_1 {"action" : "exit"}
