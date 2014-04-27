@@ -1,7 +1,7 @@
 '''
 Created on Apr 5, 2014
 
-@author: Terry Li
+@author: Terry Li, Qian Mao
 '''
 
 import logging
@@ -11,6 +11,7 @@ import action.DriverAction as DriverAction
 import comm.MessagePasser as MessagePasser
 from util.Addr import Addr
 import util.Location as Location
+from util.WatchDog import Watchdog
 
 import socket
 import threading
@@ -37,51 +38,14 @@ WATCHDOG = None
 
 RESEND_ELECT_NUM = 0
 
-
-# Watchdog class for timeout detection
-class Watchdog(object):
-    
-    def __init__(self, time=15.0):
-        ''' Class constructor. The "time" argument has the units of seconds. '''
-        self._time = time
-        return
-        
-    def startWatchdog(self):
-        ''' Starts the watchdog timer. '''
-        self._timer = Timer(self._time, self._watchdogEvent)
-        self._timer.daemon = True
-        self._timer.start()
-        return
-        
-    def petWatchdog(self):
-        ''' Reset watchdog timer. '''
-        self.stopWatchdog()
-        self.startWatchdog()
-        return
-            
-        
-    def _watchdogEvent(self):
-        '''
-        This internal method gets called when the timer triggers. A keyboard 
-        interrupt is generated on the main thread. The watchdog timer is stopped 
-        when a previous event is tripped.
-        '''
-        # timeout if don't receive askBusLoc from RSN
-        LOGGER.info("timeout")
-        RSN_timeout__message = {
-                                 "SM" : "DRIVER_SM",
-                                 "action" : "timeout",
-                                 }
-        offerMsg(RSN_timeout__message)
-            
-        #self.stopWatchdog()
-        #thread.interrupt_main()
-        return
-
-    def stopWatchdog(self):
-        ''' Stops the watchdog timer. '''
-        self._timer.cancel()
-        
+# func passed into watchdog
+def watchdogFunc():
+    LOGGER.info("timeout")
+    RSN_timeout__message = {
+                            "SM" : "DRIVER_SM",
+                            "action" : "timeout",
+                            }
+    offerMsg(RSN_timeout__message)
 
 class State_Off(State):
     def run(self):
@@ -444,7 +408,7 @@ class DriverSM(StateMachine):
 def initialize():
     global DRIVER_SM, WATCHDOG
     DRIVER_SM = DriverSM()
-    WATCHDOG = Watchdog(15)
+    WATCHDOG = Watchdog(15, watchdogFunc)
     
 
 def offerMsg(message):
@@ -465,7 +429,7 @@ DriverSM.Hold = State_Hold()
         
 # Test Only
 if __name__ == '__main__':
-    dog = Watchdog(1)
+    dog = Watchdog(1, watchdogFunc)
     dog.startWatchdog()
     while True:
         sleep(3)

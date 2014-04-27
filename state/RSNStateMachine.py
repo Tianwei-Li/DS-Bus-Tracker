@@ -206,7 +206,7 @@ class State_Ready(State):
             response_message = {
                                 "SM" : "USER_SM",
                                 "action" : "recvRes",
-                                "location" : nearest_loc, # TODO: location should be fetched from table
+                                "location" : nearest_loc, 
                                 "busId" : nearest_bus,
                                 "original" : input["original"]
                                }

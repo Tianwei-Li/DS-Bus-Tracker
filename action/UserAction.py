@@ -26,7 +26,7 @@ class UserAction(object):
 turnOn = UserAction("turnOn")
 initialize = UserAction("initialize")
 pingGSN = UserAction("pingGSN")
-timeout = UserAction("timeout")
+reqTimeout = UserAction("reqTimeout")
 recvAck = UserAction("recvAck")
 request = UserAction("request")
 recvRes = UserAction("recvRes")

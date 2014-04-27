@@ -10,6 +10,7 @@ from state.StateMachine import StateMachine
 import action.UserAction as UserAction
 import comm.MessagePasser as MessagePasser
 from util.Addr import Addr
+from util.WatchDog import Watchdog
 import socket
 import collections
 
@@ -25,8 +26,22 @@ LOCAL_ADDR = None
 USER_ID = None
 REQUEST_SEQ =0
 
+LAST_REQ = None
+
+WAITING_REQ_LIST = []
 RESPONSE_QUE = collections.deque()
 
+WATCHDOG = None
+
+# func passed into watchdog
+def watchdogFunc():
+    LOGGER.info("reqTimeout")
+    reqTimeout_message = {
+                          "SM" : "USER_SM",
+                          "action" : "reqTimeout",
+                          }
+    offerMsg(reqTimeout_message)
+    
 class State_Off(State):
     def run(self):
         LOGGER.info("OFF")
@@ -60,13 +75,16 @@ class State_Ready(State):
     def next(self, input):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.request:
-            global LOCAL_ADDR, GSN_ADDR, USER_ID, REQUEST_SEQ
+            global LOCAL_ADDR, GSN_ADDR, USER_ID, REQUEST_SEQ, WAITING_REQ_LIST, LAST_REQ, WATCHDOG
             # TODO: send a request to GSN
             LOGGER.info("send user request: %s" % input)
+            REQUEST_SEQ = REQUEST_SEQ + 1
+            requestId = USER_ID + str(REQUEST_SEQ)
+            
             request_message = {
                                "SM" : "GSN_SM",
                                "action" : "recvUserReq",
-                               "requestId" : USER_ID + str(REQUEST_SEQ),
+                               "requestId" : requestId,
                                "userId" : USER_ID,
                                "route" : input["route"],
                                "direction" : input["direction"],
@@ -75,11 +93,20 @@ class State_Ready(State):
                                "userIP" : LOCAL_ADDR.ip,
                                "userPort" : LOCAL_ADDR.port
                                }
+            
+            LAST_REQ = request_message
+
             # TODO: TEST ONLY; gsn should be modified
             MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, request_message)
+            WAITING_REQ_LIST.append(requestId)
+            
+            WATCHDOG.startWatchdog()
+            
             return UserSM.Req_Waiting
         elif action == UserAction.turnOff:
             # TODO: do something to shut-down
+            global WATCHDOG
+            WATCHDOG.stopWatchdog()
             return UserSM.Off
         else:
             # for other illegal action
@@ -97,15 +124,27 @@ class State_Req_Waiting(State):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.recvRes:
             # TODO: return response to GUI
-            global RESPONSE_QUE
-            LOGGER.info("receive response from RSN")
-            RESPONSE_QUE.append(input)
+            global RESPONSE_QUE, WAITING_REQ_LIST, WATCHDOG
+            LOGGER.info("receive response from RSN %s" % input)
+            
+            WATCHDOG.stopWatchdog()
+
+            if str(input["original"]["requestId"]) in WAITING_REQ_LIST:
+                RESPONSE_QUE.append(input)
+                
             return UserSM.Ready
-        elif action == UserAction.timeout:
-            # TODO: re-send request if under threshold
+        elif action == UserAction.reqTimeout:
+            # TODO: re-send request if over threshold
+            global LAST_REQ, WATCHDOG
+            
+            MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, LAST_REQ)
+            
+            WATCHDOG.petWatchdog()
             return UserSM.Req_Waiting
         elif action == UserAction.turnOff:
             # TODO: do something to shut-down
+            global WATCHDOG
+            WATCHDOG.stopWatchdog()
             return UserSM.Off
         else:
             # for other illegal action
@@ -129,8 +168,10 @@ class UserSM(StateMachine):
         return self.currentState
 
 def initialize():
-    global USER_SM
+    global USER_SM, WATCHDOG
     USER_SM = UserSM()
+    WATCHDOG = Watchdog(15, watchdogFunc)
+
 
 def offerMsg(message):
     global USER_SM

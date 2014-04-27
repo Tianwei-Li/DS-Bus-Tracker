@@ -93,14 +93,28 @@ class State_Ready(State):
         action = map(GSNAction.GSNAction, [input["action"]])[0]
         if action == GSNAction.recvUserReq:
             # TODO: forward user request to responding RSN
-            LOGGER.info("forward user request to RSN")
-            rsnAddr = getRSNByName(input["route"])["rsnAddr"]   # TODO: check if empty
-            request_message = {
-                               "SM" : "RSN_SM",
-                               "action" : "recvLocReq",
-                               "original" : input
-                               }
-            MessagePasser.directSend(rsnAddr.ip, rsnAddr.port, request_message)
+            LOGGER.info("receive user request")
+            rsn = getRSNByName(input["route"])
+            
+            if rsn != None:
+                LOGGER.info("forward user request to RSN")
+                rsnAddr = rsn["rsnAddr"]
+                request_message = {
+                                   "SM" : "RSN_SM",
+                                   "action" : "recvLocReq",
+                                   "original" : input
+                                   }
+                MessagePasser.directSend(rsnAddr.ip, rsnAddr.port, request_message)
+            else:
+                LOGGER.info("no rsn running")
+                response_message = {
+                                    "SM" : "USER_SM",
+                                    "action" : "recvRes",
+                                    "location" : None, 
+                                    "busId" : None,
+                                    "original" : input
+                                    }
+                MessagePasser.directSend(input["userIP"], input["userPort"], response_message)
             
             return GSNSM.Ready
         
