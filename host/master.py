@@ -342,7 +342,8 @@ def updateJsonFile():
             
             locationFile = open("../visualization/locList.txt", "w")
             for elm in NODES:
-                locationFile.write(elm["name"] + " " + elm["x"] + " " + elm["y"] + "\n")
+                if elm["type"] == "DRIVER" or elm["type"] == "RSN":
+                    locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
             locationFile.close()
             time.sleep(5)
             
