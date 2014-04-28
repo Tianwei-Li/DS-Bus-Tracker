@@ -412,13 +412,15 @@ def writeJsonFile():
             json.dump(DIC, outfile)
             outfile.close()
             
-            '''
+            
             locationFile = open("../visualization/locList.txt", "w")
             for elm in NODES:
-                if elm["type"] == "DRIVER" or elm["type"] == "RSN":
+                if elm["type"] != "USER":
                     locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
+                else:
+                    locationFile.write(elm["name"] + "\n")
             locationFile.close()
-            '''
+            
             time.sleep(5)
 
 '''
