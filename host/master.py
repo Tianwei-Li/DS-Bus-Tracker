@@ -283,7 +283,7 @@ def getNodeByName(name):
     
 def readRoutTable():
     global ROUTTABLE
-    json_data = open('coordinates.json')
+    json_data = open('../host/coordinates.json')
     ROUTTABLE = json.load(json_data)
 
 
@@ -425,8 +425,12 @@ def updateJsonFile():
                     locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
             locationFile.close()
             time.sleep(5)
-            
-    
+
+
+def djangoMain():
+    runServer(MASTER_IP, MASTER_PORT)
+    thread = threading.Thread(target=writeJsonFile, args = ())
+    thread.start()
     
     
 def main():

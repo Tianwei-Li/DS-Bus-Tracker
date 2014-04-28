@@ -1,0 +1,249 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>Live Bus Tracker</title>
+<style>
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+svg {
+  border: 1px solid black;
+  background: url("{% static "img/map_pit.png" %}");
+}
+
+
+.node {
+  fill: #000;
+}
+
+.node.gsn {
+  fill: #f00;
+}
+
+.node.rsn {
+  fill: #000;
+}
+
+.node.user {
+  fill: #000;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+.link {
+  stroke: #999;
+}
+
+</style>
+<body>
+<div id="panel" style="float:right; width: 250px;">
+
+<form action="bus_tracker/simulate/" method="post">  
+  <input type="submit" name="auto_run" value="Auto Run"><br>
+</form>
+
+</div>
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 1000,
+    height = 750;
+
+var fill = d3.scale.category20();
+
+var force = d3.layout.force()
+    .size([width, height])
+    .nodes([]) // initialize with no node
+    .linkDistance(100)
+    .charge(-200)
+    .on("tick", tick);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .on("mousedown", mousedown);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+//Draw the GSN area
+var gsnArea = svg.append("rect")
+.attr("x", 380)
+.attr("y", 0)
+.attr("width", 220)
+.attr("height", 40)
+.style("fill", "#fff");
+
+var nodes = force.nodes(),
+    links = force.links(),
+    node = svg.selectAll(".node"),
+    link = svg.selectAll(".link");
+
+var jsonNodes = force.nodes();
+var jsonLinks = force.links();
+
+var count = 0;
+
+function mousedown() {
+  restart();
+  
+  // log mouse click coordinates, uncomment to enable
+/*
+  d3.select("#log")
+    .append("span")
+    .html(count + "," + d3.mouse(this)[0] + "," + d3.mouse(this)[1]
+          + "<br/>");
+  count++;
+*/
+}
+
+function tick() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+
+  // update node icon
+  node.select("image").attr("xlink:href", function(d) {
+        if(d.type == "gsn")
+          return "{% static "img/iconGSN.png"%}";
+        else if (d.type == "rsn")
+          return "{% static "img/iconRSN.png"%}";
+        else if (d.type == "user")
+          return "{% static "img/iconUser.png"%}";
+        else
+          return "{% static "img/circle.png" %}";
+      });
+
+  node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+}
+
+function restart() {
+    // read file
+    d3.json("{% static "graph.json" %}", function(error, json) {
+      jsonNodes = json.nodes;
+      jsonLinks = json.links;
+    });
+
+    // add new nodes
+    jsonNodes.forEach( function(d) {
+      var nodeIndex = d3.keys(nodes).indexOf("" + d.index);
+      if(nodeIndex == -1) {
+//        console.log("add node with index: " + d.index);
+        n = nodes.push(d);
+      } else if(d.fixed == "true") {
+        // update coordinates
+        nodes[nodeIndex].fixed = "true";
+        nodes[nodeIndex].x = d.x;
+        nodes[nodeIndex].y = d.y;
+        nodes[nodeIndex].px = d.x;
+        nodes[nodeIndex].py = d.y;
+
+        // update type
+        nodes[nodeIndex].type = d.type;
+
+        tick();
+      }
+    });
+
+    // remove old nodes
+    nodes.forEach( function(d) {
+      if(d3.keys(jsonNodes).indexOf("" + d.index) == -1) {
+//        console.log("remove node with index: " + d.index);
+        n = nodes.splice(d.index);
+      }
+    });
+
+    // add new links
+    jsonLinks.forEach( function(d) {
+      var linkIndex = d3.keys(links).indexOf("" + d.index);
+      if(linkIndex == -1) {
+//        console.log("add link with index: " + d.index);
+        l = links.push(d);
+      } else {
+        // update links
+        if (links[linkIndex].source.index != d.source || 
+            links[linkIndex].target.index != d.target) {
+          links[linkIndex].source = d.source;
+          links[linkIndex].target = d.target;
+        }
+
+        tick();
+      }
+    });
+
+    // remove old links
+    links.forEach( function(d) {
+      if(d3.keys(jsonLinks).indexOf("" + d.index) == -1) {
+//        console.log("remove link with index: " + d.index);
+        l = links.splice(d.index);
+      }
+    });
+
+    // update links
+    link = link.data(links, function(d) { 
+        return d.index;
+    });
+
+    link.exit().remove();
+
+    link.enter().insert("line", ".node")
+      .attr("class", "link");
+
+    // update nodes
+    node = node.data(nodes, function(d) { 
+        return d.index;
+    });
+
+    node.exit().remove();
+
+    var nn = node.enter().append("g")
+      .attr("class", "node")
+      .attr("class", function(d) { return "node " + d.type; })
+      .attr("r", 5);
+
+    nn.append("image")
+      .attr("xlink:href", function(d) {
+        if(d.type == "gsn")
+          return "{% static "img/iconGSN.png"%}";
+        else if (d.type == "rsn")
+          return "{% static "img/iconRSN.png"%}";
+        else if (d.type == "user")
+          return "{% static "img/iconUser.png"%}";
+        else
+          return "{% static "img/circle.png" %}";
+      })
+      .attr("x", -8)
+      .attr("y", -8)
+      .attr("width", 16)
+      .attr("height", 16);
+
+    nn.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name });
+
+    force.start();
+}
+
+restart();
+
+// sets interval graph gets updated (1sec = 1000ms)
+setInterval(restart, 1000 * 2);
+
+</script>
+
