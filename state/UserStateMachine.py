@@ -27,6 +27,9 @@ USER_ID = None
 REQUEST_SEQ =0
 
 LAST_REQ = None
+LAST_RESPONSE = None
+ARRIVE_TIME = -1
+IS_REPORTED = False
 
 WAITING_REQ_LIST = []
 RESPONSE_QUE = collections.deque()
@@ -75,7 +78,7 @@ class State_Ready(State):
     def next(self, input):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.request:
-            global LOCAL_ADDR, GSN_ADDR, USER_ID, REQUEST_SEQ, WAITING_REQ_LIST, LAST_REQ, WATCHDOG
+            global LOCAL_ADDR, GSN_ADDR, USER_ID, REQUEST_SEQ, WAITING_REQ_LIST, LAST_REQ, WATCHDOG, LAST_RESPONSE, IS_REPORTED
             # TODO: send a request to GSN
             LOGGER.info("send user request: %s" % input)
             REQUEST_SEQ = REQUEST_SEQ + 1
@@ -95,6 +98,8 @@ class State_Ready(State):
                                }
             
             LAST_REQ = request_message
+            LAST_RESPONSE = None
+            IS_REPORTED = False
 
             # TODO: TEST ONLY; gsn should be modified
             MessagePasser.directSend(GSN_ADDR.ip, GSN_ADDR.port, request_message)
@@ -125,13 +130,22 @@ class State_Req_Waiting(State):
         action = map(UserAction.UserAction, [input["action"]])[0]
         if action == UserAction.recvRes:
             # TODO: return response to GUI
-            global RESPONSE_QUE, WAITING_REQ_LIST, WATCHDOG
+            global RESPONSE_QUE, WAITING_REQ_LIST, WATCHDOG, LAST_RESPONSE, LAST_REQ, ARRIVE_TIME
             LOGGER.info("receive response from RSN %s" % input)
             
             WATCHDOG.stopWatchdog()
 
             if str(input["original"]["requestId"]) in WAITING_REQ_LIST:
                 RESPONSE_QUE.append(input)
+                # if the last res is matched with last req, calculate arrive time
+                if input["original"]["requestId"] == LAST_REQ["requestId"]:
+                    if input["location"] == None:
+                        diff = -1
+                    else:
+                        diff = int(LAST_REQ["location"]) - int(input["location"])
+                    ARRIVE_TIME = diff
+                    LAST_RESPONSE = input
+                    IS_REPORTED = False
                 
             return UserSM.Ready
         elif action == UserAction.reqTimeout:

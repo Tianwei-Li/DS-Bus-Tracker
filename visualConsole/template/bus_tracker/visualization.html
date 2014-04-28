@@ -4,6 +4,7 @@
 
 <meta charset="utf-8">
 <title>Live Bus Tracker</title>
+
 <style>
 
 rect {
@@ -43,36 +44,64 @@ svg {
   stroke-width: 1.5px;
 }
 
+
 </style>
+
+
 <body>
-<div id="panel" style="float:right; width: 450px;">
+<div id="panel" class="panel panel-info" style="float:right; width: 350px; margin-right:20px;">
+  <div class="panel-heading"><b style="font-size: 20px" >Control Panel</b></div>
 
-<table width="450">
-  <tr>
-    <td align="middle">
-      <h3>Control Panel</h3>
-    </td>
-  </tr>
-  <tr>
-    <td align="middle">
-      <form action="simulate/" method="post">  
-        <input type="submit" name="auto_run" value="Auto Run", style="height:30px; width:100px"><br>
-      </form>
-      <br>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <textarea readonly rows="35" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
-      </textarea>
+  <div class="panel-body">
+    <table width="350">
+      <tr>
+        <td align="middle">
+          <h3>Control Panel</h3>
+        </td>
+      </tr>
+      <tr>
+        <form action="simulate/" method="post">  
+          <td align="middle">
+          <!--  auto run button -->
+            <input type="submit" name="auto_run" value="Auto Run" class="btn btn-success" style="width:120px"><br>
+        </form>
+        <br>
+      </tr>
+      <tr>
+          
+          <form action="simulate/" method="post">  
+          <td align="middle">
+            <input type="submit" name="launch_simulator" value="Launch Simulator", class="btn btn-primary"><br>
+          </td>
+        </form>
+      </tr>
+      <tr>
+        <td align="middle">
+          <h3>Info</h3>
+        </td>
+      </tr>
+      <tr>
+        <td align="middle">
+          <textarea readonly id="run_info" rows="23" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
+          </textarea>
 
-    </td>
-  </tr>
-</table>
-<br>
+        </td>
+      </tr>
+    </table>
+  </div>
+
 
 
 </div>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -131,6 +160,15 @@ function mousedown() {
 */
 }
 
+function loadInfoFileToTextArea()
+{
+  var xmlhttp = new XMLHttpRequest(); 
+  xmlhttp.open("GET","{% static "locList.txt" %}",false);
+  xmlhttp.send();
+  var value = xmlhttp.responseText;
+  document.getElementById("run_info").value=value;
+}
+
 function tick() {
   link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -156,6 +194,7 @@ function tick() {
 }
 
 function restart() {
+    loadInfoFileToTextArea()
     // read file
     d3.json("{% static "graph.json" %}", function(error, json) {
       jsonNodes = json.nodes;

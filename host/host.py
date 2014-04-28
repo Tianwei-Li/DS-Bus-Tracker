@@ -137,6 +137,9 @@ def state():
     global DISPATCHERMAP, LOCALNAME
     
     if "RSN_SM" in DISPATCHERMAP:
+        if DISPATCHERMAP["RSN_SM"].state() != str(RSNStateMachine.RSN_SM.Ready):
+            return None
+       
         state = {}
         state["SM"] = "RSN_SM"
         state["rsnId"] = DISPATCHERMAP["RSN_SM"].RSN_ID
@@ -147,7 +150,26 @@ def state():
         state["BUS_TABLE"] = DISPATCHERMAP["RSN_SM"].busTable()
         state["location"] = Location.getLocation()
         return state
-    else:
+    elif "USER_SM" in DISPATCHERMAP:
+        user_sm = DISPATCHERMAP["USER_SM"]
+        if user_sm.state() != str(UserStateMachine.USER_SM.Ready) or \
+            user_sm.IS_REPORTED == True or \
+            user_sm.LAST_RESPONSE == None or \
+            user_sm.LAST_REQ == None or \
+            user_sm.LAST_REQ["requestId"] != user_sm.LAST_RESPONSE["original"]["requestId"]:
+            return None
+        
+        state = {}
+        state["SM"] = "USER_SM"
+        state["userId"] = user_sm.USER_ID
+        state["localName"] = LOCALNAME
+        state["state"] = user_sm.state()
+        state["query"] = user_sm.LAST_REQ
+        state["response"] = user_sm.LAST_RESPONSE
+        state["arriveTime"] = user_sm.ARRIVE_TIME
+        user_sm.IS_REPORTED = True
+        return state
+        
         return None
 
 # Test Only

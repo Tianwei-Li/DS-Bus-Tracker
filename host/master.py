@@ -412,7 +412,6 @@ def writeJsonFile():
             json.dump(DIC, outfile)
             outfile.close()
             
-            
             locationFile = open("../visualConsole/static/locList.txt", "w")
             for elm in NODES:
                 if elm["type"] != "USER":
