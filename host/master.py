@@ -34,6 +34,7 @@ LINKS = None
 DIC = None
 BUSCNT = None
 ROUTTABLE = None
+ROUTNODES = None
 
 MSG_QUEUE = collections.deque()
 
@@ -301,8 +302,8 @@ def getIdxByName(name):
     return 0
     
 def writeJsonFile():
-    global NODES, LINKS, DIC
-    
+    global NODES, LINKS, DIC, ROUTNODES
+    ROUTNODES = {}
     '''
     dic = {}
     dic["index"] = len(NODES)
@@ -335,12 +336,6 @@ def writeJsonFile():
         
             NODES.append(dic)
     
-            link_dic = {}
-            link_dic["index"] = len(LINKS)
-            link_dic["source"] = 0
-            link_dic["target"] = len(NODES) - 1
-            LINKS.append(link_dic)
-    
             dic = {}
             dic["index"] = len(NODES)
             dic["name"] = "qianmao"
@@ -354,9 +349,13 @@ def writeJsonFile():
             LINKS.append(link_dic)
             
             
+            
+            # get node from message
             command = MSG_QUEUE.popleft()
             rsn_busId = command["busId"]
             bus_table = command["BUS_TABLE"]
+            route = command["route"]
+            ROUTNODES[route] = []
             
             rsn_data = bus_table.get(rsn_busId)
             dic = {}
@@ -365,15 +364,9 @@ def writeJsonFile():
             dic["type"] = "RSN"
               
             dic["fixed"] = "true"
-            dic["x"] = ROUTTABLE[command["route"]][rsn_data["location"]]["x"]
-            dic["y"] = ROUTTABLE[command["route"]][rsn_data["location"]]["y"]
-            NODES.append(dic)
-            
-            link_dic = {}
-            link_dic["index"] = len(LINKS)
-            link_dic["source"] = 0
-            link_dic["target"] = len(NODES) - 1
-            LINKS.append(link_dic)
+            dic["x"] = ROUTTABLE[route][rsn_data["location"]]["x"]
+            dic["y"] = ROUTTABLE[route][rsn_data["location"]]["y"]
+            ROUTNODES[route].append(dic)
             
             for item in bus_table.items():
                 if item[0] != rsn_busId:
@@ -382,16 +375,37 @@ def writeJsonFile():
                     dic["name"] = item[0]
                     dic["type"] = "DRIVER" 
                     dic["fixed"] = "true"
-                    dic["x"] = ROUTTABLE[command["route"]][item[1]["location"]]["x"]
-                    dic["y"] = ROUTTABLE[command["route"]][item[1]["location"]]["y"]
-                    NODES.append(dic)
+                    dic["x"] = ROUTTABLE[route][item[1]["location"]]["x"]
+                    dic["y"] = ROUTTABLE[route][item[1]["location"]]["y"]
+                    ROUTNODES[route].append(dic)
                 
-                    link_dic = {}
-                    link_dic["index"] = len(LINKS)
-                    link_dic["source"] = getIdxByName(rsn_busId)
+            
+            
+            for busLine in ROUTNODES.items():
+                busList = busLine[1]
+                dic = busList[0]
+                dic["index"] = len(NODES)
+                NODES.append(dic)
                 
-                    link_dic["target"] = len(NODES) - 1
-                    LINKS.append(link_dic)
+                link_dic = {}
+                link_dic["index"] = len(LINKS)
+                link_dic["source"] = 0
+                link_dic["target"] = len(NODES) - 1
+                LINKS.append(link_dic)
+                
+                idx = 0
+                for dic in busList:
+                    if idx != 0:
+                        dic["index"] = len(NODES)
+                        NODES.append(dic)
+                        
+                        link_dic = {}
+                        link_dic["index"] = len(LINKS)
+                        link_dic["source"] = getIdxByName(busList[0]["name"])
+                
+                        link_dic["target"] = len(NODES) - 1
+                        LINKS.append(link_dic)
+                    idx = idx + 1
                 
                     
             outfile = open("../visualization/graph.json", "w")
@@ -407,7 +421,7 @@ def writeJsonFile():
             '''
             time.sleep(5)
 
-
+'''
 def updateJsonFile():
     
     while True:
@@ -425,7 +439,7 @@ def updateJsonFile():
                     locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
             locationFile.close()
             time.sleep(5)
-            
+'''         
     
     
     
