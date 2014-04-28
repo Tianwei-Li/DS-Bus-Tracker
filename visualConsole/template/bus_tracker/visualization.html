@@ -39,16 +39,38 @@ svg {
 }
 
 .link {
-  stroke: #999;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
 </style>
 <body>
-<div id="panel" style="float:right; width: 250px;">
+<div id="panel" style="float:right; width: 450px;">
 
-<form action="bus_tracker/simulate/" method="post">  
-  <input type="submit" name="auto_run" value="Auto Run"><br>
-</form>
+<table width="450">
+  <tr>
+    <td align="middle">
+      <h3>Control Panel</h3>
+    </td>
+  </tr>
+  <tr>
+    <td align="middle">
+      <form action="simulate/" method="post">  
+        <input type="submit" name="auto_run" value="Auto Run", style="height:30px; width:100px"><br>
+      </form>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <textarea readonly rows="35" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
+      </textarea>
+
+    </td>
+  </tr>
+</table>
+<br>
+
 
 </div>
 
@@ -78,13 +100,14 @@ svg.append("rect")
     .attr("height", height);
 
 //Draw the GSN area
+/*
 var gsnArea = svg.append("rect")
 .attr("x", 380)
 .attr("y", 0)
 .attr("width", 220)
 .attr("height", 40)
 .style("fill", "#fff");
-
+*/
 var nodes = force.nodes(),
     links = force.links(),
     node = svg.selectAll(".node"),
@@ -119,11 +142,11 @@ function tick() {
 
   // update node icon
   node.select("image").attr("xlink:href", function(d) {
-        if(d.type == "gsn")
+        if(d.type == "GSN")
           return "{% static "img/iconGSN.png"%}";
-        else if (d.type == "rsn")
+        else if (d.type == "RSN")
           return "{% static "img/iconRSN.png"%}";
-        else if (d.type == "user")
+        else if (d.type == "USER")
           return "{% static "img/iconUser.png"%}";
         else
           return "{% static "img/circle.png" %}";
@@ -218,11 +241,11 @@ function restart() {
 
     nn.append("image")
       .attr("xlink:href", function(d) {
-        if(d.type == "gsn")
+        if(d.type == "GSN")
           return "{% static "img/iconGSN.png"%}";
-        else if (d.type == "rsn")
+        else if (d.type == "RSN")
           return "{% static "img/iconRSN.png"%}";
-        else if (d.type == "user")
+        else if (d.type == "USER")
           return "{% static "img/iconUser.png"%}";
         else
           return "{% static "img/circle.png" %}";
@@ -235,6 +258,9 @@ function restart() {
     nn.append("text")
       .attr("dx", 12)
       .attr("dy", ".35em")
+      .style("fill", "#8F008F")
+      .style("font-size","12px")
+      .style("font-weight", "bold")
       .text(function(d) { return d.name });
 
     force.start();

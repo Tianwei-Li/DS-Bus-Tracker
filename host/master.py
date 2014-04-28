@@ -331,8 +331,8 @@ def writeJsonFile():
             dic["name"] = "GSN_1"
             dic["type"] = "GSN"
             dic["fixed"] = "true"
-            dic["x"] = 480
-            dic["y"] = 40
+            dic["x"] = 420
+            dic["y"] = 390
         
             NODES.append(dic)
     
@@ -408,12 +408,12 @@ def writeJsonFile():
                     idx = idx + 1
                 
                     
-            outfile = open("../visualization/graph.json", "w")
+            outfile = open("../visualConsole/static/graph.json", "w")
             json.dump(DIC, outfile)
             outfile.close()
             
             
-            locationFile = open("../visualization/locList.txt", "w")
+            locationFile = open("../visualConsole/static/locList.txt", "w")
             for elm in NODES:
                 if elm["type"] != "USER":
                     locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
@@ -444,11 +444,65 @@ def updateJsonFile():
 '''
 
 def djangoMain():
+    readRoutTable()
     runServer(MASTER_IP, MASTER_PORT)
     thread = threading.Thread(target=writeJsonFile, args = ())
     thread.start()
+    
+    # start processes
+    auto_run()
+    
 
+def auto_run():
+    global CONF
+    file = open("../feedFile.txt", "r")
+    
+    for line in file:
+        # skip blank lines
+        if not line.strip():
+            continue
 
+        # ignore comment
+        if line.startswith("#"):
+            continue
+        
+        # print line
+        line = line.rstrip()
+        if line.startswith("CONF"):
+            tokens = line.split(' ')
+            CONF[tokens[1]] = {"IP" : tokens[2], "Port" : tokens[3]}
+                
+    file.close()
+    
+    print "LAUNCHING ALL PROCESSES"
+    for player in CONF:
+        addr = CONF[player]
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+
+    sleep(5)
+    
+    # send orders
+    print "SENDING COMMANDS"
+    file = open("../feedFile.txt", "r")
+    for line in file:
+        # skip blank lines
+        if not line.strip():
+            continue
+
+        # ignore comment
+        if line.startswith("#"):
+            continue
+        
+        # print line
+        if line.startswith("CONF") == False:
+            tokens = line.split(' ', 1)
+            addr = CONF[tokens[0]]
+            message = eval(tokens[1])
+            #if (message["action"] == "initialize"):
+            #    self.writeJsonFile(message["localName"], message["role"], "71A")
+            ip = addr["IP"]
+            port = int(addr["Port"])
+            TCPComm.send(ip, port, message)
     
 def main():
     readRoutTable()

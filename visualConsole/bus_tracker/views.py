@@ -1,6 +1,5 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from polls.models import Poll, Choice
 from django.template import Context, loader, RequestContext
 from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -23,8 +22,7 @@ def simulate(request):
 	if 'auto_run' in request.POST:
 		# launch master
 		master.djangoMain()
-		master.setupSim()
-		
+
 	return render_to_response('bus_tracker/visualization.html', {})
 
 
