@@ -67,10 +67,10 @@ def reporterThread():
     
     while True:
         state = host.state()
-        if state != None and state["state"] == str(RSNStateMachine.RSN_SM.Ready):
+        if state != None:
             LOGGER.info("report state: %s" % state)
             TCPComm.send(MASTER_IP, MASTER_PORT, state)
-        sleep(5)
+        sleep(2)
 
 def updateLocThread():
     global IS_BUS_START

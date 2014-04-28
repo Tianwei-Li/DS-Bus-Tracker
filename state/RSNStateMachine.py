@@ -199,7 +199,7 @@ class State_Ready(State):
                 bus = BUS_TABLE[key]
                 if (int(bus["last_update"]) >= int(LOC_REQ_NO) - 1) and (int(bus["last_update"]) <= int(LOC_REQ_NO)):
                     distance = int(input["original"]["location"]) - int(bus["location"])
-                    if nearest_dist < 0 or distance < nearest_dist:
+                    if (nearest_dist < 0 or distance < nearest_dist) and distance >= 0:
                         nearest_dist = distance
                         nearest_bus = bus
                         nearest_loc = bus["location"]

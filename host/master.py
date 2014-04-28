@@ -283,9 +283,6 @@ def writeJsonFile():
                 # message from user
                 parseUserMsg(command)
                 
-            
-            
-            
             #time.sleep(5)
 
 
