@@ -35,6 +35,7 @@ DIC = None
 BUSCNT = None
 ROUTTABLE = None
 ROUTNODES = None
+ISINIT = 0
 
 MSG_QUEUE = collections.deque()
 
@@ -63,144 +64,6 @@ def runServer(ip, port):
     server_thread.start()
 
 class Application(Frame):
-        
-    '''    
-    def newUser(self):
-        name = self.userName.get()
-        ip = self.userIP.get()
-        port = self.userPort.get()
-        routNo = self.queryRout.get()
-        #routNo = "ttt"
-        interval = "50"
-        #interval = self.timeInter.get()
-        print "new user launched!"
-        #os.system("python gui_user.py " + ip + " " + port + " " + name + " " + routNo + " " + interval + " &")
-        
-        self.writeJsonFile(name, "USER", "")
-    
-    def newGSN(self):   
-        name = self.gsnName.get()
-        ip = self.gsnIP.get()
-        port = self.gsnPort.get()
-        print "new GSN launched!"  
-        #print name + " " + ip + " " + port
-        #os.system("python gui_gsn.py " + ip + " " + port + " " + name + " &")
-        
-        self.writeJsonFile(name, "gsn", "")
-        
-    def newDriver(self):  
-        name = self.driverName.get() 
-        ip = self.driverIP.get()
-        port = self.driverPort.get()
-        routNo = self.routeNo.get()
-        #routNo = "61A"
-        print "new driver launched!"  
-        #os.system("python gui_driver.py " + ip + " " + port + " " + name + " " + routNo + " &")
-        
-        if BUSCNT.has_key(routNo) == True:
-            self.writeJsonFile(name, "DRIVER", routNo)
-            BUSCNT[routNo] += 1
-            
-        else:
-            self.writeJsonFile("RSN-"+routNo, "RSN", routNo)
-            BUSCNT[routNo] = 1
-            #for idx in range(29):
-            #    self.updateJsonFile("RSN-"+routNo, "RSN", routNo, idx)
-            #    time.sleep(2)
- 
-    def createUser(self, col):
-        Label(self, text="name:").grid(row = 1, column = col)
-        defaultName = StringVar()
-        defaultName.set("alice")
-        self.userName = Entry(self, textvariable = defaultName)
-        self.userName.grid(row = 1, column = col+1)
-        
-        Label(self, text="IP:").grid(row = 2, column = col)
-        defaultIP = StringVar()
-        defaultIP.set("127.0.0.1")        
-        self.userIP = Entry(self, textvariable = defaultIP)
-        self.userIP.grid(row = 2, column = col+1)
-        
-        Label(self, text="Port:").grid(row = 3, column = col)
-        defaultPort = StringVar()
-        defaultPort.set("30000")
-        self.userPort = Entry(self, textvariable = defaultPort)
-        self.userPort.grid(row = 3, column = col+1)  
-        
-        
-        Label(self, text="Route:").grid(row = 4, column = col)
-        defaultRoute = StringVar()
-        defaultRoute.set("61C")
-        self.queryRout = Entry(self, textvariable = defaultRoute)
-        self.queryRout.grid(row = 4, column = col+1) 
-        
-        
-        Label(self, text="Query Interval:").grid(row = 5, column = col)
-        defaultInterv = StringVar()
-        defaultInterv.set("10 s")
-        self.timeInter = Entry(self, textvariable = defaultInterv)
-        self.timeInter.grid(row = 5, column = col+1) 
-        
-        self.newUserBtn = Button(self)
-        self.newUserBtn["text"] = "launch user"
-        self.newUserBtn["command"] = self.newUser 
-        self.newUserBtn.grid(row = 6, column = col+1)   
-        
-    def createGSN(self, col):
-        Label(self, text="name:").grid(row = 1, column = col)
-        defaultName = StringVar()
-        defaultName.set("gsn")
-        self.gsnName = Entry(self, textvariable = defaultName)
-        self.gsnName.grid(row = 1, column = col+1)
-        
-        Label(self, text="IP:").grid(row = 2, column = col)
-        defaultIP = StringVar()
-        defaultIP.set("127.0.0.1")
-        self.gsnIP = Entry(self, textvariable = defaultIP)
-        self.gsnIP.grid(row = 2, column = col+1)
-        
-        Label(self, text="Port:").grid(row = 3, column = col)
-        defaultPort = StringVar()
-        defaultPort.set("40000")
-        self.gsnPort = Entry(self, textvariable = defaultPort)
-        self.gsnPort.grid(row = 3, column = col+1) 
-           
-        self.newGSNBtn = Button(self)   
-        self.newGSNBtn["text"] = "launch GSN"  
-        self.newGSNBtn["command"] =  self.newGSN   
-        self.newGSNBtn.grid(row = 6, column = col+1)  
-        
-    def createDriv(self, col): 
-        Label(self, text="name:").grid(row = 1, column = col)
-        defaultName = StringVar()
-        defaultName.set("driver1")
-        self.driverName = Entry(self, textvariable = defaultName)
-        self.driverName.grid(row = 1, column = col+1)
-        
-        Label(self, text="IP:").grid(row = 2, column = col)
-        defaultIP = StringVar()
-        defaultIP.set("127.0.0.1")
-        self.driverIP = Entry(self, textvariable = defaultIP)
-        self.driverIP.grid(row = 2, column = col+1) 
-        
-        Label(self, text="Port:").grid(row = 3, column = col)
-        defaultPort = StringVar()  
-        defaultPort.set("41000")
-        self.driverPort = Entry(self, textvariable = defaultPort)
-        self.driverPort.grid(row = 3, column = col+1) 
-        
-        Label(self, text="Route:").grid(row = 4, column = col)
-        defaultRoute = StringVar()  
-        defaultRoute.set("61A")
-        self.routeNo = Entry(self, textvariable = defaultRoute)
-        self.routeNo.grid(row = 4, column = col+1) 
-        
-        self.newDriBtn = Button(self)   
-        self.newDriBtn["text"] = "launch Driver"  
-        #self.newGSNBtn["fg"]   = "red"  
-        self.newDriBtn["command"] =  self.newDriver   
-        self.newDriBtn.grid(row = 6, column = col+1)  
-    '''
     
     def setupSim(self):
         global CONF
@@ -251,12 +114,7 @@ class Application(Frame):
            
     def createWidgets(self):
         
-        
-        
         Label(self, text="").grid(row = 0)
-        #self.createUser(0)
-        #self.createGSN(2)
-        #self.createDriv(4)
         
         self.confBtn = Button(self)
         self.confBtn["text"] = "setup sim"
@@ -304,19 +162,6 @@ def getIdxByName(name):
 def writeJsonFile():
     global NODES, LINKS, DIC, ROUTNODES
     ROUTNODES = {}
-    '''
-    dic = {}
-    dic["index"] = len(NODES)
-    dic["name"] = "qianmao2"
-    dic["type"] = "USER"
-    NODES.append(dic)
-    
-    link_dic = {}
-    link_dic["index"] = len(LINKS)
-    link_dic["source"] = 0
-    link_dic["target"] = len(NODES) - 1
-    LINKS.append(link_dic)
-    '''
         
     while True:
         if MSG_QUEUE:
@@ -423,34 +268,41 @@ def writeJsonFile():
             
             time.sleep(5)
 
-'''
-def updateJsonFile():
-    
-    while True:
-        if MSG_QUEUE:
-            command = MSG_QUEUE.popleft()
-            for item in command.items():
-                updateNodePos(item[0], "71A", item[1])
-            outfile = open("../visualization/graph.json", "w")
-            json.dump(DIC, outfile)
-            outfile.close()
-            
-            locationFile = open("../visualization/locList.txt", "w")
-            for elm in NODES:
-                if elm["type"] == "DRIVER" or elm["type"] == "RSN":
-                    locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
-            locationFile.close()
-            time.sleep(5)
-'''
 
-def djangoMain():
+def initialize(masterIp, masterPort):
+    global ISINIT, MASTER_IP, MASTER_PORT
+    ISINIT = 1
+    MASTER_IP = masterIp
+    MASTER_PORT = masterPort
+    
     readRoutTable()
     runServer(MASTER_IP, MASTER_PORT)
     thread = threading.Thread(target=writeJsonFile, args = ())
     thread.start()
     
-    # start processes
-    auto_run()
+
+def isInitialized():
+    return ISINIT
+
+
+def launchSimulator(simulatorName, ip, port, message):
+    global CONF
+    CONF[simulatorName] = {"IP" : ip, "Port" : port}
+    
+    # launch simulator
+    os.system("python ../simulation/simulator.py " + ip + " " + str(port) + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+    
+    # send initialize command
+    TCPComm.send(ip, port, message)
+    
+
+def sendCmd(simulatorName, message):
+    addr = CONF[simulatorName]
+    msgDic = eval(message)
+    ip = addr["IP"]
+    port = int(addr["Port"])
+    TCPComm.send(ip, port, msgDic)
+
     
 
 def auto_run():
@@ -503,7 +355,18 @@ def auto_run():
             ip = addr["IP"]
             port = int(addr["Port"])
             TCPComm.send(ip, port, message)
+
+
+def djangoMain():
+    readRoutTable()
+    runServer(MASTER_IP, MASTER_PORT)
+    thread = threading.Thread(target=writeJsonFile, args = ())
+    thread.start()
     
+    # start processes
+    auto_run()
+    
+
 def main():
     readRoutTable()
     
