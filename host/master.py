@@ -266,7 +266,7 @@ def writeJsonFile():
                     locationFile.write(elm["name"] + "\n")
             locationFile.close()
             
-            time.sleep(5)
+            #time.sleep(5)
 
 
 def initialize(masterIp, masterPort):
