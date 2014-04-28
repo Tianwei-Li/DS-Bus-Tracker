@@ -152,12 +152,122 @@ def updateNodePos(name, busLine, idx):
         node["x"] = ROUTTABLE[busLine][idx]["x"]
         node["y"] = ROUTTABLE[busLine][idx]["y"]
 
+
 def getIdxByName(name):
     for i in range(len(NODES)):
         if NODES[i]["name"] == name:
             return NODES[i]["index"]
         
     return 0
+
+
+def parseDriverMsg(command):
+    NODES = []
+    LINKS = []
+    DIC = {}
+    DIC["nodes"] = NODES
+    DIC["links"] = LINKS
+    
+    dic = {}
+    dic["index"] = 0
+    dic["name"] = "GSN_1"
+    dic["type"] = "GSN"
+    dic["fixed"] = "true"
+    dic["x"] = 420
+    dic["y"] = 390
+        
+    NODES.append(dic)
+    
+    dic = {}
+    dic["index"] = len(NODES)
+    dic["name"] = "qianmao"
+    dic["type"] = "USER" 
+    NODES.append(dic)
+    
+    link_dic = {}
+    link_dic["index"] = len(LINKS)
+    link_dic["source"] = 0
+    link_dic["target"] = len(NODES) - 1
+    LINKS.append(link_dic)
+            
+   
+    rsn_busId = command["busId"]
+    bus_table = command["BUS_TABLE"]
+    route = command["route"]
+    ROUTNODES[route] = []
+            
+    rsn_data = bus_table.get(rsn_busId)
+    dic = {}
+    dic["index"] = len(NODES)
+    dic["name"] = rsn_busId
+    dic["type"] = "RSN"
+              
+    dic["fixed"] = "true"
+    dic["x"] = ROUTTABLE[route][rsn_data["location"]]["x"]
+    dic["y"] = ROUTTABLE[route][rsn_data["location"]]["y"]
+    ROUTNODES[route].append(dic)
+            
+    for item in bus_table.items():
+        if item[0] != rsn_busId:
+            dic = {}
+            dic["index"] = len(NODES)
+            dic["name"] = item[0]
+            dic["type"] = "DRIVER" 
+            dic["fixed"] = "true"
+            dic["x"] = ROUTTABLE[route][item[1]["location"]]["x"]
+            dic["y"] = ROUTTABLE[route][item[1]["location"]]["y"]
+            ROUTNODES[route].append(dic)
+                
+            
+            
+    for busLine in ROUTNODES.items():
+        busList = busLine[1]
+        dic = busList[0]
+        dic["index"] = len(NODES)
+        NODES.append(dic)
+                
+        link_dic = {}
+        link_dic["index"] = len(LINKS)
+        link_dic["source"] = 0
+        link_dic["target"] = len(NODES) - 1
+        LINKS.append(link_dic)
+                
+        idx = 0
+        for dic in busList:
+            if idx != 0:
+                dic["index"] = len(NODES)
+                NODES.append(dic)
+                        
+                link_dic = {}
+                link_dic["index"] = len(LINKS)
+                link_dic["source"] = getIdxByName(busList[0]["name"])
+                
+                link_dic["target"] = len(NODES) - 1
+                LINKS.append(link_dic)
+            idx = idx + 1
+                
+                    
+    outfile = open("../visualConsole/static/graph.json", "w")
+    json.dump(DIC, outfile)
+    outfile.close()
+            
+            
+    locationFile = open("../visualConsole/static/locList.txt", "w")
+    for elm in NODES:
+        if elm["type"] != "USER":
+            locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
+        else:
+            locationFile.write(elm["name"] + "\n")
+    locationFile.close()
+
+
+def parseUserMsg(command):
+    locationFile = open("../visualConsole/static/queryResult.txt", "w")
+    
+    locationFile.write(command["userId"] + " " + command["response"]["busId"] + " " + str(command["arriveTime"] * 5) + "\n")
+  
+    locationFile.close()
+    
     
 def writeJsonFile():
     global NODES, LINKS, DIC, ROUTNODES
@@ -165,106 +275,16 @@ def writeJsonFile():
         
     while True:
         if MSG_QUEUE:
-            NODES = []
-            LINKS = []
-            DIC = {}
-            DIC["nodes"] = NODES
-            DIC["links"] = LINKS
-    
-            dic = {}
-            dic["index"] = 0
-            dic["name"] = "GSN_1"
-            dic["type"] = "GSN"
-            dic["fixed"] = "true"
-            dic["x"] = 420
-            dic["y"] = 390
-        
-            NODES.append(dic)
-    
-            dic = {}
-            dic["index"] = len(NODES)
-            dic["name"] = "qianmao"
-            dic["type"] = "USER" 
-            NODES.append(dic)
-    
-            link_dic = {}
-            link_dic["index"] = len(LINKS)
-            link_dic["source"] = 0
-            link_dic["target"] = len(NODES) - 1
-            LINKS.append(link_dic)
-            
-            
-            
             # get node from message
             command = MSG_QUEUE.popleft()
-            rsn_busId = command["busId"]
-            bus_table = command["BUS_TABLE"]
-            route = command["route"]
-            ROUTNODES[route] = []
-            
-            rsn_data = bus_table.get(rsn_busId)
-            dic = {}
-            dic["index"] = len(NODES)
-            dic["name"] = rsn_busId
-            dic["type"] = "RSN"
-              
-            dic["fixed"] = "true"
-            dic["x"] = ROUTTABLE[route][rsn_data["location"]]["x"]
-            dic["y"] = ROUTTABLE[route][rsn_data["location"]]["y"]
-            ROUTNODES[route].append(dic)
-            
-            for item in bus_table.items():
-                if item[0] != rsn_busId:
-                    dic = {}
-                    dic["index"] = len(NODES)
-                    dic["name"] = item[0]
-                    dic["type"] = "DRIVER" 
-                    dic["fixed"] = "true"
-                    dic["x"] = ROUTTABLE[route][item[1]["location"]]["x"]
-                    dic["y"] = ROUTTABLE[route][item[1]["location"]]["y"]
-                    ROUTNODES[route].append(dic)
+            if command["SM"] == "RSN_SM":
+                parseDriverMsg(command)
+            else:
+                # message from user
+                parseUserMsg(command)
                 
             
             
-            for busLine in ROUTNODES.items():
-                busList = busLine[1]
-                dic = busList[0]
-                dic["index"] = len(NODES)
-                NODES.append(dic)
-                
-                link_dic = {}
-                link_dic["index"] = len(LINKS)
-                link_dic["source"] = 0
-                link_dic["target"] = len(NODES) - 1
-                LINKS.append(link_dic)
-                
-                idx = 0
-                for dic in busList:
-                    if idx != 0:
-                        dic["index"] = len(NODES)
-                        NODES.append(dic)
-                        
-                        link_dic = {}
-                        link_dic["index"] = len(LINKS)
-                        link_dic["source"] = getIdxByName(busList[0]["name"])
-                
-                        link_dic["target"] = len(NODES) - 1
-                        LINKS.append(link_dic)
-                    idx = idx + 1
-                
-                    
-            outfile = open("../visualConsole/static/graph.json", "w")
-            json.dump(DIC, outfile)
-            outfile.close()
-            
-            
-            locationFile = open("../visualConsole/static/locList.txt", "w")
-            for elm in NODES:
-                if elm["type"] != "USER":
-                    locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
-                else:
-                    locationFile.write(elm["name"] + "\n")
-            locationFile.close()
             
             #time.sleep(5)
 
@@ -368,10 +388,10 @@ def djangoMain():
     
 
 def main():
+    djangoMain()
+    '''
     readRoutTable()
-    
     global MSG_QUEUE, MASTER_IP, MASTER_PORT
-
 
     runServer(MASTER_IP, MASTER_PORT)
     thread = threading.Thread(target=writeJsonFile, args = ())
@@ -382,6 +402,7 @@ def main():
     app = Application(master=win)   
     app.mainloop()   
     #root.destroy()  
+    '''
     
 if __name__ == '__main__':
     main()
