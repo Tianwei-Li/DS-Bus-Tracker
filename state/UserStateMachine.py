@@ -147,6 +147,7 @@ class State_Req_Waiting(State):
                     LAST_RESPONSE = input
                     IS_REPORTED = False
                 
+            LOGGER.info("expected arrive time: %s" % str(ARRIVE_TIME))
             return UserSM.Ready
         elif action == UserAction.reqTimeout:
             # TODO: re-send request if over threshold

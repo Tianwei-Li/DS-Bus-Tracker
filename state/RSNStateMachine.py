@@ -201,7 +201,7 @@ class State_Ready(State):
                     distance = int(input["original"]["location"]) - int(bus["location"])
                     if (nearest_dist < 0 or distance < nearest_dist) and distance >= 0:
                         nearest_dist = distance
-                        nearest_bus = bus
+                        nearest_bus = key
                         nearest_loc = bus["location"]
             
             response_message = {
