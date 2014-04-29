@@ -255,10 +255,10 @@ def parseDriverMsg(command):
             
     locationFile = open("../visualConsole/static/locList.txt", "w")
     for elm in NODES:
-        if elm["type"] != "USER":
-            locationFile.write(elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
+        if elm["type"] == "USER" or elm["type"] == "GSN" or elm["type"] == "RSN":
+            locationFile.write(elm["type"] + ": " + elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n\n")
         else:
-            locationFile.write(elm["name"] + "\n")
+            locationFile.write("    " + elm["type"] + ": " + elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
     locationFile.close()
 
 
