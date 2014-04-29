@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<head>
 <meta charset="utf-8">
 <title>Live Bus Tracker</title>
 <style>
@@ -10,7 +11,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("map_pit.png");
+  background: url("img/map_pit.png");
 }
 
 .node {
@@ -38,13 +39,48 @@ svg {
   stroke: #999;
 }
 
+/* table styles */
+.row, .header, .cell { height: 18px; }
+.row, .header { clear: left; }
+.header { font-weight: bold; }
+.cell { float: left; overflow: hidden; white-space: nowrap; width: 100px; }
+.col-0 { width: 180px; }
+
+td, th  { border: 1px solid #aaf; padding: 1px 5px; width: 10em; }
+th      { background-color: #ccf; }
+input   { width: 100%; margin: 0; padding:0; border: 0; }
+table   { border-collapse: collapse; }
 </style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- TODO change to local copy -->
+<script src="divgrid.js" type="text/javascript"></script>
+
+<script src="jquery.min.js"></script>
+<script src="jquerycsvtotable-read-only/js/jquery.csvToTable.js"></script>
+<script src="jquerycsvtotable-read-only/js/jquery.tablesorter.min.js"></script>
+
+</head>
 <body>
-<div id="log" style="float:right; width: 250px;">
+
+<!--
+<div id="log" style="float:right; width: 280px;">
  Coordinate Click Log:<br/><br/>
  StopNumber,x,y<br/>
 </div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+-->
+
+<!--
+<div id="tables" style="float:right; width: 700px; border: 1px solid gray;">
+<h1>Tables</h1>
+<div id="table1" style=""></div>
+<div id="table2"></div>
+</div>
+-->
+
+<button onClick="showRoute(1)">R1</button>
+<button onClick="showRoute(2)">R2</button>
+<button onClick="showRoute(3)">R3</button>
+
 <script>
 
 var width = 1000,
@@ -54,7 +90,7 @@ var fill = d3.scale.category20();
 
 var force = d3.layout.force()
     .size([width, height])
-    .nodes([]) // initialize with no node
+    .nodes([]) // initialize with no nodes
     .linkDistance(100)
     .charge(-200)
     .on("tick", tick);
@@ -84,19 +120,153 @@ var nodes = force.nodes(),
 var jsonNodes = force.nodes();
 var jsonLinks = force.links();
 
+// log mouse click coordinates
 var count = 0;
+function coordinateLog(t) {
+  d3.select("#log")
+    .append("span")
+    .html('{"index": ' + count +', "x": ' + d3.mouse(t)[0] + ', "y": ' + d3.mouse(t)[1] + '},'
+          + "<br/>");
+  count++;
+}
+
+var visibleRoutes = [0,0,0];
+function showRoute(n) {
+if (n < 1 || n > 3)
+    return;
+var route, color = null;
+var route1 = [
+{"index": 0, "x": 136, "y": 414},
+{"index": 1, "x": 154, "y": 395},
+{"index": 2, "x": 171, "y": 382},
+{"index": 3, "x": 186, "y": 367},
+{"index": 4, "x": 210, "y": 353},
+{"index": 5, "x": 238, "y": 343},
+{"index": 6, "x": 262, "y": 322},
+{"index": 7, "x": 293, "y": 307},
+{"index": 8, "x": 320, "y": 296},
+{"index": 9, "x": 347, "y": 282},
+{"index": 10, "x": 365, "y": 301},
+{"index": 11, "x": 374, "y": 318},
+{"index": 12, "x": 399, "y": 317},
+{"index": 13, "x": 429, "y": 307},
+{"index": 14, "x": 460, "y": 295},
+{"index": 15, "x": 491, "y": 284},
+{"index": 16, "x": 513, "y": 276},
+{"index": 17, "x": 523, "y": 254},
+{"index": 18, "x": 550, "y": 266},
+{"index": 19, "x": 573, "y": 282},
+{"index": 20, "x": 592, "y": 300},
+{"index": 21, "x": 614, "y": 319},
+{"index": 22, "x": 630, "y": 295},
+{"index": 23, "x": 642, "y": 271},
+{"index": 24, "x": 652, "y": 248},
+{"index": 25, "x": 635, "y": 218},
+{"index": 26, "x": 635, "y": 184},
+{"index": 27, "x": 635, "y": 159},
+{"index": 28, "x": 640, "y": 116},
+{"index": 29, "x": 638, "y": 91}];
+
+var route2 = [
+{"index": 0, "x": 953, "y": 236},
+{"index": 1, "x": 927, "y": 255},
+{"index": 2, "x": 908, "y": 259},
+{"index": 3, "x": 888, "y": 262},
+{"index": 4, "x": 867, "y": 266},
+{"index": 5, "x": 847, "y": 262},
+{"index": 6, "x": 828, "y": 283},
+{"index": 7, "x": 810, "y": 299},
+{"index": 8, "x": 794, "y": 311},
+{"index": 9, "x": 769, "y": 317},
+{"index": 10, "x": 738, "y": 311},
+{"index": 11, "x": 731, "y": 338},
+{"index": 12, "x": 715, "y": 365},
+{"index": 13, "x": 703, "y": 401},
+{"index": 14, "x": 696, "y": 425},
+{"index": 15, "x": 705, "y": 455},
+{"index": 16, "x": 721, "y": 488},
+{"index": 17, "x": 734, "y": 519},
+{"index": 18, "x": 760, "y": 553},
+{"index": 19, "x": 787, "y": 582},
+{"index": 20, "x": 819, "y": 619},
+{"index": 21, "x": 824, "y": 641},
+{"index": 22, "x": 815, "y": 667},
+{"index": 23, "x": 795, "y": 691},
+{"index": 24, "x": 783, "y": 704},
+{"index": 25, "x": 752, "y": 678},
+{"index": 26, "x": 710, "y": 665},
+{"index": 27, "x": 661, "y": 662},
+{"index": 28, "x": 622, "y": 677},
+{"index": 29, "x": 570, "y": 721}];
+
+var route3 = [
+{"index": 0, "x": 38, "y": 15},
+{"index": 1, "x": 42, "y": 34},
+{"index": 2, "x": 45, "y": 56},
+{"index": 3, "x": 51, "y": 75},
+{"index": 4, "x": 58, "y": 97},
+{"index": 5, "x": 56, "y": 122},
+{"index": 6, "x": 57, "y": 145},
+{"index": 7, "x": 69, "y": 171},
+{"index": 8, "x": 82, "y": 194},
+{"index": 9, "x": 94, "y": 214},
+{"index": 10, "x": 102, "y": 235},
+{"index": 11, "x": 103, "y": 262},
+{"index": 12, "x": 108, "y": 289},
+{"index": 13, "x": 116, "y": 315},
+{"index": 14, "x": 130, "y": 340},
+{"index": 15, "x": 146, "y": 356},
+{"index": 16, "x": 159, "y": 375},
+{"index": 17, "x": 152, "y": 399},
+{"index": 18, "x": 143, "y": 422},
+{"index": 19, "x": 131, "y": 449},
+{"index": 20, "x": 126, "y": 476},
+{"index": 21, "x": 111, "y": 501},
+{"index": 22, "x": 131, "y": 513},
+{"index": 23, "x": 167, "y": 510},
+{"index": 24, "x": 200, "y": 509},
+{"index": 25, "x": 240, "y": 514},
+{"index": 26, "x": 271, "y": 520},
+{"index": 27, "x": 296, "y": 523},
+{"index": 28, "x": 319, "y": 545},
+{"index": 29, "x": 342, "y": 567}];
+
+// select data and color
+if (n == 1) {
+    route = route1;
+    color = "#485ef1";
+} else if (n == 2) {
+    route = route2;
+    color = "#d748f1";
+} else if (n == 3) {
+    route = route3;
+    color = "#48f1af";
+}
+
+  var lineFunction = d3.svg.line()
+                         .x(function(d) { console.log (d.x); return d.x; })
+                         .y(function(d) { console.log (d.y); return d.y; })
+                         .interpolate("basis");
+
+  if (visibleRoutes[n-1] == 0) {
+    // route not visible yet
+    var lineGraph = svg.append("path")
+                            .attr("d", lineFunction(route))
+                            .attr("stroke", color)
+                            .attr("stroke-width", 6)
+                            .attr("fill", "none")
+                            .attr("id", "route" + n);
+    visibleRoutes[n-1] = 1;
+  } else {
+    // remove route
+    svg.select("#route" + n).remove();
+    visibleRoutes[n-1] = 0;
+  }
+}
 
 function mousedown() {
   restart();
-  
-  // log mouse click coordinates, uncomment to enable
-/*
-  d3.select("#log")
-    .append("span")
-    .html(count + "," + d3.mouse(this)[0] + "," + d3.mouse(this)[1]
-          + "<br/>");
-  count++;
-*/
+  coordinateLog(this);
 }
 
 function tick() {
@@ -234,7 +404,7 @@ function restart() {
 restart();
 
 // sets interval graph gets updated (1sec = 1000ms)
-setInterval(restart, 1000 * 2);
+setInterval(restart, 1000 * 20);
 
 </script>
 
