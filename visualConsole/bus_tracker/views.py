@@ -37,7 +37,7 @@ def simulate(request):
 		localName = request.POST.get("localName")
 		id = request.POST.get("id")
 		simulator_ip = request.POST.get('simulator_ip')
-		simulator_port = request.POST.get('simulator_port')
+		simulator_port = int(request.POST.get('simulator_port'))
 		host_ip = request.POST.get('host_ip')
 		host_port = int(request.POST.get('host_port'))
 
