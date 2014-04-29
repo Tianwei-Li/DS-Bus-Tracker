@@ -162,6 +162,7 @@ def getIdxByName(name):
 
 
 def parseDriverMsg(command):
+    global NODES, LINKS, DIC
     NODES = []
     LINKS = []
     DIC = {}
@@ -264,13 +265,17 @@ def parseDriverMsg(command):
 def parseUserMsg(command):
     locationFile = open("../visualConsole/static/queryResult.txt", "w")
     
-    locationFile.write(command["userId"] + " " + command["response"]["busId"] + " " + str(command["arriveTime"] * 5) + "\n")
+    busId = command["response"]["busId"]
+    if busId == None:
+        busId = "None"
+    
+    locationFile.write(command["userId"] + " " + busId + " " + str(int(command["arriveTime"]) * 5) + "\n")
   
     locationFile.close()
     
     
 def writeJsonFile():
-    global NODES, LINKS, DIC, ROUTNODES
+    global ROUTNODES
     ROUTNODES = {}
         
     while True:
