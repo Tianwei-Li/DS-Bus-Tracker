@@ -331,6 +331,7 @@ def launchSimulator(simulatorName, ip, port, message):
     # launch simulator
     os.system("python ../simulation/simulator.py " + ip + " " + str(port) + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
     
+    sleep(5)
     # send initialize command
     TCPComm.send(ip, port, message)
     
@@ -340,10 +341,9 @@ def getSimulatorNames():
 
 def sendCmd(simulatorName, message):
     addr = CONF[simulatorName]
-    msgDic = eval(message)
     ip = addr["IP"]
     port = int(addr["Port"])
-    TCPComm.send(ip, port, msgDic)
+    TCPComm.send(ip, port, message)
 
     
 

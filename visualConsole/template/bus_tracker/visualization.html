@@ -93,6 +93,14 @@ svg {
                   </button>  
                 </td>
               </tr>
+              <tr><td><br></td></tr>
+              <tr>
+                <td align="middle">
+                  <button class="btn btn-info" data-toggle="modal" data-target="#send_command_modal" style="width:150px">
+                        Send Command
+                  </button>  
+                </td>
+              </tr>
             </table>
           </div>
         </div>
@@ -146,15 +154,18 @@ svg {
       <div class="modal-body">
         <form role="form" action="simulate/" method="post">
           <div class="form-group">
-            <label class="radio-inline">
-              <input type="radio" name="roleRadios" id="GSN" value="GSN">GSN
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="roleRadios" id="DRIVER" value="DRIVER" checked>Driver
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="roleRadios" id="USER" value="USER">User
-            </label>
+
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-danger">
+                <input type="radio" name="roleRadios" id="GSN" value="GSN">GSN
+              </label>
+              <label class="btn btn-warning">
+                <input type="radio" name="roleRadios" id="DRIVER" value="DRIVER">Driver
+              </label>
+              <label class="btn btn-success">
+                <input type="radio" name="roleRadios" id="USER" value="USER">User
+              </label>
+            </div>
           </div>
           <div class="form-group">
             <label for="simulator_name">Simulator Name</label>
@@ -170,12 +181,12 @@ svg {
           </div>
           <div class="form-group">
             <label for="ip">Simulator IP/PORT</label>
-            <input type="text" name="simulator_ip" class="form-inline" id="ip" placeholder="IP Address">
+            <input type="text" name="simulator_ip" class="form-inline" id="ip" value="127.0.0.1" placeholder="IP Address">
             <input type="number" name="simulator_port" class="form-inline" id="port" placeholder="Port Number">
           </div>
           <div class="form-group">
             <label for="ip">Role(Host) IP/PORT</label>
-            <input type="text" name="host_ip" class="form-inline" id="ip" placeholder="IP Address">
+            <input type="text" name="host_ip" class="form-inline" id="ip" value="127.0.0.1" placeholder="IP Address">
             <input type="number" name="host_port" class="form-inline" id="port" placeholder="Port Number">
           </div>
 
@@ -189,6 +200,119 @@ svg {
   </div>
 </div>
 
+
+
+<!-- pop out modal for send command -->
+<!-- Modal -->
+<div class="modal fade" id="send_command_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Send Command</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li><a href="#GSN" data-toggle="tab">GSN</a></li>
+          <li><a href="#Driver" data-toggle="tab">Driver</a></li>
+          <li class="active"><a href="#User" data-toggle="tab">User</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="GSN">
+            <!-- Form for GSN  -->
+            <form role="form" action="simulate/" method="post">
+              <div class="form-group">
+                <label for="simulator_name">Simulator Name</label>
+                <input type="text" name="simulator_name" class="form-control" id="simulator_name" placeholder="Simulator Name">
+              </div>
+              <div class="form-group">
+                <label for="localName">Local Name</label>
+                <input type="text" name="localName" class="form-control" id="localName" placeholder="Local Name">
+              </div>
+
+              <button type="submit" name="launch_simulator" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="tab-pane" id="Driver">
+            <!-- Form for Driver  -->
+            <!-- drop down box for chossing a driver -->
+            <form role="form" action="simulate/" method="post">
+              <div class="form-group">
+                <label for="simulator_name">Simulator Name</label>
+                <select multiple class="form-control" name="simulator_name">
+                  {% for name in simulator_list %}
+                      <option value="{{name}}">{{name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            
+              <!-- Start a bus -->
+              <div class="panel-group" id="accordion">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Start a Bus
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <label for="route">Route Name</label>
+                        <input type="text" name="route" class="form-control" id="route" placeholder="Route Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="direction">Running Direction</label>
+                        <input type="text" name="direction" class="form-control" id="direction" value="0" placeholder="Route Direction">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Start Location</label>
+                        <input type="text" name="location" class="form-control" id="location" placeholder="Start Location">
+                      </div>
+
+                      <button type="submit" name="start_bus" class="btn btn-primary">Start</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Close a bus -->
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Close a Bus
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <button type="submit" name="exit_bus" class="btn btn-primary">Exit</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              </div>
+
+
+          </div>
+          <div class="tab-pane" id="User">
+            <!-- Form for User  -->
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
