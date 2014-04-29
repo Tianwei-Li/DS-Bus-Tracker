@@ -314,6 +314,8 @@ def initialize(masterIp, masterPort):
     MASTER_IP = masterIp
     MASTER_PORT = masterPort
     
+    clearFiles()
+    
     readRoutTable()
     runServer(MASTER_IP, MASTER_PORT)
     thread = threading.Thread(target=writeJsonFile, args = ())
@@ -419,6 +421,8 @@ def djangoMain():
     runServer(MASTER_IP, MASTER_PORT)
     thread = threading.Thread(target=writeJsonFile, args = ())
     thread.start()
+    
+    clearFiles()
     
     # start processes
     auto_run()
