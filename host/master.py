@@ -343,6 +343,10 @@ def sendCmd(simulatorName, message):
     addr = CONF[simulatorName]
     ip = addr["IP"]
     port = int(addr["Port"])
+
+    if message["action"] == "exit":
+        CONF.pop(simulatorName)
+
     TCPComm.send(ip, port, message)
 
     

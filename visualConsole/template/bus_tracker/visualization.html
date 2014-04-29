@@ -77,7 +77,7 @@ svg {
           <div class="panel-body">
             <table width="100%">
               <tr>
-                  <form action="simulate/" method="post">  
+                  <form action="" method="post">  
                   <!--  auto run button -->
                   <td align="middle">
                     <input type="submit" name="auto_run" value="Auto Run" class="btn btn-success" style="width:150px"><br>
@@ -152,7 +152,7 @@ svg {
         <h4 class="modal-title" id="myModalLabel">Launch Simulator</h4>
       </div>
       <div class="modal-body">
-        <form role="form" action="simulate/" method="post">
+        <form role="form" action="" method="post">
           <div class="form-group">
 
             <div class="btn-group" data-toggle="buttons">
@@ -214,32 +214,17 @@ svg {
       <div class="modal-body">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-          <li><a href="#GSN" data-toggle="tab">GSN</a></li>
+          <li><a href="#GSN_tab" data-toggle="tab">GSN</a></li>
           <li><a href="#Driver" data-toggle="tab">Driver</a></li>
           <li class="active"><a href="#User" data-toggle="tab">User</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active" id="GSN">
+          <div class="tab-pane" id="GSN_tab">
             <!-- Form for GSN  -->
-            <form role="form" action="simulate/" method="post">
-              <div class="form-group">
-                <label for="simulator_name">Simulator Name</label>
-                <input type="text" name="simulator_name" class="form-control" id="simulator_name" placeholder="Simulator Name">
-              </div>
-              <div class="form-group">
-                <label for="localName">Local Name</label>
-                <input type="text" name="localName" class="form-control" id="localName" placeholder="Local Name">
-              </div>
-
-              <button type="submit" name="launch_simulator" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-          <div class="tab-pane" id="Driver">
-            <!-- Form for Driver  -->
-            <!-- drop down box for chossing a driver -->
-            <form role="form" action="simulate/" method="post">
+            <!-- drop down box for chossing a user -->
+            <form role="form" action="" method="post">
               <div class="form-group">
                 <label for="simulator_name">Simulator Name</label>
                 <select multiple class="form-control" name="simulator_name">
@@ -249,17 +234,49 @@ svg {
                 </select>
               </div>
             
-              <!-- Start a bus -->
-              <div class="panel-group" id="accordion">
+              <div class="panel-group" id="gsn_accordion">
+                <!-- Close a GSN -->
                 <div class="panel panel-info">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Start a Bus
+                      <a data-toggle="collapse" data-parent="#gsn_accordion" href="#close_gsn_collapse">
+                        Close GSN
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
+                  <div id="close_gsn_collapse" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <button type="submit" name="exit" class="btn btn-primary">Exit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane" id="Driver">
+            <!-- Form for Driver  -->
+            <!-- drop down box for chossing a driver -->
+            <form role="form" action="" method="post">
+              <div class="form-group">
+                <label for="simulator_name">Simulator Name</label>
+                <select multiple class="form-control" name="simulator_name">
+                  {% for name in simulator_list %}
+                      <option value="{{name}}">{{name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            
+              <div class="panel-group" id="bus_accordion">
+                <!-- Start a bus -->
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#bus_accordion" href="#bus_start_collapse">
+                        Start Bus
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="bus_start_collapse" class="panel-collapse collapse in">
                     <div class="panel-body">
                       <div class="form-group">
                         <label for="route">Route Name</label>
@@ -282,29 +299,88 @@ svg {
                 <div class="panel panel-info">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Close a Bus
+                      <a data-toggle="collapse" data-parent="#bus_accordion" href="#bus_close_collapse">
+                        Close Bus
                       </a>
                     </h4>
                   </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
+                  <div id="bus_close_collapse" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <button type="submit" name="exit_bus" class="btn btn-primary">Exit</button>
-                      </form>
+                        <button type="submit" name="exit" class="btn btn-primary">Exit</button>
                     </div>
                   </div>
                 </div>
               </div>
-
-
-              </div>
+            </form>
 
 
           </div>
-          <div class="tab-pane" id="User">
+
+          <div class="tab-pane active" id="User">
             <!-- Form for User  -->
+            <!-- drop down box for chossing a user -->
+            <form role="form" action="" method="post">
+              <div class="form-group">
+                <label for="simulator_name">Simulator Name</label>
+                <select multiple class="form-control" name="simulator_name">
+                  {% for name in simulator_list %}
+                      <option value="{{name}}">{{name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            
+              <!-- Send a Request -->
+              <div class="panel-group" id="user_accordion">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#user_accordion" href="#user_request_collapse">
+                        Make Request
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="user_request_collapse" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <label for="route">Route Name</label>
+                        <input type="text" name="route" class="form-control" id="route" placeholder="Route Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="direction">Direction</label>
+                        <input type="text" name="direction" class="form-control" id="direction" value="0" placeholder="Direction">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Start Location</label>
+                        <input type="text" name="location" class="form-control" id="location" placeholder="Current Location">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Start Location</label>
+                        <input type="text" name="destination" class="form-control" id="destination" placeholder=" Destination">
+                      </div>
 
+                      <button type="submit" name="user_request" class="btn btn-primary">Request</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Close a user -->
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#user_accordion" href="#clos_user_collapse">
+                        Close User
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="clos_user_collapse" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <button type="submit" name="exit" class="btn btn-primary">Exit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
+
         </div>
       </div>
       <div class="modal-footer">

@@ -22,14 +22,6 @@ def index(reqest):
 @csrf_exempt
 @never_cache
 def visualization(request):
-	simulator_list = master.getSimulatorNames()
-	if simulator_list == None:
-		simulator_list = []
-	return render_to_response('bus_tracker/visualization.html', {"simulator_list" : simulator_list})
-
-@csrf_exempt
-@never_cache
-def simulate(request):
 	if master.ISINIT == False:
 		master.initialize("127.0.0.1", 2000)
 		sleep(3)
@@ -75,7 +67,24 @@ def simulate(request):
 	elif 'exit' in request.POST:
 		# quit a simulator
 		simulator_name = request.POST.get("simulator_name")
-		messge =  {"action" : "exit"}
+		message =  {"action" : "exit"}
+		master.sendCmd(simulator_name, message)
+	elif 'user_request' in request.POST:
+		# user sends a query
+		simulator_name = request.POST.get("simulator_name")
+		route = request.POST.get("route")
+		direction = int(request.POST.get("direction"))
+		location = int(request.POST.get("location"))
+		destination = int(request.POST.get("destination"))
+
+		message = {
+					"action" : "request", 
+				    "route" : route, 
+				    "direction" : direction, 
+				    "destination" : destination, 
+				    "location" : location
+				  }
+
 		master.sendCmd(simulator_name, message)
 
 	simulator_list = master.getSimulatorNames()
