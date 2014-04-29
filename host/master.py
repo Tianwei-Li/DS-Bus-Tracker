@@ -349,7 +349,18 @@ def sendCmd(simulatorName, message):
 
     TCPComm.send(ip, port, message)
 
+
+def clearFiles():
+    locationFile = open("../visualConsole/static/queryResult.txt", "w")
+    locationFile.close()
     
+    outfile = open("../visualConsole/static/graph.json", "w")
+    outfile.close()
+            
+            
+    locationFile = open("../visualConsole/static/locList.txt", "w")
+    locationFile.close()
+
 
 def auto_run():
     global CONF
