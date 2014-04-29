@@ -35,7 +35,7 @@ DIC = None
 BUSCNT = None
 ROUTTABLE = None
 ROUTNODES = None
-ISINIT = 0
+ISINIT = False
 
 MSG_QUEUE = collections.deque()
 
@@ -293,7 +293,7 @@ def writeJsonFile():
 
 def initialize(masterIp, masterPort):
     global ISINIT, MASTER_IP, MASTER_PORT
-    ISINIT = 1
+    ISINIT = True
     MASTER_IP = masterIp
     MASTER_PORT = masterPort
     
