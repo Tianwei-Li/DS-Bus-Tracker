@@ -15,6 +15,8 @@ rect {
 svg {
   border: 1px solid black;
   background: url("{% static "img/map_pit.png" %}");
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 
@@ -49,37 +51,60 @@ svg {
 
 
 <body>
-<div id="panel" class="panel panel-info" style="float:right; width: 350px; margin-right:20px;">
-  <div class="panel-heading"><b style="font-size: 20px" >Control Panel</b></div>
+<div id="panel" style="float:right; width: 350px; height: 750px; margin-top:10px; margin-right:20px;">
+  <table width="350">
+    <tr>
+      <td>
+        <div class="panel panel-info">
+          <div class="panel-heading"><b style="font-size: 20px" >Control Panel</b></div>
+          <div class="panel-body">
+            <table width="100%">
+              <tr>
+                  <form action="simulate/" method="post">  
+                  <!--  auto run button -->
+                  <td align="middle">
+                    <input type="submit" name="auto_run" value="Auto Run" class="btn btn-success" style="width:120px"><br>
+                  </td>
 
-  <div class="panel-body">
-    <table width="350">
-      <tr>
-        <td align="middle">
-          <h3>Control Panel</h3>
-        </td>
-      </tr>
-      <tr>
-        <form action="simulate/" method="post">  
-          <td align="middle">
-          <!--  auto run button -->
-            <input type="submit" name="auto_run" value="Auto Run" class="btn btn-success" style="width:120px"><br>
-        </form>
-        <br>
-      </tr>
-      <tr>
-          
-          <form action="simulate/" method="post">  
-          <td align="middle">
-            <input type="submit" name="launch_simulator" value="Launch Simulator", class="btn btn-primary"><br>
-          </td>
-        </form>
-      </tr>
-      <tr>
-        <td align="middle">
-          <h3>Info</h3>
-        </td>
-      </tr>
+                  </form>
+              </tr>
+              <tr><td><br></td></tr>
+              <tr>
+                <td align="middle">
+                    <form action="simulate/" method="post">  
+                      <input type="submit" name="launch_simulator" value="Launch Simulator", class="btn btn-primary"><br>
+                    </form>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </td>
+    <tr>
+      <td>
+        <div class="panel panel-info">
+          <div class="panel-heading"><b style="font-size: 20px" >Running Info</b></div>
+          <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+              <li><a href="#profile" data-toggle="tab">Profile</a></li>
+              <li><a href="#messages" data-toggle="tab">Messages</a></li>
+              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active" id="home">...</div>
+              <div class="tab-pane" id="profile">...</div>
+              <div class="tab-pane" id="messages">...</div>
+              <div class="tab-pane" id="settings">...</div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+
       <tr>
         <td align="middle">
           <textarea readonly id="run_info" rows="23" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
@@ -87,8 +112,14 @@ svg {
 
         </td>
       </tr>
-    </table>
-  </div>
+      <tr>
+        <td align="middle">
+          <textarea readonly id="user_query_result" rows="5" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
+          </textarea>
+        </td>
+      </tr>
+
+  </table>
 
 
 
@@ -167,6 +198,12 @@ function loadInfoFileToTextArea()
   xmlhttp.send();
   var value = xmlhttp.responseText;
   document.getElementById("run_info").value=value;
+
+  
+  xmlhttp.open("GET","{% static "queryResult.txt" %}",false);
+  xmlhttp.send();
+  var value = xmlhttp.responseText;
+  document.getElementById("user_query_result").value=value;
 }
 
 function tick() {
