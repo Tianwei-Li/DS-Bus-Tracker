@@ -35,6 +35,7 @@ DIC = None
 BUSCNT = None
 ROUTTABLE = None
 ROUTNODES = None
+USERNODES = []
 ISINIT = False
 
 MSG_QUEUE = collections.deque()
@@ -179,18 +180,17 @@ def parseDriverMsg(command):
         
     NODES.append(dic)
     
-    dic = {}
-    dic["index"] = len(NODES)
-    dic["name"] = "qianmao"
-    dic["type"] = "USER" 
-    NODES.append(dic)
+    if USERNODES != None and len(USERNODES) > 0:
+        dic = USERNODES[0]
+        dic["index"] = len(NODES)
+        NODES.append(dic)
     
-    link_dic = {}
-    link_dic["index"] = len(LINKS)
-    link_dic["source"] = 0
-    link_dic["target"] = len(NODES) - 1
-    LINKS.append(link_dic)
-            
+        link_dic = {}
+        link_dic["index"] = len(LINKS)
+        link_dic["source"] = 0
+        link_dic["target"] = len(NODES) - 1
+        LINKS.append(link_dic)
+    
    
     rsn_busId = command["busId"]
     bus_table = command["BUS_TABLE"]
@@ -263,6 +263,23 @@ def parseDriverMsg(command):
 
 
 def parseUserMsg(command):
+    global USERNODES
+    # update the user location
+    USERNODES = []
+    node = {}
+    node["index"] = 1
+    node["name"] = command["userId"]
+    node["type"] = "USER"
+    
+    route = command["query"]["route"]
+    stationIdx = command["query"]["location"]
+    node["fixed"] = "true"
+    node["x"] = ROUTTABLE[route][stationIdx]["x"]
+    node["y"] = ROUTTABLE[route][stationIdx]["y"]
+    
+    USERNODES.append(node)
+    
+    # report the user query result
     locationFile = open("../visualConsole/static/queryResult.txt", "w")
     
     busId = command["response"]["busId"]
