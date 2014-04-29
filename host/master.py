@@ -334,6 +334,9 @@ def launchSimulator(simulatorName, ip, port, message):
     # send initialize command
     TCPComm.send(ip, port, message)
     
+def getSimulatorNames():
+    return CONF.keys()
+    
 
 def sendCmd(simulatorName, message):
     addr = CONF[simulatorName]
