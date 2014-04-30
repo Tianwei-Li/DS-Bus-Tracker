@@ -7,7 +7,7 @@ from django.conf import settings
 
 urlpatterns = patterns('bus_tracker.views',
     (r'^$', 'index'),
-    (r'visualization/$', 'visualization'),
+    (r'visualization/', 'visualization'),
     (r'simulate/$', 'simulate'),
     #(r'^(?P<poll_id>\d+)/results/$', 'results'),
     #(r'^(?P<poll_id>\d+)/vote/$', 'vote'),

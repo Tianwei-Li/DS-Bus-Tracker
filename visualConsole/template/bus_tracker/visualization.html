@@ -1,6 +1,10 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
 
 <meta charset="utf-8">
 <title>Live Bus Tracker</title>
@@ -29,7 +33,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("{% static "img/map_pit.png" %}");
+  background: url("{% static "img/map_pit_all_routes.png" %}");
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -152,42 +156,61 @@ svg {
         <h4 class="modal-title" id="myModalLabel">Launch Simulator</h4>
       </div>
       <div class="modal-body">
+        
+        <!-- Quick Start Button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Import Config <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" onclick="launchGSN()">GSN</a></li>
+            <li class="divider"></li>
+            <li><a href="#" name="1" onclick="launchDriver(this.name)">Driver_1</a></li>
+            <li><a href="#" name="2" onclick="launchDriver(this.name)">Driver_2</a></li>
+            <li><a href="#" name="3" onclick="launchDriver(this.name)">Driver_3</a></li>
+            <li class="divider"></li>
+            <li><a href="#" name="1" onclick="launchUser(this.name)">User_1</a></li>
+            <li><a href="#" name="2" onclick="launchUser(this.name)">User_2</a></li>
+          </ul>
+        </div>
+        <hr>
+
         <form role="form" action="" method="post">
           <div class="form-group">
 
             <div class="btn-group" data-toggle="buttons">
               <label class="btn btn-danger">
-                <input type="radio" name="roleRadios" id="GSN" value="GSN">GSN
+                <input type="radio" name="roleRadios" id="radio_GSN" value="GSN">GSN
               </label>
               <label class="btn btn-warning">
-                <input type="radio" name="roleRadios" id="DRIVER" value="DRIVER">Driver
+                <input type="radio" name="roleRadios" id="radio_DRIVER" value="DRIVER">Driver
               </label>
               <label class="btn btn-success">
-                <input type="radio" name="roleRadios" id="USER" value="USER">User
+                <input type="radio" name="roleRadios" id="radio_USER" value="USER">User
               </label>
             </div>
           </div>
           <div class="form-group">
             <label for="simulator_name">Simulator Name</label>
-            <input type="text" name="simulator_name" class="form-control" id="simulator_name" placeholder="Simulator Name">
+            <input type="text" name="simulator_name" class="form-control" id="launch_simulator_name" placeholder="Simulator Name">
           </div>
           <div class="form-group">
             <label for="localName">Local Name</label>
-            <input type="text" name="localName" class="form-control" id="localName" placeholder="Local Name">
+            <input type="text" name="localName" class="form-control" id="launch_localName" placeholder="Local Name">
           </div>
           <div class="form-group">
             <label for="id">Role ID</label>
-            <input type="text" name="id" class="form-control" id="id" placeholder="Role ID">
+            <input type="text" name="id" class="form-control" id="launch_id" placeholder="Role ID">
           </div>
           <div class="form-group">
             <label for="ip">Simulator IP/PORT</label>
-            <input type="text" name="simulator_ip" class="form-inline" id="ip" value="127.0.0.1" placeholder="IP Address">
-            <input type="number" name="simulator_port" class="form-inline" id="port" placeholder="Port Number">
+            <input type="text" name="simulator_ip" class="form-inline" id="launch_sim_ip" value="127.0.0.1" placeholder="IP Address">
+            <input type="number" name="simulator_port" class="form-inline" id="launch_sim_port" placeholder="Port Number">
           </div>
           <div class="form-group">
             <label for="ip">Role(Host) IP/PORT</label>
-            <input type="text" name="host_ip" class="form-inline" id="ip" value="127.0.0.1" placeholder="IP Address">
-            <input type="number" name="host_port" class="form-inline" id="port" placeholder="Port Number">
+            <input type="text" name="host_ip" class="form-inline" id="launch_host_ip" value="127.0.0.1" placeholder="IP Address">
+            <input type="number" name="host_port" class="form-inline" id="launch_host_port" placeholder="Port Number">
           </div>
 
           <button type="submit" name="launch_simulator" class="btn btn-primary">Submit</button>
@@ -448,6 +471,43 @@ function mousedown() {
 */
 }
 
+// auto fill form
+ 
+function launchGSN() {
+  document.getElementById('radio_GSN').checked = true;  
+  document.getElementById("launch_simulator_name").value = 'GSN_1';
+  document.getElementById("launch_localName").value = 'gsn_1';
+  document.getElementById("launch_id").value = 'GSN_1';
+  document.getElementById("launch_sim_ip").value = '127.0.0.1';
+  document.getElementById("launch_sim_port").value = 11000;
+  document.getElementById("launch_host_ip").value = '127.0.0.1';
+  document.getElementById("launch_host_port").value = 40000;
+}
+
+
+function launchDriver(id) {
+  document.getElementById('radio_DRIVER').checked = true;  
+  document.getElementById("launch_simulator_name").value = 'DRIVER_' + String(id);
+  document.getElementById("launch_localName").value = 'driver_' + String(id);
+  document.getElementById("launch_id").value = 'driver_' + String(id);
+  document.getElementById("launch_sim_ip").value = '127.0.0.1';
+  document.getElementById("launch_sim_port").value = (12000 + Number(id));
+  document.getElementById("launch_host_ip").value = '127.0.0.1';
+  document.getElementById("launch_host_port").value = (42000 +  Number(id));
+}
+
+function launchUser(id) {
+  document.getElementById('radio_USER').checked = true;  
+  document.getElementById("launch_simulator_name").value = 'USER_' + String(id);
+  document.getElementById("launch_localName").value = 'user_' + String(id);
+  document.getElementById("launch_id").value = 'user_' + String(id);
+  document.getElementById("launch_sim_ip").value = '127.0.0.1';
+  document.getElementById("launch_sim_port").value = (13000 + Number(id));
+  document.getElementById("launch_host_ip").value = '127.0.0.1';
+  document.getElementById("launch_host_port").value = (42000 +  Number(id));
+}
+
+
 function loadInfoFileToTextArea()
 {
   var xmlhttp = new XMLHttpRequest(); 
@@ -512,6 +572,8 @@ function restart() {
         // update type
         nodes[nodeIndex].type = d.type;
 
+        // update name
+        nodes[nodeIndex].name = d.name;
         tick();
       }
     });
