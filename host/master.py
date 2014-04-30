@@ -365,6 +365,8 @@ def sendCmd(simulatorName, message):
 
     if message["action"] == "exit":
         CONF.pop(simulatorName)
+        if len(CONF) == 0 or len(CONF) == 1:
+            clearFiles()
 
     TCPComm.send(ip, port, message)
 
@@ -386,6 +388,9 @@ def terminate():
     
     for simulatorName in CONF.keys():
         sendCmd(simulatorName, message)
+        #CONF.pop(simulatorName)
+        
+    clearFiles()
 
     
 def auto_run():
