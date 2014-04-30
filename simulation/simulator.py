@@ -70,7 +70,7 @@ def reporterThread():
         if state != None:
             LOGGER.info("report state: %s" % state)
             TCPComm.send(MASTER_IP, MASTER_PORT, state)
-        sleep(2)
+        sleep(1)
 
 def updateLocThread():
     global IS_BUS_START
@@ -79,7 +79,9 @@ def updateLocThread():
             Location.moveOneStop()
             LOGGER.info("Update Location")
             sleep(10)       # take 10 seconds to move to next stop
-           # if Location.
+            # if Location reaches the end - 29, turn off 
+            if Location.getLocation() == 29:
+                os._exit(0)
 
 
 # should be called by master

@@ -3,23 +3,23 @@
 
 CONF GSN GSN 127.0.0.1 9000
 
-# 71A
-CONF DRIVER_71A_1 DRIVER 127.0.0.1 9100
-CONF DRIVER_71A_2 DRIVER 127.0.0.1 9110
-CONF DRIVER_71A_3 DRIVER 127.0.0.1 9120
-CONF DRIVER_71A_4 DRIVER 127.0.0.1 9130
+# Blue
+CONF DRIVER_Blue_1 DRIVER 127.0.0.1 9100
+CONF DRIVER_Blue_2 DRIVER 127.0.0.1 9110
+CONF DRIVER_Blue_3 DRIVER 127.0.0.1 9120
+CONF DRIVER_Blue_4 DRIVER 127.0.0.1 9130
 
-# 61A
-CONF DRIVER_61A_1 DRIVER 127.0.0.1 9200
-CONF DRIVER_61A_2 DRIVER 127.0.0.1 9210
-CONF DRIVER_61A_3 DRIVER 127.0.0.1 9220
-CONF DRIVER_61A_4 DRIVER 127.0.0.1 9230
-CONF DRIVER_61A_5 DRIVER 127.0.0.1 9240
+# Purple
+CONF DRIVER_Purple_1 DRIVER 127.0.0.1 9200
+CONF DRIVER_Purple_2 DRIVER 127.0.0.1 9210
+CONF DRIVER_Purple_3 DRIVER 127.0.0.1 9220
+CONF DRIVER_Purple_4 DRIVER 127.0.0.1 9230
+CONF DRIVER_Purple_5 DRIVER 127.0.0.1 9240
 
-# 28X
-CONF DRIVER_28X_1 DRIVER 127.0.0.1 9300
-CONF DRIVER_28X_2 DRIVER 127.0.0.1 9310
-CONF DRIVER_28X_3 DRIVER 127.0.0.1 9320
+# Green
+CONF DRIVER_Green_1 DRIVER 127.0.0.1 9300
+CONF DRIVER_Green_2 DRIVER 127.0.0.1 9310
+CONF DRIVER_Green_3 DRIVER 127.0.0.1 9320
 
 # User Channing Mao
 CONF USER_1 USER 127.0.0.1 10000
@@ -28,90 +28,90 @@ CONF USER_1 USER 127.0.0.1 10000
 # GSN
 GSN {"action" : "initialize", "localName" : "gsn_1", "role" : "GSN", "id" : "gsn_pittsburgh_1", "localIP" : "127.0.0.1", "localPort" : 40000}
 
-# DRIVER_71A_1
-DRIVER_71A_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
-DRIVER_71A_1 {"action":"sleep", "time": 5}
-DRIVER_71A_1 {"action":"start", "route":"71A", "direction":0, "location":15}
+# DRIVER_Blue_1
+DRIVER_Blue_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_Blue_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
+DRIVER_Blue_1 {"action":"sleep", "time": 5}
+DRIVER_Blue_1 {"action":"start", "route":"Blue", "direction":0, "location":15}
 
   
-# DRIVER_71A_2
-DRIVER_71A_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_71A_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
-DRIVER_71A_2 {"action":"sleep", "time": 5}
-DRIVER_71A_2 {"action":"start", "route":"71A", "direction":0, "location":10}
+# DRIVER_Blue_2
+DRIVER_Blue_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_Blue_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
+DRIVER_Blue_2 {"action":"sleep", "time": 5}
+DRIVER_Blue_2 {"action":"start", "route":"Blue", "direction":0, "location":10}
 
 
-# DRIVER_71A_3
-DRIVER_71A_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_71A_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
-DRIVER_71A_3 {"action":"sleep", "time": 5}
-DRIVER_71A_3 {"action":"start", "route":"71A", "direction":0, "location":5}
+# DRIVER_Blue_3
+DRIVER_Blue_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
+DRIVER_Blue_3 {"action":"sleep", "time": 5}
+DRIVER_Blue_3 {"action":"start", "route":"Blue", "direction":0, "location":5}
 
-# DRIVER_71A_4
-DRIVER_71A_4 {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_71A_david", "localIP" : "127.0.0.1", "localPort" : 40140}
-DRIVER_71A_4 {"action":"sleep", "time": 5}
-DRIVER_71A_4 {"action":"start", "route":"71A", "direction":0, "location":0}
+# DRIVER_Blue_4
+DRIVER_Blue_4 {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_Blue_david", "localIP" : "127.0.0.1", "localPort" : 40140}
+DRIVER_Blue_4 {"action":"sleep", "time": 5}
+DRIVER_Blue_4 {"action":"start", "route":"Blue", "direction":0, "location":0}
 
 
-# DRIVER_61A_1
-DRIVER_61A_1 {"action" : "initialize", "localName" : "EVA", "role" : "DRIVER", "id" : "bus_61A_eva", "localIP" : "127.0.0.1", "localPort" : 40210}
-DRIVER_61A_1 {"action":"sleep", "time": 5}
-DRIVER_61A_1 {"action":"start", "route":"61A", "direction":0, "location":20}
+# DRIVER_Purple_1
+DRIVER_Purple_1 {"action" : "initialize", "localName" : "EVA", "role" : "DRIVER", "id" : "bus_Purple_eva", "localIP" : "127.0.0.1", "localPort" : 40210}
+DRIVER_Purple_1 {"action":"sleep", "time": 5}
+DRIVER_Purple_1 {"action":"start", "route":"Purple", "direction":0, "location":20}
 
-# DRIVER_61A_2
-DRIVER_61A_2 {"action" : "initialize", "localName" : "fisher_wood", "role" : "DRIVER", "id" : "bus_61A_fisher", "localIP" : "127.0.0.1", "localPort" : 40220}
-DRIVER_61A_2 {"action":"sleep", "time": 5}
-DRIVER_61A_2 {"action":"start", "route":"61A", "direction":0, "location":16}
+# DRIVER_Purple_2
+DRIVER_Purple_2 {"action" : "initialize", "localName" : "fisher_wood", "role" : "DRIVER", "id" : "bus_Purple_fisher", "localIP" : "127.0.0.1", "localPort" : 40220}
+DRIVER_Purple_2 {"action":"sleep", "time": 5}
+DRIVER_Purple_2 {"action":"start", "route":"Purple", "direction":0, "location":16}
 
-# DRIVER_61A_3
-DRIVER_61A_3 {"action" : "initialize", "localName" : "Gager", "role" : "DRIVER", "id" : "bus_61A_gaga", "localIP" : "127.0.0.1", "localPort" : 40230}
-DRIVER_61A_3 {"action":"sleep", "time": 5}
-DRIVER_61A_3 {"action":"start", "route":"61A", "direction":0, "location":12}
+# DRIVER_Purple_3
+DRIVER_Purple_3 {"action" : "initialize", "localName" : "Gager", "role" : "DRIVER", "id" : "bus_Purple_gaga", "localIP" : "127.0.0.1", "localPort" : 40230}
+DRIVER_Purple_3 {"action":"sleep", "time": 5}
+DRIVER_Purple_3 {"action":"start", "route":"Purple", "direction":0, "location":12}
 
-# DRIVER_61A_4
-DRIVER_61A_4 {"action" : "initialize", "localName" : "helen", "role" : "DRIVER", "id" : "bus_61A_helen", "localIP" : "127.0.0.1", "localPort" : 40240}
-DRIVER_61A_4 {"action":"sleep", "time": 5}
-DRIVER_61A_4 {"action":"start", "route":"61A", "direction":0, "location":6}
+# DRIVER_Purple_4
+DRIVER_Purple_4 {"action" : "initialize", "localName" : "helen", "role" : "DRIVER", "id" : "bus_Purple_helen", "localIP" : "127.0.0.1", "localPort" : 40240}
+DRIVER_Purple_4 {"action":"sleep", "time": 5}
+DRIVER_Purple_4 {"action":"start", "route":"Purple", "direction":0, "location":6}
 
-# DRIVER_61A_5
-DRIVER_61A_5 {"action" : "initialize", "localName" : "Ilan", "role" : "DRIVER", "id" : "bus_61A_ilan", "localIP" : "127.0.0.1", "localPort" : 40250}
-DRIVER_61A_5 {"action":"sleep", "time": 5}
-DRIVER_61A_5 {"action":"start", "route":"61A", "direction":0, "location":0}
+# DRIVER_Purple_5
+DRIVER_Purple_5 {"action" : "initialize", "localName" : "Ilan", "role" : "DRIVER", "id" : "bus_Purple_ilan", "localIP" : "127.0.0.1", "localPort" : 40250}
+DRIVER_Purple_5 {"action":"sleep", "time": 5}
+DRIVER_Purple_5 {"action":"start", "route":"Purple", "direction":0, "location":0}
 
-# DRIVER_28X_1
-DRIVER_28X_1 {"action" : "initialize", "localName" : "Jack", "role" : "DRIVER", "id" : "bus_28X_jack", "localIP" : "127.0.0.1", "localPort" : 40310}
-DRIVER_28X_1 {"action":"sleep", "time": 5}
-DRIVER_28X_1 {"action":"start", "route":"28X", "direction":0, "location":20}
+# DRIVER_Green_1
+DRIVER_Green_1 {"action" : "initialize", "localName" : "Jack", "role" : "DRIVER", "id" : "bus_Green_jack", "localIP" : "127.0.0.1", "localPort" : 40310}
+DRIVER_Green_1 {"action":"sleep", "time": 5}
+DRIVER_Green_1 {"action":"start", "route":"Green", "direction":0, "location":20}
 
-# DRIVER_28X_2
-DRIVER_28X_2 {"action" : "initialize", "localName" : "kiya", "role" : "DRIVER", "id" : "bus_28X_kiya", "localIP" : "127.0.0.1", "localPort" : 40320}
-DRIVER_28X_2 {"action":"sleep", "time": 5}
-DRIVER_28X_2 {"action":"start", "route":"28X", "direction":0, "location":10}
+# DRIVER_Green_2
+DRIVER_Green_2 {"action" : "initialize", "localName" : "kiya", "role" : "DRIVER", "id" : "bus_Green_kiya", "localIP" : "127.0.0.1", "localPort" : 40320}
+DRIVER_Green_2 {"action":"sleep", "time": 5}
+DRIVER_Green_2 {"action":"start", "route":"Green", "direction":0, "location":10}
 
-# DRIVER_28X_3
-DRIVER_28X_3 {"action" : "initialize", "localName" : "Lina", "role" : "DRIVER", "id" : "bus_28X_lina", "localIP" : "127.0.0.1", "localPort" : 40330}
-DRIVER_28X_3 {"action":"sleep", "time": 5}
-DRIVER_28X_3 {"action":"start", "route":"28X", "direction":0, "location":1}
+# DRIVER_Green_3
+DRIVER_Green_3 {"action" : "initialize", "localName" : "Lina", "role" : "DRIVER", "id" : "bus_Green_lina", "localIP" : "127.0.0.1", "localPort" : 40330}
+DRIVER_Green_3 {"action":"sleep", "time": 5}
+DRIVER_Green_3 {"action":"start", "route":"Green", "direction":0, "location":1}
 
 
 # USER_1
 USER_1 {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "Channing Mao", "localIP" : "127.0.0.1", "localPort" : 50000}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":20, "location":15}
+USER_1 {"action" : "request", "route":"Blue", "direction":0, "destination":20, "location":15}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"71A", "direction":0, "destination":20, "location":5}
+USER_1 {"action" : "request", "route":"Blue", "direction":0, "destination":20, "location":5}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":20, "location":10}
+USER_1 {"action" : "request", "route":"Purple", "direction":0, "destination":20, "location":10}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":20, "location":20}
+USER_1 {"action" : "request", "route":"Purple", "direction":0, "destination":20, "location":20}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":20, "location":25}
+USER_1 {"action" : "request", "route":"Purple", "direction":0, "destination":20, "location":25}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":20, "location":15}
+USER_1 {"action" : "request", "route":"Purple", "direction":0, "destination":20, "location":15}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"61A", "direction":0, "destination":20, "location":20}
+USER_1 {"action" : "request", "route":"Purple", "direction":0, "destination":20, "location":20}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"28X", "direction":0, "destination":20, "location":25}
+USER_1 {"action" : "request", "route":"Green", "direction":0, "destination":20, "location":25}
 USER_1 {"action" : "sleep", "time" : 10}
-USER_1 {"action" : "request", "route":"28X", "direction":0, "destination":20, "location":15}
+USER_1 {"action" : "request", "route":"Green", "direction":0, "destination":20, "location":15}
 
 
 
