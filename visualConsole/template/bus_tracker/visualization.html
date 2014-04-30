@@ -100,10 +100,12 @@ svg {
               <tr>
                 <td align="middle">
                   <div class="row">
+                    <div class="col-xs-6">
+                      <button class="btn btn-success" data-toggle="modal" data-target="#auto_run_modal"  style="width:150px">
+                        Auto Run
+                      </button>
+                    </div>
                     <form action="" method="post">  
-                      <div class="col-xs-6">
-                        <input type="submit" name="auto_run" value="Auto Run" class="btn btn-success" style="width:150px">
-                      </div>
                       <div class="col-xs-6">
                         <input type="submit" name="terminate_all" value="Terminate All" class="btn btn-danger" style="width:150px">
                       </div>
@@ -438,6 +440,38 @@ svg {
 
 
 
+<!-- pop out modal for auto run -->
+<!-- Modal -->
+<div class="modal fade" id="auto_run_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Auto Run</h4>
+      </div>
+      <div class="modal-body">
+        <label>Available Scripts</label>
+        <form role="form" action="" method="post">
+          <div class="form-group">
+            <label for="auto_run_scripts"></label>
+            <select multiple class="form-control" name="auto_run_scripts">
+            {% for script in auto_run_script_list %}
+              <option value="{{script}}">{{script}}</option>
+            {% endfor %}
+            </select>
+          </div>
+          <button type="submit" name="auto_run" class="btn btn-primary">Run!</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <script>
@@ -668,16 +702,16 @@ function restart() {
         else
           return "{% static "img/circle.png" %}";
       })
-      .attr("x", -8)
-      .attr("y", -8)
-      .attr("width", 16)
-      .attr("height", 16);
+      .attr("x", -12)
+      .attr("y", -12)
+      .attr("width", 24)
+      .attr("height", 24);
 
     nn.append("text")
-      .attr("dx", 12)
+      .attr("dx", 20)
       .attr("dy", ".35em")
-      .style("fill", "#8F008F")
-      .style("font-size","12px")
+      .style("fill", "#00003D")
+      .style("font-size","14px")
       .style("font-weight", "bold")
       .text(function(d) { return d.name });
 
