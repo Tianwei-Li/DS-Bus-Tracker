@@ -79,6 +79,7 @@ def updateLocThread():
             Location.moveOneStop()
             LOGGER.info("Update Location")
             sleep(10)       # take 10 seconds to move to next stop
+           # if Location.
 
 
 # should be called by master

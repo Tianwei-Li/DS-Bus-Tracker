@@ -579,11 +579,22 @@ function loadInfoFileToTextArea()
   document.getElementById("user_query_result").value=value;
 }
 
+function getBusCoords(n) {
+    var Coords = new Object();
+    nodes.forEach(function(d) {
+        if (d.index == n) {
+            Coords['x'] = d.x;
+            Coords['y'] = d.y;
+        }
+    });
+    return Coords;
+}
+
 function tick() {
-  link.attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
+  link.attr("x1", function(d) { return getBusCoords(d.source).x; })
+      .attr("y1", function(d) { return getBusCoords(d.source).y; })
+      .attr("x2", function(d) { return getBusCoords(d.target).x; })
+      .attr("y2", function(d) { return getBusCoords(d.target).y; });
 
   node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
@@ -600,6 +611,8 @@ function tick() {
           return "{% static "img/circle.png" %}";
       });
 
+  node.select("text").text(function(d) { return d.name; });
+
   node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
@@ -611,6 +624,7 @@ function restart() {
       jsonLinks = json.links;
     });
 
+    /*
     // add new nodes
     jsonNodes.forEach( function(d) {
       var nodeIndex = d3.keys(nodes).indexOf("" + d.index);
@@ -700,6 +714,63 @@ function restart() {
           return "{% static "img/iconUser.png"%}";
         else
           return "{% static "img/circle.png" %}";
+      })
+      .attr("x", -12)
+      .attr("y", -12)
+      .attr("width", 24)
+      .attr("height", 24);
+
+    nn.append("text")
+      .attr("dx", 20)
+      .attr("dy", ".35em")
+      .style("fill", "#00003D")
+      .style("font-size","14px")
+      .style("font-weight", "bold")
+      .text(function(d) { return d.name });
+
+    force.start();
+    */
+    nodes = jsonNodes;
+    links = jsonLinks;
+    tick();
+
+
+// update links
+    link = link.data(links, function(d) { 
+                //console.log(d.source + "-" + d.target);
+                return d.source + "-" + d.target;
+            });
+    link.exit().remove();
+
+
+    link.enter().append("line")
+             .attr("class", "link")
+             .attr("stroke", "#000")
+             .attr("stroke-width", 1);
+
+    // update nodes
+    node = node.data(nodes, function(d) { 
+        return d.name;
+    });
+    node.exit().remove();
+
+    // style nodes
+    var nn = node.enter().append("g")
+      .attr("class", "node")
+      .attr("class", function(d) { return "node " + d.type; })
+      .attr("r", 5);
+
+    nn.append("image")
+      .attr("xlink:href", function(d) {
+        if(d.type == "GSN")
+          return "{% static "img/iconGSN.png"%}";
+        else if (d.type == "RSN")
+          return "{% static "img/iconRSN.png"%}";
+        else if (d.type == "USER")
+          return "{% static "img/iconUser.png"%}";
+        else
+          return "{% static "img/circle.png" %}";
+
       })
       .attr("x", -12)
       .attr("y", -12)
