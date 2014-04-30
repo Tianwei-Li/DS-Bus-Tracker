@@ -23,7 +23,6 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-
 <style>
 
 rect {
@@ -33,7 +32,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("{% static "img/map_pit_all_routes.png" %}");
+  background: url("{% static "img/map_pit_paths_70_opacity.png" %}");
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -550,7 +549,7 @@ function launchDriver(id) {
   document.getElementById("launch_sim_ip").value = '127.0.0.1';
   document.getElementById("launch_sim_port").value = (12000 + Number(id));
   document.getElementById("launch_host_ip").value = '127.0.0.1';
-  document.getElementById("launch_host_port").value = (42000 +  Number(id));
+  document.getElementById("launch_host_port").value = (41000 +  Number(id));
 }
 
 function launchUser(id) {
