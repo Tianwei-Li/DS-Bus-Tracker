@@ -11,7 +11,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("img/map_pit.png");
+  background: url("img/map_pit_paths_70_opacity.png");
 }
 
 .node {
@@ -39,25 +39,9 @@ svg {
   stroke: #999;
 }
 
-/* table styles */
-.row, .header, .cell { height: 18px; }
-.row, .header { clear: left; }
-.header { font-weight: bold; }
-.cell { float: left; overflow: hidden; white-space: nowrap; width: 100px; }
-.col-0 { width: 180px; }
-
-td, th  { border: 1px solid #aaf; padding: 1px 5px; width: 10em; }
-th      { background-color: #ccf; }
-input   { width: 100%; margin: 0; padding:0; border: 0; }
-table   { border-collapse: collapse; }
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <!-- TODO change to local copy -->
-<script src="divgrid.js" type="text/javascript"></script>
-
-<script src="jquery.min.js"></script>
-<script src="jquerycsvtotable-read-only/js/jquery.csvToTable.js"></script>
-<script src="jquerycsvtotable-read-only/js/jquery.tablesorter.min.js"></script>
 
 </head>
 <body>
@@ -68,18 +52,6 @@ table   { border-collapse: collapse; }
  StopNumber,x,y<br/>
 </div>
 -->
-
-<!--
-<div id="tables" style="float:right; width: 700px; border: 1px solid gray;">
-<h1>Tables</h1>
-<div id="table1" style=""></div>
-<div id="table2"></div>
-</div>
--->
-
-<button onClick="showRoute(1)">R1</button>
-<button onClick="showRoute(2)">R2</button>
-<button onClick="showRoute(3)">R3</button>
 
 <script>
 
@@ -244,8 +216,8 @@ if (n == 1) {
 }
 
   var lineFunction = d3.svg.line()
-                         .x(function(d) { console.log (d.x); return d.x; })
-                         .y(function(d) { console.log (d.y); return d.y; })
+                         .x(function(d) { return d.x; })
+                         .y(function(d) { return d.y; })
                          .interpolate("basis");
 
   if (visibleRoutes[n-1] == 0) {
@@ -266,14 +238,25 @@ if (n == 1) {
 
 function mousedown() {
   restart();
-  coordinateLog(this);
+//  coordinateLog(this);
+}
+
+function getBusCoords(n) {
+    var Coords = new Object();
+    nodes.forEach(function(d) {
+        if (d.index == n) {
+            Coords['x'] = d.x;
+            Coords['y'] = d.y;
+        }
+    });
+    return Coords;
 }
 
 function tick() {
-  link.attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
+  link.attr("x1", function(d) { return getBusCoords(d.source).x; })
+      .attr("y1", function(d) { return getBusCoords(d.source).y; })
+      .attr("x2", function(d) { return getBusCoords(d.target).x; })
+      .attr("y2", function(d) { return getBusCoords(d.target).y; });
 
   node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
@@ -290,6 +273,8 @@ function tick() {
           return "img/circle.png";
       });
 
+  node.select("text").text(function(d) { return d.name; });
+
   node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
@@ -300,78 +285,35 @@ function restart() {
       jsonLinks = json.links;
     });
 
-    // add new nodes
-    jsonNodes.forEach( function(d) {
-      var nodeIndex = d3.keys(nodes).indexOf("" + d.index);
-      if(nodeIndex == -1) {
-//        console.log("add node with index: " + d.index);
-        n = nodes.push(d);
-      } else if(d.fixed == "true") {
-        // update coordinates
-        nodes[nodeIndex].fixed = "true";
-        nodes[nodeIndex].x = d.x;
-        nodes[nodeIndex].y = d.y;
-        nodes[nodeIndex].px = d.x;
-        nodes[nodeIndex].py = d.y;
+    nodes = jsonNodes;
+    links = jsonLinks;
+    tick();
 
-        // update type
-        nodes[nodeIndex].type = d.type;
+console.log("links before data()");
+console.log(links);
 
-        tick();
-      }
-    });
-
-    // remove old nodes
-    nodes.forEach( function(d) {
-      if(d3.keys(jsonNodes).indexOf("" + d.index) == -1) {
-//        console.log("remove node with index: " + d.index);
-        n = nodes.splice(d.index);
-      }
-    });
-
-    // add new links
-    jsonLinks.forEach( function(d) {
-      var linkIndex = d3.keys(links).indexOf("" + d.index);
-      if(linkIndex == -1) {
-//        console.log("add link with index: " + d.index);
-        l = links.push(d);
-      } else {
-        // update links
-        if (links[linkIndex].source.index != d.source || 
-            links[linkIndex].target.index != d.target) {
-          links[linkIndex].source = d.source;
-          links[linkIndex].target = d.target;
-        }
-
-        tick();
-      }
-    });
-
-    // remove old links
-    links.forEach( function(d) {
-      if(d3.keys(jsonLinks).indexOf("" + d.index) == -1) {
-//        console.log("remove link with index: " + d.index);
-        l = links.splice(d.index);
-      }
-    });
-
-    // update links
+// update links
     link = link.data(links, function(d) { 
-        return d.index;
-    });
-
+                //console.log(d.source + "-" + d.target);
+                return d.source + "-" + d.target;
+            });
     link.exit().remove();
 
-    link.enter().insert("line", ".node")
-      .attr("class", "link");
+console.log("link after");
+console.log(link);
+
+    link.enter().append("line")
+             .attr("class", "link")
+             .attr("stroke", "#000")
+             .attr("stroke-width", 1);
 
     // update nodes
     node = node.data(nodes, function(d) { 
-        return d.index;
+        return d.name;
     });
-
     node.exit().remove();
 
+    // style nodes
     var nn = node.enter().append("g")
       .attr("class", "node")
       .attr("class", function(d) { return "node " + d.type; })
@@ -408,3 +350,6 @@ setInterval(restart, 1000 * 20);
 
 </script>
 
+<button onClick="showRoute(1)">R1</button>
+<button onClick="showRoute(2)">R2</button>
+<button onClick="showRoute(3)">R3</button>
