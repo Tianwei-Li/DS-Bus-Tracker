@@ -14,6 +14,7 @@ import socket
 import collections
 import SocketServer
 import pickle
+import glob
 
 
 import sys
@@ -37,6 +38,7 @@ ROUTTABLE = None
 ROUTNODES = None
 USERNODES = []
 ISINIT = False
+AUTO_RUN_SCRIPT_FILES = {}
 
 MSG_QUEUE = collections.deque()
 
@@ -314,10 +316,15 @@ def writeJsonFile():
 
 
 def initialize(masterIp, masterPort):
-    global ISINIT, MASTER_IP, MASTER_PORT
+    global ISINIT, MASTER_IP, MASTER_PORT, AUTO_RUN_SCRIPT_FILES
     ISINIT = True
     MASTER_IP = masterIp
     MASTER_PORT = masterPort
+    
+    file_paths = glob.glob("../auto_run_scripts/*.txt")
+    
+    for path in file_paths:
+        AUTO_RUN_SCRIPT_FILES[os.path.basename(path)] = path
     
     clearFiles()
     
@@ -341,7 +348,11 @@ def launchSimulator(simulatorName, role, ip, port, message):
     sleep(2)
     # send initialize command
     TCPComm.send(ip, port, message)
-    
+
+def getScripts():
+    global AUTO_RUN_SCRIPT_FILES
+    return AUTO_RUN_SCRIPT_FILES.keys()
+
 def getSimulatorNames():
     global CONF
     
@@ -396,9 +407,11 @@ def terminate():
     clearFiles()
 
     
-def auto_run():
-    global CONF
-    file = open("../feedFile.txt", "r")
+def auto_run(filename):
+    global CONF, AUTO_RUN_SCRIPT_FILES
+
+    path = AUTO_RUN_SCRIPT_FILES[filename]
+    file = open(path, "r")
     
     for line in file:
         # skip blank lines
@@ -478,4 +491,6 @@ def main():
     '''
     
 if __name__ == '__main__':
-    main()
+    # main()
+    path = glob.glob("../auto_run_scripts/*.txt")
+    print os.path.basename(path[0])

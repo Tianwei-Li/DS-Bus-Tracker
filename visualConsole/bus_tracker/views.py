@@ -28,7 +28,8 @@ def visualization(request):
 
 	if 'auto_run' in request.POST:
 		# launch master
-		master.auto_run()
+		script = request.POST.get("auto_run_scripts")
+		master.auto_run(script)
 
 	elif 'launch_simulator' in request.POST:
 		# launch a simulator
@@ -91,9 +92,7 @@ def visualization(request):
 
 	simulator_list = master.getSimulatorNames()
 	route_list = master.getRoutes()
-
-	print simulator_list
-
+	auto_run_script_list = master.getScripts()
 
 	if route_list == None:
 		route_list = []
@@ -101,6 +100,7 @@ def visualization(request):
 	return render_to_response('bus_tracker/visualization.html', {"gsn_list" : simulator_list["GSN"], 
 																 "driver_list" : simulator_list["DRIVER"],
 																 "user_list" : simulator_list["USER"],
-																 "route_list" : route_list})
+																 "route_list" : route_list,
+																 "auto_run_script_list" : auto_run_script_list})
 
 
