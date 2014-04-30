@@ -2,11 +2,11 @@
 # 
 
 CONF GSN GSN 127.0.0.1 9000
-CONF DRIVER_71A_1 DRIVER 127.0.0.1 9100
-CONF DRIVER_71A_2 DRIVER 127.0.0.1 9110
-CONF DRIVER_71A_3 DRIVER 127.0.0.1 9120
-#CONF DRIVER_71A_4 DRIVER 127.0.0.1 9130
-#CONF DRIVER_71A_5 DRIVER 127.0.0.1 9140
+CONF DRIVER_Blue_1 DRIVER 127.0.0.1 9100
+CONF DRIVER_Blue_2 DRIVER 127.0.0.1 9110
+CONF DRIVER_Blue_3 DRIVER 127.0.0.1 9120
+#CONF DRIVER_Blue_4 DRIVER 127.0.0.1 9130
+#CONF DRIVER_Blue_5 DRIVER 127.0.0.1 9140
 
 CONF USER_1 USER 127.0.0.1 10000
 
@@ -15,22 +15,32 @@ CONF USER_1 USER 127.0.0.1 10000
 GSN {"action" : "initialize", "localName" : "gsn_1", "role" : "GSN", "id" : "gsn_pittsburgh_1", "localIP" : "127.0.0.1", "localPort" : 40000}
 
 
-# DRIVER_71A_1
-DRIVER_71A_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_71A_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
-DRIVER_71A_1 {"action":"sleep", "time": 5}
-DRIVER_71A_1 {"action":"start", "route":"71A", "direction":0, "location":15}
+# DRIVER_Blue_1
+DRIVER_Blue_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_Blue_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
+DRIVER_Blue_1 {"action":"sleep", "time": 5}
+DRIVER_Blue_1 {"action":"start", "route":"Blue", "direction":0, "location":17}
 
   
-# DRIVER_71A_2
-DRIVER_71A_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_71A_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
-DRIVER_71A_2 {"action":"sleep", "time": 5}
-DRIVER_71A_2 {"action":"start", "route":"71A", "direction":0, "location":12}
+# DRIVER_Blue_2
+DRIVER_Blue_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_Blue_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
+DRIVER_Blue_2 {"action":"sleep", "time": 5}
+DRIVER_Blue_2 {"action":"start", "route":"Blue", "direction":0, "location":12}
 
 
-# DRIVER_71A_3
-DRIVER_71A_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_71A_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
-DRIVER_71A_3 {"action":"sleep", "time": 5}
-DRIVER_71A_3 {"action":"start", "route":"71A", "direction":0, "location":8}
+# DRIVER_Blue_3
+DRIVER_Blue_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
+DRIVER_Blue_3 {"action":"sleep", "time": 5}
+DRIVER_Blue_3 {"action":"start", "route":"Blue", "direction":0, "location":8}
+
+# DRIVER_Blue_4
+DRIVER_Blue_4 {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_Blue_david", "localIP" : "127.0.0.1", "localPort" : 40140}
+DRIVER_Blue_4 {"action":"sleep", "time": 5}
+DRIVER_Blue_4 {"action":"start", "route":"Blue", "direction":0, "location":3}
+
+# DRIVER_Blue_5
+DRIVER_Blue_5 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40150}
+DRIVER_Blue_5 {"action":"sleep", "time": 5}
+DRIVER_Blue_5 {"action":"start", "route":"Blue", "direction":0, "location":0}
 
 
 
