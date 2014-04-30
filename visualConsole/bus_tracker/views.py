@@ -86,6 +86,8 @@ def visualization(request):
 				  }
 
 		master.sendCmd(simulator_name, message)
+	elif 'terminate_all' in request.POST:
+		master.terminate()
 
 	simulator_list = master.getSimulatorNames()
 	route_list = master.getRoutes()
