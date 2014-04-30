@@ -48,7 +48,7 @@ TCP_SERVER = None
 class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
-        data = pickle.loads(self.request.recv(1024))
+        data = pickle.loads(self.request.recv(4096))
         message = data["data"]
         MSG_QUEUE.append(message)
 
