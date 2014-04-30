@@ -359,6 +359,9 @@ def getSimulatorNames():
     
 
 def sendCmd(simulatorName, message):
+    if CONF.has_key(simulatorName) == False:
+        return
+    
     addr = CONF[simulatorName]
     ip = addr["IP"]
     port = int(addr["Port"])
