@@ -143,7 +143,7 @@ def getNodeByName(name):
     
 def readRoutTable():
     global ROUTTABLE
-    json_data = open('../host/coordinates.json')
+    json_data = open('../visualization/coordinates.json')
     ROUTTABLE = json.load(json_data)
 
 
