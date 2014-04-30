@@ -82,14 +82,14 @@ DRIVER_28X_1 {"action":"sleep", "time": 5}
 DRIVER_28X_1 {"action":"start", "route":"28X", "direction":0, "location":20}
 
 # DRIVER_28X_2
-DRIVER_28X_1 {"action" : "initialize", "localName" : "kiya", "role" : "DRIVER", "id" : "bus_28X_kiya", "localIP" : "127.0.0.1", "localPort" : 40320}
-DRIVER_28X_1 {"action":"sleep", "time": 5}
-DRIVER_28X_1 {"action":"start", "route":"28X", "direction":0, "location":10}
+DRIVER_28X_2 {"action" : "initialize", "localName" : "kiya", "role" : "DRIVER", "id" : "bus_28X_kiya", "localIP" : "127.0.0.1", "localPort" : 40320}
+DRIVER_28X_2 {"action":"sleep", "time": 5}
+DRIVER_28X_2 {"action":"start", "route":"28X", "direction":0, "location":10}
 
 # DRIVER_28X_3
-DRIVER_28X_1 {"action" : "initialize", "localName" : "Lina", "role" : "DRIVER", "id" : "bus_28X_lina", "localIP" : "127.0.0.1", "localPort" : 40330}
-DRIVER_28X_1 {"action":"sleep", "time": 5}
-DRIVER_28X_1 {"action":"start", "route":"28X", "direction":0, "location":1}
+DRIVER_28X_3 {"action" : "initialize", "localName" : "Lina", "role" : "DRIVER", "id" : "bus_28X_lina", "localIP" : "127.0.0.1", "localPort" : 40330}
+DRIVER_28X_3 {"action":"sleep", "time": 5}
+DRIVER_28X_3 {"action":"start", "route":"28X", "direction":0, "location":1}
 
 
 # USER_1
