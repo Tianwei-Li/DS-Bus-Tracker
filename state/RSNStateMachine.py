@@ -131,6 +131,8 @@ class State_Idle(State):
             elif input["type"] == "normal":
                 BUS_TABLE = input["busTable"]
                 
+                if BUS_TABLE == None:
+                    BUS_TABLE = {}
                 # reset all time stampes
                 for bus in BUS_TABLE:
                     BUS_TABLE[bus]["last_update"] = 0
