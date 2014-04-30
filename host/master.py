@@ -258,8 +258,10 @@ def parseDriverMsg(command):
             
     locationFile = open("../visualConsole/static/locList.txt", "w")
     for elm in NODES:
-        if elm["type"] == "USER" or elm["type"] == "GSN" or elm["type"] == "RSN":
+        if elm["type"] == "USER" or elm["type"] == "GSN":
             locationFile.write(elm["type"] + ": " + elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n\n")
+        elif elm["type"] == "RSN":
+            locationFile.write(elm["type"] + ": " + elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
         else:
             locationFile.write("    " + elm["type"] + ": " + elm["name"] + " " + str(elm["x"]) + " " + str(elm["y"]) + "\n")
     locationFile.close()
@@ -403,7 +405,7 @@ def auto_run():
         line = line.rstrip()
         if line.startswith("CONF"):
             tokens = line.split(' ')
-            CONF[tokens[1]] = {"IP" : tokens[2], "Port" : tokens[3]}
+            CONF[tokens[1]] = {"role" : tokens[2], "IP" : tokens[3], "Port" : tokens[4]}
                 
     file.close()
     
@@ -412,7 +414,7 @@ def auto_run():
         addr = CONF[player]
         os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
 
-    sleep(5)
+    sleep(2)
     
     # send orders
     print "SENDING COMMANDS"
