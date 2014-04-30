@@ -146,6 +146,9 @@ def readRoutTable():
     json_data = open('../visualization/coordinates.json')
     ROUTTABLE = json.load(json_data)
 
+def getRoutes():
+    global ROUTTABLE
+    return ROUTTABLE.keys()
 
 def updateNodePos(name, busLine, idx):
     node = getNodeByName(name)
@@ -326,19 +329,31 @@ def isInitialized():
     return ISINIT
 
 
-def launchSimulator(simulatorName, ip, port, message):
+def launchSimulator(simulatorName, role, ip, port, message):
     global CONF
-    CONF[simulatorName] = {"IP" : ip, "Port" : port}
+    CONF[simulatorName] = {"role": role, "IP" : ip, "Port" : port}
     
     # launch simulator
     os.system("python ../simulation/simulator.py " + ip + " " + str(port) + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
     
-    sleep(5)
+    sleep(2)
     # send initialize command
     TCPComm.send(ip, port, message)
     
 def getSimulatorNames():
-    return CONF.keys()
+    global CONF
+    
+    gsn_list = []
+    driver_list = []
+    user_list = []
+    for name in CONF:
+        if CONF[name]["role"] == "GSN":
+            gsn_list.append(name)
+        elif CONF[name]["role"] == "DRIVER":
+            driver_list.append(name)
+        elif CONF[name]["role"] == "USER":
+            user_list.append(name)
+    return {"GSN":gsn_list, "DRIVER":driver_list, "USER":user_list}
     
 
 def sendCmd(simulatorName, message):

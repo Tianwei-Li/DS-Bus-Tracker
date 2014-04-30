@@ -124,7 +124,7 @@ svg {
             <!-- Tab panes -->
             <div class="tab-content">
               <div class="tab-pane active" id="host">
-                <textarea readonly id="run_info" rows="23" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
+                <textarea readonly id="run_info" rows="15" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
                 </textarea>
               </div>
               <div class="tab-pane" id="usr_query">
@@ -251,7 +251,7 @@ svg {
               <div class="form-group">
                 <label for="simulator_name">Simulator Name</label>
                 <select multiple class="form-control" name="simulator_name">
-                  {% for name in simulator_list %}
+                  {% for name in gsn_list %}
                       <option value="{{name}}">{{name}}</option>
                   {% endfor %}
                 </select>
@@ -283,7 +283,7 @@ svg {
               <div class="form-group">
                 <label for="simulator_name">Simulator Name</label>
                 <select multiple class="form-control" name="simulator_name">
-                  {% for name in simulator_list %}
+                  {% for name in driver_list %}
                       <option value="{{name}}">{{name}}</option>
                   {% endfor %}
                 </select>
@@ -303,15 +303,20 @@ svg {
                     <div class="panel-body">
                       <div class="form-group">
                         <label for="route">Route Name</label>
-                        <input type="text" name="route" class="form-control" id="route" placeholder="Route Name">
+                        <select multiple class="form-control" name="route">
+                        {% for route in route_list %}
+                          <option value="{{route}}">{{route}}</option>
+                        {% endfor %}
+                        </select>
                       </div>
+
                       <div class="form-group">
                         <label for="direction">Running Direction</label>
                         <input type="text" name="direction" class="form-control" id="direction" value="0" placeholder="Route Direction">
                       </div>
                       <div class="form-group">
                         <label for="location">Start Location</label>
-                        <input type="text" name="location" class="form-control" id="location" placeholder="Start Location">
+                        <input type="text" name="location" class="form-control" id="location" placeholder="Start Location" value="0">
                       </div>
 
                       <button type="submit" name="start_bus" class="btn btn-primary">Start</button>
@@ -346,7 +351,7 @@ svg {
               <div class="form-group">
                 <label for="simulator_name">Simulator Name</label>
                 <select multiple class="form-control" name="simulator_name">
-                  {% for name in simulator_list %}
+                  {% for name in user_list %}
                       <option value="{{name}}">{{name}}</option>
                   {% endfor %}
                 </select>
@@ -366,7 +371,11 @@ svg {
                     <div class="panel-body">
                       <div class="form-group">
                         <label for="route">Route Name</label>
-                        <input type="text" name="route" class="form-control" id="route" placeholder="Route Name">
+                        <select multiple class="form-control" name="route">
+                        {% for route in route_list %}
+                          <option value="{{route}}">{{route}}</option>
+                        {% endfor %}
+                        </select>
                       </div>
                       <div class="form-group">
                         <label for="direction">Direction</label>
@@ -374,11 +383,11 @@ svg {
                       </div>
                       <div class="form-group">
                         <label for="location">Current Location</label>
-                        <input type="text" name="location" class="form-control" id="location" placeholder="Current Location">
+                        <input type="text" name="location" class="form-control" id="location" placeholder="Current Location" value="15">
                       </div>
                       <div class="form-group">
                         <label for="location">Destination</label>
-                        <input type="text" name="destination" class="form-control" id="destination" placeholder="Destination">
+                        <input type="text" name="destination" class="form-control" id="destination" placeholder="Destination" value="29">
                       </div>
 
                       <button type="submit" name="user_request" class="btn btn-primary">Request</button>

@@ -50,7 +50,7 @@ def visualization(request):
 					"localPort" : host_port
 		}
 		
-		master.launchSimulator(simulator_name, simulator_ip, simulator_port, message)
+		master.launchSimulator(simulator_name, role, simulator_ip, simulator_port, message)
 	elif 'start_bus' in request.POST:
 		# start a bus
 		simulator_name = request.POST.get("simulator_name")
@@ -88,8 +88,17 @@ def visualization(request):
 		master.sendCmd(simulator_name, message)
 
 	simulator_list = master.getSimulatorNames()
-	if simulator_list == None:
-		simulator_list = []
-	return render_to_response('bus_tracker/visualization.html', {"simulator_list" : simulator_list})
+	route_list = master.getRoutes()
+
+	print simulator_list
+
+
+	if route_list == None:
+		route_list = []
+
+	return render_to_response('bus_tracker/visualization.html', {"gsn_list" : simulator_list["GSN"], 
+																 "driver_list" : simulator_list["DRIVER"],
+																 "user_list" : simulator_list["USER"],
+																 "route_list" : route_list})
 
 
