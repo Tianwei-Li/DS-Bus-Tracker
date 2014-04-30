@@ -363,7 +363,14 @@ def clearFiles():
     locationFile = open("../visualConsole/static/locList.txt", "w")
     locationFile.close()
 
+def terminate():
+    message = {}
+    message["action"] = "exit"
+    
+    for simulatorName in CONF.keys():
+        sendCmd(simulatorName, message)
 
+    
 def auto_run():
     global CONF
     file = open("../feedFile.txt", "r")
