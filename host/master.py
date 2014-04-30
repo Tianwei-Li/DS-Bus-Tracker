@@ -66,6 +66,7 @@ def runServer(ip, port):
     server_thread.daemon = True
     server_thread.start()
 
+'''
 class Application(Frame):
     
     def setupSim(self):
@@ -134,7 +135,7 @@ class Application(Frame):
         Frame.__init__(self, master)   
         self.pack()   
         self.createWidgets()   
- 
+''' 
 
 def getNodeByName(name):
     for elm in NODES:
@@ -439,7 +440,8 @@ def auto_run(filename):
     
     # send orders
     print "SENDING COMMANDS"
-    file = open("../feedFile.txt", "r")
+    file = open(path, "r")
+    #file = open("../auto_run_scripts/all_routes.txt", "r")
     for line in file:
         # skip blank lines
         if not line.strip():
@@ -462,15 +464,9 @@ def auto_run(filename):
 
 
 def djangoMain():
-    readRoutTable()
-    runServer(MASTER_IP, MASTER_PORT)
-    thread = threading.Thread(target=writeJsonFile, args = ())
-    thread.start()
-    
-    clearFiles()
-    
+    initialize(MASTER_IP, MASTER_PORT)    
     # start processes
-    auto_run()
+    auto_run("fault_1.txt")
     
 
 def main():
@@ -494,3 +490,4 @@ if __name__ == '__main__':
     # main()
     path = glob.glob("../auto_run_scripts/*.txt")
     print os.path.basename(path[0])
+    main()
