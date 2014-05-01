@@ -309,7 +309,7 @@ def parseUserMsg(command):
     if busId == None:
         busId = "None"
     
-    locationFile.write(command["userId"] + " " + busId + " " + str(int(command["arriveTime"]) * 5) + "\n")
+    locationFile.write("<tr><td>" + command["userId"] + "</td><td>" + busId + "</td><td>" + str(int(command["arriveTime"]) * 5) + "</td></tr>\n")
   
     locationFile.close()
     

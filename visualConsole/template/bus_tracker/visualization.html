@@ -146,8 +146,9 @@ svg {
                 </textarea>
               </div>
               <div class="tab-pane" id="usr_query">
-                <textarea readonly id="user_query_result" rows="21" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
-                </textarea>
+                <!--<textarea readonly id="user_query_result" rows="21" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
+                </textarea>-->
+                <table class="table table-striped" id="user_query_table"></table>
               </div>
               <div class="tab-pane" id="settings">
                 <textarea readonly id="setting_result" rows="21" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
@@ -576,7 +577,9 @@ function loadInfoFileToTextArea()
   xmlhttp.open("GET","{% static "queryResult.txt" %}",false);
   xmlhttp.send();
   var value = xmlhttp.responseText;
-  document.getElementById("user_query_result").value=value;
+
+  document.getElementById("user_query_table").innerHTML= "<tr><td>UserId</td><td>Nearest Bus</td><td>Dist</td></tr>" + value;
+
 }
 
 function getBusCoords(n) {
