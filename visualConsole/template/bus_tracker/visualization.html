@@ -624,118 +624,12 @@ function restart() {
       jsonLinks = json.links;
     });
 
-    /*
-    // add new nodes
-    jsonNodes.forEach( function(d) {
-      var nodeIndex = d3.keys(nodes).indexOf("" + d.index);
-      if(nodeIndex == -1) {
-//        console.log("add node with index: " + d.index);
-        n = nodes.push(d);
-      } else if(d.fixed == "true") {
-        // update coordinates
-        nodes[nodeIndex].fixed = "true";
-        nodes[nodeIndex].x = d.x;
-        nodes[nodeIndex].y = d.y;
-        nodes[nodeIndex].px = d.x;
-        nodes[nodeIndex].py = d.y;
-
-        // update type
-        nodes[nodeIndex].type = d.type;
-
-        // update name
-        nodes[nodeIndex].name = d.name;
-        tick();
-      }
-    });
-
-    // remove old nodes
-    nodes.forEach( function(d) {
-      if(d3.keys(jsonNodes).indexOf("" + d.index) == -1) {
-//        console.log("remove node with index: " + d.index);
-        n = nodes.splice(d.index);
-      }
-    });
-
-    // add new links
-    jsonLinks.forEach( function(d) {
-      var linkIndex = d3.keys(links).indexOf("" + d.index);
-      if(linkIndex == -1) {
-//        console.log("add link with index: " + d.index);
-        l = links.push(d);
-      } else {
-        // update links
-        if (links[linkIndex].source.index != d.source || 
-            links[linkIndex].target.index != d.target) {
-          links[linkIndex].source = d.source;
-          links[linkIndex].target = d.target;
-        }
-
-        tick();
-      }
-    });
-
-    // remove old links
-    links.forEach( function(d) {
-      if(d3.keys(jsonLinks).indexOf("" + d.index) == -1) {
-//        console.log("remove link with index: " + d.index);
-        l = links.splice(d.index);
-      }
-    });
-
-    // update links
-    link = link.data(links, function(d) { 
-        return d.index;
-    });
-
-    link.exit().remove();
-
-    link.enter().insert("line", ".node")
-      .attr("class", "link");
-
-    // update nodes
-    node = node.data(nodes, function(d) { 
-        return d.index;
-    });
-
-    node.exit().remove();
-
-    var nn = node.enter().append("g")
-      .attr("class", "node")
-      .attr("class", function(d) { return "node " + d.type; })
-      .attr("r", 5);
-
-    nn.append("image")
-      .attr("xlink:href", function(d) {
-        if(d.type == "GSN")
-          return "{% static "img/iconGSN.png"%}";
-        else if (d.type == "RSN")
-          return "{% static "img/iconRSN.png"%}";
-        else if (d.type == "USER")
-          return "{% static "img/iconUser.png"%}";
-        else
-          return "{% static "img/circle.png" %}";
-      })
-      .attr("x", -12)
-      .attr("y", -12)
-      .attr("width", 24)
-      .attr("height", 24);
-
-    nn.append("text")
-      .attr("dx", 20)
-      .attr("dy", ".35em")
-      .style("fill", "#00003D")
-      .style("font-size","14px")
-      .style("font-weight", "bold")
-      .text(function(d) { return d.name });
-
-    force.start();
-    */
     nodes = jsonNodes;
     links = jsonLinks;
     tick();
 
 
-// update links
+    // update links
     link = link.data(links, function(d) { 
                 //console.log(d.source + "-" + d.target);
                 return d.source + "-" + d.target;
