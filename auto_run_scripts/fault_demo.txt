@@ -5,8 +5,8 @@ CONF GSN GSN 127.0.0.1 9000
 CONF DRIVER_Blue_1 DRIVER 127.0.0.1 9100
 CONF DRIVER_Blue_2 DRIVER 127.0.0.1 9110
 CONF DRIVER_Blue_3 DRIVER 127.0.0.1 9120
-#CONF DRIVER_Blue_4 DRIVER 127.0.0.1 9130
-#CONF DRIVER_Blue_5 DRIVER 127.0.0.1 9140
+CONF DRIVER_Blue_4 DRIVER 127.0.0.1 9130
+CONF DRIVER_Blue_5 DRIVER 127.0.0.1 9140
 
 CONF USER_1 USER 127.0.0.1 10000
 
@@ -38,7 +38,7 @@ DRIVER_Blue_4 {"action":"sleep", "time": 5}
 DRIVER_Blue_4 {"action":"start", "route":"Blue", "direction":0, "location":3}
 
 # DRIVER_Blue_5
-DRIVER_Blue_5 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40150}
+DRIVER_Blue_5 {"action" : "initialize", "localName" : "i'm eva", "role" : "DRIVER", "id" : "bus_Blue_eva", "localIP" : "127.0.0.1", "localPort" : 40150}
 DRIVER_Blue_5 {"action":"sleep", "time": 5}
 DRIVER_Blue_5 {"action":"start", "route":"Blue", "direction":0, "location":0}
 
