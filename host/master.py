@@ -37,6 +37,8 @@ BUSCNT = None
 ROUTTABLE = None
 ROUTNODES = None
 USERNODES = []
+USERROUTE = ""
+USERSTOP = 0
 ISINIT = False
 AUTO_RUN_SCRIPT_FILES = {}
 
@@ -169,7 +171,7 @@ def getIdxByName(name):
 
 
 def parseDriverMsg(command):
-    global NODES, LINKS, DIC
+    global NODES, LINKS, DIC, USERNODES
     NODES = []
     LINKS = []
     DIC = {}
@@ -183,8 +185,19 @@ def parseDriverMsg(command):
     dic["fixed"] = "true"
     dic["x"] = 420
     dic["y"] = 390
-        
+
     NODES.append(dic)
+    
+    rsn_busId = command["busId"]
+    bus_table = command["BUS_TABLE"]
+    route = command["route"]
+    
+    if route == USERROUTE:
+        for item in bus_table.items():
+            if item[1]["location"] == USERSTOP:
+                USERNODES = []
+                break
+        
     
     if USERNODES != None and len(USERNODES) > 0:
         dic = USERNODES[0]
@@ -198,9 +211,7 @@ def parseDriverMsg(command):
         LINKS.append(link_dic)
     
    
-    rsn_busId = command["busId"]
-    bus_table = command["BUS_TABLE"]
-    route = command["route"]
+    
     ROUTNODES[route] = []
             
     rsn_data = bus_table.get(rsn_busId)
@@ -271,7 +282,7 @@ def parseDriverMsg(command):
 
 
 def parseUserMsg(command):
-    global USERNODES
+    global USERNODES, USERROUTE, USERSTOP
     # update the user location
     USERNODES = []
     node = {}
@@ -280,7 +291,11 @@ def parseUserMsg(command):
     node["type"] = "USER"
     
     route = command["query"]["route"]
+    USERROUTE = route
+    
     stationIdx = command["query"]["location"]
+    USERSTOP = stationIdx
+    
     node["fixed"] = "true"
     node["x"] = ROUTTABLE[route][stationIdx]["x"]
     node["y"] = ROUTTABLE[route][stationIdx]["y"]
@@ -288,7 +303,7 @@ def parseUserMsg(command):
     USERNODES.append(node)
     
     # report the user query result
-    locationFile = open("../visualConsole/static/queryResult.txt", "w")
+    locationFile = open("../visualConsole/static/queryResult.txt", "a")
     
     busId = command["response"]["busId"]
     if busId == None:
@@ -404,7 +419,8 @@ def terminate():
     for simulatorName in CONF.keys():
         sendCmd(simulatorName, message)
         #CONF.pop(simulatorName)
-        
+    
+    MSG_QUEUE.clear()
     clearFiles()
 
     
@@ -466,7 +482,7 @@ def auto_run(filename):
 def djangoMain():
     initialize(MASTER_IP, MASTER_PORT)    
     # start processes
-    auto_run("fault_1.txt")
+    auto_run("fault_demo.txt")
     
 
 def main():
