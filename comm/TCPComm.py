@@ -11,10 +11,12 @@ import logging
 import socket
 import threading
 import pickle
-
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("TCPComm")
 LOGGER.setLevel(logging.DEBUG)
+'''
+LOGGER = logging.getLogger("Simulator")
 
 # deque for buffering received messages
 RECVMSGQUE = collections.deque()

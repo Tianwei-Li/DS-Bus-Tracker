@@ -13,10 +13,12 @@ from util.Addr import Addr
 from util.WatchDog import Watchdog
 import socket
 import collections
-
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("UserStateMachine")
 LOGGER.setLevel(logging.DEBUG)
+'''
+LOGGER = logging.getLogger("Simulator")
 
 USER_SM = None
 

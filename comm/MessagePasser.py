@@ -13,10 +13,14 @@ import threading
 import TCPComm
 import yaml
 
-
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("MessagePasser")
 LOGGER.setLevel(logging.DEBUG)
+'''
+
+LOGGER = logging.getLogger("Simulator")
+
 
 # deque for buffering received messages ready to deliver
 DELIVERQUE = collections.deque()

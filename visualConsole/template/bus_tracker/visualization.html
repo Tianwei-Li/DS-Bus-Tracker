@@ -32,7 +32,7 @@ rect {
 
 svg {
   border: 1px solid black;
-  background: url("{% static "img/map_pit_paths_70_opacity.png" %}");
+  background: url("{% static "img/map_final.png" %}");
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -136,7 +136,7 @@ svg {
             <ul class="nav nav-tabs">
               <li class="active"><a href="#host" data-toggle="tab">Host</a></li>
               <li><a href="#usr_query" data-toggle="tab">UserQuery</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li><a href="#logs" data-toggle="tab">Logs</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -146,13 +146,22 @@ svg {
                 </textarea>
               </div>
               <div class="tab-pane" id="usr_query">
-                <!--<textarea readonly id="user_query_result" rows="21" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
-                </textarea>-->
-                <table class="table table-striped" id="user_query_table"></table>
+                <div style="width:318px;height:430px;overflow:auto;"> 
+                  <table class="table table-striped" id="user_query_table"></table>
+                </div>
+                
               </div>
-              <div class="tab-pane" id="settings">
-                <textarea readonly id="setting_result" rows="21" style="border: none; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"> 
-                </textarea>
+              <div class="tab-pane" id="logs">
+                <div style="width:318px;height:430px;overflow:auto;"> 
+                  <table class="table" id="log_links_table">
+                    {% for link in log_links_list %}
+                      <tr><td><a href="{% static "logs/"%}{{link}}" target="_blank">{{link}}</a></td></tr>
+                    {% endfor %}
+                  </table>
+                    <form action="" method="post">  
+                      <input type="submit" name="clear_logs" value="Clear All" class="btn btn-default" style="width:150px">
+                    </form>
+                  </div>
               </div>
             </div>
           </div>
@@ -578,7 +587,7 @@ function loadInfoFileToTextArea()
   xmlhttp.send();
   var value = xmlhttp.responseText;
 
-  document.getElementById("user_query_table").innerHTML= "<tr><td>UserId</td><td>Nearest Bus</td><td>Dist</td></tr>" + value;
+  document.getElementById("user_query_table").innerHTML= "<tr><td>User</td><td>ULoc</td><td>Rout</td><td>Bus</td><td>BLoc</td><td>Dist</td></tr>" + value;
 
 }
 
@@ -688,7 +697,7 @@ function restart() {
 restart();
 
 // sets interval graph gets updated (1sec = 1000ms)
-setInterval(restart, 1000 * 2);
+setInterval(restart, 1000);
 
 </script>
 

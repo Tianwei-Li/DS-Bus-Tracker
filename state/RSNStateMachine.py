@@ -13,10 +13,12 @@ from util.Addr import Addr
 import socket
 import threading
 import time
-
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("RSNStateMachine")
 LOGGER.setLevel(logging.DEBUG)
+'''
+LOGGER = logging.getLogger("Simulator")
 
 RSN_SM = None
 

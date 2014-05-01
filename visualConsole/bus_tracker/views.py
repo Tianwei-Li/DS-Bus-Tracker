@@ -89,10 +89,13 @@ def visualization(request):
 		master.sendCmd(simulator_name, message)
 	elif 'terminate_all' in request.POST:
 		master.terminate()
+	elif 'clear_logs' in request.POST:
+		master.clearLogs()
 
 	simulator_list = master.getSimulatorNames()
 	route_list = master.getRoutes()
 	auto_run_script_list = master.getScripts()
+	log_links_list = master.getLogs()
 
 	if route_list == None:
 		route_list = []
@@ -101,6 +104,7 @@ def visualization(request):
 																 "driver_list" : simulator_list["DRIVER"],
 																 "user_list" : simulator_list["USER"],
 																 "route_list" : route_list,
-																 "auto_run_script_list" : auto_run_script_list})
+																 "auto_run_script_list" : auto_run_script_list,
+																 "log_links_list" : log_links_list})
 
 

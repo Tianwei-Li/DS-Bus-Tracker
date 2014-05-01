@@ -14,10 +14,13 @@ from util.Addr import Addr
 import util.BusTableElm as BusTableElm
 
 import threading
-
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("GSNStateMachine")
 LOGGER.setLevel(logging.DEBUG)
+'''
+LOGGER = logging.getLogger("Simulator")
+
 
 GSN_SM = None
 '''

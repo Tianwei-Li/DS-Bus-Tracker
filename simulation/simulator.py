@@ -8,6 +8,7 @@ sys.path += ['../']
 
 import host.host as host
 import logging
+import logging.handlers
 import socket
 import collections
 import SocketServer
@@ -21,16 +22,13 @@ import state.RSNStateMachine as RSNStateMachine
 #import json
 
 
-logging.basicConfig()
-LOGGER = logging.getLogger("Simulator")
-LOGGER.setLevel(logging.DEBUG)
-
 TCP_IP = '127.0.0.1'
 TCP_PORT = 9999
 
 MASTER_IP = '127.0.0.1'
 MASTER_PORT = 60000
 
+SIMULATOR_NAME = None
 
 MSG_QUEUE = collections.deque()
 
@@ -86,16 +84,29 @@ def updateLocThread():
 
 # should be called by master
 if __name__ == '__main__':
-    global MSG_QUEUE, TCP_IP, TCP_PORT, MASTER_IP, MASTER_PORT, IS_BUS_START
-
-    LOGGER.info("Simulator starts! Hello from simulator!")
+    global MSG_QUEUE, TCP_IP, TCP_PORT, MASTER_IP, MASTER_PORT, IS_BUS_START, SIMULATOR_NAME
 
     TCP_IP = sys.argv[1]
     TCP_PORT = int(sys.argv[2])
     
     MASTER_IP = sys.argv[3]
-    MASTER_PORT =int(sys.argv[4])
+    MASTER_PORT = int(sys.argv[4])
     
+    SIMULATOR_NAME = sys.argv[5]
+    
+    LOGGER_FILE_NAME = "../visualConsole/static/logs/Simulator_%s.log" % SIMULATOR_NAME
+    #log_file_name = ()
+    
+    logging.basicConfig()
+    LOGGER = logging.getLogger("Simulator")
+    LOGGER.setLevel(logging.DEBUG)
+    
+    #hdlr = logging.FileHandler(LOGGER_FILE_NAME, when='h', interval=1, )
+    hdlr = logging.handlers.TimedRotatingFileHandler(LOGGER_FILE_NAME, when='h', interval=1, backupCount=3, encoding=None, delay=False, utc=False)
+    formatter = logging.Formatter('%(asctime)s  %(levelname)s  %(message)s')
+    hdlr.setFormatter(formatter)
+    LOGGER.addHandler(hdlr) 
+
     runServer(TCP_IP, TCP_PORT)
     
     # initialize reporter thread
@@ -107,7 +118,9 @@ if __name__ == '__main__':
     updateLocThread = threading.Thread(target=updateLocThread, args = ())
     updateLocThread.daemon = True
     updateLocThread.start()
-    
+
+    LOGGER.info("Simulator starts! Hello from simulator!")
+
     while True:
         if MSG_QUEUE:
             command = MSG_QUEUE.popleft()

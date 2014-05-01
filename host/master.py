@@ -41,6 +41,7 @@ USERROUTE = ""
 USERSTOP = 0
 ISINIT = False
 AUTO_RUN_SCRIPT_FILES = {}
+LOGS_FILES = {}
 
 MSG_QUEUE = collections.deque()
 
@@ -305,11 +306,15 @@ def parseUserMsg(command):
     # report the user query result
     locationFile = open("../visualConsole/static/queryResult.txt", "a")
     
-    busId = command["response"]["busId"]
+    userLoc = str(command["query"]["location"])
+    userRoute = str(command["query"]["route"])
+    busId = str(command["response"]["busId"])
+    busLoc = str(command["response"]["location"])
     if busId == None:
         busId = "None"
+        busLoc = "None"
     
-    locationFile.write("<tr><td>" + command["userId"] + "</td><td>" + busId + "</td><td>" + str(int(command["arriveTime"]) * 5) + "</td></tr>\n")
+    locationFile.write("<tr><td>" + command["userId"] + "</td><td>" + userLoc + "</td><td>" + userRoute + "</td><td>" + busId + "</td><td>" + busLoc + "</td><td>" + str(int(command["arriveTime"]) * 1) + "</td></tr>\n")
   
     locationFile.close()
     
@@ -359,7 +364,7 @@ def launchSimulator(simulatorName, role, ip, port, message):
     CONF[simulatorName] = {"role": role, "IP" : ip, "Port" : port}
     
     # launch simulator
-    os.system("python ../simulation/simulator.py " + ip + " " + str(port) + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+    os.system("python ../simulation/simulator.py " + ip + " " + str(port) + " " + MASTER_IP + " " + str(MASTER_PORT) + " " + simulatorName + " &")
     
     sleep(2)
     # send initialize command
@@ -368,6 +373,21 @@ def launchSimulator(simulatorName, role, ip, port, message):
 def getScripts():
     global AUTO_RUN_SCRIPT_FILES
     return AUTO_RUN_SCRIPT_FILES.keys()
+
+def getLogs():
+    global LOGS_FILES
+    LOGS_FILES = {}
+    file_paths = glob.glob("../visualConsole/static/logs/*.log")
+
+    for path in file_paths:
+        LOGS_FILES[os.path.basename(path)] = path
+
+    return LOGS_FILES.keys()
+
+def clearLogs():
+    global LOGS_FILES
+    for filename in LOGS_FILES:
+        os.remove(LOGS_FILES[filename])
 
 def getSimulatorNames():
     global CONF
@@ -450,7 +470,7 @@ def auto_run(filename):
     print "LAUNCHING ALL PROCESSES"
     for player in CONF:
         addr = CONF[player]
-        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " &")
+        os.system("python ../simulation/simulator.py " + addr["IP"] + " " + addr["Port"] + " " + MASTER_IP + " " + str(MASTER_PORT) + " " + player + " &")
 
     sleep(2)
     

@@ -20,9 +20,12 @@ from time import sleep
 from threading import Timer
 import thread
 
+'''
 logging.basicConfig()
 LOGGER = logging.getLogger("DriverStateMachine")
 LOGGER.setLevel(logging.DEBUG)
+'''
+LOGGER = logging.getLogger("Simulator")
 
 DRIVER_SM = None
 

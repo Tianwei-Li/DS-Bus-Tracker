@@ -19,9 +19,9 @@ import logging
 import socket
 
 
-logging.basicConfig()
-LOGGER = logging.getLogger("Host")
-LOGGER.setLevel(logging.DEBUG)
+#logging.basicConfig()
+LOGGER = logging.getLogger("Simulator")
+#LOGGER.setLevel(logging.DEBUG)
 
 LOCALNAME = None
 ROLE = None

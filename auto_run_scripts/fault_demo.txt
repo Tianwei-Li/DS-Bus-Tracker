@@ -2,47 +2,46 @@
 # 
 
 CONF GSN GSN 127.0.0.1 9000
-CONF DRIVER_Blue_1 DRIVER 127.0.0.1 9100
-CONF DRIVER_Blue_2 DRIVER 127.0.0.1 9110
-CONF DRIVER_Blue_3 DRIVER 127.0.0.1 9120
-CONF DRIVER_Blue_4 DRIVER 127.0.0.1 9130
-CONF DRIVER_Blue_5 DRIVER 127.0.0.1 9140
+CONF SIM_DRIVER_Blue_Alice DRIVER 127.0.0.1 9100
+CONF SIM_DRIVER_Blue_Bob DRIVER 127.0.0.1 9110
+CONF SIM_DRIVER_Blue_Charlie DRIVER 127.0.0.1 9120
+CONF SIM_DRIVER_Blue_David DRIVER 127.0.0.1 9130
+CONF SIM_DRIVER_Blue_Eva DRIVER 127.0.0.1 9140
 
-CONF USER_1 USER 127.0.0.1 10000
+CONF SIM_USER_Qian USER 127.0.0.1 10000
 
 
 # GSN
 GSN {"action" : "initialize", "localName" : "gsn_1", "role" : "GSN", "id" : "gsn_pittsburgh_1", "localIP" : "127.0.0.1", "localPort" : 40000}
 
 
-# DRIVER_Blue_1
-DRIVER_Blue_1 {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_Blue_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
-DRIVER_Blue_1 {"action":"sleep", "time": 5}
-DRIVER_Blue_1 {"action":"start", "route":"Blue", "direction":0, "location":17}
+# SIM_DRIVER_Blue_Alice
+SIM_DRIVER_Blue_Alice {"action" : "initialize", "localName" : "driver_alice", "role" : "DRIVER", "id" : "bus_Blue_alice", "localIP" : "127.0.0.1", "localPort" : 40110}
+SIM_DRIVER_Blue_Alice {"action":"sleep", "time": 5}
+SIM_DRIVER_Blue_Alice {"action":"start", "route":"Blue", "direction":0, "location":17}
 
   
-# DRIVER_Blue_2
-DRIVER_Blue_2 {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_Blue_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
-DRIVER_Blue_2 {"action":"sleep", "time": 5}
-DRIVER_Blue_2 {"action":"start", "route":"Blue", "direction":0, "location":12}
+# SIM_DRIVER_Blue_Bob
+SIM_DRIVER_Blue_Bob {"action" : "initialize", "localName" : "super_bob", "role" : "DRIVER", "id" : "bus_Blue_bob", "localIP" : "127.0.0.1", "localPort" : 40120}
+SIM_DRIVER_Blue_Bob {"action":"sleep", "time": 5}
+SIM_DRIVER_Blue_Bob {"action":"start", "route":"Blue", "direction":0, "location":12}
 
 
-# DRIVER_Blue_3
-DRIVER_Blue_3 {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
-DRIVER_Blue_3 {"action":"sleep", "time": 5}
-DRIVER_Blue_3 {"action":"start", "route":"Blue", "direction":0, "location":8}
+# SIM_DRIVER_Blue_Charlie
+SIM_DRIVER_Blue_Charlie {"action" : "initialize", "localName" : "i'm charlie", "role" : "DRIVER", "id" : "bus_Blue_charlie", "localIP" : "127.0.0.1", "localPort" : 40130}
+SIM_DRIVER_Blue_Charlie {"action":"sleep", "time": 5}
+SIM_DRIVER_Blue_Charlie {"action":"start", "route":"Blue", "direction":0, "location":8}
 
-# DRIVER_Blue_4
-DRIVER_Blue_4 {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_Blue_david", "localIP" : "127.0.0.1", "localPort" : 40140}
-DRIVER_Blue_4 {"action":"sleep", "time": 5}
-DRIVER_Blue_4 {"action":"start", "route":"Blue", "direction":0, "location":3}
+# SIM_DRIVER_Blue_David
+SIM_DRIVER_Blue_David {"action" : "initialize", "localName" : "david", "role" : "DRIVER", "id" : "bus_Blue_david", "localIP" : "127.0.0.1", "localPort" : 40140}
+SIM_DRIVER_Blue_David {"action":"sleep", "time": 5}
+SIM_DRIVER_Blue_David {"action":"start", "route":"Blue", "direction":0, "location":3}
 
-# DRIVER_Blue_5
-DRIVER_Blue_5 {"action" : "initialize", "localName" : "eva", "role" : "DRIVER", "id" : "bus_Blue_eva", "localIP" : "127.0.0.1", "localPort" : 40150}
-DRIVER_Blue_5 {"action":"sleep", "time": 5}
-DRIVER_Blue_5 {"action":"start", "route":"Blue", "direction":0, "location":0}
+# SIM_DRIVER_Blue_Eva
+SIM_DRIVER_Blue_Eva {"action" : "initialize", "localName" : "eva", "role" : "DRIVER", "id" : "bus_Blue_eva", "localIP" : "127.0.0.1", "localPort" : 40150}
+SIM_DRIVER_Blue_Eva {"action":"sleep", "time": 5}
+SIM_DRIVER_Blue_Eva {"action":"start", "route":"Blue", "direction":0, "location":0}
 
 
-
-# USER_1
-USER_1 {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "Channing Mao", "localIP" : "127.0.0.1", "localPort" : 51100}
+# SIM_USER_Qian
+SIM_USER_Qian {"action" : "initialize", "localName" : "Qian Mao", "role" : "USER", "id" : "Qian", "localIP" : "127.0.0.1", "localPort" : 51100}
