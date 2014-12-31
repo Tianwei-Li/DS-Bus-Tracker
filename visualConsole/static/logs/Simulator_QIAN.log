@@ -1,0 +1,62 @@
+2014-05-04 03:20:13,061  INFO  Lisenting on (127.0.0.1, 10110)
+2014-05-04 03:20:13,247  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,851  INFO  Receive message from ('127.0.0.1', 52770) : {'src': '', 'data': {'localPort': 50110, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Qian Mao', 'id': 'Qian'}, 'dst_port': 10110, 'seq': 92, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,862  INFO  Receive message from ('127.0.0.1', 52771) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10110, 'seq': 93, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,877  INFO  Receive message from ('127.0.0.1', 52772) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 4}, 'dst_port': 10110, 'seq': 94, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,888  INFO  Receive message from ('127.0.0.1', 52773) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10110, 'seq': 95, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,901  INFO  Receive message from ('127.0.0.1', 52774) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 5}, 'dst_port': 10110, 'seq': 96, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,980  INFO  perform action: {'localPort': 50110, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Qian Mao', 'id': 'Qian'}
+2014-05-04 03:20:15,980  INFO  Lisenting on (127.0.0.1, 50110)
+2014-05-04 03:20:16,345  INFO  Initializing Host
+2014-05-04 03:20:16,356  INFO  OFF
+2014-05-04 03:20:16,633  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Qian', 'localPort': 50110, 'SM': 'USER_SM'}]
+2014-05-04 03:20:16,634  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-04 03:20:16,634  INFO  Ready
+2014-05-04 03:20:16,858  INFO  Receive message from ('127.0.0.1', 52775) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10110, 'seq': 97, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,874  INFO  Receive message from ('127.0.0.1', 52779) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}, 'dst_port': 10110, 'seq': 98, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,887  INFO  Receive message from ('127.0.0.1', 52780) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10110, 'seq': 99, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,898  INFO  Receive message from ('127.0.0.1', 52781) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 7}, 'dst_port': 10110, 'seq': 100, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,917  INFO  Receive message from ('127.0.0.1', 52782) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10110, 'seq': 101, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,928  INFO  Receive message from ('127.0.0.1', 52783) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 25}, 'dst_port': 10110, 'seq': 102, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,801  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 4}
+2014-05-04 03:20:26,891  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 4, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:20:26,892  INFO  send user request: {'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 4, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:20:26,893  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Qian Mao', 'data': {'src': 'Qian Mao', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'location': 4}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,904  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-04 03:20:26,904  INFO  Req_Waiting: requesting
+2014-05-04 03:20:27,481  INFO  Receive message from ('127.0.0.1', 52925) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Purple_ilan', 'location': 1, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 4}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50110, 'seq': 19, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:27,623  INFO  Dispatch message [{'action': 'recvRes', 'busId': 'bus_Purple_ilan', 'location': 1, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 4}}]
+2014-05-04 03:20:27,623  INFO  receive response from RSN {'action': 'recvRes', 'busId': 'bus_Purple_ilan', 'location': 1, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 4}}
+2014-05-04 03:20:27,623  INFO  expected arrive time: 3
+2014-05-04 03:20:27,623  INFO  Ready
+2014-05-04 03:20:27,805  INFO  report state: {'arriveTime': 3, 'userId': 'Qian', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'location': 4}, 'localName': 'Qian Mao', 'response': {'action': 'recvRes', 'busId': 'bus_Purple_ilan', 'location': 1, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 4}}}
+2014-05-04 03:20:27,832  INFO  Send message to (127.0.0.1, 2000) : {'src': 'Qian Mao', 'data': {'arriveTime': 3, 'userId': 'Qian', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'location': 4}, 'localName': 'Qian Mao', 'response': {'action': 'recvRes', 'busId': 'bus_Purple_ilan', 'location': 1, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 4}}}, 'dst_port': 2000, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,123  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 5}
+2014-05-04 03:20:47,216  INFO  Dispatch message [{'direction': 0, 'route': 'Green', 'destination': 20, 'location': 5, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:20:47,217  INFO  send user request: {'direction': 0, 'route': 'Green', 'destination': 20, 'location': 5, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:20:47,218  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Qian Mao', 'data': {'src': 'Qian Mao', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'location': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,229  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-04 03:20:47,230  INFO  Req_Waiting: requesting
+2014-05-04 03:20:47,670  INFO  Receive message from ('127.0.0.1', 53198) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 5}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50110, 'seq': 54, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,743  INFO  Dispatch message [{'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 5}}]
+2014-05-04 03:20:47,743  INFO  receive response from RSN {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 5}}
+2014-05-04 03:20:47,743  INFO  expected arrive time: 2
+2014-05-04 03:20:47,743  INFO  Ready
+2014-05-04 03:20:48,066  INFO  report state: {'arriveTime': 2, 'userId': 'Qian', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'location': 5}, 'localName': 'Qian Mao', 'response': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 5}}}
+2014-05-04 03:20:48,067  INFO  Send message to (127.0.0.1, 2000) : {'src': 'Qian Mao', 'data': {'arriveTime': 2, 'userId': 'Qian', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Qian2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50110, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'location': 5}, 'localName': 'Qian Mao', 'response': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Qian', 'action': 'recvUserReq', 'requestId': 'Qian2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50110, 'location': 5}}}, 'dst_port': 2000, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:50,971  INFO  Receive message from ('127.0.0.1', 53224) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 10110, 'seq': 131, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:21:07,340  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}
+2014-05-04 03:21:07,341  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 10, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:21:07,341  INFO  send user request: {'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 10, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:21:07,341  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:21:07,342  INFO  Req_Waiting: requesting
+2014-05-04 03:21:07,448  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-04 03:21:22,342  INFO  reqTimeout
+2014-05-04 03:21:22,353  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:21:22,360  INFO  Req_Waiting: requesting
+2014-05-04 03:21:27,564  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 7}
+2014-05-04 03:21:27,607  INFO  Dispatch message [{'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 7, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:21:27,675  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-04 03:21:37,372  INFO  reqTimeout
+2014-05-04 03:21:37,855  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 25}
+2014-05-04 03:21:37,992  INFO  perform action: {'action': 'exit'}

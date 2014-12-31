@@ -1,0 +1,22 @@
+2014-05-04 03:20:13,262  INFO  Lisenting on (127.0.0.1, 9260)
+2014-05-04 03:20:13,586  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,382  INFO  Receive message from ('127.0.0.1', 52751) : {'src': '', 'data': {'localPort': 40270, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Padma', 'id': 'bus_Purple_padma'}, 'dst_port': 9260, 'seq': 77, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,397  INFO  Receive message from ('127.0.0.1', 52752) : {'src': '', 'data': {'action': 'sleep', 'time': 40}, 'dst_port': 9260, 'seq': 78, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,409  INFO  Receive message from ('127.0.0.1', 52753) : {'src': '', 'data': {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 0}, 'dst_port': 9260, 'seq': 79, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,534  INFO  perform action: {'localPort': 40270, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Padma', 'id': 'bus_Purple_padma'}
+2014-05-04 03:20:15,534  INFO  Lisenting on (127.0.0.1, 40270)
+2014-05-04 03:20:15,594  INFO  Initializing Host
+2014-05-04 03:20:15,615  INFO  OFF
+2014-05-04 03:20:15,616  INFO  OFF
+2014-05-04 03:20:15,766  INFO  perform action: {'action': 'sleep', 'time': 40}
+2014-05-04 03:20:15,773  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Purple_padma', 'localPort': 40270, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:15,829  INFO  Idle
+2014-05-04 03:20:15,928  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40270, 'SM': 'RSN_SM', 'rsnId': 'bus_Purple_padma'}]
+2014-05-04 03:20:15,928  INFO  Idle
+2014-05-04 03:20:50,965  INFO  Receive message from ('127.0.0.1', 53233) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9260, 'seq': 138, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:55,941  INFO  perform action: {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 0}
+2014-05-04 03:20:55,983  INFO  Dispatch message [{'action': 'start', 'route': 'Purple', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 0}]
+2014-05-04 03:20:55,983  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:20:55,994  INFO  Update Location
+2014-05-04 03:20:55,996  INFO  Init_Waiting
+2014-05-04 03:20:56,048  INFO  perform action: {'action': 'exit'}

@@ -1,0 +1,31 @@
+2014-05-04 03:20:14,076  INFO  Lisenting on (127.0.0.1, 9250)
+2014-05-04 03:20:14,110  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,307  INFO  Receive message from ('127.0.0.1', 52748) : {'src': '', 'data': {'localPort': 40260, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Oier', 'id': 'bus_Purple_oier'}, 'dst_port': 9250, 'seq': 74, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,326  INFO  Receive message from ('127.0.0.1', 52749) : {'src': '', 'data': {'action': 'sleep', 'time': 25}, 'dst_port': 9250, 'seq': 75, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,337  INFO  Receive message from ('127.0.0.1', 52750) : {'src': '', 'data': {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 0}, 'dst_port': 9250, 'seq': 76, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,533  INFO  perform action: {'localPort': 40260, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Oier', 'id': 'bus_Purple_oier'}
+2014-05-04 03:20:15,534  INFO  Lisenting on (127.0.0.1, 40260)
+2014-05-04 03:20:15,680  INFO  Initializing Host
+2014-05-04 03:20:15,681  INFO  OFF
+2014-05-04 03:20:15,682  INFO  OFF
+2014-05-04 03:20:15,772  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Purple_oier', 'localPort': 40260, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:15,773  INFO  Idle
+2014-05-04 03:20:15,823  INFO  perform action: {'action': 'sleep', 'time': 25}
+2014-05-04 03:20:15,829  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40260, 'SM': 'RSN_SM', 'rsnId': 'bus_Purple_oier'}]
+2014-05-04 03:20:15,829  INFO  Idle
+2014-05-04 03:20:40,998  INFO  perform action: {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 0}
+2014-05-04 03:20:40,999  INFO  Update Location
+2014-05-04 03:20:41,184  INFO  Dispatch message [{'action': 'start', 'route': 'Purple', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 0}]
+2014-05-04 03:20:41,185  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Oier', 'data': {'src': 'Oier', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_oier', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40260, 'route': 'Purple', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:41,198  INFO  Init_Waiting
+2014-05-04 03:20:41,652  INFO  Receive message from ('127.0.0.1', 53100) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40260, 'seq': 55, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:41,770  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:41,787  INFO  Ready
+2014-05-04 03:20:46,617  INFO  Receive message from ('127.0.0.1', 53160) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40260, 'seq': 64, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:46,780  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:46,780  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:46,793  INFO  Send message to (127.0.0.1, 40250) : {'src': 'Oier', 'data': {'src': 'Oier', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_oier', 'location': 0, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40260, 'route': 'Purple', 'requestNo': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:46,793  INFO  Ready
+2014-05-04 03:20:51,074  INFO  Update Location
+2014-05-04 03:20:51,075  INFO  Receive message from ('127.0.0.1', 53246) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9250, 'seq': 151, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:51,084  INFO  perform action: {'action': 'exit'}

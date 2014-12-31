@@ -1,0 +1,44 @@
+2014-05-04 03:20:13,744  INFO  Lisenting on (127.0.0.1, 10130)
+2014-05-04 03:20:13,802  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:18,087  INFO  Receive message from ('127.0.0.1', 52796) : {'src': '', 'data': {'localPort': 50130, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'MORITZ', 'id': 'Moritz'}, 'dst_port': 10130, 'seq': 112, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:18,088  INFO  perform action: {'localPort': 50130, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'MORITZ', 'id': 'Moritz'}
+2014-05-04 03:20:18,088  INFO  Lisenting on (127.0.0.1, 50130)
+2014-05-04 03:20:18,101  INFO  Receive message from ('127.0.0.1', 52797) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10130, 'seq': 113, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:18,123  INFO  Receive message from ('127.0.0.1', 52798) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 15}, 'dst_port': 10130, 'seq': 114, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:18,136  INFO  Receive message from ('127.0.0.1', 52799) : {'src': '', 'data': {'action': 'sleep', 'time': 15}, 'dst_port': 10130, 'seq': 115, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:18,162  INFO  Receive message from ('127.0.0.1', 52800) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 11}, 'dst_port': 10130, 'seq': 116, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:18,327  INFO  Initializing Host
+2014-05-04 03:20:18,498  INFO  OFF
+2014-05-04 03:20:18,600  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-04 03:20:18,709  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Moritz', 'localPort': 50130, 'SM': 'USER_SM'}]
+2014-05-04 03:20:18,711  INFO  Ready
+2014-05-04 03:20:19,147  INFO  Receive message from ('127.0.0.1', 52801) : {'src': '', 'data': {'action': 'sleep', 'time': 7}, 'dst_port': 10130, 'seq': 117, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:19,164  INFO  Receive message from ('127.0.0.1', 52805) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 22}, 'dst_port': 10130, 'seq': 118, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:19,165  INFO  Receive message from ('127.0.0.1', 52806) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10130, 'seq': 119, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:19,178  INFO  Receive message from ('127.0.0.1', 52807) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 14}, 'dst_port': 10130, 'seq': 120, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:38,719  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 15}
+2014-05-04 03:20:38,771  INFO  Dispatch message [{'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:20:38,771  INFO  send user request: {'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:20:38,772  INFO  Send message to (127.0.0.1, 40000) : {'src': 'MORITZ', 'data': {'src': 'MORITZ', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50130, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'location': 15}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:38,784  INFO  Req_Waiting: requesting
+2014-05-04 03:20:38,834  INFO  perform action: {'action': 'sleep', 'time': 15}
+2014-05-04 03:20:39,140  INFO  Receive message from ('127.0.0.1', 53071) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'action': 'recvUserReq', 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50130, 'location': 15}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50130, 'seq': 42, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:39,418  INFO  Dispatch message [{'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'action': 'recvUserReq', 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50130, 'location': 15}}]
+2014-05-04 03:20:39,418  INFO  receive response from RSN {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'action': 'recvUserReq', 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50130, 'location': 15}}
+2014-05-04 03:20:39,418  INFO  expected arrive time: 3
+2014-05-04 03:20:39,418  INFO  Ready
+2014-05-04 03:20:39,611  INFO  report state: {'arriveTime': 3, 'userId': 'Moritz', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50130, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'location': 15}, 'localName': 'MORITZ', 'response': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'action': 'recvUserReq', 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50130, 'location': 15}}}
+2014-05-04 03:20:39,613  INFO  Send message to (127.0.0.1, 2000) : {'src': 'MORITZ', 'data': {'arriveTime': 3, 'userId': 'Moritz', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50130, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'location': 15}, 'localName': 'MORITZ', 'response': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Moritz', 'action': 'recvUserReq', 'requestId': 'Moritz1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50130, 'location': 15}}}, 'dst_port': 2000, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:50,956  INFO  Receive message from ('127.0.0.1', 53241) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 10130, 'seq': 146, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:53,951  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 11}
+2014-05-04 03:20:54,018  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 11, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:20:54,019  INFO  send user request: {'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 11, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:20:54,019  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:20:54,030  INFO  Req_Waiting: requesting
+2014-05-04 03:20:54,054  INFO  perform action: {'action': 'sleep', 'time': 7}
+2014-05-04 03:21:01,189  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 22}
+2014-05-04 03:21:01,231  INFO  Dispatch message [{'direction': 0, 'route': 'Green', 'destination': 20, 'location': 22, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:21:01,291  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-04 03:21:09,034  INFO  reqTimeout
+2014-05-04 03:21:11,401  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 14}
+2014-05-04 03:21:11,511  INFO  perform action: {'action': 'exit'}

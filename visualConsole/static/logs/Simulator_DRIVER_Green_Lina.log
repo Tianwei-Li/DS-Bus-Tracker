@@ -1,0 +1,52 @@
+2014-05-04 03:20:14,008  INFO  Lisenting on (127.0.0.1, 9320)
+2014-05-04 03:20:14,026  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,870  INFO  perform action: {'localPort': 40330, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Lina', 'id': 'bus_Green_lina'}
+2014-05-04 03:20:15,871  INFO  Receive message from ('127.0.0.1', 52764) : {'src': '', 'data': {'localPort': 40330, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Lina', 'id': 'bus_Green_lina'}, 'dst_port': 9320, 'seq': 86, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,871  INFO  Lisenting on (127.0.0.1, 40330)
+2014-05-04 03:20:15,883  INFO  Receive message from ('127.0.0.1', 52766) : {'src': '', 'data': {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 1}, 'dst_port': 9320, 'seq': 88, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,902  INFO  Receive message from ('127.0.0.1', 52765) : {'src': '', 'data': {'action': 'sleep', 'time': 5}, 'dst_port': 9320, 'seq': 87, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,919  INFO  Initializing Host
+2014-05-04 03:20:15,945  INFO  OFF
+2014-05-04 03:20:15,946  INFO  OFF
+2014-05-04 03:20:16,067  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Green_lina', 'localPort': 40330, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:16,068  INFO  Idle
+2014-05-04 03:20:16,154  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40330, 'SM': 'RSN_SM', 'rsnId': 'bus_Green_lina'}]
+2014-05-04 03:20:16,155  INFO  Idle
+2014-05-04 03:20:16,202  INFO  perform action: {'action': 'sleep', 'time': 5}
+2014-05-04 03:20:21,380  INFO  perform action: {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 1}
+2014-05-04 03:20:21,457  INFO  Update Location
+2014-05-04 03:20:21,458  INFO  Dispatch message [{'action': 'start', 'route': 'Green', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 1}]
+2014-05-04 03:20:21,458  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 1, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40330, 'route': 'Green', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:21,478  INFO  Init_Waiting
+2014-05-04 03:20:22,253  INFO  Receive message from ('127.0.0.1', 52860) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:22,414  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:22,425  INFO  Ready
+2014-05-04 03:20:27,143  INFO  Receive message from ('127.0.0.1', 52915) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 9, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:27,212  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:27,212  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:27,224  INFO  Send message to (127.0.0.1, 40310) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 1, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40330, 'route': 'Green', 'requestNo': 1}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:27,224  INFO  Ready
+2014-05-04 03:20:31,534  INFO  Update Location
+2014-05-04 03:20:32,181  INFO  Receive message from ('127.0.0.1', 52980) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 19, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:32,287  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:32,287  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:32,301  INFO  Send message to (127.0.0.1, 40310) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 2, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40330, 'route': 'Green', 'requestNo': 2}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:32,303  INFO  Ready
+2014-05-04 03:20:37,209  INFO  Receive message from ('127.0.0.1', 53049) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 29, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:37,355  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:37,356  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:37,360  INFO  Send message to (127.0.0.1, 40310) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 2, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40330, 'route': 'Green', 'requestNo': 3}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:37,361  INFO  Ready
+2014-05-04 03:20:41,568  INFO  Update Location
+2014-05-04 03:20:42,249  INFO  Receive message from ('127.0.0.1', 53121) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 39, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,375  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:42,375  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:42,381  INFO  Send message to (127.0.0.1, 40310) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40330, 'route': 'Green', 'requestNo': 4}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,381  INFO  Ready
+2014-05-04 03:20:47,501  INFO  Receive message from ('127.0.0.1', 53189) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40330, 'seq': 50, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,629  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:47,630  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:47,635  INFO  Send message to (127.0.0.1, 40310) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40330, 'route': 'Green', 'requestNo': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,636  INFO  Ready
+2014-05-04 03:20:50,971  INFO  Receive message from ('127.0.0.1', 53245) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9320, 'seq': 150, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:50,999  INFO  perform action: {'action': 'exit'}

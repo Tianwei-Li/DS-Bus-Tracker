@@ -1,0 +1,25 @@
+2014-05-04 03:20:13,138  INFO  Lisenting on (127.0.0.1, 9330)
+2014-05-04 03:20:13,598  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,952  INFO  Receive message from ('127.0.0.1', 52767) : {'src': '', 'data': {'localPort': 40340, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Qing', 'id': 'bus_Green_qing'}, 'dst_port': 9330, 'seq': 89, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,974  INFO  Receive message from ('127.0.0.1', 52768) : {'src': '', 'data': {'action': 'sleep', 'time': 30}, 'dst_port': 9330, 'seq': 90, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,974  INFO  Receive message from ('127.0.0.1', 52769) : {'src': '', 'data': {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 0}, 'dst_port': 9330, 'seq': 91, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:16,186  INFO  perform action: {'localPort': 40340, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'Qing', 'id': 'bus_Green_qing'}
+2014-05-04 03:20:16,186  INFO  Lisenting on (127.0.0.1, 40340)
+2014-05-04 03:20:16,442  INFO  Initializing Host
+2014-05-04 03:20:16,664  INFO  OFF
+2014-05-04 03:20:16,679  INFO  OFF
+2014-05-04 03:20:17,106  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Green_qing', 'localPort': 40340, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:17,106  INFO  perform action: {'action': 'sleep', 'time': 30}
+2014-05-04 03:20:17,111  INFO  Idle
+2014-05-04 03:20:17,190  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40340, 'SM': 'RSN_SM', 'rsnId': 'bus_Green_qing'}]
+2014-05-04 03:20:17,191  INFO  Idle
+2014-05-04 03:20:47,229  INFO  perform action: {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 0}
+2014-05-04 03:20:47,348  INFO  Dispatch message [{'action': 'start', 'route': 'Green', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 0}]
+2014-05-04 03:20:47,349  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Qing', 'data': {'src': 'Qing', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_qing', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40340, 'route': 'Green', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,360  INFO  Init_Waiting
+2014-05-04 03:20:47,360  INFO  Update Location
+2014-05-04 03:20:48,263  INFO  Receive message from ('127.0.0.1', 53203) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40340, 'seq': 56, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:48,488  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:48,501  INFO  Ready
+2014-05-04 03:20:51,007  INFO  Receive message from ('127.0.0.1', 53229) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9330, 'seq': 134, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:51,011  INFO  perform action: {'action': 'exit'}

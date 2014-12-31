@@ -1,0 +1,52 @@
+2014-05-04 03:20:13,564  INFO  Lisenting on (127.0.0.1, 9310)
+2014-05-04 03:20:13,641  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,668  INFO  Receive message from ('127.0.0.1', 52759) : {'src': '', 'data': {'localPort': 40320, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'kiya', 'id': 'bus_Green_kiya'}, 'dst_port': 9310, 'seq': 83, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,679  INFO  Receive message from ('127.0.0.1', 52760) : {'src': '', 'data': {'action': 'sleep', 'time': 5}, 'dst_port': 9310, 'seq': 84, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,690  INFO  Receive message from ('127.0.0.1', 52761) : {'src': '', 'data': {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 10}, 'dst_port': 9310, 'seq': 85, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,818  INFO  perform action: {'localPort': 40320, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'kiya', 'id': 'bus_Green_kiya'}
+2014-05-04 03:20:15,820  INFO  Lisenting on (127.0.0.1, 40320)
+2014-05-04 03:20:15,868  INFO  Initializing Host
+2014-05-04 03:20:16,008  INFO  OFF
+2014-05-04 03:20:16,008  INFO  OFF
+2014-05-04 03:20:16,066  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Green_kiya', 'localPort': 40320, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:16,066  INFO  Idle
+2014-05-04 03:20:16,253  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40320, 'SM': 'RSN_SM', 'rsnId': 'bus_Green_kiya'}]
+2014-05-04 03:20:16,254  INFO  perform action: {'action': 'sleep', 'time': 5}
+2014-05-04 03:20:16,255  INFO  Idle
+2014-05-04 03:20:21,581  INFO  perform action: {'action': 'start', 'route': 'Green', 'direction': 0, 'location': 10}
+2014-05-04 03:20:21,684  INFO  Dispatch message [{'action': 'start', 'route': 'Green', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 10}]
+2014-05-04 03:20:21,687  INFO  Send message to (127.0.0.1, 40000) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 10, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40320, 'route': 'Green', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:21,700  INFO  Init_Waiting
+2014-05-04 03:20:21,700  INFO  Update Location
+2014-05-04 03:20:22,462  INFO  Receive message from ('127.0.0.1', 52863) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:22,628  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:22,639  INFO  Ready
+2014-05-04 03:20:27,150  INFO  Receive message from ('127.0.0.1', 52917) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 11, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:27,221  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:27,221  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:27,237  INFO  Send message to (127.0.0.1, 40310) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 11, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40320, 'route': 'Green', 'requestNo': 1}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:27,237  INFO  Ready
+2014-05-04 03:20:31,768  INFO  Update Location
+2014-05-04 03:20:32,179  INFO  Receive message from ('127.0.0.1', 52982) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 21, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:32,265  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:32,268  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:32,273  INFO  Send message to (127.0.0.1, 40310) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 12, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40320, 'route': 'Green', 'requestNo': 2}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:32,274  INFO  Ready
+2014-05-04 03:20:37,202  INFO  Receive message from ('127.0.0.1', 53051) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 31, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:37,396  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:37,396  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:37,410  INFO  Send message to (127.0.0.1, 40310) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 12, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40320, 'route': 'Green', 'requestNo': 3}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:37,410  INFO  Ready
+2014-05-04 03:20:41,809  INFO  Update Location
+2014-05-04 03:20:42,411  INFO  Receive message from ('127.0.0.1', 53123) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 41, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,465  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:42,465  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:42,477  INFO  Send message to (127.0.0.1, 40310) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 13, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40320, 'route': 'Green', 'requestNo': 4}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,477  INFO  Ready
+2014-05-04 03:20:47,368  INFO  Receive message from ('127.0.0.1', 53191) : {'src': 'Jack', 'data': {'src': 'Jack', 'group': None, 'seq': None, 'data': {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40320, 'seq': 52, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,600  INFO  Dispatch message [{'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}]
+2014-05-04 03:20:47,601  INFO  received RSN location request: {'rsnPort': 40310, 'route': 'Green', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Green_jack'}
+2014-05-04 03:20:47,615  INFO  Send message to (127.0.0.1, 40310) : {'src': 'kiya', 'data': {'src': 'kiya', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Green_kiya', 'location': 13, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40320, 'route': 'Green', 'requestNo': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40310, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,616  INFO  Ready
+2014-05-04 03:20:51,009  INFO  Receive message from ('127.0.0.1', 53239) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9310, 'seq': 144, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:51,020  INFO  perform action: {'action': 'exit'}

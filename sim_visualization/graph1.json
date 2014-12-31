@@ -1,0 +1,10 @@
+{"nodes":[
+{"name":"GSN"},
+{"name":"RSN-71A"},
+{"name":"RSN-61B"},
+{"name":"User"}],
+"links":[
+{"source":0,"target":1},
+{"source":0,"target":2},
+{"source":3,"target":0}
+]}

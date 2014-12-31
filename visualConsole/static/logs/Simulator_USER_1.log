@@ -1,0 +1,35 @@
+2014-05-04 03:06:14,145  INFO  Lisenting on (127.0.0.1, 13001)
+2014-05-04 03:06:14,158  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:06:15,972  INFO  Receive message from ('127.0.0.1', 49901) : {'src': '', 'data': {'localPort': 42001, 'localIP': u'127.0.0.1', 'role': u'USER', 'action': 'initialize', 'localName': u'user_1', 'id': u'user_1'}, 'dst_port': 13001, 'seq': 3, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:16,050  INFO  perform action: {'localPort': 42001, 'localIP': u'127.0.0.1', 'role': u'USER', 'action': 'initialize', 'localName': u'user_1', 'id': u'user_1'}
+2014-05-04 03:06:16,051  INFO  Lisenting on (127.0.0.1, 42001)
+2014-05-04 03:06:16,145  INFO  Initializing Host
+2014-05-04 03:06:16,162  INFO  OFF
+2014-05-04 03:06:16,213  INFO  Dispatch message [{'action': 'turnOn', 'localIP': u'127.0.0.1', 'userId': u'user_1', 'localPort': 42001, 'SM': 'USER_SM'}]
+2014-05-04 03:06:16,220  INFO  Ready
+2014-05-04 03:06:42,425  INFO  Receive message from ('127.0.0.1', 49986) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 13001, 'seq': 8, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:42,427  INFO  perform action: {'action': 'exit'}
+2014-05-04 03:07:14,023  INFO  Lisenting on (127.0.0.1, 13001)
+2014-05-04 03:07:14,154  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:07:15,786  INFO  Receive message from ('127.0.0.1', 50060) : {'src': '', 'data': {'localPort': 42001, 'localIP': u'127.0.0.1', 'role': u'USER', 'action': 'initialize', 'localName': u'user_1', 'id': u'user_1'}, 'dst_port': 13001, 'seq': 13, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:15,882  INFO  perform action: {'localPort': 42001, 'localIP': u'127.0.0.1', 'role': u'USER', 'action': 'initialize', 'localName': u'user_1', 'id': u'user_1'}
+2014-05-04 03:07:15,883  INFO  Lisenting on (127.0.0.1, 42001)
+2014-05-04 03:07:15,948  INFO  Initializing Host
+2014-05-04 03:07:15,949  INFO  OFF
+2014-05-04 03:07:16,001  INFO  Dispatch message [{'action': 'turnOn', 'localIP': u'127.0.0.1', 'userId': u'user_1', 'localPort': 42001, 'SM': 'USER_SM'}]
+2014-05-04 03:07:16,002  INFO  Ready
+2014-05-04 03:07:37,369  INFO  Receive message from ('127.0.0.1', 50131) : {'src': '', 'data': {'action': 'request', 'route': u'Green', 'destination': 29, 'direction': 0, 'location': 15}, 'dst_port': 13001, 'seq': 16, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:37,463  INFO  perform action: {'action': 'request', 'route': u'Green', 'destination': 29, 'direction': 0, 'location': 15}
+2014-05-04 03:07:37,489  INFO  Dispatch message [{'direction': 0, 'route': u'Green', 'destination': 29, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-04 03:07:37,490  INFO  send user request: {'direction': 0, 'route': u'Green', 'destination': 29, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-04 03:07:37,491  INFO  Send message to (127.0.0.1, 40000) : {'src': u'user_1', 'data': {'src': u'user_1', 'group': None, 'seq': None, 'data': {'userIP': u'127.0.0.1', 'direction': 0, 'requestId': u'user_11', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 42001, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'location': 15}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:37,505  INFO  Req_Waiting: requesting
+2014-05-04 03:07:37,684  INFO  Receive message from ('127.0.0.1', 50137) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': u'driver_1', 'location': 6, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 42001, 'seq': 24, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:37,781  INFO  Dispatch message [{'action': 'recvRes', 'busId': u'driver_1', 'location': 6, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}}]
+2014-05-04 03:07:37,781  INFO  receive response from RSN {'action': 'recvRes', 'busId': u'driver_1', 'location': 6, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}}
+2014-05-04 03:07:37,781  INFO  expected arrive time: 9
+2014-05-04 03:07:37,781  INFO  Ready
+2014-05-04 03:07:38,246  INFO  report state: {'arriveTime': 9, 'userId': u'user_1', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': u'127.0.0.1', 'direction': 0, 'requestId': u'user_11', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 42001, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'location': 15}, 'localName': u'user_1', 'response': {'action': 'recvRes', 'busId': u'driver_1', 'location': 6, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}}}
+2014-05-04 03:07:38,247  INFO  Send message to (127.0.0.1, 2000) : {'src': u'user_1', 'data': {'arriveTime': 9, 'userId': u'user_1', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': u'127.0.0.1', 'direction': 0, 'requestId': u'user_11', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 42001, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'location': 15}, 'localName': u'user_1', 'response': {'action': 'recvRes', 'busId': u'driver_1', 'location': 6, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}}}, 'dst_port': 2000, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:47,693  INFO  Receive message from ('127.0.0.1', 51423) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 13001, 'seq': 17, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:47,719  INFO  perform action: {'action': 'exit'}

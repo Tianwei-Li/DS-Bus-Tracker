@@ -1,0 +1,68 @@
+2014-05-01 19:57:28,119  INFO  Lisenting on (127.0.0.1, 10120)
+2014-05-01 19:57:28,891  INFO  Simulator starts! Hello from simulator!
+2014-05-01 19:57:30,791  INFO  Receive message from ('127.0.0.1', 56250) : {'src': '', 'data': {'localPort': 50120, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Tianwei', 'id': 'Terry'}, 'dst_port': 10120, 'seq': 63, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:30,792  INFO  perform action: {'localPort': 50120, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Tianwei', 'id': 'Terry'}
+2014-05-01 19:57:30,792  INFO  Lisenting on (127.0.0.1, 50120)
+2014-05-01 19:57:30,795  INFO  Receive message from ('127.0.0.1', 56251) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10120, 'seq': 64, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:30,848  INFO  Receive message from ('127.0.0.1', 56253) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10120, 'seq': 66, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:30,850  INFO  Receive message from ('127.0.0.1', 56252) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 15}, 'dst_port': 10120, 'seq': 65, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:30,851  INFO  Receive message from ('127.0.0.1', 56254) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 20}, 'dst_port': 10120, 'seq': 67, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:30,880  INFO  Initializing Host
+2014-05-01 19:57:30,902  INFO  OFF
+2014-05-01 19:57:30,978  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Terry', 'localPort': 50120, 'SM': 'USER_SM'}]
+2014-05-01 19:57:30,984  INFO  Ready
+2014-05-01 19:57:31,073  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 19:57:31,889  INFO  Receive message from ('127.0.0.1', 56255) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10120, 'seq': 68, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:31,900  INFO  Receive message from ('127.0.0.1', 56259) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}, 'dst_port': 10120, 'seq': 69, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:31,921  INFO  Receive message from ('127.0.0.1', 56260) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10120, 'seq': 70, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:31,929  INFO  Receive message from ('127.0.0.1', 56261) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 15}, 'dst_port': 10120, 'seq': 71, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:41,272  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 19:57:51,454  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 15}
+2014-05-01 19:57:51,520  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 19:57:51,525  INFO  send user request: {'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 19:57:51,526  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Tianwei', 'data': {'src': 'Tianwei', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Terry1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50120, 'route': 'Purple', 'destination': 20, 'userId': 'Terry', 'location': 15}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:57:51,536  INFO  Req_Waiting: requesting
+2014-05-01 19:57:51,558  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 20}
+2014-05-01 19:57:51,720  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-01 19:57:51,721  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 20, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 19:57:51,953  INFO  Receive message from ('127.0.0.1', 56521) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Purple_gaga', 'location': 13, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Terry', 'action': 'recvUserReq', 'requestId': 'Terry1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50120, 'location': 15}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50120, 'seq': 43, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:58:06,559  INFO  reqTimeout
+2014-05-01 19:58:11,930  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}
+2014-05-01 19:58:12,051  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-01 19:58:32,152  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 15}
+2014-05-01 19:58:49,381  INFO  Receive message from ('127.0.0.1', 57325) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 10120, 'seq': 100, 'dst_ip': '127.0.0.1'}
+2014-05-01 19:58:49,381  INFO  perform action: {'action': 'exit'}
+2014-05-01 20:17:51,003  INFO  Lisenting on (127.0.0.1, 10120)
+2014-05-01 20:17:51,211  INFO  Simulator starts! Hello from simulator!
+2014-05-01 20:17:55,214  INFO  Receive message from ('127.0.0.1', 59739) : {'src': '', 'data': {'localPort': 50120, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Tianwei', 'id': 'Terry'}, 'dst_port': 10120, 'seq': 63, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:55,214  INFO  perform action: {'localPort': 50120, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Tianwei', 'id': 'Terry'}
+2014-05-01 20:17:55,214  INFO  Lisenting on (127.0.0.1, 50120)
+2014-05-01 20:17:55,236  INFO  Receive message from ('127.0.0.1', 59740) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10120, 'seq': 64, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:55,271  INFO  Receive message from ('127.0.0.1', 59741) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 15}, 'dst_port': 10120, 'seq': 65, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:55,292  INFO  Initializing Host
+2014-05-01 20:17:55,303  INFO  Receive message from ('127.0.0.1', 59742) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10120, 'seq': 66, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:55,304  INFO  Receive message from ('127.0.0.1', 59743) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 20}, 'dst_port': 10120, 'seq': 67, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:55,315  INFO  OFF
+2014-05-01 20:17:55,419  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Terry', 'localPort': 50120, 'SM': 'USER_SM'}]
+2014-05-01 20:17:55,419  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 20:17:55,420  INFO  Ready
+2014-05-01 20:17:56,215  INFO  Receive message from ('127.0.0.1', 59744) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10120, 'seq': 68, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:56,230  INFO  Receive message from ('127.0.0.1', 59748) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}, 'dst_port': 10120, 'seq': 69, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:56,242  INFO  Receive message from ('127.0.0.1', 59749) : {'src': '', 'data': {'action': 'sleep', 'time': 20}, 'dst_port': 10120, 'seq': 70, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:17:56,254  INFO  Receive message from ('127.0.0.1', 59750) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 15}, 'dst_port': 10120, 'seq': 71, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:18:05,629  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 15}
+2014-05-01 20:18:05,699  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 20:18:05,700  INFO  send user request: {'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 15, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 20:18:05,701  INFO  Send message to (127.0.0.1, 40000) : {'src': 'Tianwei', 'data': {'src': 'Tianwei', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Terry1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50120, 'route': 'Purple', 'destination': 20, 'userId': 'Terry', 'location': 15}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:18:05,711  INFO  Req_Waiting: requesting
+2014-05-01 20:18:05,730  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 20}
+2014-05-01 20:18:05,832  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 20, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 20:18:05,833  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 20:18:06,076  INFO  Receive message from ('127.0.0.1', 59890) : {'src': 'Gager', 'data': {'src': 'Gager', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Purple_gaga', 'location': 12, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Purple', 'destination': 20, 'userId': 'Terry', 'action': 'recvUserReq', 'requestId': 'Terry1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50120, 'location': 15}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50120, 'seq': 21, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:18:16,060  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-01 20:18:20,719  INFO  reqTimeout
+2014-05-01 20:18:36,184  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}
+2014-05-01 20:18:36,316  INFO  perform action: {'action': 'sleep', 'time': 20}
+2014-05-01 20:18:56,436  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 15}
+2014-05-01 20:24:04,100  INFO  Receive message from ('127.0.0.1', 63499) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 10120, 'seq': 93, 'dst_ip': '127.0.0.1'}
+2014-05-01 20:24:04,182  INFO  perform action: {'action': 'exit'}

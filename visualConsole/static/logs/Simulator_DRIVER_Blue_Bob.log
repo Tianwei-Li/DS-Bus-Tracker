@@ -1,0 +1,53 @@
+2014-05-04 03:20:13,246  INFO  Lisenting on (127.0.0.1, 9110)
+2014-05-04 03:20:13,305  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,077  INFO  Receive message from ('127.0.0.1', 52718) : {'src': '', 'data': {'localPort': 40120, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'super_bob', 'id': 'bus_Blue_bob'}, 'dst_port': 9110, 'seq': 44, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,078  INFO  Receive message from ('127.0.0.1', 52719) : {'src': '', 'data': {'action': 'sleep', 'time': 5}, 'dst_port': 9110, 'seq': 45, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,078  INFO  perform action: {'localPort': 40120, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'super_bob', 'id': 'bus_Blue_bob'}
+2014-05-04 03:20:15,089  INFO  Lisenting on (127.0.0.1, 40120)
+2014-05-04 03:20:15,100  INFO  Receive message from ('127.0.0.1', 52720) : {'src': '', 'data': {'action': 'start', 'route': 'Blue', 'direction': 0, 'location': 10}, 'dst_port': 9110, 'seq': 46, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,499  INFO  Initializing Host
+2014-05-04 03:20:15,516  INFO  OFF
+2014-05-04 03:20:15,516  INFO  OFF
+2014-05-04 03:20:15,567  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Blue_bob', 'localPort': 40120, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:15,574  INFO  Idle
+2014-05-04 03:20:15,641  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40120, 'SM': 'RSN_SM', 'rsnId': 'bus_Blue_bob'}]
+2014-05-04 03:20:15,641  INFO  perform action: {'action': 'sleep', 'time': 5}
+2014-05-04 03:20:15,648  INFO  Idle
+2014-05-04 03:20:20,878  INFO  perform action: {'action': 'start', 'route': 'Blue', 'direction': 0, 'location': 10}
+2014-05-04 03:20:20,879  INFO  Dispatch message [{'action': 'start', 'route': 'Blue', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 10}]
+2014-05-04 03:20:20,880  INFO  Send message to (127.0.0.1, 40000) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 10, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40120, 'route': 'Blue', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:20,890  INFO  Init_Waiting
+2014-05-04 03:20:20,892  INFO  Update Location
+2014-05-04 03:20:21,792  INFO  Receive message from ('127.0.0.1', 52848) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:21,850  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:21,861  INFO  Ready
+2014-05-04 03:20:26,610  INFO  Receive message from ('127.0.0.1', 52905) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 13, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,719  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:26,719  INFO  received RSN location request: {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}
+2014-05-04 03:20:26,730  INFO  Send message to (127.0.0.1, 40140) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40120, 'route': 'Blue', 'requestNo': 1}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40140, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,730  INFO  Ready
+2014-05-04 03:20:30,893  INFO  Update Location
+2014-05-04 03:20:31,605  INFO  Receive message from ('127.0.0.1', 52971) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 23, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:31,878  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:31,878  INFO  received RSN location request: {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}
+2014-05-04 03:20:31,889  INFO  Send message to (127.0.0.1, 40140) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40120, 'route': 'Blue', 'requestNo': 2}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40140, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:31,890  INFO  Ready
+2014-05-04 03:20:36,667  INFO  Receive message from ('127.0.0.1', 53033) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 36, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:36,924  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:36,924  INFO  received RSN location request: {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}
+2014-05-04 03:20:36,943  INFO  Send message to (127.0.0.1, 40140) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 12, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40120, 'route': 'Blue', 'requestNo': 3}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40140, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:36,944  INFO  Ready
+2014-05-04 03:20:40,948  INFO  Update Location
+2014-05-04 03:20:41,785  INFO  Receive message from ('127.0.0.1', 53106) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 49, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,015  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:42,015  INFO  received RSN location request: {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}
+2014-05-04 03:20:42,028  INFO  Send message to (127.0.0.1, 40140) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 13, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40120, 'route': 'Blue', 'requestNo': 4}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40140, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:42,028  INFO  Ready
+2014-05-04 03:20:46,893  INFO  Receive message from ('127.0.0.1', 53167) : {'src': 'david', 'data': {'src': 'david', 'group': None, 'seq': None, 'data': {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40120, 'seq': 61, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,015  INFO  Dispatch message [{'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}]
+2014-05-04 03:20:47,015  INFO  received RSN location request: {'rsnPort': 40140, 'route': 'Blue', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Blue_david'}
+2014-05-04 03:20:47,031  INFO  Send message to (127.0.0.1, 40140) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Blue_bob', 'location': 13, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40120, 'route': 'Blue', 'requestNo': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40140, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:47,033  INFO  Ready
+2014-05-04 03:20:51,033  INFO  Update Location
+2014-05-04 03:20:51,044  INFO  Receive message from ('127.0.0.1', 53231) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9110, 'seq': 136, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:51,045  INFO  perform action: {'action': 'exit'}

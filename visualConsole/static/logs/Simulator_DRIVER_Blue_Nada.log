@@ -1,0 +1,22 @@
+2014-05-04 03:20:13,988  INFO  Lisenting on (127.0.0.1, 9150)
+2014-05-04 03:20:14,420  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,110  INFO  Receive message from ('127.0.0.1', 52730) : {'src': '', 'data': {'localPort': 40160, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'nada', 'id': 'bus_Blue_nada'}, 'dst_port': 9150, 'seq': 56, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,113  INFO  Receive message from ('127.0.0.1', 52731) : {'src': '', 'data': {'action': 'sleep', 'time': 40}, 'dst_port': 9150, 'seq': 57, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,120  INFO  Receive message from ('127.0.0.1', 52732) : {'src': '', 'data': {'action': 'start', 'route': 'Blue', 'direction': 0, 'location': 0}, 'dst_port': 9150, 'seq': 58, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,128  INFO  perform action: {'localPort': 40160, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'nada', 'id': 'bus_Blue_nada'}
+2014-05-04 03:20:15,129  INFO  Lisenting on (127.0.0.1, 40160)
+2014-05-04 03:20:15,373  INFO  Initializing Host
+2014-05-04 03:20:15,375  INFO  OFF
+2014-05-04 03:20:15,375  INFO  OFF
+2014-05-04 03:20:15,460  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Blue_nada', 'localPort': 40160, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:15,467  INFO  Idle
+2014-05-04 03:20:15,543  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40160, 'SM': 'RSN_SM', 'rsnId': 'bus_Blue_nada'}]
+2014-05-04 03:20:15,543  INFO  perform action: {'action': 'sleep', 'time': 40}
+2014-05-04 03:20:15,551  INFO  Idle
+2014-05-04 03:20:51,048  INFO  Receive message from ('127.0.0.1', 53244) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9150, 'seq': 149, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:55,646  INFO  perform action: {'action': 'start', 'route': 'Blue', 'direction': 0, 'location': 0}
+2014-05-04 03:20:55,647  INFO  Update Location
+2014-05-04 03:20:55,715  INFO  Dispatch message [{'action': 'start', 'route': 'Blue', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 0}]
+2014-05-04 03:20:55,715  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:20:55,726  INFO  Init_Waiting
+2014-05-04 03:20:55,747  INFO  perform action: {'action': 'exit'}

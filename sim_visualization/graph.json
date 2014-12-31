@@ -1,0 +1,1 @@
+{"nodes": [{"name": "gsn"}, {"name": "driver1"}, {"name": "alice"}], "links": [{"source": 0, "target": 1}, {"source": 0, "target": 2}]}

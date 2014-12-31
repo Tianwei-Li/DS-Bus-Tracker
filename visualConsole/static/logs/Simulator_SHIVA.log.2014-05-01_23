@@ -1,0 +1,86 @@
+2014-05-01 23:18:41,792  INFO  Lisenting on (127.0.0.1, 10140)
+2014-05-01 23:18:41,887  INFO  Simulator starts! Hello from simulator!
+2014-05-01 23:18:47,004  INFO  Receive message from ('127.0.0.1', 60939) : {'src': '', 'data': {'localPort': 50140, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'SHIVA', 'id': 'Shiva'}, 'dst_port': 10140, 'seq': 81, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,005  INFO  Receive message from ('127.0.0.1', 60940) : {'src': '', 'data': {'action': 'sleep', 'time': 14}, 'dst_port': 10140, 'seq': 82, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,017  INFO  Receive message from ('127.0.0.1', 60941) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 12}, 'dst_port': 10140, 'seq': 83, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,028  INFO  Receive message from ('127.0.0.1', 60943) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 9}, 'dst_port': 10140, 'seq': 85, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,029  INFO  Receive message from ('127.0.0.1', 60942) : {'src': '', 'data': {'action': 'sleep', 'time': 12}, 'dst_port': 10140, 'seq': 84, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,040  INFO  Receive message from ('127.0.0.1', 60944) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10140, 'seq': 86, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:47,335  INFO  perform action: {'localPort': 50140, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'SHIVA', 'id': 'Shiva'}
+2014-05-01 23:18:47,336  INFO  Lisenting on (127.0.0.1, 50140)
+2014-05-01 23:18:47,494  INFO  Initializing Host
+2014-05-01 23:18:47,524  INFO  OFF
+2014-05-01 23:18:47,665  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Shiva', 'localPort': 50140, 'SM': 'USER_SM'}]
+2014-05-01 23:18:47,665  INFO  perform action: {'action': 'sleep', 'time': 14}
+2014-05-01 23:18:47,665  INFO  Ready
+2014-05-01 23:18:48,078  INFO  Receive message from ('127.0.0.1', 60945) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}, 'dst_port': 10140, 'seq': 87, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:48,089  INFO  Receive message from ('127.0.0.1', 60951) : {'src': '', 'data': {'action': 'sleep', 'time': 8}, 'dst_port': 10140, 'seq': 88, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:18:48,102  INFO  Receive message from ('127.0.0.1', 60952) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}, 'dst_port': 10140, 'seq': 89, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:19:01,841  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 12}
+2014-05-01 23:19:01,946  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 9}
+2014-05-01 23:19:01,946  INFO  Dispatch message [{'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 12, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:19:01,947  INFO  send user request: {'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 12, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 23:19:01,950  INFO  Send message to (127.0.0.1, 40000) : {'src': 'SHIVA', 'data': {'src': 'SHIVA', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'location': 12}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:19:01,965  INFO  Req_Waiting: requesting
+2014-05-01 23:19:02,051  INFO  Dispatch message [{'direction': 0, 'route': 'Green', 'destination': 20, 'location': 9, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:19:02,052  INFO  perform action: {'action': 'sleep', 'time': 12}
+2014-05-01 23:19:02,436  INFO  Receive message from ('127.0.0.1', 61138) : {'src': "i'm charlie", 'data': {'src': "i'm charlie", 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50140, 'seq': 37, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:19:14,279  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 23:19:16,977  INFO  reqTimeout
+2014-05-01 23:19:24,462  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}
+2014-05-01 23:19:24,630  INFO  perform action: {'action': 'sleep', 'time': 8}
+2014-05-01 23:19:32,865  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}
+2014-05-01 23:23:14,488  INFO  Lisenting on (127.0.0.1, 10140)
+2014-05-01 23:23:15,026  INFO  Simulator starts! Hello from simulator!
+2014-05-01 23:23:18,886  INFO  Receive message from ('127.0.0.1', 63000) : {'src': '', 'data': {'localPort': 50140, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'SHIVA', 'id': 'Shiva'}, 'dst_port': 10140, 'seq': 81, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:18,897  INFO  Receive message from ('127.0.0.1', 63001) : {'src': '', 'data': {'action': 'sleep', 'time': 14}, 'dst_port': 10140, 'seq': 82, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:18,912  INFO  Receive message from ('127.0.0.1', 63002) : {'src': '', 'data': {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 12}, 'dst_port': 10140, 'seq': 83, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:18,923  INFO  Receive message from ('127.0.0.1', 63003) : {'src': '', 'data': {'action': 'sleep', 'time': 12}, 'dst_port': 10140, 'seq': 84, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:18,935  INFO  Receive message from ('127.0.0.1', 63004) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 9}, 'dst_port': 10140, 'seq': 85, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:19,020  INFO  perform action: {'localPort': 50140, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'SHIVA', 'id': 'Shiva'}
+2014-05-01 23:23:19,020  INFO  Lisenting on (127.0.0.1, 50140)
+2014-05-01 23:23:19,457  INFO  Initializing Host
+2014-05-01 23:23:19,484  INFO  OFF
+2014-05-01 23:23:19,638  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Shiva', 'localPort': 50140, 'SM': 'USER_SM'}]
+2014-05-01 23:23:19,639  INFO  Ready
+2014-05-01 23:23:19,640  INFO  perform action: {'action': 'sleep', 'time': 14}
+2014-05-01 23:23:20,071  INFO  Receive message from ('127.0.0.1', 63005) : {'src': '', 'data': {'action': 'sleep', 'time': 10}, 'dst_port': 10140, 'seq': 86, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:20,208  INFO  Receive message from ('127.0.0.1', 63010) : {'src': '', 'data': {'action': 'sleep', 'time': 8}, 'dst_port': 10140, 'seq': 88, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:20,209  INFO  Receive message from ('127.0.0.1', 63011) : {'src': '', 'data': {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}, 'dst_port': 10140, 'seq': 89, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:20,210  INFO  Receive message from ('127.0.0.1', 63009) : {'src': '', 'data': {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}, 'dst_port': 10140, 'seq': 87, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:33,776  INFO  perform action: {'action': 'request', 'route': 'Blue', 'destination': 20, 'direction': 0, 'location': 12}
+2014-05-01 23:23:33,873  INFO  Dispatch message [{'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 12, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:23:33,873  INFO  send user request: {'direction': 0, 'route': 'Blue', 'destination': 20, 'location': 12, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 23:23:33,874  INFO  Send message to (127.0.0.1, 40000) : {'src': 'SHIVA', 'data': {'src': 'SHIVA', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'location': 12}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:33,890  INFO  perform action: {'action': 'sleep', 'time': 12}
+2014-05-01 23:23:33,890  INFO  Req_Waiting: requesting
+2014-05-01 23:23:34,352  INFO  Receive message from ('127.0.0.1', 63193) : {'src': 'super_bob', 'data': {'src': 'super_bob', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50140, 'seq': 30, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:34,434  INFO  Dispatch message [{'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}]
+2014-05-01 23:23:34,434  INFO  receive response from RSN {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}
+2014-05-01 23:23:34,435  INFO  expected arrive time: 1
+2014-05-01 23:23:34,435  INFO  Ready
+2014-05-01 23:23:34,637  INFO  report state: {'arriveTime': 1, 'userId': 'Shiva', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'location': 12}, 'localName': 'SHIVA', 'response': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}}
+2014-05-01 23:23:34,638  INFO  Send message to (127.0.0.1, 2000) : {'src': 'SHIVA', 'data': {'arriveTime': 1, 'userId': 'Shiva', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'location': 12}, 'localName': 'SHIVA', 'response': {'action': 'recvRes', 'busId': 'bus_Blue_bob', 'location': 11, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Blue', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva1', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 12}}}, 'dst_port': 2000, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:46,028  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 9}
+2014-05-01 23:23:46,090  INFO  Dispatch message [{'direction': 0, 'route': 'Green', 'destination': 20, 'location': 9, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:23:46,091  INFO  send user request: {'direction': 0, 'route': 'Green', 'destination': 20, 'location': 9, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 23:23:46,105  INFO  Send message to (127.0.0.1, 40000) : {'src': 'SHIVA', 'data': {'src': 'SHIVA', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'location': 9}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:46,116  INFO  Req_Waiting: requesting
+2014-05-01 23:23:46,131  INFO  perform action: {'action': 'sleep', 'time': 10}
+2014-05-01 23:23:46,385  INFO  Receive message from ('127.0.0.1', 63347) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 9}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50140, 'seq': 48, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:46,597  INFO  Dispatch message [{'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 9}}]
+2014-05-01 23:23:46,597  INFO  receive response from RSN {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 9}}
+2014-05-01 23:23:46,597  INFO  expected arrive time: 6
+2014-05-01 23:23:46,597  INFO  Ready
+2014-05-01 23:23:47,147  INFO  report state: {'arriveTime': 6, 'userId': 'Shiva', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'location': 9}, 'localName': 'SHIVA', 'response': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 9}}}
+2014-05-01 23:23:47,148  INFO  Send message to (127.0.0.1, 2000) : {'src': 'SHIVA', 'data': {'arriveTime': 6, 'userId': 'Shiva', 'state': 'State_Ready', 'SM': 'USER_SM', 'query': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'location': 9}, 'localName': 'SHIVA', 'response': {'action': 'recvRes', 'busId': 'bus_Green_lina', 'location': 3, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva2', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 9}}}, 'dst_port': 2000, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:23:56,241  INFO  perform action: {'action': 'sleep', 'time': 8}
+2014-05-01 23:24:04,505  INFO  perform action: {'action': 'request', 'route': 'Green', 'destination': 20, 'direction': 0, 'location': 25}
+2014-05-01 23:24:04,593  INFO  Dispatch message [{'direction': 0, 'route': 'Green', 'destination': 20, 'location': 25, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:24:04,594  INFO  send user request: {'direction': 0, 'route': 'Green', 'destination': 20, 'location': 25, 'SM': 'USER_SM', 'action': 'request'}
+2014-05-01 23:24:04,596  INFO  Send message to (127.0.0.1, 40000) : {'src': 'SHIVA', 'data': {'src': 'SHIVA', 'group': None, 'seq': None, 'data': {'userIP': '127.0.0.1', 'direction': 0, 'requestId': 'Shiva3', 'SM': 'GSN_SM', 'action': 'recvUserReq', 'userPort': 50140, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'location': 25}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:24:04,606  INFO  perform action: {'action': 'request', 'route': 'Purple', 'destination': 20, 'direction': 0, 'location': 10}
+2014-05-01 23:24:04,607  INFO  Req_Waiting: requesting
+2014-05-01 23:24:04,685  INFO  Dispatch message [{'direction': 0, 'route': 'Purple', 'destination': 20, 'location': 10, 'SM': 'USER_SM', 'action': 'request'}]
+2014-05-01 23:24:04,900  INFO  Receive message from ('127.0.0.1', 63621) : {'src': 'Lina', 'data': {'src': 'Lina', 'group': None, 'seq': None, 'data': {'action': 'recvRes', 'busId': 'bus_Green_jack', 'location': 24, 'SM': 'USER_SM', 'original': {'direction': 0, 'route': 'Green', 'destination': 20, 'userId': 'Shiva', 'action': 'recvUserReq', 'requestId': 'Shiva3', 'SM': 'GSN_SM', 'userIP': '127.0.0.1', 'userPort': 50140, 'location': 25}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 50140, 'seq': 93, 'dst_ip': '127.0.0.1'}
+2014-05-01 23:24:19,628  INFO  reqTimeout

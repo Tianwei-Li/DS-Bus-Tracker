@@ -1,0 +1,53 @@
+2014-05-04 03:20:13,171  INFO  Lisenting on (127.0.0.1, 9230)
+2014-05-04 03:20:13,333  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:20:15,108  INFO  Receive message from ('127.0.0.1', 52742) : {'src': '', 'data': {'localPort': 40240, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'helen', 'id': 'bus_Purple_helen'}, 'dst_port': 9230, 'seq': 68, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,128  INFO  Receive message from ('127.0.0.1', 52743) : {'src': '', 'data': {'action': 'sleep', 'time': 5}, 'dst_port': 9230, 'seq': 69, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,132  INFO  Receive message from ('127.0.0.1', 52744) : {'src': '', 'data': {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 6}, 'dst_port': 9230, 'seq': 70, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:15,208  INFO  perform action: {'localPort': 40240, 'localIP': '127.0.0.1', 'role': 'DRIVER', 'action': 'initialize', 'localName': 'helen', 'id': 'bus_Purple_helen'}
+2014-05-04 03:20:15,209  INFO  Lisenting on (127.0.0.1, 40240)
+2014-05-04 03:20:15,370  INFO  Initializing Host
+2014-05-04 03:20:15,391  INFO  OFF
+2014-05-04 03:20:15,391  INFO  OFF
+2014-05-04 03:20:15,564  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'busId': 'bus_Purple_helen', 'localPort': 40240, 'SM': 'DRIVER_SM'}]
+2014-05-04 03:20:15,565  INFO  perform action: {'action': 'sleep', 'time': 5}
+2014-05-04 03:20:15,565  INFO  Idle
+2014-05-04 03:20:15,682  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'localPort': 40240, 'SM': 'RSN_SM', 'rsnId': 'bus_Purple_helen'}]
+2014-05-04 03:20:15,683  INFO  Idle
+2014-05-04 03:20:20,797  INFO  perform action: {'action': 'start', 'route': 'Purple', 'direction': 0, 'location': 6}
+2014-05-04 03:20:20,797  INFO  Update Location
+2014-05-04 03:20:20,904  INFO  Dispatch message [{'action': 'start', 'route': 'Purple', 'direction': 0, 'SM': 'DRIVER_SM', 'location': 6}]
+2014-05-04 03:20:20,905  INFO  Send message to (127.0.0.1, 40000) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 6, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 40240, 'route': 'Purple', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:20,916  INFO  Init_Waiting
+2014-05-04 03:20:21,930  INFO  Receive message from ('127.0.0.1', 52854) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:22,007  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'SM': 'DRIVER_SM', 'action': 'recvRSNAck', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:22,018  INFO  Ready
+2014-05-04 03:20:26,305  INFO  Receive message from ('127.0.0.1', 52895) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 14, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,349  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:26,349  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 1, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:26,360  INFO  Send message to (127.0.0.1, 40250) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 6, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40240, 'route': 'Purple', 'requestNo': 1}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 1, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:26,361  INFO  Ready
+2014-05-04 03:20:30,889  INFO  Update Location
+2014-05-04 03:20:31,436  INFO  Receive message from ('127.0.0.1', 52962) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 28, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:31,494  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:31,495  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 2, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:31,506  INFO  Send message to (127.0.0.1, 40250) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 7, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40240, 'route': 'Purple', 'requestNo': 2}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 2, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:31,506  INFO  Ready
+2014-05-04 03:20:36,463  INFO  Receive message from ('127.0.0.1', 53025) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 40, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:36,685  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:36,686  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 3, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:36,697  INFO  Send message to (127.0.0.1, 40250) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 7, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40240, 'route': 'Purple', 'requestNo': 3}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 3, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:36,697  INFO  Ready
+2014-05-04 03:20:40,935  INFO  Update Location
+2014-05-04 03:20:41,638  INFO  Receive message from ('127.0.0.1', 53098) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 53, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:41,768  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:41,768  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 4, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:41,786  INFO  Send message to (127.0.0.1, 40250) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 8, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40240, 'route': 'Purple', 'requestNo': 4}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:41,786  INFO  Ready
+2014-05-04 03:20:46,672  INFO  Receive message from ('127.0.0.1', 53162) : {'src': 'Ilan', 'data': {'src': 'Ilan', 'group': None, 'seq': None, 'data': {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40240, 'seq': 66, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:46,880  INFO  Dispatch message [{'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}]
+2014-05-04 03:20:46,880  INFO  received RSN location request: {'rsnPort': 40250, 'route': 'Purple', 'rsnIP': '127.0.0.1', 'requestNo': 5, 'SM': 'DRIVER_SM', 'action': 'recvLocReq', 'rsnId': 'bus_Purple_ilan'}
+2014-05-04 03:20:46,892  INFO  Send message to (127.0.0.1, 40250) : {'src': 'helen', 'data': {'src': 'helen', 'group': None, 'seq': None, 'data': {'busIP': '127.0.0.1', 'direction': 0, 'busId': 'bus_Purple_helen', 'location': 8, 'SM': 'RSN_SM', 'action': 'recvDriverLoc', 'busPort': 40240, 'route': 'Purple', 'requestNo': 5}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40250, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:46,892  INFO  Ready
+2014-05-04 03:20:50,953  INFO  Update Location
+2014-05-04 03:20:50,969  INFO  Receive message from ('127.0.0.1', 53228) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 9230, 'seq': 133, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:51,060  INFO  perform action: {'action': 'exit'}

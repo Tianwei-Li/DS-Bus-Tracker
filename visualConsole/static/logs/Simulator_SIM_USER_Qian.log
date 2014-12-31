@@ -1,0 +1,11 @@
+2014-05-04 03:12:55,018  INFO  Lisenting on (127.0.0.1, 10000)
+2014-05-04 03:12:55,048  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:12:56,406  INFO  Receive message from ('127.0.0.1', 51476) : {'src': '', 'data': {'localPort': 51100, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Qian Mao', 'id': 'Qian'}, 'dst_port': 10000, 'seq': 35, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:56,466  INFO  perform action: {'localPort': 51100, 'localIP': '127.0.0.1', 'role': 'USER', 'action': 'initialize', 'localName': 'Qian Mao', 'id': 'Qian'}
+2014-05-04 03:12:56,467  INFO  Lisenting on (127.0.0.1, 51100)
+2014-05-04 03:12:56,647  INFO  Initializing Host
+2014-05-04 03:12:56,657  INFO  OFF
+2014-05-04 03:12:56,753  INFO  Dispatch message [{'action': 'turnOn', 'localIP': '127.0.0.1', 'userId': 'Qian', 'localPort': 51100, 'SM': 'USER_SM'}]
+2014-05-04 03:12:56,755  INFO  Ready
+2014-05-04 03:20:04,375  INFO  Receive message from ('127.0.0.1', 52661) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 10000, 'seq': 38, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:20:04,488  INFO  perform action: {'action': 'exit'}

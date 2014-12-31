@@ -1,0 +1,536 @@
+2014-05-04 03:05:55,341  INFO  Lisenting on (127.0.0.1, 11000)
+2014-05-04 03:05:55,398  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:05:56,766  INFO  Receive message from ('127.0.0.1', 49884) : {'src': '', 'data': {'localPort': 40000, 'localIP': u'127.0.0.1', 'role': u'GSN', 'action': 'initialize', 'localName': u'gsn_1', 'id': u'GSN_1'}, 'dst_port': 11000, 'seq': 0, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:05:56,820  INFO  perform action: {'localPort': 40000, 'localIP': u'127.0.0.1', 'role': u'GSN', 'action': 'initialize', 'localName': u'gsn_1', 'id': u'GSN_1'}
+2014-05-04 03:05:56,821  INFO  Lisenting on (127.0.0.1, 40000)
+2014-05-04 03:05:57,061  INFO  Initializing Host
+2014-05-04 03:05:57,080  INFO  OFF
+2014-05-04 03:05:57,130  INFO  Dispatch message [{'action': 'turnOn', 'localIP': u'127.0.0.1', 'gsnId': u'GSN_1', 'SM': 'GSN_SM', 'localPort': 40000}]
+2014-05-04 03:05:57,131  INFO  Ready
+2014-05-04 03:06:02,132  INFO  send heart beat to each RSN
+2014-05-04 03:06:02,133  INFO  Ready
+2014-05-04 03:06:07,134  INFO  send heart beat to each RSN
+2014-05-04 03:06:07,134  INFO  Ready
+2014-05-04 03:06:12,136  INFO  send heart beat to each RSN
+2014-05-04 03:06:12,140  INFO  Ready
+2014-05-04 03:06:17,142  INFO  send heart beat to each RSN
+2014-05-04 03:06:17,143  INFO  Ready
+2014-05-04 03:06:22,144  INFO  send heart beat to each RSN
+2014-05-04 03:06:22,149  INFO  Ready
+2014-05-04 03:06:24,132  INFO  Receive message from ('127.0.0.1', 49906) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'direction': 5, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:24,172  INFO  Dispatch message [{'direction': 5, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}]
+2014-05-04 03:06:24,173  INFO  receive bus request
+2014-05-04 03:06:24,173  INFO  assign new RSN
+2014-05-04 03:06:24,180  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'route': u'Green', 'groupMember': [u'driver_1'], 'SM': 'RSN_SM', 'action': 'recvRSNAssign', 'type': 'self', 'original': {'direction': 5, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 0, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:24,180  INFO  Ready
+2014-05-04 03:06:27,151  INFO  send heart beat to each RSN
+2014-05-04 03:06:27,161  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 6, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 1, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:27,161  INFO  Ready
+2014-05-04 03:06:27,296  INFO  Receive message from ('127.0.0.1', 49916) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 6, 'busTable': {u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 0, 'last_update': 0}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 5, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:27,350  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 6, 'busTable': {u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 0, 'last_update': 0}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:06:27,350  INFO  receive HB response
+2014-05-04 03:06:27,350  INFO  Ready
+2014-05-04 03:06:30,565  INFO  Receive message from ('127.0.0.1', 49929) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41002, 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:30,650  INFO  Dispatch message [{'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41002, 'type': 'add'}]
+2014-05-04 03:06:30,658  INFO  receive bus request
+2014-05-04 03:06:30,664  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'busIP': u'127.0.0.1', 'direction': 0, 'busId': u'driver_2', 'location': 0, 'SM': 'RSN_SM', 'action': 'recvBusChange', 'busPort': 41002, 'route': u'Green', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 2, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:30,665  INFO  Ready
+2014-05-04 03:06:32,172  INFO  send heart beat to each RSN
+2014-05-04 03:06:32,173  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 7, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 3, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:32,183  INFO  Ready
+2014-05-04 03:06:32,323  INFO  Receive message from ('127.0.0.1', 49939) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 7, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 1}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 0, 'last_update': 1}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 14, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:32,399  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 7, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 1}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 0, 'last_update': 1}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:06:32,399  INFO  receive HB response
+2014-05-04 03:06:32,400  INFO  Ready
+2014-05-04 03:06:37,185  INFO  send heart beat to each RSN
+2014-05-04 03:06:37,186  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 8, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 4, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:37,201  INFO  Ready
+2014-05-04 03:06:37,303  INFO  Receive message from ('127.0.0.1', 49961) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 8, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 2}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 1, 'last_update': 2}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 23, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:37,406  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 8, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 2}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 1, 'last_update': 2}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:06:37,406  INFO  receive HB response
+2014-05-04 03:06:37,406  INFO  Ready
+2014-05-04 03:06:42,203  INFO  send heart beat to each RSN
+2014-05-04 03:06:42,204  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 9, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 5, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:42,205  INFO  Ready
+2014-05-04 03:06:42,324  INFO  Receive message from ('127.0.0.1', 49982) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 9, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 3}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 1, 'last_update': 3}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 32, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:06:42,402  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 9, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 3}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 5, 'location': 1, 'last_update': 3}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:06:42,407  INFO  receive HB response
+2014-05-04 03:06:42,408  INFO  Ready
+2014-05-04 03:06:42,432  INFO  Receive message from ('127.0.0.1', 49987) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 11000, 'seq': 9, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:42,475  INFO  perform action: {'action': 'exit'}
+2014-05-04 03:06:54,564  INFO  Lisenting on (127.0.0.1, 11000)
+2014-05-04 03:06:54,596  INFO  Simulator starts! Hello from simulator!
+2014-05-04 03:06:56,252  INFO  Receive message from ('127.0.0.1', 50025) : {'src': '', 'data': {'localPort': 40000, 'localIP': u'127.0.0.1', 'role': u'GSN', 'action': 'initialize', 'localName': u'gsn_1', 'id': u'GSN_1'}, 'dst_port': 11000, 'seq': 10, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:06:56,304  INFO  perform action: {'localPort': 40000, 'localIP': u'127.0.0.1', 'role': u'GSN', 'action': 'initialize', 'localName': u'gsn_1', 'id': u'GSN_1'}
+2014-05-04 03:06:56,304  INFO  Lisenting on (127.0.0.1, 40000)
+2014-05-04 03:06:56,326  INFO  Initializing Host
+2014-05-04 03:06:56,409  INFO  OFF
+2014-05-04 03:06:56,424  INFO  Dispatch message [{'action': 'turnOn', 'localIP': u'127.0.0.1', 'gsnId': u'GSN_1', 'SM': 'GSN_SM', 'localPort': 40000}]
+2014-05-04 03:06:56,427  INFO  Ready
+2014-05-04 03:07:01,435  INFO  send heart beat to each RSN
+2014-05-04 03:07:01,435  INFO  Ready
+2014-05-04 03:07:06,438  INFO  send heart beat to each RSN
+2014-05-04 03:07:06,438  INFO  Ready
+2014-05-04 03:07:11,442  INFO  send heart beat to each RSN
+2014-05-04 03:07:11,442  INFO  Ready
+2014-05-04 03:07:16,444  INFO  send heart beat to each RSN
+2014-05-04 03:07:16,444  INFO  Ready
+2014-05-04 03:07:21,447  INFO  send heart beat to each RSN
+2014-05-04 03:07:21,447  INFO  Ready
+2014-05-04 03:07:24,344  INFO  Receive message from ('127.0.0.1', 50072) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'direction': 0, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 5, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:24,453  INFO  Dispatch message [{'direction': 0, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 5, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}]
+2014-05-04 03:07:24,454  INFO  receive bus request
+2014-05-04 03:07:24,455  INFO  assign new RSN
+2014-05-04 03:07:24,459  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'route': u'Green', 'groupMember': [u'driver_1'], 'SM': 'RSN_SM', 'action': 'recvRSNAssign', 'type': 'self', 'original': {'direction': 0, 'busId': u'driver_1', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 5, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41001, 'type': 'add'}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 0, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:24,461  INFO  Ready
+2014-05-04 03:07:26,450  INFO  send heart beat to each RSN
+2014-05-04 03:07:26,451  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 6, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 1, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:26,452  INFO  Ready
+2014-05-04 03:07:26,574  INFO  Receive message from ('127.0.0.1', 50081) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 6, 'busTable': {u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 5, 'last_update': 0}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 4, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:26,666  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 6, 'busTable': {u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 5, 'last_update': 0}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:26,667  INFO  receive HB response
+2014-05-04 03:07:26,667  INFO  Ready
+2014-05-04 03:07:30,011  INFO  Receive message from ('127.0.0.1', 50094) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41002, 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:30,071  INFO  Dispatch message [{'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 0, 'SM': 'GSN_SM', 'action': 'recvBusReq', 'busPort': 41002, 'type': 'add'}]
+2014-05-04 03:07:30,071  INFO  receive bus request
+2014-05-04 03:07:30,089  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'busIP': u'127.0.0.1', 'direction': 0, 'busId': u'driver_2', 'location': 0, 'SM': 'RSN_SM', 'action': 'recvBusChange', 'busPort': 41002, 'route': u'Green', 'type': 'add'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 2, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:30,090  INFO  Ready
+2014-05-04 03:07:31,469  INFO  send heart beat to each RSN
+2014-05-04 03:07:31,472  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 7, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 3, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:31,474  INFO  Ready
+2014-05-04 03:07:31,639  INFO  Receive message from ('127.0.0.1', 50105) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 7, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 1}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 5, 'last_update': 1}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 13, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:31,739  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 7, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 1}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 5, 'last_update': 1}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:31,740  INFO  receive HB response
+2014-05-04 03:07:31,740  INFO  Ready
+2014-05-04 03:07:36,491  INFO  send heart beat to each RSN
+2014-05-04 03:07:36,496  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 8, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 4, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:36,497  INFO  Ready
+2014-05-04 03:07:36,577  INFO  Receive message from ('127.0.0.1', 50127) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 8, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 2}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 6, 'last_update': 2}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 22, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:36,622  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 8, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 2}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 6, 'last_update': 2}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:36,622  INFO  receive HB response
+2014-05-04 03:07:36,622  INFO  Ready
+2014-05-04 03:07:37,512  INFO  Receive message from ('127.0.0.1', 50132) : {'src': u'user_1', 'data': {'src': u'user_1', 'group': None, 'seq': None, 'data': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 0, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:37,535  INFO  Dispatch message [{'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}]
+2014-05-04 03:07:37,535  INFO  receive user request
+2014-05-04 03:07:37,535  INFO  forward user request to RSN
+2014-05-04 03:07:37,537  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvLocReq', 'original': {'direction': 0, 'route': u'Green', 'destination': 29, 'userId': u'user_1', 'action': 'recvUserReq', 'requestId': u'user_11', 'SM': 'GSN_SM', 'userIP': u'127.0.0.1', 'userPort': 42001, 'location': 15}, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 5, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:37,541  INFO  Ready
+2014-05-04 03:07:41,498  INFO  send heart beat to each RSN
+2014-05-04 03:07:41,499  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 9, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 6, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:41,500  INFO  Ready
+2014-05-04 03:07:41,682  INFO  Receive message from ('127.0.0.1', 50158) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 9, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 3}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 6, 'last_update': 3}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 32, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:41,771  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 9, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 0, 'last_update': 3}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 6, 'last_update': 3}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:41,771  INFO  receive HB response
+2014-05-04 03:07:41,771  INFO  Ready
+2014-05-04 03:07:46,520  INFO  send heart beat to each RSN
+2014-05-04 03:07:46,533  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 10, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 7, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:46,533  INFO  Ready
+2014-05-04 03:07:46,686  INFO  Receive message from ('127.0.0.1', 50183) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 10, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 4}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 7, 'last_update': 4}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 40, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:46,754  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 10, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 4}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 7, 'last_update': 4}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:46,754  INFO  receive HB response
+2014-05-04 03:07:46,754  INFO  Ready
+2014-05-04 03:07:51,534  INFO  send heart beat to each RSN
+2014-05-04 03:07:51,543  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 11, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 8, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:51,543  INFO  Ready
+2014-05-04 03:07:51,709  INFO  Receive message from ('127.0.0.1', 50209) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 11, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 5}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 7, 'last_update': 5}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 49, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:51,855  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 11, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 1, 'last_update': 5}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 7, 'last_update': 5}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:51,856  INFO  receive HB response
+2014-05-04 03:07:51,856  INFO  Ready
+2014-05-04 03:07:56,553  INFO  send heart beat to each RSN
+2014-05-04 03:07:56,565  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 12, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 9, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:07:56,565  INFO  Ready
+2014-05-04 03:07:56,667  INFO  Receive message from ('127.0.0.1', 50235) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 12, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 2, 'last_update': 6}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 8, 'last_update': 6}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 58, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:07:56,735  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 12, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 2, 'last_update': 6}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 8, 'last_update': 6}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:07:56,740  INFO  receive HB response
+2014-05-04 03:07:56,740  INFO  Ready
+2014-05-04 03:08:01,573  INFO  send heart beat to each RSN
+2014-05-04 03:08:01,580  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 13, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 10, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:01,580  INFO  Ready
+2014-05-04 03:08:01,660  INFO  Receive message from ('127.0.0.1', 50258) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 13, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 2, 'last_update': 7}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 8, 'last_update': 7}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 67, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:01,737  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 13, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 2, 'last_update': 7}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 8, 'last_update': 7}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:01,737  INFO  receive HB response
+2014-05-04 03:08:01,738  INFO  Ready
+2014-05-04 03:08:06,582  INFO  send heart beat to each RSN
+2014-05-04 03:08:06,589  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 14, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 11, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:06,589  INFO  Ready
+2014-05-04 03:08:06,745  INFO  Receive message from ('127.0.0.1', 50282) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 14, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 3, 'last_update': 8}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 9, 'last_update': 8}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 76, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:06,777  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 14, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 3, 'last_update': 8}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 9, 'last_update': 8}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:06,777  INFO  receive HB response
+2014-05-04 03:08:06,778  INFO  Ready
+2014-05-04 03:08:11,598  INFO  send heart beat to each RSN
+2014-05-04 03:08:11,599  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 15, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 12, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:11,599  INFO  Ready
+2014-05-04 03:08:11,726  INFO  Receive message from ('127.0.0.1', 50304) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 15, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 3, 'last_update': 9}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 9, 'last_update': 9}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 85, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:11,805  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 15, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 3, 'last_update': 9}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 9, 'last_update': 9}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:11,806  INFO  receive HB response
+2014-05-04 03:08:11,807  INFO  Ready
+2014-05-04 03:08:16,602  INFO  send heart beat to each RSN
+2014-05-04 03:08:16,608  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 16, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 13, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:16,644  INFO  Ready
+2014-05-04 03:08:16,732  INFO  Receive message from ('127.0.0.1', 50327) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 16, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 4, 'last_update': 10}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 10, 'last_update': 10}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 94, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:16,803  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 16, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 4, 'last_update': 10}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 10, 'last_update': 10}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:16,804  INFO  receive HB response
+2014-05-04 03:08:16,804  INFO  Ready
+2014-05-04 03:08:21,651  INFO  send heart beat to each RSN
+2014-05-04 03:08:21,655  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 17, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 14, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:21,656  INFO  Ready
+2014-05-04 03:08:21,799  INFO  Receive message from ('127.0.0.1', 50350) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 17, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 4, 'last_update': 11}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 10, 'last_update': 11}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 103, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:21,811  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 17, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 4, 'last_update': 11}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 10, 'last_update': 11}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:21,811  INFO  receive HB response
+2014-05-04 03:08:21,812  INFO  Ready
+2014-05-04 03:08:26,667  INFO  send heart beat to each RSN
+2014-05-04 03:08:26,668  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 18, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 15, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:26,669  INFO  Ready
+2014-05-04 03:08:26,768  INFO  Receive message from ('127.0.0.1', 50372) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 18, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 5, 'last_update': 12}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 11, 'last_update': 12}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 112, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:26,872  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 18, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 5, 'last_update': 12}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 11, 'last_update': 12}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:26,872  INFO  receive HB response
+2014-05-04 03:08:26,878  INFO  Ready
+2014-05-04 03:08:31,682  INFO  send heart beat to each RSN
+2014-05-04 03:08:31,685  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 19, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 16, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:31,686  INFO  Ready
+2014-05-04 03:08:31,742  INFO  Receive message from ('127.0.0.1', 50394) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 19, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 5, 'last_update': 13}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 11, 'last_update': 13}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 121, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:31,825  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 19, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 5, 'last_update': 13}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 11, 'last_update': 13}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:31,825  INFO  receive HB response
+2014-05-04 03:08:31,841  INFO  Ready
+2014-05-04 03:08:36,746  INFO  send heart beat to each RSN
+2014-05-04 03:08:36,749  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 20, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 17, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:36,749  INFO  Ready
+2014-05-04 03:08:36,840  INFO  Receive message from ('127.0.0.1', 50416) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 20, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 6, 'last_update': 14}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 12, 'last_update': 14}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 130, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:37,027  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 20, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 6, 'last_update': 14}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 12, 'last_update': 14}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:37,044  INFO  receive HB response
+2014-05-04 03:08:37,044  INFO  Ready
+2014-05-04 03:08:41,754  INFO  send heart beat to each RSN
+2014-05-04 03:08:41,761  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 21, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 18, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:41,762  INFO  Ready
+2014-05-04 03:08:41,903  INFO  Receive message from ('127.0.0.1', 50439) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 21, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 7, 'last_update': 15}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 12, 'last_update': 15}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 139, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:41,959  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 21, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 7, 'last_update': 15}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 12, 'last_update': 15}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:41,959  INFO  receive HB response
+2014-05-04 03:08:41,959  INFO  Ready
+2014-05-04 03:08:46,790  INFO  send heart beat to each RSN
+2014-05-04 03:08:46,791  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 22, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 19, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:46,791  INFO  Ready
+2014-05-04 03:08:46,897  INFO  Receive message from ('127.0.0.1', 50461) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 22, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 7, 'last_update': 16}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 13, 'last_update': 16}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 148, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:46,947  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 22, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 7, 'last_update': 16}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 13, 'last_update': 16}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:46,948  INFO  receive HB response
+2014-05-04 03:08:46,948  INFO  Ready
+2014-05-04 03:08:51,794  INFO  send heart beat to each RSN
+2014-05-04 03:08:51,818  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 23, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 20, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:51,819  INFO  Ready
+2014-05-04 03:08:51,958  INFO  Receive message from ('127.0.0.1', 50488) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 23, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 8, 'last_update': 17}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 13, 'last_update': 17}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 157, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:52,010  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 23, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 8, 'last_update': 17}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 13, 'last_update': 17}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:52,011  INFO  receive HB response
+2014-05-04 03:08:52,012  INFO  Ready
+2014-05-04 03:08:56,841  INFO  send heart beat to each RSN
+2014-05-04 03:08:56,841  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 24, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 21, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:08:56,842  INFO  Ready
+2014-05-04 03:08:56,985  INFO  Receive message from ('127.0.0.1', 50511) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 24, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 8, 'last_update': 18}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 14, 'last_update': 18}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 166, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:08:57,037  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 24, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 8, 'last_update': 18}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 14, 'last_update': 18}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:08:57,037  INFO  receive HB response
+2014-05-04 03:08:57,038  INFO  Ready
+2014-05-04 03:09:01,851  INFO  send heart beat to each RSN
+2014-05-04 03:09:01,856  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 25, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 22, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:01,862  INFO  Ready
+2014-05-04 03:09:01,984  INFO  Receive message from ('127.0.0.1', 50533) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 25, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 9, 'last_update': 19}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 14, 'last_update': 19}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 175, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:02,067  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 25, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 9, 'last_update': 19}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 14, 'last_update': 19}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:02,067  INFO  receive HB response
+2014-05-04 03:09:02,067  INFO  Ready
+2014-05-04 03:09:06,866  INFO  send heart beat to each RSN
+2014-05-04 03:09:06,868  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 26, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 23, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:06,868  INFO  Ready
+2014-05-04 03:09:06,909  INFO  Receive message from ('127.0.0.1', 50554) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 26, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 9, 'last_update': 20}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 15, 'last_update': 20}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 183, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:06,989  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 26, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 9, 'last_update': 20}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 15, 'last_update': 20}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:06,996  INFO  receive HB response
+2014-05-04 03:09:06,996  INFO  Ready
+2014-05-04 03:09:11,882  INFO  send heart beat to each RSN
+2014-05-04 03:09:11,886  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 27, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 24, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:11,887  INFO  Ready
+2014-05-04 03:09:11,997  INFO  Receive message from ('127.0.0.1', 50576) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 27, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 10, 'last_update': 21}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 15, 'last_update': 21}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 193, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:12,069  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 27, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 10, 'last_update': 21}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 15, 'last_update': 21}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:12,070  INFO  receive HB response
+2014-05-04 03:09:12,070  INFO  Ready
+2014-05-04 03:09:16,890  INFO  send heart beat to each RSN
+2014-05-04 03:09:16,891  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 28, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 25, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:16,891  INFO  Ready
+2014-05-04 03:09:17,004  INFO  Receive message from ('127.0.0.1', 50597) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 28, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 10, 'last_update': 22}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 16, 'last_update': 22}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 201, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:17,054  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 28, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 10, 'last_update': 22}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 16, 'last_update': 22}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:17,055  INFO  receive HB response
+2014-05-04 03:09:17,055  INFO  Ready
+2014-05-04 03:09:21,894  INFO  send heart beat to each RSN
+2014-05-04 03:09:21,903  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 29, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 26, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:21,903  INFO  Ready
+2014-05-04 03:09:22,002  INFO  Receive message from ('127.0.0.1', 50619) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 29, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 11, 'last_update': 23}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 16, 'last_update': 23}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 210, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:22,083  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 29, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 11, 'last_update': 23}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 16, 'last_update': 23}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:22,083  INFO  receive HB response
+2014-05-04 03:09:22,083  INFO  Ready
+2014-05-04 03:09:26,918  INFO  send heart beat to each RSN
+2014-05-04 03:09:26,919  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 30, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 27, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:26,919  INFO  Ready
+2014-05-04 03:09:27,073  INFO  Receive message from ('127.0.0.1', 50640) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 30, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 11, 'last_update': 24}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 17, 'last_update': 24}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 219, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:27,098  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 30, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 11, 'last_update': 24}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 17, 'last_update': 24}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:27,098  INFO  receive HB response
+2014-05-04 03:09:27,098  INFO  Ready
+2014-05-04 03:09:31,922  INFO  send heart beat to each RSN
+2014-05-04 03:09:31,923  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 31, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 28, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:31,924  INFO  Ready
+2014-05-04 03:09:31,969  INFO  Receive message from ('127.0.0.1', 50662) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 31, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 12, 'last_update': 25}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 17, 'last_update': 25}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 228, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:32,036  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 31, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 12, 'last_update': 25}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 17, 'last_update': 25}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:32,039  INFO  receive HB response
+2014-05-04 03:09:32,039  INFO  Ready
+2014-05-04 03:09:36,931  INFO  send heart beat to each RSN
+2014-05-04 03:09:36,933  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 32, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 29, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:36,933  INFO  Ready
+2014-05-04 03:09:37,031  INFO  Receive message from ('127.0.0.1', 50683) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 32, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 12, 'last_update': 26}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 18, 'last_update': 26}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 237, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:37,033  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 32, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 12, 'last_update': 26}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 18, 'last_update': 26}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:37,033  INFO  receive HB response
+2014-05-04 03:09:37,034  INFO  Ready
+2014-05-04 03:09:41,936  INFO  send heart beat to each RSN
+2014-05-04 03:09:41,938  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 33, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 30, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:41,939  INFO  Ready
+2014-05-04 03:09:42,029  INFO  Receive message from ('127.0.0.1', 50704) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 33, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 13, 'last_update': 27}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 18, 'last_update': 27}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 246, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:42,099  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 33, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 13, 'last_update': 27}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 18, 'last_update': 27}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:42,099  INFO  receive HB response
+2014-05-04 03:09:42,100  INFO  Ready
+2014-05-04 03:09:46,946  INFO  send heart beat to each RSN
+2014-05-04 03:09:46,946  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 34, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 31, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:46,947  INFO  Ready
+2014-05-04 03:09:47,046  INFO  Receive message from ('127.0.0.1', 50726) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 34, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 13, 'last_update': 28}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 19, 'last_update': 28}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 255, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:47,145  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 34, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 13, 'last_update': 28}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 19, 'last_update': 28}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:47,146  INFO  receive HB response
+2014-05-04 03:09:47,146  INFO  Ready
+2014-05-04 03:09:51,950  INFO  send heart beat to each RSN
+2014-05-04 03:09:51,951  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 35, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 32, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:51,952  INFO  Ready
+2014-05-04 03:09:52,034  INFO  Receive message from ('127.0.0.1', 50747) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 35, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 14, 'last_update': 29}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 19, 'last_update': 29}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 264, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:52,044  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 35, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 14, 'last_update': 29}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 19, 'last_update': 29}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:52,045  INFO  receive HB response
+2014-05-04 03:09:52,047  INFO  Ready
+2014-05-04 03:09:56,957  INFO  send heart beat to each RSN
+2014-05-04 03:09:56,959  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 36, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 33, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:09:56,959  INFO  Ready
+2014-05-04 03:09:57,055  INFO  Receive message from ('127.0.0.1', 50769) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 36, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 14, 'last_update': 30}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 20, 'last_update': 30}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 273, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:09:57,168  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 36, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 14, 'last_update': 30}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 20, 'last_update': 30}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:09:57,169  INFO  receive HB response
+2014-05-04 03:09:57,169  INFO  Ready
+2014-05-04 03:10:01,966  INFO  send heart beat to each RSN
+2014-05-04 03:10:01,967  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 37, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 34, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:01,968  INFO  Ready
+2014-05-04 03:10:02,055  INFO  Receive message from ('127.0.0.1', 50791) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 37, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 15, 'last_update': 31}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 20, 'last_update': 31}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 282, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:02,181  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 37, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 15, 'last_update': 31}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 20, 'last_update': 31}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:02,182  INFO  receive HB response
+2014-05-04 03:10:02,182  INFO  Ready
+2014-05-04 03:10:06,968  INFO  send heart beat to each RSN
+2014-05-04 03:10:06,978  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 38, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 35, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:06,978  INFO  Ready
+2014-05-04 03:10:07,073  INFO  Receive message from ('127.0.0.1', 50813) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 38, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 15, 'last_update': 32}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 21, 'last_update': 32}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 291, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:07,150  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 38, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 15, 'last_update': 32}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 21, 'last_update': 32}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:07,158  INFO  receive HB response
+2014-05-04 03:10:07,158  INFO  Ready
+2014-05-04 03:10:11,982  INFO  send heart beat to each RSN
+2014-05-04 03:10:11,983  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 39, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 36, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:11,983  INFO  Ready
+2014-05-04 03:10:12,098  INFO  Receive message from ('127.0.0.1', 50835) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 39, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 16, 'last_update': 33}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 21, 'last_update': 33}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 300, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:12,108  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 39, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 16, 'last_update': 33}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 21, 'last_update': 33}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:12,108  INFO  receive HB response
+2014-05-04 03:10:12,109  INFO  Ready
+2014-05-04 03:10:16,985  INFO  send heart beat to each RSN
+2014-05-04 03:10:16,987  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 40, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 37, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:16,987  INFO  Ready
+2014-05-04 03:10:17,094  INFO  Receive message from ('127.0.0.1', 50856) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 40, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 16, 'last_update': 34}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 22, 'last_update': 34}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 309, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:17,189  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 40, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 16, 'last_update': 34}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 22, 'last_update': 34}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:17,190  INFO  receive HB response
+2014-05-04 03:10:17,190  INFO  Ready
+2014-05-04 03:10:21,995  INFO  send heart beat to each RSN
+2014-05-04 03:10:21,998  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 41, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 38, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:22,000  INFO  Ready
+2014-05-04 03:10:22,048  INFO  Receive message from ('127.0.0.1', 50878) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 41, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 17, 'last_update': 35}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 22, 'last_update': 35}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 318, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:22,109  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 41, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 17, 'last_update': 35}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 22, 'last_update': 35}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:22,110  INFO  receive HB response
+2014-05-04 03:10:22,110  INFO  Ready
+2014-05-04 03:10:27,002  INFO  send heart beat to each RSN
+2014-05-04 03:10:27,003  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 42, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 39, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:27,003  INFO  Ready
+2014-05-04 03:10:27,016  INFO  Receive message from ('127.0.0.1', 50900) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 42, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 17, 'last_update': 36}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 23, 'last_update': 36}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 327, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:27,062  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 42, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 17, 'last_update': 36}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 23, 'last_update': 36}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:27,062  INFO  receive HB response
+2014-05-04 03:10:27,062  INFO  Ready
+2014-05-04 03:10:32,004  INFO  send heart beat to each RSN
+2014-05-04 03:10:32,005  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 43, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 40, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:32,006  INFO  Ready
+2014-05-04 03:10:32,072  INFO  Receive message from ('127.0.0.1', 50920) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 43, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 18, 'last_update': 37}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 23, 'last_update': 37}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 335, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:32,083  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 43, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 18, 'last_update': 37}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 23, 'last_update': 37}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:32,084  INFO  receive HB response
+2014-05-04 03:10:32,084  INFO  Ready
+2014-05-04 03:10:37,008  INFO  send heart beat to each RSN
+2014-05-04 03:10:37,011  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 44, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 41, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:37,012  INFO  Ready
+2014-05-04 03:10:37,156  INFO  Receive message from ('127.0.0.1', 50941) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 44, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 18, 'last_update': 38}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 24, 'last_update': 38}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 344, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:37,239  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 44, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 18, 'last_update': 38}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 24, 'last_update': 38}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:37,239  INFO  receive HB response
+2014-05-04 03:10:37,239  INFO  Ready
+2014-05-04 03:10:42,013  INFO  send heart beat to each RSN
+2014-05-04 03:10:42,017  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 45, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 42, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:42,017  INFO  Ready
+2014-05-04 03:10:42,037  INFO  Receive message from ('127.0.0.1', 50963) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 45, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 19, 'last_update': 39}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 24, 'last_update': 39}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 353, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:42,059  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 45, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 19, 'last_update': 39}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 24, 'last_update': 39}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:42,059  INFO  receive HB response
+2014-05-04 03:10:42,061  INFO  Ready
+2014-05-04 03:10:47,022  INFO  send heart beat to each RSN
+2014-05-04 03:10:47,023  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 46, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 43, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:47,023  INFO  Ready
+2014-05-04 03:10:47,099  INFO  Receive message from ('127.0.0.1', 50984) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 46, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 19, 'last_update': 40}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 25, 'last_update': 40}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 362, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:47,182  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 46, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 19, 'last_update': 40}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 25, 'last_update': 40}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:47,186  INFO  receive HB response
+2014-05-04 03:10:47,187  INFO  Ready
+2014-05-04 03:10:52,025  INFO  send heart beat to each RSN
+2014-05-04 03:10:52,028  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 47, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 44, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:52,029  INFO  Ready
+2014-05-04 03:10:52,118  INFO  Receive message from ('127.0.0.1', 51005) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 47, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 20, 'last_update': 41}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 25, 'last_update': 41}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 371, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:52,188  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 47, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 20, 'last_update': 41}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 25, 'last_update': 41}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:52,188  INFO  receive HB response
+2014-05-04 03:10:52,188  INFO  Ready
+2014-05-04 03:10:57,032  INFO  send heart beat to each RSN
+2014-05-04 03:10:57,037  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 48, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 45, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:10:57,040  INFO  Ready
+2014-05-04 03:10:57,162  INFO  Receive message from ('127.0.0.1', 51027) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 48, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 20, 'last_update': 42}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 26, 'last_update': 42}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 380, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:10:57,245  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 48, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 20, 'last_update': 42}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 26, 'last_update': 42}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:10:57,245  INFO  receive HB response
+2014-05-04 03:10:57,245  INFO  Ready
+2014-05-04 03:11:02,042  INFO  send heart beat to each RSN
+2014-05-04 03:11:02,043  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 49, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 46, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:02,043  INFO  Ready
+2014-05-04 03:11:02,205  INFO  Receive message from ('127.0.0.1', 51049) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 49, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 21, 'last_update': 43}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 26, 'last_update': 43}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 389, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:02,281  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 49, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 21, 'last_update': 43}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 26, 'last_update': 43}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:02,281  INFO  receive HB response
+2014-05-04 03:11:02,281  INFO  Ready
+2014-05-04 03:11:07,048  INFO  send heart beat to each RSN
+2014-05-04 03:11:07,049  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 50, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 47, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:07,049  INFO  Ready
+2014-05-04 03:11:07,102  INFO  Receive message from ('127.0.0.1', 51070) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 50, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 21, 'last_update': 44}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 27, 'last_update': 44}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 398, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:07,197  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 50, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 21, 'last_update': 44}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 27, 'last_update': 44}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:07,197  INFO  receive HB response
+2014-05-04 03:11:07,198  INFO  Ready
+2014-05-04 03:11:12,050  INFO  send heart beat to each RSN
+2014-05-04 03:11:12,052  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 51, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 48, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:12,052  INFO  Ready
+2014-05-04 03:11:12,123  INFO  Receive message from ('127.0.0.1', 51091) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 51, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 22, 'last_update': 45}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 27, 'last_update': 45}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 407, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:12,174  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 51, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 22, 'last_update': 45}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 27, 'last_update': 45}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:12,174  INFO  receive HB response
+2014-05-04 03:11:12,177  INFO  Ready
+2014-05-04 03:11:17,056  INFO  send heart beat to each RSN
+2014-05-04 03:11:17,065  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 52, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 49, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:17,066  INFO  Ready
+2014-05-04 03:11:17,233  INFO  Receive message from ('127.0.0.1', 51113) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 52, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 22, 'last_update': 46}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 28, 'last_update': 46}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 416, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:17,304  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 52, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 22, 'last_update': 46}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 28, 'last_update': 46}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:17,304  INFO  receive HB response
+2014-05-04 03:11:17,305  INFO  Ready
+2014-05-04 03:11:22,077  INFO  send heart beat to each RSN
+2014-05-04 03:11:22,078  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 53, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 50, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:22,078  INFO  Ready
+2014-05-04 03:11:22,135  INFO  Receive message from ('127.0.0.1', 51136) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 53, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 23, 'last_update': 47}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 28, 'last_update': 47}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 425, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:22,153  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 53, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 23, 'last_update': 47}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 28, 'last_update': 47}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:22,178  INFO  receive HB response
+2014-05-04 03:11:22,179  INFO  Ready
+2014-05-04 03:11:27,079  INFO  send heart beat to each RSN
+2014-05-04 03:11:27,081  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 54, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 51, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:27,081  INFO  Ready
+2014-05-04 03:11:27,265  INFO  Receive message from ('127.0.0.1', 51157) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 54, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 23, 'last_update': 48}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 29, 'last_update': 48}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 434, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:27,329  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 54, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 23, 'last_update': 48}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 29, 'last_update': 48}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:27,329  INFO  receive HB response
+2014-05-04 03:11:27,329  INFO  Ready
+2014-05-04 03:11:32,084  INFO  send heart beat to each RSN
+2014-05-04 03:11:32,085  INFO  Send message to (127.0.0.1, 41001) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 55, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41001, 'seq': 52, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:32,085  INFO  Ready
+2014-05-04 03:11:32,182  INFO  Receive message from ('127.0.0.1', 51178) : {'src': u'driver_1', 'data': {'src': u'driver_1', 'group': None, 'seq': None, 'data': {'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 55, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 24, 'last_update': 49}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 29, 'last_update': 49}}, 'rsnId': u'driver_1'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 443, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:32,263  INFO  Dispatch message [{'rsnPort': 41001, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 55, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 24, 'last_update': 49}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 29, 'last_update': 49}}, 'rsnId': u'driver_1'}]
+2014-05-04 03:11:32,264  INFO  receive HB response
+2014-05-04 03:11:32,264  INFO  Ready
+2014-05-04 03:11:37,096  INFO  send heart beat to each RSN
+2014-05-04 03:11:37,113  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:11:37,115  INFO  Ready
+2014-05-04 03:11:42,116  INFO  send heart beat to each RSN
+2014-05-04 03:11:42,117  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:11:42,117  INFO  Ready
+2014-05-04 03:11:45,561  INFO  Receive message from ('127.0.0.1', 51210) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 25, 'SM': 'GSN_SM', 'action': 'recvElecReq', 'busPort': 41002}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 49, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:45,594  INFO  Dispatch message [{'direction': 0, 'busId': u'driver_2', 'route': u'Green', 'busIP': u'127.0.0.1', 'location': 25, 'SM': 'GSN_SM', 'action': 'recvElecReq', 'busPort': 41002}]
+2014-05-04 03:11:45,594  INFO  receive election request
+2014-05-04 03:11:45,596  INFO  RSN is dead, select a new RSN [driver_2] for route [Green]
+2014-05-04 03:11:45,601  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:11:45,603  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'route': u'Green', 'SM': 'RSN_SM', 'action': 'recvRSNAssign', 'type': 'normal', 'original': None, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 24, 'last_update': 49}, u'driver_1': {'addr': 127.0.0.1:41001, 'direction': 0, 'location': 29, 'last_update': 49}}}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 53, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:45,605  INFO  Ready
+2014-05-04 03:11:47,119  INFO  send heart beat to each RSN
+2014-05-04 03:11:47,120  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 58, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 54, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:47,120  INFO  Ready
+2014-05-04 03:11:47,185  INFO  Receive message from ('127.0.0.1', 51221) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 58, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 25, 'last_update': 1}, u'driver_1': {'direction': 0, 'location': 29, 'addr': 127.0.0.1:41001, 'last_update': 0}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 54, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:47,304  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 58, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 25, 'last_update': 1}, u'driver_1': {'direction': 0, 'location': 29, 'addr': 127.0.0.1:41001, 'last_update': 0}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:11:47,305  INFO  receive HB response
+2014-05-04 03:11:47,305  INFO  Ready
+2014-05-04 03:11:52,132  INFO  send heart beat to each RSN
+2014-05-04 03:11:52,135  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 59, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 55, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:52,138  INFO  Ready
+2014-05-04 03:11:52,168  INFO  Receive message from ('127.0.0.1', 51241) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 59, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 26, 'last_update': 2}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 62, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:52,199  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 59, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 26, 'last_update': 2}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:11:52,199  INFO  receive HB response
+2014-05-04 03:11:52,200  INFO  Ready
+2014-05-04 03:11:57,145  INFO  send heart beat to each RSN
+2014-05-04 03:11:57,147  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 60, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 56, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:11:57,147  INFO  Ready
+2014-05-04 03:11:57,169  INFO  Receive message from ('127.0.0.1', 51260) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 60, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 26, 'last_update': 3}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 70, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:11:57,199  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 60, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 26, 'last_update': 3}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:11:57,200  INFO  receive HB response
+2014-05-04 03:11:57,200  INFO  Ready
+2014-05-04 03:12:02,156  INFO  send heart beat to each RSN
+2014-05-04 03:12:02,158  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 61, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 57, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:02,159  INFO  Ready
+2014-05-04 03:12:02,308  INFO  Receive message from ('127.0.0.1', 51281) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 61, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 27, 'last_update': 4}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 78, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:02,378  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 61, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 27, 'last_update': 4}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:02,379  INFO  receive HB response
+2014-05-04 03:12:02,380  INFO  Ready
+2014-05-04 03:12:07,160  INFO  send heart beat to each RSN
+2014-05-04 03:12:07,161  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 62, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 58, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:07,161  INFO  Ready
+2014-05-04 03:12:07,236  INFO  Receive message from ('127.0.0.1', 51300) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 62, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 27, 'last_update': 5}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 86, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:07,332  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 62, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 27, 'last_update': 5}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:07,333  INFO  receive HB response
+2014-05-04 03:12:07,334  INFO  Ready
+2014-05-04 03:12:12,170  INFO  send heart beat to each RSN
+2014-05-04 03:12:12,172  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 63, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 59, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:12,172  INFO  Ready
+2014-05-04 03:12:12,273  INFO  Receive message from ('127.0.0.1', 51319) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 63, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 28, 'last_update': 6}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 94, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:12,324  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 63, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 28, 'last_update': 6}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:12,324  INFO  receive HB response
+2014-05-04 03:12:12,324  INFO  Ready
+2014-05-04 03:12:17,173  INFO  send heart beat to each RSN
+2014-05-04 03:12:17,174  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 64, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 60, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:17,174  INFO  Ready
+2014-05-04 03:12:17,240  INFO  Receive message from ('127.0.0.1', 51338) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 64, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 28, 'last_update': 7}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 102, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:17,293  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 64, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 28, 'last_update': 7}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:17,294  INFO  receive HB response
+2014-05-04 03:12:17,295  INFO  Ready
+2014-05-04 03:12:22,176  INFO  send heart beat to each RSN
+2014-05-04 03:12:22,177  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 65, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 61, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:22,177  INFO  Ready
+2014-05-04 03:12:22,266  INFO  Receive message from ('127.0.0.1', 51357) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 65, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 29, 'last_update': 8}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 110, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:22,303  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 65, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 29, 'last_update': 8}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:22,304  INFO  receive HB response
+2014-05-04 03:12:22,304  INFO  Ready
+2014-05-04 03:12:27,179  INFO  send heart beat to each RSN
+2014-05-04 03:12:27,184  INFO  Send message to (127.0.0.1, 41002) : {'src': u'gsn_1', 'data': {'src': u'gsn_1', 'group': None, 'seq': None, 'data': {'action': 'recvGSNHB', 'HBNo': 66, 'SM': 'RSN_SM'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 41002, 'seq': 62, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:27,187  INFO  Ready
+2014-05-04 03:12:27,269  INFO  Receive message from ('127.0.0.1', 51377) : {'src': u'driver_2', 'data': {'src': u'driver_2', 'group': None, 'seq': None, 'data': {'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 66, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 29, 'last_update': 9}}, 'rsnId': u'driver_2'}, 'memberList': [], 'type': 'NORMAL'}, 'dst_port': 40000, 'seq': 118, 'dst_ip': '127.0.0.1'}
+2014-05-04 03:12:27,335  INFO  Dispatch message [{'rsnPort': 41002, 'route': u'Green', 'rsnIP': u'127.0.0.1', 'SM': 'GSN_SM', 'action': 'recvHBRes', 'HBNo': 66, 'busTable': {u'driver_2': {'addr': 127.0.0.1:41002, 'direction': 0, 'location': 29, 'last_update': 9}}, 'rsnId': u'driver_2'}]
+2014-05-04 03:12:27,337  INFO  receive HB response
+2014-05-04 03:12:27,338  INFO  Ready
+2014-05-04 03:12:32,191  INFO  send heart beat to each RSN
+2014-05-04 03:12:32,203  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:12:32,204  INFO  Ready
+2014-05-04 03:12:37,210  INFO  send heart beat to each RSN
+2014-05-04 03:12:37,212  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:12:37,218  INFO  Ready
+2014-05-04 03:12:42,227  INFO  send heart beat to each RSN
+2014-05-04 03:12:42,233  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:12:42,233  INFO  Ready
+2014-05-04 03:12:47,235  INFO  send heart beat to each RSN
+2014-05-04 03:12:47,236  ERROR  Socket error: [Errno 61] Connection refused
+2014-05-04 03:12:47,237  INFO  Ready
+2014-05-04 03:12:47,689  INFO  Receive message from ('127.0.0.1', 51424) : {'src': '', 'data': {'action': 'exit'}, 'dst_port': 11000, 'seq': 18, 'dst_ip': u'127.0.0.1'}
+2014-05-04 03:12:47,705  INFO  perform action: {'action': 'exit'}
